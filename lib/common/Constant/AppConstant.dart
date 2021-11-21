@@ -1,0 +1,12 @@
+String Name ='Username';
+String Password= 'Password';
+String Email_ID= 'Email ID';
+String Confirm_Password= 'Confirm Password';
+String Delivery_Address='Delivery Address';
+String City ='City';
+String State_City = 'State';
+String Zip_City = 'Zip';
+String EmailValidation='Email can not be empty';
+String PasswordValidation='Password can not be empty';
+String NameValidation='Name can not be empty';
+String ConfigPasswordValidation='Confirm passowrd can not be empty';

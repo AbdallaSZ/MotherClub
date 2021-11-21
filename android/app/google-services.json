@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587349302262",
+    "project_id": "mothersclub-42750",
+    "storage_bucket": "mothersclub-42750.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587349302262:android:3aca5a6be87e1103f0c5d7",
+        "android_client_info": {
+          "package_name": "com.Application.motherclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587349302262-5n8h11ibkcmkl57kfn9cicva08n6gppm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-F4ZZIg_1ITZrGiDsIUPcYPNEC8cy5NU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587349302262-5n8h11ibkcmkl57kfn9cicva08n6gppm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
