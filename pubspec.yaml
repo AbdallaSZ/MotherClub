@@ -34,6 +34,7 @@ dependencies:
   flutter_otp_text_field: ^1.0.0
   carousel_slider: ^4.0.0
   flick_video_player:
+  rxdart: ^0.27.3
 
 
 dev_dependencies:

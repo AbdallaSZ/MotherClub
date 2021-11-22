@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:motherclub/app/RegisterBloc/register_view.dart';
 import 'package:motherclub/app/modules/Cart/views/cart_view.dart';
 import 'package:motherclub/app/modules/Categories/bindings/CategoriesBindings.dart';
 import 'package:motherclub/app/modules/Categories/views/categories_views.dart';
@@ -23,7 +24,6 @@ import 'package:motherclub/app/modules/YourPregnancy/bindings/YourPregnancyBindi
 import 'package:motherclub/app/modules/account/views/account_view.dart';
 import 'package:motherclub/app/modules/auth/bindings/auth_biinding.dart';
 import 'package:motherclub/app/modules/auth/views/login_view.dart';
-import 'package:motherclub/app/modules/auth/views/register_view.dart';
 import 'package:motherclub/app/modules/bottomNavigation/binding/bottombinding.dart';
 import 'package:motherclub/app/modules/bottomNavigation/views/bottom_screen.dart';
 import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';

@@ -14,11 +14,18 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:motherclub/common/CustomWidget/EditTextWithoutIcon.dart';
 import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 
 
 
+class RegisterView extends StatefulWidget {
 
-class RegisterView extends GetView<AuthController> {
+  @override
+  _RegisterViewState createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  @override
   bool _checkbox = false;
   TextEditingController _yourbabyController=TextEditingController();
   TextEditingController Baby_AgeController=TextEditingController();
@@ -28,7 +35,22 @@ class RegisterView extends GetView<AuthController> {
   TextEditingController _emailController=TextEditingController();
   TextEditingController _passwordController=TextEditingController();
 
+  // ============ check Box Behaviour ======
+  BehaviorSubject<bool> checkBoxSubject = BehaviorSubject();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkBoxSubject.sink.add(false);
 
+}
+@override
+  void dispose() {
+    // TODO: implement dispose
+checkBoxSubject.close();
+    super.dispose();
+
+}
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -39,8 +61,8 @@ class RegisterView extends GetView<AuthController> {
     return Scaffold(
       body: SafeArea(
           child: Container(
-            color: white_color,
-            height: deviceHeight,
+              color: white_color,
+              height: deviceHeight,
               width: deviceWidth,
               child: SingleChildScrollView(
                 child: Column(
@@ -56,9 +78,9 @@ class RegisterView extends GetView<AuthController> {
                           SizedBox(width:10),
                           Text("Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
                             style: GoogleFonts.roboto(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: Black_textColor),),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                color: Black_textColor),),
                           Divider(color: Colors.transparent, height: deviceHeight /25,),
                           EditTextwidget("First Name",_nameController ,context),
                           Divider(
@@ -86,14 +108,14 @@ class RegisterView extends GetView<AuthController> {
                             height: 10,
                           ),
                           EditTextWidget(Lable: 'Your Baby Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: _yourbabyController),
-                         // EditTextWidget("Your Baby Age", context, Icons.keyboard_arrow_down_outlined),
+                          // EditTextWidget("Your Baby Age", context, Icons.keyboard_arrow_down_outlined),
                           Divider(
                             color: Colors.transparent,
                             height: 10,
                           ),
                           EditTextWidget(Lable: 'Your Pragnancy Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: Baby_AgeController),
 
-                         // EditTextWidget("Your Pregnancy", context, Icons.keyboard_arrow_down_outlined),
+                          // EditTextWidget("Your Pregnancy", context, Icons.keyboard_arrow_down_outlined),
                           Divider(
                             color: Colors.transparent,
                             height: 10,
@@ -118,7 +140,7 @@ class RegisterView extends GetView<AuthController> {
 
                                 ),
                                 // CustomToggleWidget(deviceHeight/23,deviceWidth/4,context),
-                             ],
+                              ],
                             ),
                           ),
                           Divider(
@@ -127,11 +149,17 @@ class RegisterView extends GetView<AuthController> {
                           ),
                           Row(
                             children: [
-                              Checkbox(
-                                value: _checkbox,
-                                onChanged: (value) {
-
-                                },
+                              StreamBuilder<bool>(
+                                  stream: checkBoxSubject.stream,
+                                  builder: (context, snapshot) {
+                                    return Checkbox(
+                                      value: snapshot.data,
+                                      activeColor: pinkfavorite_Color,
+                                      onChanged: (value) {
+                                        checkBoxSubject.sink.add(value!);
+                                      },
+                                    );
+                                  }
                               ),
                               RichText(
                                 text: TextSpan(
@@ -165,15 +193,15 @@ class RegisterView extends GetView<AuthController> {
                                   ],
                                 ),
                               ),
-                          //     Text(
-                          //       'to\n MotherClub',
-                          //       style:  GoogleFonts.roboto(
-                          //         fontSize: 13,
-                          //         fontWeight: FontWeight.w500,
-                          //         fontStyle: FontStyle.normal,
-                          //         color: Black_textColor),
-                          //
-                          // ),
+                              //     Text(
+                              //       'to\n MotherClub',
+                              //       style:  GoogleFonts.roboto(
+                              //         fontSize: 13,
+                              //         fontWeight: FontWeight.w500,
+                              //         fontStyle: FontStyle.normal,
+                              //         color: Black_textColor),
+                              //
+                              // ),
                             ],
                           ),
                           Divider(
@@ -209,3 +237,4 @@ class RegisterView extends GetView<AuthController> {
     );
   }
 }
+
