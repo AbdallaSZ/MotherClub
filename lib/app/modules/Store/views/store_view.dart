@@ -192,7 +192,7 @@ class _StoreViewScreenState  extends State<StoreView>{
                                               SizedBox(width:15),
                                               GestureDetector(
                                                 onTap: (){
-                                                  Get.offAndToNamed(Routes.CART);
+                                                  Get.toNamed(Routes.CART);
                                                 },
                                                 child: Container(
                                                   width: 40,

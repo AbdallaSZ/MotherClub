@@ -210,7 +210,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
 
                                     child: GestureDetector(
                                       onTap: () {
-                                        Get.offAndToNamed(Routes.BLOG);
+                                        Get.toNamed(Routes.BLOG);
                                       },
                                       child: Row(
                                         //crossAxisAlignment: CrossAxisAlignment.center,

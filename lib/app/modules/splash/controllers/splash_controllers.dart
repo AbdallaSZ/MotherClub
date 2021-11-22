@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
@@ -20,7 +21,6 @@ class SplashController extends GetxController {
         print('IDDDD $Id');
         if (Id != null) {
           getursedata();
-
           Get.offAndToNamed(Routes.BOTTOM);
         }
         else {
@@ -28,7 +28,7 @@ class SplashController extends GetxController {
         }
       }
       else{
-        Get.offAndToNamed(Routes.NONETWORKVIEW);
+        Get.toNamed(Routes.NONETWORKVIEW);
       }
      // Get.offAndToNamed(Routes.LOGIN);
     });

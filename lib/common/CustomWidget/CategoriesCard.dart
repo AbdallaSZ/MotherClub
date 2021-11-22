@@ -13,7 +13,7 @@ Widget CategoriresCard(double height , double width,BuildContext context,Categor
 
     GestureDetector(
       onTap: (){
-        Get.offAndToNamed(Routes.YOURPREGNANCY);
+        Get.toNamed(Routes.YOURPREGNANCY);
       },
       child: Container(
         margin: EdgeInsets.only(top: 10),
