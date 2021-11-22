@@ -4,54 +4,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/modules/home/controllers/home_controllers.dart';
 import 'package:motherclub/app/modules/home/widgets/appBarWidget.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
-
+import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 
 
 class HomeView extends GetResponsiveView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
+    double deviceHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double deviceWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor:Colors.white ,
-          title: Container(
-            child: Row(
-              children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
-
-                Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-                Text('',style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Black_textColor),),
-                // Image.asset('assets/images/logo.png',width: 120,height: 87,),
-
-              ],
-            ),
-          ),
+        appBar: CustomAppBar(
           actions: [
-            Icon(Icons.search,color: Colors.black87,),
+            Icon(Icons.search, color: Colors.black87,),
             SizedBox(width: 20,),
             Image.asset('assets/images/translate.png'),
-
           ],
         ),
         body:
-        HomeAppBar("",deviceHeight/9.4,deviceWidth,context),
-
-                    // AppBarWidget("",deviceHeight/9.4,deviceWidth,context),
-                    // InfoWidget("Hi, Amara Moussa","You are pregnant for","Week","9-12",deviceHeight/11.6,deviceWidth,context)
-
-
-            ),
+        HomeAppBar("", deviceHeight / 9.4, deviceWidth, context),
+      ),
     );
- }
+  }
 }
 // Container(
 // padding: EdgeInsets.all(8),

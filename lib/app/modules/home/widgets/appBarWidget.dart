@@ -16,7 +16,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
     slivers: <Widget>[
       // SliverToBoxAdapter(
           // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
-      SliverToBoxAdapter(child: InfoWidget("Hi, ${Utils.name}","You are pregnant for","Week","9-12",deviceHeight/11.6,deviceWidth,context)),
+      SliverToBoxAdapter(child: InfoWidget("Hi, ${Utils.name}","You are pregnant for","Week","9-12",deviceHeight/10,deviceWidth,context)),
       SliverToBoxAdapter(
         child: Container(
           height: 120.0,

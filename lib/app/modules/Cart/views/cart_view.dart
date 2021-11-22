@@ -9,6 +9,7 @@ import 'package:motherclub/app/modules/Store/widgets/store_widget.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
+import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 
@@ -54,6 +55,12 @@ class _StoreViewScreenState  extends State<cart_view>{
 
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBar(
+          onBackButtonPressed: (){Navigator.of(context).pop();},
+          centerTitle: true,
+          withBackButton: true,
+          title: 'Your Cart',
+        ),
         bottomSheet: Card(
           color: Colors.white,
           child: Container(
@@ -93,38 +100,38 @@ class _StoreViewScreenState  extends State<cart_view>{
                 Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.redAccent)),
 
               ],),
-            SizedBox(height: Utils.deviceHeight/22,),
+             SizedBox(height: Utils.deviceHeight/38,),
             CustomBUttonWidget('CHECKOUT', Utils.deviceHeight/20, Utils.deviceWidth/1.1, context),
 
 
           ],),),
         ),
-        appBar:  AppBar(
-        backgroundColor:Colors.white ,
-        title: Container(
-          child: Row(
-            children: [
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
-
-              Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-              Text('My Cart',style: GoogleFonts.roboto(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Black_textColor),),
-              // Image.asset('assets/images/logo.png',width: 120,height: 87,),
-
-            ],
-          ),
-        ),
-        actions: [
-          Icon(Icons.search,color: Colors.black87,),
-          SizedBox(width: 20,),
-          Image.asset('assets/images/translate.png'),
-
-        ],
-      ),
+      //   appBar:  AppBar(
+      //   backgroundColor:Colors.white ,
+      //   title: Container(
+      //     child: Row(
+      //       children: [
+      //         Align(
+      //             alignment: Alignment.centerLeft,
+      //             child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
+      //
+      //         Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
+      //         Text('My Cart',style: GoogleFonts.roboto(
+      //             fontSize: 20,
+      //             fontWeight: FontWeight.w700,
+      //             color: Black_textColor),),
+      //         // Image.asset('assets/images/logo.png',width: 120,height: 87,),
+      //
+      //       ],
+      //     ),
+      //   ),
+      //   actions: [
+      //     Icon(Icons.search,color: Colors.black87,),
+      //     SizedBox(width: 20,),
+      //     Image.asset('assets/images/translate.png'),
+      //
+      //   ],
+      // ),
         body: SingleChildScrollView(
           child: Column(
               children: [
