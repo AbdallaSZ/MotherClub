@@ -2,17 +2,20 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:http/http.dart'as http;
 
 class NetworkService {
   static final String BASE_URL = "https://mothersclub.me/";
+  static Dio dio = new Dio();
 
- static Future<http.Response> getMyData(String apiUrl, {dynamic headers})async {
+  static Future<dynamic> getMyData(String apiUrl, {dynamic headers})async {
 
-     var response = await http.get(Uri.parse(apiUrl), headers: headers);
-     return response;
+     var response = await http.get(Uri.parse(BASE_URL+apiUrl), headers: headers);
+     var decodedResponse = decodeTheResponse(response);
+     return decodedResponse;
   }
 
   static Future<http.Response> getWithBody(String apiBaseUrl, dynamic data,
@@ -25,13 +28,17 @@ class NetworkService {
     return http.Response.fromStream(streamedResponse);
   }
 
-  static Future<http.Response> post(String apiBaseUrl, dynamic data,
-      {dynamic headers = const {"Content-Type": "application/json"}}) {
-    return http.post(
-      Uri.parse(BASE_URL+apiBaseUrl),
-      body: data,
-      headers: headers,
-    );
+  static Future<dynamic> post(String apiBaseUrl, dynamic data,
+      {dynamic headers = const {"Content-Type": "application/json"}})async {
+   var dataEncoded = jsonEncode(data);
+   print("================= "+dataEncoded.toString());
+   dio.options.headers['content-Type'] = 'application/json';
+   var response = await dio.post(BASE_URL+apiBaseUrl, data:FormData.fromMap(data));
+    //var decoded = decodeTheResponse(response.data);
+    return response.data;
+  }
+ static decodeTheResponse (http.Response response){
+    return jsonDecode(response.body);
   }
 
   static Future<http.Response> patch(String apiBaseUrl, dynamic data,

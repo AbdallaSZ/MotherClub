@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:motherclub/app/RegisterBloc/RegisterBloc.dart';
 import 'package:motherclub/app/RegisterBloc/register_view.dart';
 import 'package:motherclub/app/modules/Cart/views/cart_view.dart';
 import 'package:motherclub/app/modules/Categories/bindings/CategoriesBindings.dart';
@@ -61,7 +63,9 @@ class AppPages{
     ),
     GetPage(
       name: _Paths.REGISTER,
-      page: () => RegisterView(),
+      page: () => BlocProvider(
+          create: (c)=> RegisterBloc(),
+          child: RegisterView()),
       binding: AuthBinding(),
     ),
     GetPage(

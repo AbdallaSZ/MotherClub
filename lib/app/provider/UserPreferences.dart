@@ -4,8 +4,9 @@ import 'dart:async';
 
 
 class UserPreferences {
+  late final SharedPreferences prefs;
+
   Future<bool> saveUser(UserModel user) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("ID", user.userId);
     prefs.setString("user_login", user.user_login);
@@ -18,9 +19,20 @@ class UserPreferences {
 
     return prefs.commit();
   }
+initialize()async{
+  prefs = await SharedPreferences.getInstance();
+  print("Shared Preference ready");
+}
+  setNonce(String nonce)async{
+    prefs.setString("Nonce", nonce);
+    print("Nonce Saved");
+  }
 
+  getNonce(){
+    var nonce = prefs.getString("Nonce");
+    return nonce;
+  }
   Future<UserModel> getUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String userId = prefs.getString("ID")??'';
     String user_login = prefs.getString("user_login")??'';
@@ -35,7 +47,6 @@ class UserPreferences {
   }
 
   void removeUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.remove("ID");
     prefs.remove("user_login");
@@ -48,7 +59,6 @@ class UserPreferences {
   }
 
   Future<String> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("ID")??'';
     return token;
   }

@@ -10,6 +10,12 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access photos for choosing image for profile</string>
+	<key>NSCameraUsageDescription </key>
+	<string>Capture photos for choosing image for profile</string>
+	<key>NSCameraUsageDescription </key>
+	<string>Capture photos for choosing image for profile</string>
 	<key>CFBundleName</key>
 	<string>motherclub</string>
 	<key>CFBundlePackageType</key>
