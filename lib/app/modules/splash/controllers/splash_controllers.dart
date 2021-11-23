@@ -18,14 +18,13 @@ class SplashController extends GetxController {
     Utils.userPreferences.setNonce(myData["nonce"]);
   }
   Future<void> loading() async {
-    String Id = await Utils.userPreferences.getToken();
-    print('IDDDD $Id');
+
     Timer(Duration(seconds: 5), () async {
 
       if(await Utils.checkapp()==true) {
         String Id = await Utils.userPreferences.getToken();
         print('IDDDD $Id');
-        if (Id != null) {
+        if (Id != '') {
           getursedata();
           Get.offAndToNamed(Routes.BOTTOM);
         }

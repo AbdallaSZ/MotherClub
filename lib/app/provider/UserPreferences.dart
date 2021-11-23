@@ -1,4 +1,5 @@
 import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -16,7 +17,7 @@ class UserPreferences {
     prefs.setString("user_url", user.user_url);
     prefs.setString("user_registered", user.user_registered);
     prefs.setString("display_name", user.display_name);
-
+    setAttributeToUtils(user);
     return prefs.commit();
   }
 initialize()async{
@@ -61,5 +62,12 @@ initialize()async{
   Future<String> getToken() async {
     String token = prefs.getString("ID")??'';
     return token;
+  }
+
+  void setAttributeToUtils(UserModel value) {
+    Utils.id=value.userId;
+    Utils.name=value.display_name;
+    Utils.email=value.user_email;
+    Utils.ImageUrl=value.user_url;
   }
 }

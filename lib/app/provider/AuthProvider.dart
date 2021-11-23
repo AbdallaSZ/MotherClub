@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 
 enum Status {
@@ -57,7 +58,7 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(userData);
 
-      UserPreferences().saveUser(authUser);
+      Utils.userPreferences.saveUser(authUser);
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
@@ -135,7 +136,7 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(userData);
 
-      UserPreferences().saveUser(authUser);
+      Utils.userPreferences.saveUser(authUser);
       result = {
         'status': true,
         'message': 'Successfully registered',

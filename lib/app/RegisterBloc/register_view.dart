@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:motherclub/app/Models/RegisterRequestModel.dart';
 import 'package:motherclub/app/RegisterBloc/RegisterBloc.dart';
 import 'package:motherclub/app/RegisterBloc/RegisterState.dart';
@@ -22,6 +26,7 @@ import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:image/image.dart' as img;
 
 
 
@@ -44,24 +49,29 @@ class _RegisterViewState extends State<RegisterView> {
 
   // ============ check Box Behaviour ======
   BehaviorSubject<bool> checkBoxSubject = BehaviorSubject();
+  BehaviorSubject<String> imageSubject = BehaviorSubject();
   RegisterBloc? _bloc;
   GlobalKey<ScaffoldState>_scaffoldKey = GlobalKey();
   GlobalKey<FormState>_formKey = GlobalKey();
+  String imageText = "";
+  String imageName = "Upload Profile Image" ;
 
 @override
   void initState() {
     // TODO: implement initState
   _bloc = BlocProvider.of<RegisterBloc>(context);
-    super.initState();
-    checkBoxSubject.sink.add(false);
+  checkBoxSubject.sink.add(false);
+  imageSubject.sink.add(imageName);
+  super.initState();
+
 
 }
 @override
   void dispose() {
     // TODO: implement dispose
 checkBoxSubject.close();
+imageSubject.close();
     super.dispose();
-
 }
   @override
   Widget build(BuildContext context) {
@@ -77,188 +87,211 @@ checkBoxSubject.close();
               color: white_color,
               height: deviceHeight,
               width: deviceWidth,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomLogoWidget("Back to ",deviceHeight/4.3,deviceWidth,context),
-                    Container(
-                      padding: const EdgeInsets.only(left: 20,right: 20),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Create a New Account",style: Theme.of(context).textTheme.headline1),
-                            SizedBox(width:10),
-                            Text("Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  color: Black_textColor),),
-                            Divider(color: Colors.transparent, height: deviceHeight /25,),
-                            EditTextwidget("First Name",_nameController ,context,validate: firstNameValidate),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextwidget("Last Name", _lastnameController,context,validate:lastNameValidate),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextwidget("Username", _usernameController,context,validate:userNameValidate
-                            ),Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextwidget("Email", _emailController,context,validate: emailValidate
-                            ),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextwidget("Password", _passwordController,context,validate: passwordValidate
-                           ),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextWidget(Lable: 'Your Baby Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: _yourbabyController),
-                            // EditTextWidget("Your Baby Age", context, Icons.keyboard_arrow_down_outlined),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            EditTextWidget(Lable: 'Your Pragnancy Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: Baby_AgeController),
+              child: GestureDetector(
+                onTap: (){
+                  FocusScope.of(context).unfocus();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomLogoWidget("Back to ",deviceHeight/4.3,deviceWidth,context),
+                      Container(
+                        padding: const EdgeInsets.only(left: 20,right: 20),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Create a New Account",style: Theme.of(context).textTheme.headline1),
+                              SizedBox(width:10),
+                              Text("Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    color: Black_textColor),),
+                              Divider(color: Colors.transparent, height: deviceHeight /25,),
+                              EditTextwidget("First Name",_nameController ,context,validate: firstNameValidate),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextwidget("Last Name", _lastnameController,context,validate:lastNameValidate),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextwidget("Username", _usernameController,context,validate:userNameValidate
+                              ),Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextwidget("Email", _emailController,context,validate: emailValidate
+                              ),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextwidget("Password", _passwordController,context,validate: passwordValidate
+                             ),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextWidget(Lable: 'Your Baby Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: _yourbabyController),
+                              // EditTextWidget("Your Baby Age", context, Icons.keyboard_arrow_down_outlined),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              EditTextWidget(Lable: 'Your Pragnancy Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: Baby_AgeController),
 
-                            // EditTextWidget("Your Pregnancy", context, Icons.keyboard_arrow_down_outlined),
-                            Divider(
-                              color: Colors.transparent,
-                              height: 10,
-                            ),
-                            DottedContainerWidget(context,deviceHeight/8.2,deviceWidth/1.10),
-                            Divider(
-                              color: Colors.transparent,
-                              height: deviceHeight/25,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                              // EditTextWidget("Your Pregnancy", context, Icons.keyboard_arrow_down_outlined),
+                              Divider(
+                                color: Colors.transparent,
+                                height: 10,
+                              ),
+                              GestureDetector(
+                                  onTap: (){
+                                  openImagePicker();
+                                   },
+                                  child: StreamBuilder<String>(
+                                    stream: imageSubject.stream,
+                                    builder: (context, snapshot) {
+                                      return DottedContainerWidget(context,deviceHeight/8.2,deviceWidth/1.10,snapshot.data!);
+                                    }
+                                  )),
+                              Divider(
+                                color: Colors.transparent,
+                                height: deviceHeight/25,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Agree for Newsletter?',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal,
+                                          color: Black_textColor),
+
+                                    ),
+                                    // CustomToggleWidget(deviceHeight/23,deviceWidth/4,context),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                color: Colors.transparent,
+                                height: deviceHeight/23,
+                              ),
+                              Row(
                                 children: [
-                                  Text(
-                                    'Agree for Newsletter?',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FontStyle.normal,
-                                        color: Black_textColor),
-
+                                  StreamBuilder<bool>(
+                                      stream: checkBoxSubject.stream,
+                                      builder: (context, snapshot) {
+                                        return Checkbox(
+                                          value: snapshot.data,
+                                          activeColor: pinkfavorite_Color,
+                                          onChanged: (value) {
+                                            checkBoxSubject.sink.add(value!);
+                                            _checkbox = value;
+                                          },
+                                        );
+                                      }
                                   ),
-                                  // CustomToggleWidget(deviceHeight/23,deviceWidth/4,context),
+                                  RichText(
+                                    text: TextSpan(
+                                      text: 'I agree to the ',
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w400,
+                                          fontStyle: FontStyle.normal,
+                                          color: Black_textColor),
+                                      children: <TextSpan>[
+                                        TextSpan(text: 'Terms and conditions', style: GoogleFonts.roboto(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w400,
+                                            fontStyle: FontStyle.normal,
+                                            color: Text_color),),
+                                        TextSpan(text: ' and ',style:  GoogleFonts.roboto(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w400,
+                                            fontStyle: FontStyle.normal,
+                                            color: Black_textColor),),
+                                        TextSpan(text: 'Privacy Policy', style: GoogleFonts.roboto(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w400,
+                                            fontStyle: FontStyle.normal,
+                                            color: Text_color),),
+                                        TextSpan(text:' to\nMotherClub',style:  GoogleFonts.roboto(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w400,
+                                            fontStyle: FontStyle.normal,
+                                            color: Black_textColor),)
+                                      ],
+                                    ),
+                                  ),
+                                  //     Text(
+                                  //       'to\n MotherClub',
+                                  //       style:  GoogleFonts.roboto(
+                                  //         fontSize: 13,
+                                  //         fontWeight: FontWeight.w500,
+                                  //         fontStyle: FontStyle.normal,
+                                  //         color: Black_textColor),
+                                  //
+                                  // ),
                                 ],
                               ),
-                            ),
-                            Divider(
-                              color: Colors.transparent,
-                              height: deviceHeight/23,
-                            ),
-                            Row(
-                              children: [
-                                StreamBuilder<bool>(
-                                    stream: checkBoxSubject.stream,
-                                    builder: (context, snapshot) {
-                                      return Checkbox(
-                                        value: snapshot.data,
-                                        activeColor: pinkfavorite_Color,
-                                        onChanged: (value) {
-                                          checkBoxSubject.sink.add(value!);
-                                          _checkbox = value;
-                                        },
-                                      );
-                                    }
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'I agree to the ',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.normal,
-                                        color: Black_textColor),
-                                    children: <TextSpan>[
-                                      TextSpan(text: 'Terms and conditions', style: GoogleFonts.roboto(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          color: Text_color),),
-                                      TextSpan(text: ' and ',style:  GoogleFonts.roboto(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          color: Black_textColor),),
-                                      TextSpan(text: 'Privacy Policy', style: GoogleFonts.roboto(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          color: Text_color),),
-                                      TextSpan(text:' to\nMotherClub',style:  GoogleFonts.roboto(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w400,
-                                          fontStyle: FontStyle.normal,
-                                          color: Black_textColor),)
-                                    ],
-                                  ),
-                                ),
-                                //     Text(
-                                //       'to\n MotherClub',
-                                //       style:  GoogleFonts.roboto(
-                                //         fontSize: 13,
-                                //         fontWeight: FontWeight.w500,
-                                //         fontStyle: FontStyle.normal,
-                                //         color: Black_textColor),
-                                //
-                                // ),
-                              ],
-                            ),
-                            Divider(
-                              color: Colors.transparent,
-                              height: deviceHeight/21,
-                            ),
-                            InkWell(
-                                onTap: (){
-                                  submit();                               // Get.to(Routes.)
-                                },
-                                child: CustomBUttonWidget("Register", deviceHeight/17 , deviceWidth/1.1, context)),
-                            Divider(
-                              color: Colors.transparent,
-                              height: deviceHeight/30,
-                            ),
+                              Divider(
+                                color: Colors.transparent,
+                                height: deviceHeight/21,
+                              ),
+                              InkWell(
+                                  onTap: (){
+                                    submit();                               // Get.to(Routes.)
+                                  },
+                                  child: CustomBUttonWidget("Register", deviceHeight/17 , deviceWidth/1.1, context)),
+                              Divider(
+                                color: Colors.transparent,
+                                height: deviceHeight/30,
+                              ),
 
 
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                BlocListener<RegisterBloc, RegisterState>
-                  (listener: (con , state ){
-                  if(state.resultState == ResultState.Loading){
-                    Utils.progressBar.showLoadingIndicator("Registering",context);
-                  }else if(state.resultState == ResultState.Success){
-                    Utils.progressBar.hideOpenDialog(context);
+                  BlocListener<RegisterBloc, RegisterState>
+                    (listener: (con , state )async{
+                    if(state.resultState == ResultState.Loading){
+                      Utils.progressBar.showLoadingIndicator("Registering",context);
+                    }else if(state.resultState == ResultState.Success){
+                      auth.login(_usernameController.text, _passwordController.text).then((value) {
+                        print('loginAuth ${value['status']}');
+                        if(value['status']==true)
+                        {
+                          Utils.progressBar.hideOpenDialog(context);
+                          Get.offAllNamed(Routes.BOTTOM);
+                        }
+
+                      });
 
 
-                  }else if(state.resultState == ResultState.Error){
-                    Utils.progressBar.hideOpenDialog(context);
 
-                  }else{
+                    }else if(state.resultState == ResultState.Error){
+                      Utils.progressBar.hideOpenDialog(context);
+                      showSnackBar(state.errorMessage!);
+                    }else{
 
-                  }
-                },
-                child: Container(),)
-                  ],
+                    }
+                  },
+                  child: Container(),)
+                    ],
+                  ),
                 ),
               ))
 
@@ -289,15 +322,15 @@ checkBoxSubject.close();
   void submit() {
   var validated = checkOnInput();
   if(validated){
-    fireEvent();
+    fireRegisterEvent();
   }else {
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text("Some fields are invalid ")));
+    showSnackBar("Some fields are invalid ");
   }
   }
 
   bool checkOnInput() {
   if(!_checkbox){
-    _scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text("You have to agree the terms  ")));
+    showSnackBar("You have to agree the terms  ");
         }else {
   if(_formKey.currentState!.validate()){
     return true;
@@ -305,7 +338,7 @@ checkBoxSubject.close();
   return false;
   }
 
-  void fireEvent() {
+  void fireRegisterEvent() {
     _bloc!.add(RegisterEvent(RegisterRequestModel(
       email: _emailController.text,customFieldsFirstName: _nameController.text,
       customFieldsLastName: _lastnameController.text,
@@ -313,8 +346,29 @@ checkBoxSubject.close();
       customFieldsWeeksUser: _yourbabyController.text,
       userPass: _passwordController.text,
       username: _usernameController.text,
+      image: imageText,
       nonce: Utils.userPreferences.getNonce()
     )));
   }
+
+  void openImagePicker() async{
+    final ImagePicker _picker = ImagePicker();
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final path = image!.path;
+    imageName = image.name;
+    final bytes = await File(path).readAsBytes();
+      var result = base64Encode(bytes);
+    imageText = result;
+    imageSubject.sink.add(imageName);
+      print(result.length);
+  }
+  String base64Encode(List<int> bytes) => base64.encode(bytes);
+
+  void showSnackBar(String text) {
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text( text)));
+
+  }
+
 }
 
