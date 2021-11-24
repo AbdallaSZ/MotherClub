@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/language/LangaugeBloc.dart';
+import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -8,9 +11,17 @@ import 'dart:ui' as ui;
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class AccountView extends StatefulWidget {
+
+  @override
+  _AccountViewState createState() => _AccountViewState();
+}
 
 
-class AccountView extends StatelessWidget {
+class _AccountViewState extends State<AccountView> {
+  LanguageBloc? _bloc;
 
   final Shader linearGradient = LinearGradient(
     colors: <Color>[CustomButton_Color,
@@ -23,6 +34,8 @@ class AccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     double deviceHeight=MediaQuery.of(context).size.height;
     double deviceWidth=MediaQuery.of(context).size.width;
+    _bloc = BlocProvider.of<LanguageBloc>(context);
+
     return
 
       SafeArea(
@@ -208,22 +221,142 @@ class AccountView extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,top: 30),
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(Icons.g_translate,size: 22),
-                    SizedBox(width:15),
-                    Text("Select Language",style: GoogleFonts.roboto(
-                        fontSize:17,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (c) {
+                      return Directionality(
+                        textDirection: Utils.locality == Locality.english ? TextDirection.ltr : TextDirection.rtl,
+                        child: AlertDialog(
+                            title: Text(
+                              Utils.labels!.change_language,
+                            ),
+                            content: Container(
+                              alignment: Alignment.centerRight,
+                              height: 120,
+                              width: 200,
+                              child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        radioButtonChanges("en");
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 6,
+                                            child: Text(
+                                              "English",
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Radio(
+                                              value: 'en',
+                                              groupValue: _radioValue,
+                                              onChanged: radioButtonChanges,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        radioButtonChanges("ar");
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 6,
+                                            child: Text(
+                                              "اللغة العربية",
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Radio(
+                                              value: 'ar',
+                                              groupValue: _radioValue,
+                                              onChanged: radioButtonChanges,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ), /*
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                                     children: <Widget>[
+                                       Expanded(
+                                         flex:6,
+                                         child: Text(
+                                           "Spanish",
+                                         ),
+                                       ),
+                                       Expanded(
+                                         flex:1,
+                                         child: Radio(
+                                           value: 'es',
+                                           groupValue: _radioValue,
+                                           onChanged: radioButtonChanges,
+                                         ),
+                                       ),
 
-                        color:Black_textColor
-                    ),),
+                                     ],
+                                   ),
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                                     children: <Widget>[
+                                       Expanded(
+                                         flex:6,
+                                         child: Text(
+                                           "اللغة الأردية",
+                                         ),
+                                       ),
+                                       Expanded(
+                                         flex:1,
+                                         child: Radio(
+                                           value: 'ur',
+                                           groupValue: _radioValue,
+                                           onChanged: radioButtonChanges,
+                                         ),
+                                       ),
 
-                  ],
+                                     ],
+                                   ),*/
+                                  ]),
+                            )),
+                      );
+                    });
+                if (choice == "en") {
+                  _bloc!.add(LanguageEvent(Locale("en", "")));
+                } else if (choice == "ar") {
+                  _bloc!.add(LanguageEvent( Locale("ar", "")));
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20,top: 30),
+                child: Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.g_translate,size: 22),
+                      SizedBox(width:15),
+                      Text("Select Language",style: GoogleFonts.roboto(
+                          fontSize:17,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
+
+                          color:Black_textColor
+                      ),),
+
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -275,4 +408,44 @@ class AccountView extends StatelessWidget {
 
     ));
   }
+  String _radioValue = Utils.locality == Locality.english
+      ? "en"
+      : Utils.locality == Locality.arabic
+      ? "ar"
+      : Utils.locality == Locality.spanish
+      ? "es"
+      : "ur"; //Initial definition of radio button value
+  String? choice;
+
+  void radioButtonChanges(String? value) {
+    Navigator.pop(context);
+    setState(() {
+      _radioValue = value!;
+      switch (value) {
+        case 'en':
+          choice = value;
+          break;
+        case 'ar':
+          choice = value;
+          break;
+        default:
+          choice = null;
+      }
+      debugPrint(choice); //Debug the choice in console
+    });
+    //      Strings.isEnglish = value;
+
+    if (choice == "en") {
+      _bloc!.add(LanguageEvent( Locale("en", "")));
+      Get.updateLocale(Locale("en", ""));
+    } else if (choice == "ar") {
+      _bloc!.add(LanguageEvent(  Locale("ar", "")));
+      Get.updateLocale(Locale("ar", ""));
+    }
+    Future.delayed(Duration(milliseconds: 500)).then((value) {
+      Utils.languageSubject.sink.add(true);
+
+    });
+  }
+
 }

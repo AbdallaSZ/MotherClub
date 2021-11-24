@@ -32,6 +32,14 @@ initialize()async{
   getNonce(){
     var nonce = prefs.getString("Nonce");
     return nonce;
+  } setLanguage(String lang)async{
+    prefs.setString("Lang", lang);
+    print("Nonce Saved");
+  }
+
+  getLanguage(){
+    var lang = prefs.getString("Lang");
+    return lang;
   }
   Future<UserModel> getUser() async {
 

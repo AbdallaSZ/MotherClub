@@ -1,0 +1,34 @@
+{
+  "home" : "Home",
+  "@home": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "my_account":"My Account",
+  "@profile": {
+    "description": "The conventional newborn programmer greeting"
+  },
+   "store":"Store",
+  "@store": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "logout":"Log out",
+  "@logout": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "change_language":"Change Language",
+  "@change_language": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "forum":"Forum",
+  "@forum": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "category":"Category",
+  "@category": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "splash_phrase":"Your companion on the journey of \n pregnancy and motherhood",
+  "@splash_phrase": {
+    "description": "The conventional newborn programmer greeting"
+  }
+  }
