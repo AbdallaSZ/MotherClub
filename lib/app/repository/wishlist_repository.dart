@@ -13,16 +13,16 @@ class WishlistRepository{
 
 
 
-  Future<String> createWishlist( CreateWishlistModel wishlist) async {
-    final response = await _networkService.getMyData('apiUrl');
-    if (response.statusCode == 200) {
-      debugPrint("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa$response");
-      return 'Course add to favorite successfully';
-    } else {
-      // If that call was not successful, throw an error.
-      throw Exception('Failed to load post');
-    }
-  }
+  // Future<String> createWishlist( CreateWishlistModel wishlist) async {
+  //   final response = await _networkService.getMyData('apiUrl');
+  //   if (response.statusCode == 200) {
+  //     debugPrint("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa$response");
+  //     return 'Course add to favorite successfully';
+  //   } else {
+  //     // If that call was not successful, throw an error.
+  //     throw Exception('Failed to load post');
+  //   }
+  // }
 
   // Stream<String> addCourseToFavorite(String studentId, String courseId) {
   //   final userIdParam = '/$studentId';
