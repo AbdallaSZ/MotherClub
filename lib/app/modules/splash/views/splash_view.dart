@@ -9,8 +9,6 @@ import 'package:motherclub/common/Utils/Utils.dart';
 class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
-
-
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
 

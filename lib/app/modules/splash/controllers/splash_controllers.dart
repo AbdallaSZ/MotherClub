@@ -18,7 +18,6 @@ class SplashController extends GetxController {
     Utils.userPreferences.setNonce(myData["nonce"]);
   }
   Future<void> loading() async {
-
     Timer(Duration(seconds: 5), () async {
 
       if(await Utils.checkapp()==true) {
