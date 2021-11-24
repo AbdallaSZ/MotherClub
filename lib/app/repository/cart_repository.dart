@@ -57,26 +57,26 @@ print('asasllllll${response.statusCode}');
     }
   }
 Future<String> addCartItem() async {
-
-  final response = await NetworkService.post(
-    'wp-json/cocart/v2/cart/add-item',
-      _networkService.convertToJson({
-        'id':'4432',
-        'quantity':'1' ,
-        'variation[attribute_pa_age]':'0-3-months ',
-      }),
-  );
-  print('stCode${response.statusCode}');
-  if (response.statusCode != 200 ) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    throw Exception('Failed to create album.');
-  } else {
-    print('printBody${response.body}');
-    print('printBodyDecoded${jsonDecode(response.body)}');
-    return 'item added';
-
-  }
+   final _networkService = NetworkService();
+  // final response = await _networkService.post(
+  //   'wp-json/cocart/v2/cart/add-item',
+  //     _networkService.convertToJson({
+  //       'id':'4432',
+  //       'quantity':'1' ,
+  //       'variation[attribute_pa_age]':'0-3-months ',
+  //     }),
+  // );
+  // print('stCode${response.statusCode}');
+  // if (response.statusCode != 200 ) {
+  //   // If the server did return a 201 CREATED response,
+  //   // then parse the JSON.
+  //   throw Exception('Failed to create album.');
+  // } else {
+  //   print('printBody${response.body}');
+  //   print('printBodyDecoded${jsonDecode(response.body)}');
+     return 'item added';
+  //
+  // }
 }
 
 
