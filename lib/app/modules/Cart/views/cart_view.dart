@@ -24,7 +24,7 @@ class CartView extends StatefulWidget {
 class _StoreViewScreenState  extends State<CartView>{
   var _searchview = new TextEditingController();
   bool _show = false;
-  bool _firstSearch = true;
+  bool _firstSearch  = true;
   String _query = "";
 
   @override
