@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
+import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
@@ -229,79 +230,79 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
               scrollDirection: Axis.horizontal,
               itemCount: data!.length,
               itemBuilder: (context, index) {
-                return Card(
-                  // padding: EdgeInsets.all(2),
-                  // color: Colors.yellow,
-                  child: Container(
-                      padding: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(),
-                      height:117,
-                      width:180,
-                      child:Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:[
-                            SizedBox(height:23),
-                            Image.network('${data[index].imageslist[0].src}',height: 130,width: 155,),
-                            SizedBox(height:15),
-
-                            Text("${data[index].name}",style: GoogleFonts.roboto(
-                              fontSize: 13,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w500,
-                              color: Black_textColor,
-
-                            ),
-                            ),
-                            SizedBox(height:15),
-                            Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
-                              fontSize: 18,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w700,
-                              color: Black_textColor,
-
-                            )
-                            ),
-                            SizedBox(height:10),
-                            Container(
-                              alignment: Alignment.bottomRight,
-                              padding: EdgeInsets.only(right: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Icon(Icons.favorite_border,size: 28,),
-                                  SizedBox(width:20),
-                                  Container(
-                                    width: 40,
-                                    height:40,
-
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25.0),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          stops: [0.0,0.1,10.0],
-
-                                          colors: [
-                                            // Colors.deepPurple.shade400,
-                                            CustomButton_Color,
-                                            CustomButton_Color,
-                                            CustomButton_Second_Color,
-                                            // Colors.deepPurple.shade200,
-                                          ]),
-
-                                      // gradient: colorsConstants.gradient1
-                                    ),
-                                    child: Icon(Icons.add_shopping_cart,color: Colors.white,),
-
-
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]
-                      )
-                  ),
-                );
+                return ProductItem(data: data[index],);
+                //   Card(
+                //   // padding: EdgeInsets.all(2),
+                //   // color: Colors.yellow,
+                //   child: Container(
+                //       padding: EdgeInsets.only(left: 10),
+                //       decoration: BoxDecoration(),
+                //       height:117,
+                //       width:180,
+                //       child:Column(
+                //           crossAxisAlignment: CrossAxisAlignment.start,
+                //           children:[
+                //             SizedBox(height:23),
+                //             Image.network('${data[index].imageslist[0].src}',height: 130,width: 155,),
+                //             SizedBox(height:15),
+                //
+                //             Text("${data[index].name}",style: GoogleFonts.roboto(
+                //               fontSize: 13,
+                //               fontStyle: FontStyle.normal,
+                //               fontWeight: FontWeight.w500,
+                //               color: Black_textColor,
+                //
+                //             ),
+                //             ),
+                //             SizedBox(height:15),
+                //             Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
+                //               fontSize: 18,
+                //               fontStyle: FontStyle.normal,
+                //               fontWeight: FontWeight.w700,
+                //               color: Black_textColor,
+                //             )
+                //             ),
+                //             SizedBox(height:10),
+                //             Container(
+                //               alignment: Alignment.bottomRight,
+                //               padding: EdgeInsets.only(right: 10),
+                //               child: Row(
+                //                 mainAxisAlignment: MainAxisAlignment.end,
+                //                 children: [
+                //                   Icon(Icons.favorite_border,size: 28,),
+                //                   SizedBox(width:20),
+                //                   Container(
+                //                     width: 40,
+                //                     height:40,
+                //
+                //                     decoration: BoxDecoration(
+                //                       borderRadius: BorderRadius.circular(25.0),
+                //                       gradient: LinearGradient(
+                //                           begin: Alignment.topLeft,
+                //                           end: Alignment.bottomRight,
+                //                           stops: [0.0,0.1,10.0],
+                //
+                //                           colors: [
+                //                             // Colors.deepPurple.shade400,
+                //                             CustomButton_Color,
+                //                             CustomButton_Color,
+                //                             CustomButton_Second_Color,
+                //                             // Colors.deepPurple.shade200,
+                //                           ]),
+                //
+                //                       // gradient: colorsConstants.gradient1
+                //                     ),
+                //                     child: Icon(Icons.add_shopping_cart,color: Colors.white,),
+                //
+                //
+                //                   ),
+                //                 ],
+                //               ),
+                //             ),
+                //           ]
+                //       )
+                //   ),
+                // );
               },
             );}
             else{

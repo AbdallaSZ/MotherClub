@@ -6,6 +6,7 @@ import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC{
@@ -17,7 +18,6 @@ class BLoC{
             (newProduct) {
 
               List<Images> imagesOfProductList = [];
-
               newProduct["images"].forEach(
                     (newImage) {
                   imagesOfProductList.add(
@@ -144,5 +144,27 @@ class BLoC{
 
     return categories_Lst;
   }
+
+  Future<List<CartItemModel>> cartItemsList() async {
+    List<CartItemModel> cartItemss = <CartItemModel>[];
+
+    var cartItemsResponse = await Utils.networkcall.getCartItems();
+    cartItemsResponse['data'].forEach(
+            (newCartItem) {
+          print('newdata ${newCartItem}');
+          CartItemModel categoriesModel=new CartItemModel(cartHash: newCartItem['cartHash'], cartKey: newCartItem['cartKey'], currency: newCartItem['currency'], customer: newCartItem['customer'], items: newCartItem['items'], itemCount: newCartItem['itemCount'], itemsWeight: newCartItem['itemsWeight'], coupons: newCartItem['coupons'], needsPayment: newCartItem['needsPayment'], needsShipping: newCartItem['needsShipping'], shipping: newCartItem['shipping'], fees: newCartItem['fees'], taxes: newCartItem['taxes'], totals: newCartItem['totals'], removedItems: newCartItem['removedItems'], crossSells: newCartItem['crossSells'], notices: newCartItem['notices']);
+          cartItemss.add(categoriesModel);
+
+        });
+
+    return cartItemss;
+  }
+
+
+  Future<void> addCartItems(String id ,int quantity ,String variation) async {
+ await Utils.networkcall.addCartItem(id,quantity,variation);
+  }
+
+
 
   }

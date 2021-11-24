@@ -9,13 +9,12 @@ import 'package:http/http.dart'as http;
 class NetworkService {
   static final String BASE_URL = "https://mothersclub.me/";
 
- static Future<http.Response> getMyData(String apiUrl, {dynamic headers})async {
-
-     var response = await http.get(Uri.parse(apiUrl), headers: headers);
+  Future<http.Response> getMyData(String apiBaseUrl, {dynamic headers})async {
+     var response = await http.get(Uri.parse(BASE_URL+apiBaseUrl), headers: headers);
      return response;
   }
 
-  static Future<http.Response> getWithBody(String apiBaseUrl, dynamic data,
+   Future<http.Response> getWithBody(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}}) async {
     final url = Uri.parse(BASE_URL+apiBaseUrl);
     final request = http.Request("GET", url);
@@ -25,7 +24,7 @@ class NetworkService {
     return http.Response.fromStream(streamedResponse);
   }
 
-  static Future<http.Response> post(String apiBaseUrl, dynamic data,
+   Future<http.Response> post(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}}) {
     return http.post(
       Uri.parse(BASE_URL+apiBaseUrl),
@@ -34,7 +33,7 @@ class NetworkService {
     );
   }
 
-  static Future<http.Response> patch(String apiBaseUrl, dynamic data,
+   Future<http.Response> patch(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}}) {
     return http.patch(
       Uri.parse(BASE_URL+apiBaseUrl),

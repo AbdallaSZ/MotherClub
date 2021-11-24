@@ -158,7 +158,7 @@ class AppPages{
     ),
     GetPage(
       name: _Paths.CART,
-      page: () => cart_view(),
+      page: () => CartView(),
       // binding: blog_binding(),
     ),
     GetPage(
