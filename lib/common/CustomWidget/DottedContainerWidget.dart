@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 
-Widget DottedContainerWidget(BuildContext context,height,width) {
+Widget DottedContainerWidget(BuildContext context,height,width,String  text) {
   return Container(
     color: Edit_textColor,
     child: DottedBorder(
@@ -29,9 +29,11 @@ Widget DottedContainerWidget(BuildContext context,height,width) {
               ),
             ),
             SizedBox(width: 14,),
-            Text("Uplaod Profile Photo", style: GoogleFonts.roboto(fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Grey_text_Color,))
+            Flexible(
+              child: Text(text, style: GoogleFonts.roboto(fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Grey_text_Color,)),
+            )
           ],
         ),
       ),

@@ -35,6 +35,12 @@ dependencies:
   carousel_slider: ^4.0.0
   flick_video_player:
   rxdart: ^0.27.3
+  dio: ^4.0.4
+  flutter_bloc: ^7.0.0
+  image_picker: ^0.8.4+4
+  image: ^3.0.8
+
+
 
 
 dev_dependencies:

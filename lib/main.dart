@@ -7,12 +7,15 @@ import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/app/provider/UserProvider.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
 
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Utils.userPreferences.initialize();
+
   await Firebase.initializeApp();
   runApp(
 
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),

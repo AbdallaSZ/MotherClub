@@ -1,11 +1,13 @@
 import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 
 class UserPreferences {
+  late final SharedPreferences prefs;
+
   Future<bool> saveUser(UserModel user) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("ID", user.userId);
     prefs.setString("user_login", user.user_login);
@@ -15,12 +17,23 @@ class UserPreferences {
     prefs.setString("user_url", user.user_url);
     prefs.setString("user_registered", user.user_registered);
     prefs.setString("display_name", user.display_name);
-
+    setAttributeToUtils(user);
     return prefs.commit();
   }
+initialize()async{
+  prefs = await SharedPreferences.getInstance();
+  print("Shared Preference ready");
+}
+  setNonce(String nonce)async{
+    prefs.setString("Nonce", nonce);
+    print("Nonce Saved");
+  }
 
+  getNonce(){
+    var nonce = prefs.getString("Nonce");
+    return nonce;
+  }
   Future<UserModel> getUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String userId = prefs.getString("ID")??'';
     String user_login = prefs.getString("user_login")??'';
@@ -35,7 +48,6 @@ class UserPreferences {
   }
 
   void removeUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.remove("ID");
     prefs.remove("user_login");
@@ -48,8 +60,14 @@ class UserPreferences {
   }
 
   Future<String> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("ID")??'';
     return token;
+  }
+
+  void setAttributeToUtils(UserModel value) {
+    Utils.id=value.userId;
+    Utils.name=value.display_name;
+    Utils.email=value.user_email;
+    Utils.ImageUrl=value.user_url;
   }
 }

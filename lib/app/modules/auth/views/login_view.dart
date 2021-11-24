@@ -186,7 +186,7 @@ class LoginView extends GetView<AuthController> {
                        alignment: Alignment.center,
                        child: GestureDetector(
                          onTap: (){
-                           Get.offAndToNamed(Routes.REGISTER);
+                           Get.toNamed(Routes.REGISTER);
                          },
                          child: Row(
                            mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 
-Widget EditTextwidget(String Lable,TextEditingController textEditingController,BuildContext context){
+Widget EditTextwidget(String Lable,TextEditingController textEditingController,BuildContext context,{String? Function(String? s)? validate} ){
 
   return Container(
     alignment: Alignment.center,
@@ -12,7 +12,7 @@ Widget EditTextwidget(String Lable,TextEditingController textEditingController,B
         color:Edit_textColor,
       ),
     ),
-    child: TextField(
+    child: TextFormField(
       controller:  textEditingController,
       decoration: InputDecoration(
         border: InputBorder.none,
@@ -24,6 +24,8 @@ Widget EditTextwidget(String Lable,TextEditingController textEditingController,B
         // suffixIcon:  Icon(IconButton,color: Black_textColor,),
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       ),
+
+      validator:validate,
     ),
   );
 }
