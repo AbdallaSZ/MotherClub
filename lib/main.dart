@@ -22,10 +22,7 @@ void main() async {
   Utils.userPreferences.initialize();
 
   await Firebase.initializeApp();
-  int? a ;
-  a ??=3;
-  a ??=5;
-  print(a);
+
   runApp(
 
        MyApp()
