@@ -6,6 +6,7 @@ import 'package:motherclub/app/modules/splash/controllers/splash_controllers.dar
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/ResorcesListCard.dart';
 import 'package:motherclub/common/CustomWidget/logslist_Widget.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 
 class blog_views extends GetView<SplashController> {
@@ -26,7 +27,7 @@ class blog_views extends GetView<SplashController> {
                     child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
 
                 Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-                Text('Expert Blogs',style: GoogleFonts.roboto(
+                Text(Utils.labels!.expert_Blogs,style: GoogleFonts.roboto(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Black_textColor),),
@@ -72,7 +73,7 @@ class blog_views extends GetView<SplashController> {
 
                                       },
 
-                                      title:   Text('Physical',style: Theme.of(context).textTheme.headline4,),
+                                      title:   Text(Utils.labels!.physical,style: Theme.of(context).textTheme.headline4,),
                                       children: <Widget>[
                                         Container(
                                           padding: EdgeInsets.only(left: 10,right: 10),

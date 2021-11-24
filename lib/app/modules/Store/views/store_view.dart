@@ -71,7 +71,7 @@ class _StoreViewScreenState extends State<StoreView> {
                     height: deviceHeight / 8,
                   ),
                   Text(
-                    'Store',
+                    Utils.labels!.store,
                     style: GoogleFonts.roboto(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -128,7 +128,7 @@ class _StoreViewScreenState extends State<StoreView> {
                               Icons.sort,
                               color: Black_textColor,
                             ),
-                            labelText: 'Search Products',
+                            labelText: Utils.labels!.search_product,
                             labelStyle: Theme.of(context).textTheme.bodyText2,
                             //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
                             contentPadding:

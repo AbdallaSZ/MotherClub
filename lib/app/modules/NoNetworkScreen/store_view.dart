@@ -44,7 +44,7 @@ class _NonetworkViewState  extends State<NonetworkView>{
 
               Align(
                   alignment: Alignment.center,
-                  child: Text('Ok Go Back ',style: TextStyle(color: Colors.red ,fontSize: 15,decoration: TextDecoration.none,),textAlign: TextAlign.center,)),
+                  child: Text(Utils.labels!.ok_Go_Back ,style: TextStyle(color: Colors.red ,fontSize: 15,decoration: TextDecoration.none,),textAlign: TextAlign.center,)),
 
             ],),
         ),

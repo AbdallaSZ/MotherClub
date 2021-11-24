@@ -10,7 +10,7 @@ Widget createFilteredListView(List<ProductModel> data) {
     child: data.length==0? Container(
       alignment: Alignment.center,
       height: Utils.deviceHeight,
-      child: Text('No Products Found'),
+      child: Text(Utils.labels!.no_Products_Found),
     ):  GridView.builder(
       itemCount:data.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -43,7 +43,7 @@ Widget createFilteredListView(List<ProductModel> data) {
                   ),
                   ),
                   SizedBox(height:15),
-                  Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
+                  Text(Utils.labels!.amd+" ${data[index].price}",style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w700,

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class ConfigDialog{
@@ -21,7 +22,7 @@ class ConfigDialog{
               content: Container(
                 height: 50,
                 alignment: Alignment.center,
-                  child: JumpingText('Loading...',style: TextStyle(color: Colors.pink),)),
+                  child: JumpingText(Utils.labels!.loading,style: TextStyle(color: Colors.pink),)),
             )
         );
       },

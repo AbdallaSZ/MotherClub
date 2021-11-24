@@ -110,7 +110,7 @@ Widget  storeAppBar(String Label,double height , double width,BuildContext conte
                     ),
                     ),
                     SizedBox(height:15),
-                    Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
+                    Text(Utils.labels!.amd+ data[index].price,style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w700,

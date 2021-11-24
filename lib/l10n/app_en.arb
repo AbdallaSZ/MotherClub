@@ -30,5 +30,262 @@
   "splash_phrase":"Your companion on the journey of \n pregnancy and motherhood",
   "@splash_phrase": {
     "description": "The conventional newborn programmer greeting"
+  },
+  "items":"Items",
+  "@items": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "amd":"AMD",
+  "@amd": {
+    "description": "The conventional newborn programmer greeting"
+  },"discount":"Discount",
+  "@discount": {
+    "description": "The conventional newborn programmer greeting"
+  },"create_New_Account":"Create a New Account",
+  "@create_New_Account": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+
+
+  "create_New_Account_to_see":"Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
+  "@create_New_Account_to_see": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "agree_for_news":"Agree for Newsletter?",
+  "@agree_for_news": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "total":"Total",
+  "@total": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "sizes":"Sizes:",
+  "@sizes": {
+    "description": "The conventional newborn programmer greeting"
+  },"done":"Done",
+  "@done": {
+    "description": "The conventional newborn programmer greeting"
+  },"we_are_pleased":"We are pleased to join your journey and provide you with free knowledge and medical tips week by week as your pea-pod develops into a full-grown sweet baby.",
+  "@we_are_pleased": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "your_Pregnancy":"Your Pregnancy",
+  "@your_Pregnancy": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "physical":"Physical",
+  "@physical": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "loading":"Loading...",
+  "@loading": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"wish_List":"Wish List",
+  "@wish_List": {
+    "description": "The conventional newborn programmer greeting"
+  },"weeks_Pregnancy_Helps":"Weeks Pregnancy Helps",
+  "@weeks_Pregnancy_Helps": {
+    "description": "The conventional newborn programmer greeting"
+  },"expert_Blogs":"Expert Blogs",
+  "@expert_Blogs": {
+    "description": "The conventional newborn programmer greeting"
+  },"ok_Go_Back":"Ok Go Back ",
+  "@ok_Go_Back": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "code_entered_is":"Code entered is ",
+  "@code_entered_is": {
+    "description": "The conventional newborn programmer greeting"
+  }, "item_Details":"Item Details ",
+  "@item_Details": {
+    "description": "The conventional newborn programmer greeting"
+  }, "description":"Description",
+  "@description": {
+    "description": "The conventional newborn programmer greeting"
+  },"review":"Review",
+  "@review": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "magnetic_Energy":"Magnetic Energy Anion Sanitary Napkins are designed for your wellness during your periods. Magnetic Strip provides 3 natural energies (magnetism, anion and far infrared) that",
+  "@magnetic_Energy": {
+    "description": "The conventional newborn programmer greeting"
+  },"add_to_cart":"Add to Cart",
+  "@add_to_cart": {
+    "description": "The conventional newborn programmer greeting"
+  },"maternity_Bladder":"Maternity Bladder Control ads'",
+  "@maternity_Bladder": {
+    "description": "The conventional newborn programmer greeting"
+  },"no_Products_Found":"No Products Found",
+  "@no_Products_Found": {
+    "description": "The conventional newborn programmer greeting"
+  },"thaiamine":"Thiamine (Vitamin B1) in\\n your diet \\nduring pregnancy",
+  "@thaiamine": {
+    "description": "The conventional newborn programmer greeting"
+  },"agree_to":"I agree to the ",
+  "@agree_to": {
+    "description": "The conventional newborn programmer greeting"
+  },"terms_conditions":"Terms and conditions",
+  "@terms_conditions": {
+    "description": "The conventional newborn programmer greeting"
+  },"and":"and",
+  "@and": {
+    "description": "The conventional newborn programmer greeting"
+  },"privacy_policy":"Privacy Policy",
+  "@privacy_policy": {
+    "description": "The conventional newborn programmer greeting"
+  },"to_mother_club":" to\\nMotherClub",
+  "@to_mother_club": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "register":"Register",
+  "@register": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "name_must_be_more_than":"Name Must be more than 3 characters",
+  "@name_must_be_more_than": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "username_must_be_more_than":"User name Must be more than 3 characters",
+  "@username_must_be_more_than": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "password_must_be_more_than":"Password Must be more than 7 characters",
+  "@password_must_be_more_than": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "email_must_be_more_than":"Email is not valid ",
+  "@email_must_be_more_than": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "your_orders":"Your Orders",
+  "@your_orders": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "see_all":"See All",
+  "@see_all": {
+    "description": "The conventional newborn programmer greeting"
+  },"week":"Week",
+  "@week": {
+    "description": "The conventional newborn programmer greeting"
+  },"comments":"Comments",
+  "@comments": {
+    "description": "The conventional newborn programmer greeting"
+  }, "reply":"Reply",
+  "@reply": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "buy_again":"Buy Again",
+  "@buy_again": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "your_wish_list":"Your Wish List",
+  "@your_wish_list": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "chat":"Chat",
+  "@chat": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "select_language":"Select Language",
+  "@select_language": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "settings":"Settings",
+  "@settings": {
+    "description": "The conventional newborn programmer greeting"
+  },"contact_details":"Contact Details",
+  "@contact_details": {
+    "description": "The conventional newborn programmer greeting"
+  },"address":"Address",
+  "@address": {
+    "description": "The conventional newborn programmer greeting"
+  },"save_address_as":"SAVE ADDRESS AS",
+  "@save_address_as": {
+    "description": "The conventional newborn programmer greeting"
+  },"work":"Work",
+  "@work": {
+    "description": "The conventional newborn programmer greeting"
+  },"payment_option":"PAYMENT OPTION",
+  "@payment_option": {
+    "description": "The conventional newborn programmer greeting"
+  },"have_a_promo":"Have a promo code",
+  "@have_a_promo": {
+    "description": "The conventional newborn programmer greeting"
+  },"apply":"Apply",
+  "@apply": {
+    "description": "The conventional newborn programmer greeting"
+  },"verify_your_email":"Verify Your Email",
+  "@verify_your_email": {
+    "description": "The conventional newborn programmer greeting"
+  },"please_enter_4_digit":"Please enter the 4 digite code sent to Amara123@gmail.com",
+  "@please_enter_4_digit": {
+    "description": "The conventional newborn programmer greeting"
+  },"verification_code":"Verification Code",
+  "@verification_code": {
+    "description": "The conventional newborn programmer greeting"
+  },"login_to_account":"Login your Account",
+  "@login_to_account": {
+    "description": "The conventional newborn programmer greeting"
+  },"your_password":"Your new password must be different from priviously  used Password",
+  "@your_password": {
+    "description": "The conventional newborn programmer greeting"
+  },"we_pleased":"We are pleased to accompany you on your journey and provide you with free information",
+  "@we_pleased": {
+    "description": "The conventional newborn programmer greeting"
+  },"or_login_with":"Or login with",
+  "@or_login_with": {
+    "description": "The conventional newborn programmer greeting"
+  },"following":"Following",
+  "@following": {
+    "description": "The conventional newborn programmer greeting"
+  },  "we_choose_for_you": "We Choose for you",
+  "@we_choose_for_you": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "search_product": "Search Products",
+  "@search_product": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "your_baby": "Search Products",
+  "@your_baby": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "congrats": "'Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.'",
+  "@congrats": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "followers":"Followers",
+  "@followers": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "you_are_pregnant_for":"You are pregnant for",
+  "@you_are_pregnant_for": {
+    "description": "The conventional newborn programmer greeting"
+  },
+   "hi":"Hi",
+  "@hi": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "likes":"Likes",
+  "@likes": {
+    "description": "The conventional newborn programmer greeting"
+  },"total_post":"Total Post",
+  "@total_post": {
+    "description": "The conventional newborn programmer greeting"
+  },"shopping_products":"Shopping products",
+  "@shopping_products": {
+    "description": "The conventional newborn programmer greeting"
   }
+
+
   }

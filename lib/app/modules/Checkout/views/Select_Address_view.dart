@@ -60,7 +60,7 @@ class Select_Address_view extends GetView<AuthController> {
                         children: [
                           Padding(
                             padding: EdgeInsets.all(10),
-                            child: Text("PAYMENT OPTION",style:GoogleFonts.roboto(
+                            child: Text(Utils.labels!.payment_option,style:GoogleFonts.roboto(
                                 fontSize: 18,
                                 fontWeight: FontWeight.normal,
                                 fontStyle: FontStyle.normal,
@@ -156,7 +156,7 @@ class Select_Address_view extends GetView<AuthController> {
                                          children: [
                                          Icon(Icons.card_giftcard),
                                        SizedBox(width: 10,),
-                                       Text("Have a promo code",style: GoogleFonts.roboto(
+                                       Text(Utils.labels!.have_a_promo,style: GoogleFonts.roboto(
                                        fontSize: 14,
                                        fontStyle: FontStyle.normal,
                                        fontWeight: FontWeight.normal,
@@ -164,7 +164,7 @@ class Select_Address_view extends GetView<AuthController> {
 
                                  ))
                                        ],),
-                                       Text("Apply",style: GoogleFonts.roboto(
+                                       Text(Utils.labels!.apply,style: GoogleFonts.roboto(
                                          fontSize: 14,
                                          fontStyle: FontStyle.normal,
                                          fontWeight: FontWeight.bold,

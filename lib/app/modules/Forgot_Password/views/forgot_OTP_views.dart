@@ -70,14 +70,14 @@ class forgot_otp_views extends GetView<Forgot_OTP_Controller> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Login your Account",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.login_to_account,style: GoogleFonts.roboto(
                         fontSize: 18,
 
                         fontWeight: FontWeight.bold,
                         color: Black_textColor,
                       )),
                           SizedBox(height:10),
-                          Text("Your new password must be different from priviously  used Password",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.your_password,style: GoogleFonts.roboto(
                             fontSize: 13,
 
                             fontWeight: FontWeight.w400,

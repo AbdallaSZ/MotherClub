@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 Widget VideoView(){
   
@@ -14,7 +15,7 @@ Widget VideoView(){
         borderRadius: BorderRadius.all(Radius.circular(10))),
     child: Column(
       children: [
-        Text('We are pleased to join your journey and provide you with free knowledge and medical tips week by week as your pea-pod develops into a full-grown sweet baby.',style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.w400,color:Colors.black)),
+        Text(Utils.labels!.we_are_pleased,style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.w400,color:Colors.black)),
         Divider(height: 10,color: Colors.transparent,),
         Stack(
           alignment: Alignment.center,
@@ -25,7 +26,7 @@ Widget VideoView(){
         Divider(height: 10,color: Colors.transparent,),
         Align(
           alignment: Alignment.centerLeft,
-            child: Text('11 Weeks Pregnancy Helps',style: GoogleFonts.roboto(fontSize: 12,fontWeight: FontWeight.normal,color:Colors.black))),
+            child: Text('11'+ Utils.labels!.weeks_Pregnancy_Helps,style: GoogleFonts.roboto(fontSize: 12,fontWeight: FontWeight.normal,color:Colors.black))),
 
 
       ],

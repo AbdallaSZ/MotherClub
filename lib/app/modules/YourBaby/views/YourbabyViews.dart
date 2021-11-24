@@ -48,7 +48,7 @@ class YourbabyViews extends GetView<YourBabyController> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Your Baby ',style: Theme.of(context).textTheme.headline1,),
+                              Text(Utils.labels!.your_baby,style: Theme.of(context).textTheme.headline1,),
                               Row(children: [
                                 Icon(Icons.search,color: Colors.white,size: 25,),
                                 SizedBox(width: 10,),
@@ -115,7 +115,7 @@ class YourbabyViews extends GetView<YourBabyController> {
                 SliverToBoxAdapter(
                   child:  Padding(
                       padding: EdgeInsets.all(10),
-                      child: Text('Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.',style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.w400,color:Colors.black))),
+                      child: Text(Utils.labels!.congrats,style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.w400,color:Colors.black))),
 
                 ),
               /*  SliverToBoxAdapter(
@@ -182,7 +182,7 @@ class YourbabyViews extends GetView<YourBabyController> {
 
                             },
 
-                          title:   Text('Physical',style: Theme.of(context).textTheme.headline4,),
+                          title:   Text(Utils.labels!.physical,style: Theme.of(context).textTheme.headline4,),
                           children: <Widget>[
                           Container(
                             padding: EdgeInsets.only(left: 10,right: 10),

@@ -41,7 +41,7 @@ class product_details_viewsState extends State<product_details_views> {
         automaticallyImplyLeading: true,
 
         backgroundColor: Colors.white,
-        title: Text('Item Details',style: TextStyle(color: Colors.black),),
+        title: Text(Utils.labels!.item_Details,style: TextStyle(color: Colors.black),),
       ),
       body: Container(
         color: Color(0xffE5E5E5),
@@ -126,15 +126,15 @@ class product_details_viewsState extends State<product_details_views> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text('Maternity Bladder Control ads',style: Theme.of(context).textTheme.headline4,),
+                      Text(Utils.labels!.maternity_Bladder,style: Theme.of(context).textTheme.headline4,),
                       Divider(height: 5,color: Colors.transparent,),
                       Row(
                         //crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('AMD 150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.red)),
+                          Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.red)),
                          SizedBox(width: Utils.deviceWidth/8,),
-                          Text('AMD 150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey)),
+                          Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey)),
 
                         ],
                       ),
@@ -163,7 +163,7 @@ class product_details_viewsState extends State<product_details_views> {
                     ),
                     height: 60,
                     width: Utils.deviceWidth/2.5,
-                    child:  Text('Discription',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.white)),
+                    child:  Text(Utils.labels!.description,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.white)),
 
                   ),
                   Container(
@@ -175,21 +175,21 @@ class product_details_viewsState extends State<product_details_views> {
                     ),
                     height: 60,
                     width: Utils.deviceWidth/2.5,
-                    child:  Text('Review',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
+                    child:  Text(Utils.labels!.review,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
 
                   )
                 ],),
     SizedBox(
     height: 10,
     ),
-                Text('Magnetic Energy Anion Sanitary Napkins are designed for your wellness during your periods. Magnetic Strip provides 3 natural energies (magnetism, anion and far infrared) that',style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.normal,color: Colors.grey)),
+                Text(Utils.labels!.magnetic_Energy,style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.normal,color: Colors.grey)),
                 SizedBox(
                   height: 10,
                 ),
 
                 Align(
                   alignment: Alignment.topLeft,
-                    child: Text('Sizes:',style: Theme.of(context).textTheme.headline4,)),
+                    child: Text(Utils.labels!.sizes,style: Theme.of(context).textTheme.headline4,)),
                 Container(
                   height: 60,
                   child: ListView.builder(
@@ -237,7 +237,7 @@ class product_details_viewsState extends State<product_details_views> {
                       Icon(Icons.add)
                     ],)
                   ),
-    CustomBUttonWidget("Add to Cart", Utils.deviceHeight/17 , Utils.deviceWidth/2.3, context),
+    CustomBUttonWidget(Utils.labels!.add_to_cart, Utils.deviceHeight/17 , Utils.deviceWidth/2.3, context),
 
     ],)
 

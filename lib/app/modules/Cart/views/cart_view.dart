@@ -80,9 +80,9 @@ class _StoreViewScreenState  extends State<CartView>{
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                    Text('Items',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.blueGrey)),
+                    Text(Utils.labels!.items,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.blueGrey)),
                     SizedBox(width: 10,),
-                    Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                    Text(Utils.labels!.amd+' 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
 
                   ],),
                 ),
@@ -90,9 +90,9 @@ class _StoreViewScreenState  extends State<CartView>{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Discount',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.blueGrey)),
+                    Text(Utils.labels!.discount,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.blueGrey)),
                     SizedBox(width: 10,),
-                    Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                    Text(Utils.labels!.amd+'180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
 
                   ],),
                 Divider(thickness: 2,),
@@ -100,9 +100,9 @@ class _StoreViewScreenState  extends State<CartView>{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Total',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                    Text(Utils.labels!.total,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
                     SizedBox(width: 10,),
-                    Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.redAccent)),
+                    Text(Utils.labels!.amd+'180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.redAccent)),
 
                   ],),
                  SizedBox(height: Utils.deviceHeight/38,),
@@ -196,7 +196,7 @@ class _StoreViewScreenState  extends State<CartView>{
                                                   SizedBox(height:15),
                                                   Row(
                                                     children: [
-                                                      Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
+                                                      Text( Utils.labels!.amd+ " ${data[index].price}",style: GoogleFonts.roboto(
                                                         fontSize: 18,
                                                         fontStyle: FontStyle.normal,
                                                         fontWeight: FontWeight.w700,
@@ -313,7 +313,7 @@ class _StoreViewScreenState  extends State<CartView>{
               child: Column(children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Sizes:',style: Theme.of(context).textTheme.headline4,)),
+                    child: Text(Utils.labels!.sizes,style: Theme.of(context).textTheme.headline4,)),
                 Container(
                   height: 60,
                   child: ListView.builder(
@@ -338,16 +338,16 @@ class _StoreViewScreenState  extends State<CartView>{
                 Padding(
                   padding: EdgeInsets.only(left: 8),
                   child: Row(children: [
-                    Text('AMD 150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                    Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
                     SizedBox(width: 10,),
-                    Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
+                    Text(Utils.labels!.amd+'180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
                     SizedBox(width: 10,),
                     Text('(10% off)',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.red)),
 
                   ],),
                 ),
                 SizedBox(height: 10,),
-                CustomBUttonWidget('Done', Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
+                CustomBUttonWidget(Utils.labels!.done, Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
               ],),),
           );
         },

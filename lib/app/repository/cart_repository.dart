@@ -57,8 +57,8 @@ print('asasllllll${response.statusCode}');
     }
   }
 Future<String> addCartItem() async {
-   final _networkService = NetworkService();
-  final response = await _networkService.post(
+
+  final response = await NetworkService.post(
     'wp-json/cocart/v2/cart/add-item',
       _networkService.convertToJson({
         'id':'4432',

@@ -53,7 +53,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
             onBackButtonPressed:Navigator.of(context).pop,
             centerTitle: true,
             withBackButton: true,
-            title: 'Your Pregnancy',
+            title: Utils.labels!.your_Pregnancy,
           ),
           body: CustomScrollView(
               slivers: <Widget>[
@@ -78,7 +78,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                            Text('Your Pregnancy',style: Theme.of(context).textTheme.headline1,),
+                            Text(Utils.labels!.your_Pregnancy,style: Theme.of(context).textTheme.headline1,),
                             Row(children: [
                               Icon(Icons.search,color: Colors.white,size: 25,),
                               SizedBox(width: 10,),
@@ -239,7 +239,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                                   // mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
                                                     (weekSlug=="0")?
-                                                    Text("Week 2",
+                                                    Text( Utils.labels!.week+"2",
                                                         style: Theme
                                                             .of(context)
                                                             .textTheme

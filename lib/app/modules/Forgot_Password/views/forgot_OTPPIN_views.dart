@@ -73,14 +73,14 @@ class forgot_OTPPIN_views extends GetView<Forgot_OTPPIN_Controller> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Verify Your Email",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.verify_your_email,style: GoogleFonts.roboto(
                         fontSize: 18,
 
                         fontWeight: FontWeight.bold,
                         color: Black_textColor,
                       )),
                           SizedBox(height:10),
-                          Text("Please enter the 4 digite code sent to Amara123@gmail.com",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.please_enter_4_digit,style: GoogleFonts.roboto(
                             fontSize: 13,
 
                             fontWeight: FontWeight.w400,
@@ -107,8 +107,8 @@ class forgot_OTPPIN_views extends GetView<Forgot_OTPPIN_Controller> {
                                   context: context,
                                   builder: (context){
                                     return AlertDialog(
-                                      title: Text("Verification Code".trim().toString()),
-                                      content: Text('Code entered is $verificationCode'),
+                                      title: Text(Utils.labels!.verification_code.trim().toString()),
+                                      content: Text(Utils.labels!.code_entered_is+'$verificationCode'),
                                     );
                                   }
                               );

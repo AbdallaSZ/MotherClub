@@ -28,7 +28,7 @@ class CategoriesView extends GetView<CategoriesController> {
                    child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
 
                Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-               Text('Category',style: GoogleFonts.roboto(
+               Text(Utils.labels!.category,style: GoogleFonts.roboto(
                    fontSize: 20,
                    fontWeight: FontWeight.w700,
                    color: Black_textColor),),
