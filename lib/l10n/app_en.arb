@@ -257,6 +257,12 @@
     "description": "The conventional newborn programmer greeting"
   },
 
+
+  "write_your_experience": "Write your experience",
+  "@write_your_experience": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
   "congrats": "'Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.'",
   "@congrats": {
     "description": "The conventional newborn programmer greeting"

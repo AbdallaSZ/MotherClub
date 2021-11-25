@@ -576,7 +576,7 @@ class ForumCommentView extends GetView<ForumController> {
                                         enabledBorder: InputBorder.none,
                                         errorBorder: InputBorder.none,
                                         disabledBorder: InputBorder.none,
-                                        hintText: "Write your experience",
+                                        hintText: Utils.labels!.write_your_experience,
                                         hintStyle:  GoogleFonts.roboto(
                                             fontSize: 13,
                                             letterSpacing: 0.25,
