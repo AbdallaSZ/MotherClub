@@ -108,7 +108,7 @@ class ForumView extends GetView<ForumController> {
                             ),
                             child: Column(
                               children: [
-                                Text("Week",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.week,style: GoogleFonts.roboto(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -140,7 +140,7 @@ class ForumView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Following",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.following,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -160,7 +160,7 @@ class ForumView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Followers",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.followers,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -180,7 +180,7 @@ class ForumView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Likes",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.likes,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -211,7 +211,7 @@ class ForumView extends GetView<ForumController> {
                         children: [
 
                           SizedBox(width:15),
-                          Text("Total Post",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.total_post,style: GoogleFonts.roboto(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
@@ -273,7 +273,7 @@ class ForumView extends GetView<ForumController> {
                             CustomButton_Second_Color
                           ],
                         ); },
-                        child: Text("See All",style: GoogleFonts.roboto(
+                        child: Text(Utils.labels!.see_all,style: GoogleFonts.roboto(
                             fontSize:15,
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
@@ -422,7 +422,7 @@ class ForumView extends GetView<ForumController> {
                                                         CustomButton_Second_Color
                                                       ],
                                                     ); },
-                                                    child: Text("Reply",style: GoogleFonts.roboto(
+                                                    child: Text(Utils.labels!.reply,style: GoogleFonts.roboto(
                                                       fontSize: 16,
                                                       letterSpacing: 0.25,
                                                       height: 1.4,

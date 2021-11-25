@@ -50,7 +50,7 @@ class ProductItem extends StatelessWidget {
               ),
             ),
 
-            Text("AMD ${data.price}",
+            Text("amd ${data.price}",
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   fontStyle: FontStyle.normal,

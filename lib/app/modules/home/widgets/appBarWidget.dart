@@ -17,7 +17,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
     slivers: <Widget>[
       // SliverToBoxAdapter(
           // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
-      SliverToBoxAdapter(child: InfoWidget("Hi, ${Utils.name}","You are pregnant for","Week","9-12",deviceHeight/10,deviceWidth,context)),
+      SliverToBoxAdapter(child: InfoWidget(Utils.labels!.hi+", ${Utils.name}",Utils.labels!.you_are_pregnant_for,Utils.labels!.week,"9-12",deviceHeight/10,deviceWidth,context)),
       SliverToBoxAdapter(
         child: Container(
           height: 120.0,
@@ -91,7 +91,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("We Choose for You",style: GoogleFonts.roboto(
+              Text(Utils.labels!.we_choose_for_you,style: GoogleFonts.roboto(
                 fontSize: 18,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w700,
@@ -99,7 +99,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
 
               ),
               ),
-              Text("See All",style: GoogleFonts.roboto(
+              Text(Utils.labels!.see_all,style: GoogleFonts.roboto(
                 fontSize: 15,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w500,
@@ -192,7 +192,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Shopping products",style: GoogleFonts.roboto(
+                Text(Utils.labels!.shopping_products,style: GoogleFonts.roboto(
                   fontSize: 20,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w700,
@@ -200,7 +200,7 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
 
                 ),
                 ),
-                Text("See All",style: GoogleFonts.roboto(
+                Text(Utils.labels!.see_all,style: GoogleFonts.roboto(
                   fontSize: 16,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w500,

@@ -103,9 +103,9 @@ imageSubject.close();
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Create a New Account",style: Theme.of(context).textTheme.headline1),
+                              Text(Utils.labels!.create_New_Account,style: Theme.of(context).textTheme.headline1),
                               SizedBox(width:10),
-                              Text("Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
+                              Text(Utils.labels!.create_New_Account_to_see,
                                 style: GoogleFonts.roboto(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -144,7 +144,7 @@ imageSubject.close();
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextWidget(Lable: 'Your Pragnancy Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: Baby_AgeController),
+                              EditTextWidget(Lable: Utils.labels!.your_Pregnancy, context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: Baby_AgeController),
 
                               // EditTextWidget("Your Pregnancy", context, Icons.keyboard_arrow_down_outlined),
                               Divider(
@@ -171,7 +171,7 @@ imageSubject.close();
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Agree for Newsletter?',
+                                      Utils.labels!.agree_for_news,
                                       style: GoogleFonts.roboto(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
@@ -204,29 +204,29 @@ imageSubject.close();
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: 'I agree to the ',
+                                      text: Utils.labels!.agree_to,
                                       style: GoogleFonts.roboto(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.normal,
                                           color: Black_textColor),
                                       children: <TextSpan>[
-                                        TextSpan(text: 'Terms and conditions', style: GoogleFonts.roboto(
+                                        TextSpan(text: Utils.labels!.terms_conditions, style: GoogleFonts.roboto(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400,
                                             fontStyle: FontStyle.normal,
                                             color: Text_color),),
-                                        TextSpan(text: ' and ',style:  GoogleFonts.roboto(
+                                        TextSpan(text:  Utils.labels!.and,style:  GoogleFonts.roboto(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400,
                                             fontStyle: FontStyle.normal,
                                             color: Black_textColor),),
-                                        TextSpan(text: 'Privacy Policy', style: GoogleFonts.roboto(
+                                        TextSpan(text: Utils.labels!.privacy_policy, style: GoogleFonts.roboto(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400,
                                             fontStyle: FontStyle.normal,
                                             color: Text_color),),
-                                        TextSpan(text:' to\nMotherClub',style:  GoogleFonts.roboto(
+                                        TextSpan(text:Utils.labels!.to_mother_club,style:  GoogleFonts.roboto(
                                             fontSize: 11,
                                             fontWeight: FontWeight.w400,
                                             fontStyle: FontStyle.normal,
@@ -253,7 +253,7 @@ imageSubject.close();
                                   onTap: (){
                                     submit();                               // Get.to(Routes.)
                                   },
-                                  child: CustomBUttonWidget("Register", deviceHeight/17 , deviceWidth/1.1, context)),
+                                  child: CustomBUttonWidget(Utils.labels!.register, deviceHeight/17 , deviceWidth/1.1, context)),
                               Divider(
                                 color: Colors.transparent,
                                 height: deviceHeight/30,
@@ -300,23 +300,23 @@ imageSubject.close();
   }
 
   String? firstNameValidate(String? text) {
-  return text!.length < 3 ?"Name Must be more than 3 characters": null;
+  return text!.length < 3 ?Utils.labels!.name_must_be_more_than: null;
   }
   String? lastNameValidate(String? text) {
-  return text!.length < 3 ?"Name Must be more than 3 characters": null;
+  return text!.length < 3 ?Utils.labels!.name_must_be_more_than: null;
   }
   String? userNameValidate(String? text) {
-  return text!.length < 3 ?"Name Must be more than 3 characters": null;
+  return text!.length < 3 ?Utils.labels!.username_must_be_more_than: null;
   }
 
  String? passwordValidate(String? text) {
-  return text!.length < 8 ?"Password Must be more than 7 characters": null;
+  return text!.length < 8 ?Utils.labels!.password_must_be_more_than: null;
   }
   String? emailValidate(String? text) {
   return text!.isNotEmpty &&
       text.length > 0 &&
       RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\-*[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(text)? null:"Email is not valid "  ;
+          .hasMatch(text)? null:  Utils.labels!.email_must_be_more_than;
   }
 
   void submit() {

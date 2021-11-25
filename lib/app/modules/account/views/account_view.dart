@@ -51,7 +51,7 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(Icons.shopping_basket),
                       SizedBox(width:10),
-                      Text("Your Orders",style: GoogleFonts.roboto(
+                      Text(Utils.labels!.your_orders,style: GoogleFonts.roboto(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
@@ -99,7 +99,7 @@ class _AccountViewState extends State<AccountView> {
                        CustomButton_Second_Color
                      ],
                    ); },
-                   child: Text("See All",style: GoogleFonts.roboto(
+                   child: Text(Utils.labels!.see_all,style: GoogleFonts.roboto(
                         fontSize:13,
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.normal,
@@ -142,7 +142,7 @@ class _AccountViewState extends State<AccountView> {
                   children: [
                     Icon(Icons.touch_app,size: 22),
                     SizedBox(width:15),
-                    Text("Buy Again",style: GoogleFonts.roboto(
+                    Text(Utils.labels!.buy_again,style: GoogleFonts.roboto(
                         fontSize:17,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
@@ -161,7 +161,7 @@ class _AccountViewState extends State<AccountView> {
                   children: [
                     Icon(Icons.favorite,size: 22,),
                     SizedBox(width:15),
-                    Text("Your Wish List",style: GoogleFonts.roboto(
+                    Text(Utils.labels!.your_wish_list,style: GoogleFonts.roboto(
                         fontSize:17,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
@@ -180,7 +180,7 @@ class _AccountViewState extends State<AccountView> {
                   children: [
                     Icon(Icons.message,size: 22),
                     SizedBox(width:15),
-                    Text("Chat",style: GoogleFonts.roboto(
+                    Text(Utils.labels!.chat,style: GoogleFonts.roboto(
                         fontSize:17,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
@@ -318,7 +318,7 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(Icons.g_translate,size: 22),
                       SizedBox(width:15),
-                      Text("Select Language",style: GoogleFonts.roboto(
+                      Text(Utils.labels!.select_language,style: GoogleFonts.roboto(
                           fontSize:17,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
@@ -338,7 +338,7 @@ class _AccountViewState extends State<AccountView> {
                   children: [
                     Icon(Icons.settings,),
                     SizedBox(width:15),
-                    Text("Settings",style: GoogleFonts.roboto(
+                    Text(Utils.labels!.settings,style: GoogleFonts.roboto(
                         fontSize:17,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
@@ -361,7 +361,7 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(Icons.power_settings_new,size: 22),
                       SizedBox(width:15),
-                      Text("Logout",style: GoogleFonts.roboto(
+                      Text(Utils.labels!.logout,style: GoogleFonts.roboto(
                           fontSize:17,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,

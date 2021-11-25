@@ -36,7 +36,7 @@ Widget ResorcesListCard(double height , double width,BuildContext context,String
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text('Your Pregnancy',style:  Theme.of(context).textTheme.headline3),
+              Text(Utils.labels!.your_Pregnancy,style:  Theme.of(context).textTheme.headline3),
               Divider(height: 5,color: Colors.transparent,),
               Text('Free knowledge and medical tips week by week as your pea-pod develops...',style: GoogleFonts.roboto(fontSize: Utils.deviceHeight/58,fontWeight: FontWeight.normal,color: Black_textColor)),
 

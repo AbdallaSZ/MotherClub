@@ -72,7 +72,7 @@ class Choose_Payment_view extends GetView<AuthController> {
 
 
                                 ),
-                                child: Text("Work",style:GoogleFonts.roboto(
+                                child: Text(Utils.labels!.work,style:GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
                                     fontStyle: FontStyle.normal,
@@ -125,7 +125,7 @@ class Choose_Payment_view extends GetView<AuthController> {
                                                           children: [
                                                             Icon(Icons.home,color: Colors.red,),
                                                             SizedBox(width: 5,),
-                                                            Text("Home",style: GoogleFonts.roboto(
+                                                            Text(Utils.labels!.home,style: GoogleFonts.roboto(
                                                               fontSize: 18,
                                                               fontStyle: FontStyle.normal,
                                                               fontWeight: FontWeight.normal,
@@ -191,7 +191,7 @@ class Choose_Payment_view extends GetView<AuthController> {
 
                           Padding(
                             padding: EdgeInsets.all(10),
-                            child: Text("SAVE ADDRESS AS",style:GoogleFonts.roboto(
+                            child: Text(Utils.labels!.save_address_as,style:GoogleFonts.roboto(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
@@ -211,7 +211,7 @@ class Choose_Payment_view extends GetView<AuthController> {
 
 
                                 ),
-                                child: Text("Home",style:GoogleFonts.roboto(
+                                child: Text(Utils.labels!.home,style:GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
                                     fontStyle: FontStyle.normal,
@@ -228,7 +228,7 @@ class Choose_Payment_view extends GetView<AuthController> {
 
 
                                 ),
-                                child: Text("Work",style:GoogleFonts.roboto(
+                                child: Text(Utils.labels!.work,style:GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
                                     fontStyle: FontStyle.normal,

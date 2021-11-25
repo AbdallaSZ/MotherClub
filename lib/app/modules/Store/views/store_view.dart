@@ -89,7 +89,7 @@ class _StoreViewScreenState extends State<StoreView> {
                               Icons.sort,
                               color: Black_textColor,
                             ),
-                            labelText: 'Search Products',
+                            labelText: Utils.labels!.search_product,
                             labelStyle: Theme.of(context).textTheme.bodyText2,
                             //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
                             contentPadding:
@@ -151,6 +151,7 @@ class _StoreViewScreenState extends State<StoreView> {
           GestureDetector(
             onTap: () {},
             child: Container(
+
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
@@ -176,10 +177,7 @@ class _StoreViewScreenState extends State<StoreView> {
                   color: white_color,
                   size: 35,
                 )),
-          ),
-        ],
-      ),
-      //storeAppBar("",deviceHeight/9.4,deviceWidth,context)
+          )),
     );
   }
 }

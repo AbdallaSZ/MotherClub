@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 Widget SliverListWidget(){
 
@@ -37,7 +38,7 @@ Widget SliverListWidget(){
                             ),
                             SizedBox(height:3),
 
-                            Text("Your Pregnancy",style: GoogleFonts.roboto(
+                            Text(Utils.labels!.your_Pregnancy,style: GoogleFonts.roboto(
                                 fontSize: 13,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w500,
@@ -76,7 +77,7 @@ Widget SliverListWidget(){
             children: [
               Image.asset('assets/images/home_listimage.png',height: 98,width: 98,),
               SizedBox(width: 20,),
-              Text("Thiamine (Vitamin B1) in\n your diet \nduring pregnancy",style: GoogleFonts.roboto(
+              Text(Utils.labels!.thaiamine,style: GoogleFonts.roboto(
                 fontSize: 13,
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w500,
@@ -131,7 +132,7 @@ Widget SliverListWidget(){
                             Image.asset('assets/images/product_image.png',height: 130,width: 155,),
                             SizedBox(height:15),
 
-                            Text("Maternity Bladder Control Pads",style: GoogleFonts.roboto(
+                            Text(Utils.labels!.maternity_Bladder,style: GoogleFonts.roboto(
                               fontSize: 13,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w500,
@@ -140,7 +141,7 @@ Widget SliverListWidget(){
                             )
                             ),
                             SizedBox(height:15),
-                            Text("AMD 150.00",style: GoogleFonts.roboto(
+                            Text(Utils.labels!.amd+"150.00",style: GoogleFonts.roboto(
                               fontSize: 13,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w500,

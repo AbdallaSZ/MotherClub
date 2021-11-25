@@ -63,7 +63,7 @@ class _StoreViewScreenState  extends State<WishListView>{
           child: Column(children: [
             Align(
                 alignment: Alignment.topLeft,
-                child: Text('Sizes:',style: Theme.of(context).textTheme.headline4,)),
+                child: Text(Utils.labels!.sizes,style: Theme.of(context).textTheme.headline4,)),
             Container(
               height: 60,
               child: ListView.builder(
@@ -88,16 +88,16 @@ class _StoreViewScreenState  extends State<WishListView>{
             Padding(
               padding: EdgeInsets.only(left: 8),
               child: Row(children: [
-                Text('AMD 150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                Text( Utils.labels!.amd+ '150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
                 SizedBox(width: 10,),
-                Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
+                Text(Utils.labels!.amd+'180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
                 SizedBox(width: 10,),
                 Text('(10% off)',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.red)),
 
               ],),
             ),
             SizedBox(height: 10,),
-            CustomBUttonWidget('Done', Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
+            CustomBUttonWidget(Utils.labels!.done, Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
           ],),),
         ),
         appBar:  AppBar(
@@ -110,7 +110,7 @@ class _StoreViewScreenState  extends State<WishListView>{
                   child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),
 
               Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-              Text('Wish List',style: GoogleFonts.roboto(
+              Text(Utils.labels!.wish_List,style: GoogleFonts.roboto(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                   color: Black_textColor),),
@@ -222,7 +222,7 @@ class _StoreViewScreenState  extends State<WishListView>{
                                         ),
                                         ),
                                         SizedBox(height:15),
-                                        Text("AMD ${data[index].price}",style: GoogleFonts.roboto(
+                                        Text(Utils.labels!.amd+ "${data[index].price}",style: GoogleFonts.roboto(
                                           fontSize: 18,
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w700,
@@ -339,7 +339,7 @@ class _StoreViewScreenState  extends State<WishListView>{
               child: Column(children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Sizes:',style: Theme.of(context).textTheme.headline4,)),
+                    child: Text(Utils.labels!.sizes,style: Theme.of(context).textTheme.headline4,)),
                 Container(
                   height: 60,
                   child: ListView.builder(
@@ -364,16 +364,16 @@ class _StoreViewScreenState  extends State<WishListView>{
                 Padding(
                   padding: EdgeInsets.only(left: 8),
                   child: Row(children: [
-                    Text('AMD 150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
+                    Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.black)),
                     SizedBox(width: 10,),
-                    Text('AMD 180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
+                    Text(Utils.labels!.amd+'180',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
                     SizedBox(width: 10,),
                     Text('(10% off)',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.red)),
 
                   ],),
                 ),
                 SizedBox(height: 10,),
-                CustomBUttonWidget('Done', Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
+                CustomBUttonWidget(Utils.labels!.done, Utils.deviceHeight/20, Utils.deviceWidth/1.1, context)
               ],),),
           );
         },

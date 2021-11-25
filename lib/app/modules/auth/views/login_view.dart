@@ -63,9 +63,9 @@ class LoginView extends GetView<AuthController> {
                  child: Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     Text("Login your Account",style: Theme.of(context).textTheme.headline1),
+                     Text(Utils.labels!.login_to_account,style: Theme.of(context).textTheme.headline1),
                      SizedBox(height:10),
-                     Text("We are pleased to accompany you on your journey and provide you with free information",style: GoogleFonts.roboto(
+                     Text(Utils.labels!.we_pleased,style: GoogleFonts.roboto(
                          fontSize: 13,
 
                          fontWeight: FontWeight.w400,
@@ -151,7 +151,7 @@ class LoginView extends GetView<AuthController> {
                            ),
                            SizedBox(width:15),
 
-                           Text("Or login with",style: GoogleFonts.roboto(
+                           Text(Utils.labels!.or_login_with,style: GoogleFonts.roboto(
                                fontSize: 18,
                                fontWeight: FontWeight.w500,
                                color: Black_textColor),

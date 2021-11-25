@@ -47,7 +47,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
             onBackButtonPressed: Navigator.of(context).pop,
             centerTitle: true,
             withBackButton: true,
-            title: 'Your Pregnancy',
+            title: Utils.labels!.your_Pregnancy,
           ),
           body: CustomScrollView(slivers: <Widget>[
             SliverToBoxAdapter(
@@ -74,35 +74,17 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                           ),
                           Row(
                             children: [
-                              Icon(
-                                Icons.search,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              CircleAvatar(
-                                radius: 20,
-                                backgroundColor: Colors.white,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      Divider(
-                        height: 13,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        'Pregnancy Week',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      Divider(
-                        height: 15,
-                        color: Colors.transparent,
-                      ),
-                      FutureBuilder<List<WeeksModel>>(
+                            Text(Utils.labels!.your_Pregnancy,style: Theme.of(context).textTheme.headline1,),
+                            Row(children: [
+                              Icon(Icons.search,color: Colors.white,size: 25,),
+                              SizedBox(width: 10,),
+                              CircleAvatar(radius: 20,backgroundColor: Colors.white,)
+                            ],)
+                          ],),
+                          Divider(height: 13,color: Colors.transparent,),
+                          Text('Pregnancy Week',style: Theme.of(context).textTheme.bodyText1,),
+                          Divider(height: 15,color: Colors.transparent,),
+                          FutureBuilder<List<WeeksModel>>(
                           future: Utils.bLoC.weeks_list(context),
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
@@ -178,7 +160,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                           }),
                     ],
                   ),
-                ),
+                ),),
               ),
             ),
 

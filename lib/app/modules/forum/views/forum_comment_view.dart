@@ -6,6 +6,7 @@ import 'package:motherclub/app/modules/forum/controller/forumController.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 class ForumCommentView extends GetView<ForumController> {
 
@@ -28,7 +29,7 @@ class ForumCommentView extends GetView<ForumController> {
                       alignment: Alignment.centerLeft,
                       child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),*/
                   Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-                  Text('Forum',style: GoogleFonts.roboto(
+                  Text(Utils.labels!.forum,style: GoogleFonts.roboto(
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: Black_textColor),),
@@ -130,7 +131,7 @@ class ForumCommentView extends GetView<ForumController> {
                             ),
                             child: Column(
                               children: [
-                                Text("Week",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.week,style: GoogleFonts.roboto(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -162,7 +163,7 @@ class ForumCommentView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Following",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.following,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -182,7 +183,7 @@ class ForumCommentView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Followers",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.followers,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -202,7 +203,7 @@ class ForumCommentView extends GetView<ForumController> {
                                     color: white_color),),
                                 SizedBox(height: 3,),
 
-                                Text("Likes",style: GoogleFonts.roboto(
+                                Text(Utils.labels!.likes,style: GoogleFonts.roboto(
                                     fontSize:12,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
@@ -233,7 +234,7 @@ class ForumCommentView extends GetView<ForumController> {
                         children: [
 
                           SizedBox(width:15),
-                          Text("Total Post",style: GoogleFonts.roboto(
+                          Text(Utils.labels!.total_post,style: GoogleFonts.roboto(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.normal,
@@ -281,7 +282,7 @@ class ForumCommentView extends GetView<ForumController> {
                             CustomButton_Second_Color
                           ],
                         ); },
-                        child: Text("See All",style: GoogleFonts.roboto(
+                        child: Text(Utils.labels!.see_all,style: GoogleFonts.roboto(
                             fontSize:13,
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
@@ -426,7 +427,7 @@ class ForumCommentView extends GetView<ForumController> {
                                                     CustomButton_Second_Color
                                                   ],
                                                 ); },
-                                                child: Text("Reply",style: GoogleFonts.roboto(
+                                                child: Text(Utils.labels!.reply,style: GoogleFonts.roboto(
                                                   fontSize: 16,
                                                   letterSpacing: 0.25,
                                                   height: 1.4,
@@ -467,7 +468,7 @@ class ForumCommentView extends GetView<ForumController> {
 
                     ),
 
-                    Text("81 Comments"),
+                    Text("81"+Utils.labels!.comments),
                     Container(
                       padding: EdgeInsets.all(15),
                       color: white_color,
