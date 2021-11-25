@@ -160,7 +160,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                           }),
                     ],
                   ),
-                ),),
+                ],),),
               ),
             ),
 
@@ -339,7 +339,6 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                     ),
                   );
                 }),
-          ]),
-        ));
+          ]),),);
   }
 }

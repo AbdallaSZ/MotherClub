@@ -177,7 +177,7 @@ class _StoreViewScreenState extends State<StoreView> {
                   color: white_color,
                   size: 35,
                 )),
-          )),
+          ),]),
     );
   }
 }
