@@ -7,14 +7,13 @@ import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 
-Widget CategoriresCard(double height , double width,BuildContext context,CategoriesModel categoriesModel){
+Widget CategoriresCard(double height , double width,BuildContext context,CategoriesModel categoriesModel,String route){
 
   return
-
     GestureDetector(
-      onTap: (){
-        Get.toNamed(Routes.YOURPREGNANCY);
-      },
+      onTap: ()=>
+        Get.toNamed(route)
+      ,
       child: Container(
         margin: EdgeInsets.only(top: 10),
         padding: EdgeInsets.all(10),

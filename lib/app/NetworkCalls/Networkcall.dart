@@ -68,7 +68,7 @@ class Networkcall {
 
   //todo API Call For moths
 
-  Future<dynamic> getmonthAPICall(context) async {
+  Future<dynamic> getmonthAPICall() async {
     var response = await http
         .get(
       Uri.parse(
@@ -111,7 +111,7 @@ class Networkcall {
 
   //todo API Call For weeksdetails
 
-  Future<dynamic> getWeeksDetailAPICall(context) async {
+  Future<dynamic> getWeeksDetailAPICall() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var weekslug = preferences.getString('slug').toString();
     var response = await http

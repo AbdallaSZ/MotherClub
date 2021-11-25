@@ -20,11 +20,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Utils.userPreferences.initialize();
-
+  
   await Firebase.initializeApp();
 
   runApp(
-
        MyApp()
   );
 }
