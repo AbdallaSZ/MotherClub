@@ -21,7 +21,10 @@ class BottomController extends GetxController {
     AccountView(),
   ];
 
+
+
   Widget get currentPage => pages[currentIndex.value];
+
 
   void changePage(int _index) {
     currentIndex.value = _index;

@@ -7,6 +7,7 @@ import 'package:motherclub/app/modules/account/views/account_view.dart';
 import 'package:motherclub/app/modules/bottomNavigation/controllers/bottom_conroller.dart';
 import 'package:motherclub/app/modules/forum/views/forum_view.dart';
 import 'package:motherclub/app/modules/home/views/home_views.dart';
+import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
 class a {
@@ -51,6 +52,15 @@ class _BottomScreenState extends State<BottomScreen> {
                 stream: rxPages.stream,
                 builder: (context, mySnapshot) {
                   return Scaffold(
+                   appBar: CustomAppBar(
+                     centerTitle: true,
+                     title: titles[currentIndex],
+                     actions: [
+                       Icon(Icons.search, color: Colors.black87,),
+                       SizedBox(width: 20,),
+                       Image.asset('assets/images/translate.png'),
+                     ],
+                   ),
                    body: currentPage,
                    bottomNavigationBar: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
@@ -83,18 +93,25 @@ class _BottomScreenState extends State<BottomScreen> {
 }
 
 
-  List<Widget> pages = [
+   List<Widget> pages = [
     HomeView(),
     CategoriesView(),
     ForumView(),
     StoreView(),
     AccountView(),
   ];
-
+  static List<String> titles= [
+    'Home',
+    'Categories',
+    'Forum',
+    'Store',
+    'My Account',
+  ];
   Widget get currentPage => pages[currentIndex];
 
   void changePage(int _index) {
     currentIndex = _index;
+
     rxPages.sink.add(_index);
   }
 }

@@ -22,13 +22,6 @@ class HomeView extends GetResponsiveView<HomeController> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(
-          actions: [
-            Icon(Icons.search, color: Colors.black87,),
-            SizedBox(width: 20,),
-            Image.asset('assets/images/translate.png'),
-          ],
-        ),
         body:
         HomeAppBar("", deviceHeight / 9.4, deviceWidth, context),
       ),

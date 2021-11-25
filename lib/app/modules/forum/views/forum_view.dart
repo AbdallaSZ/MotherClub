@@ -23,32 +23,6 @@ class ForumView extends GetView<ForumController> {
     double deviceWidth=MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
-          appBar:  AppBar(
-          backgroundColor:Colors.white ,
-          title: Container(
-            child: Row(
-              children: [
-              /*  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset('assets/images/sort.png',height: 37,width:  deviceWidth/14,)),*/
-
-                Image.asset('assets/images/logo.png',width: deviceWidth/5,height: deviceHeight/8,),
-                Text('Forum',style: GoogleFonts.roboto(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Black_textColor),),
-                // Image.asset('assets/images/logo.png',width: 120,height: 87,),
-
-              ],
-            ),
-          ),
-          actions: [
-            Icon(Icons.search,color: Colors.black87,),
-            SizedBox(width: 20,),
-            Image.asset('assets/images/translate.png'),
-
-          ],
-        ),
           body:SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

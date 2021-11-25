@@ -51,48 +51,9 @@ class _StoreViewScreenState extends State<StoreView> {
     double deviceWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            title: Container(
-              child: Row(
-                children: [
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Image.asset(
-                        'assets/images/sort.png',
-                        height: 37,
-                        width: deviceWidth / 14,
-                      )),
-
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: deviceWidth / 5,
-                    height: deviceHeight / 8,
-                  ),
-                  Text(
-                    'Store',
-                    style: GoogleFonts.roboto(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: Black_textColor),
-                  ),
-                  // Image.asset('assets/images/logo.png',width: 120,height: 87,),
-                ],
-              ),
-            ),
-            actions: [
-              Icon(
-                Icons.search,
-                color: Colors.black87,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Image.asset('assets/images/translate.png'),
-            ],
-          ),
-          body: SingleChildScrollView(
+      child: Stack(
+        children: [
+          SingleChildScrollView(
             child: Column(children: [
               // AppBarWidget("Store", deviceHeight / 9.4, deviceWidth, context),
 
@@ -139,8 +100,8 @@ class _StoreViewScreenState extends State<StoreView> {
                       // SizedBox(width: 10,),
                       // Icon(Icons.sort,color: Colors.black,size: 25,),
                       /*Icon(Icons.arrow_back,color: Colors.black,),
-                        SizedBox(width: 20,),
-                        Text('Category List',style: Theme.of(context).textTheme.headline1,),
+                            SizedBox(width: 20,),
+                            Text('Category List',style: Theme.of(context).textTheme.headline1,),
 */
                     ],
                   ),
@@ -149,50 +110,47 @@ class _StoreViewScreenState extends State<StoreView> {
               SizedBox(height: 0),
 
               Container(
-                  padding: EdgeInsets.all(10),
-                  // color: Colors.red,
-                  height: deviceHeight,
-                  child: FutureBuilder<List<ProductModel>>(
-                    future: Utils.bLoC.Product_list(context),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<ProductModel>? data = snapshot.data;
-                        print(data);
-                        return _firstSearch
-                            ? GridView.builder(
-                                itemCount: data!.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20,
-                                  childAspectRatio: (.53),
-                                ),
-                                itemBuilder: (
-                                  context,
-                                  index,
-                                ) {
-                                  return ProductItem(data:data[index]);
-                                },
-                              )
-                            : performSearch(data!, _query);
-                      } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      }
-                      return GridShimmer(
-                          deviceWidth: deviceWidth, deviceHeight: deviceHeight);
-                      return CircularProgressIndicator();
-                    },
-                  ))
+                padding: EdgeInsets.all(10),
+                // color: Colors.red,
+                height: deviceHeight,
+                child: FutureBuilder<List<ProductModel>>(
+                  future: Utils.bLoC.Product_list(context),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<ProductModel>? data = snapshot.data;
+                      print(data);
+                      return _firstSearch
+                          ? GridView.builder(
+                              itemCount: data!.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: (.53),
+                              ),
+                              itemBuilder: (
+                                context,
+                                index,
+                              ) {
+                                return ProductItem(data: data[index]);
+                              },
+                            )
+                          : performSearch(data!, _query);
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return GridShimmer(
+                        deviceWidth: deviceWidth, deviceHeight: deviceHeight);
+                    return CircularProgressIndicator();
+                  },
+                ),
+              ),
             ]),
           ),
-          //storeAppBar("",deviceHeight/9.4,deviceWidth,context),
-          floatingActionButton: GestureDetector(
-            onTap: (){
-
-            },
+          GestureDetector(
+            onTap: () {},
             child: Container(
-
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
@@ -218,7 +176,10 @@ class _StoreViewScreenState extends State<StoreView> {
                   color: white_color,
                   size: 35,
                 )),
-          )),
+          ),
+        ],
+      ),
+      //storeAppBar("",deviceHeight/9.4,deviceWidth,context)
     );
   }
 }

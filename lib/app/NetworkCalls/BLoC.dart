@@ -7,6 +7,7 @@ import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
+import 'package:motherclub/app/Models/month_details.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC{
@@ -62,15 +63,15 @@ class BLoC{
     return weeksLst;
   }
 
- Future<List<WeeksDetail>> weeks_detail(BuildContext context) async {
+ Future<List<WeeksDetail>> weeks_detail() async {
    List<WeeksDetail> weeksDetailList = <WeeksDetail>[];
 
-   var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(context);
+   var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
    weekDetailResponse.forEach(
            (newWeekDetail) {
-         print('newweekdata ${newWeekDetail['name'].toString()}');
+         print('newweekdata ${newWeekDetail['link'].toString()}');
 
-         WeeksDetail weeksDetailModel=new  WeeksDetail(name: newWeekDetail['name'].toString(),description: newWeekDetail['description'].toString(),video_link: newWeekDetail['video_link'].toString());
+         WeeksDetail weeksDetailModel=new  WeeksDetail(name: newWeekDetail['name'].toString(),description: newWeekDetail['description'].toString(),video_link: newWeekDetail['link'].toString());
          weeksDetailList.add(weeksDetailModel);
 
        });
@@ -117,18 +118,36 @@ class BLoC{
   Future<List<MonthsModel>> months_list(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];
 
-    var weekResponse = await Utils.networkcall.getmonthAPICall(context);
+    var weekResponse = await Utils.networkcall.getmonthAPICall();
     weekResponse.forEach(
-            (newWeek) {
-          print('newdata ${newWeek['name'].toString()}');
+            (month) {
+          print('newdata ${month['name'].toString()}');
 
-          MonthsModel monthsModel=new  MonthsModel(Id: newWeek['id'].toString(), name: newWeek['name'], slug: newWeek['slug'], count: newWeek['count'].toString());
+          MonthsModel monthsModel=new  MonthsModel(Id: month['id'].toString(), name: month['name'], slug: month['slug'], count: month['count'].toString());
           monthsLst.add(monthsModel);
 
         });
     print('newdata ${monthsLst.toString()}');
     return monthsLst;
   }
+
+  Future<List<MonthDetailsModel>> monthDetail() async {
+    List<MonthDetailsModel> monthDetailList = <MonthDetailsModel>[];
+ 
+    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
+    weekDetailResponse.forEach(
+            (newMonthDetail) {
+          print('newweekdata ${newMonthDetail['link'].toString()}');
+
+          MonthDetailsModel monthDetailsModel=new  MonthDetailsModel(id: newMonthDetail['id'],name: newMonthDetail['name'],acf: newMonthDetail['acf'],addUrlVid: newMonthDetail['addUrlVid'],cartItemModelAddUrlVid: newMonthDetail['cartItemModelAddUrlVid'],cartItemModelDescMonth: newMonthDetail['cartItemModelDescMonth'],cartItemModelImageMonth: newMonthDetail['cartItemModelImageMonth'],count:newMonthDetail['count'] ,descMonth: newMonthDetail['descMonth'],description: newMonthDetail['description'],imageMonth: newMonthDetail['imageMonth'],link: newMonthDetail['link'],links:newMonthDetail['links'] ,meta:newMonthDetail['meta'] ,parent:newMonthDetail['parent'] ,slug: newMonthDetail['slug'],taxonomy:newMonthDetail['taxonomy'] );
+          monthDetailList.add(monthDetailsModel);
+
+        });
+    print('newweekdata ${monthDetailList.toString()}');
+    return monthDetailList;
+
+  }
+
 
   Future<List<CategoriesModel>> categores_list(BuildContext context) async {
     List<CategoriesModel> categories_Lst = <CategoriesModel>[];
