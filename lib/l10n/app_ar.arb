@@ -53,7 +53,8 @@
   "week": "الأسبوع",
   "we_choose_for_you": "قمنا بإلاختيار لك",
   "search_product": "البحث عن المنتجات",
-  "your_baby": "Search Products",
+  "your_baby": "طفلك",
+  "baby_month": "شهر الطفل",
   "comments": "التعليقات",
   "reply": "رد",
   "buy_again": "شراء مرة أخرى",
@@ -78,5 +79,6 @@
   "followers": "يتبع",
   "likes": "يحب",
   "total_post": "اجمالي البريد",
+  "week_pregnancy":"أسبوع الحمل",
   "shopping_products": "منتجات التسوق"
 }

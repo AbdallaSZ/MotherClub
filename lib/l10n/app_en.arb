@@ -252,8 +252,18 @@
     "description": "The conventional newborn programmer greeting"
   },
 
-  "your_baby": "Search Products",
+  "your_baby": "Your baby",
   "@your_baby": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "baby_month": "'Baby Month'",
+  "@baby_month": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "week_pregnancy": "Pregnancy Week",
+  "@week_pregnancy": {
     "description": "The conventional newborn programmer greeting"
   },
 

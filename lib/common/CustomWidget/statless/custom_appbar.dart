@@ -71,7 +71,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Image.asset('assets/images/sort.png',height: 37,width:  Utils.deviceWidth/14,)),
 
                  ] ),
-
+      ),
       bottom: tabBar,
       actions: actions,
     );

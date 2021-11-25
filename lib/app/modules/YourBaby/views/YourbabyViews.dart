@@ -41,7 +41,7 @@ class _YourbabyViewsState extends State<YourbabyViews> {
             onBackButtonPressed: Navigator.of(context).pop,
             centerTitle: true,
             withBackButton: true,
-            title: 'Your Baby',
+            title: Utils.labels!.your_baby,
           ),
           backgroundColor: Colors.white.withOpacity(0.96),
           body: CustomScrollView(slivers: <Widget>[
@@ -66,7 +66,7 @@ class _YourbabyViewsState extends State<YourbabyViews> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Your Baby ',
+                            Utils.labels!.your_baby,
                             style: Theme.of(context).textTheme.headline1,
                           ),
                           Row(
@@ -92,7 +92,7 @@ class _YourbabyViewsState extends State<YourbabyViews> {
                         color: Colors.transparent,
                       ),
                       Text(
-                        'Baby: Baby Month',
+                        Utils.labels!.baby_month,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       Divider(
