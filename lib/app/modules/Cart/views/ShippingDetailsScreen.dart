@@ -107,11 +107,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
 
 
                   InkWell(
-                      onTap: ()async{
-                       // submit();
-                        await  showDialog(context: context, builder:  (c){
-                          return Dialogs.warningDialog(Utils.labels!.confirmed,"responseMessage", Utils.labels!.ok, backFunction);
-                        });
+                      onTap: (){
+                        submit();
                         },
                       child: CustomBUttonWidget(Utils.labels!.continue_, deviceHeight/17 , deviceWidth/1.1, context)),
                   Divider(
