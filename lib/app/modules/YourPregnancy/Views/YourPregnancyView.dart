@@ -29,38 +29,26 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
     double deviceWidth = MediaQuery.of(context).size.width;
 
 
-
     @override
     void dispose() {
       flickManager.dispose();
       super.dispose();
     }
 
-    Future<void> getweekSlug() async {
+    Future<void> getWeekSlug() async {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('slug', weekSlug);
-
-
-      setState(() {
-
-      });
     }
 
     return Scaffold(
         backgroundColor: Colors.white.withOpacity(0.96),
         body: Scaffold(
-        /*  appBar: CustomAppBar(
-            onBackButtonPressed:Navigator.of(context).pop,
-            centerTitle: true,
-            withBackButton: true,
-            title: Utils.labels!.your_Pregnancy,
-          ),*/
           body: CustomScrollView(
               slivers: <Widget>[
 
                 SliverToBoxAdapter(
                   child: Container(
-                    height: deviceHeight/4,
+                    height: deviceHeight/3.7,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(0.0),
                       gradient: LinearGradient(
@@ -120,7 +108,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                                   tappedIndex=index;
                                                   weekSlug=snapshot.data![index].slug;
                                                   setState(() {
-                                                    getweekSlug();
+                                                    getWeekSlug();
                                                   });
 
 
@@ -169,11 +157,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                 //     childCount: 1,
                 //   ),
                 // ),
-                SliverToBoxAdapter(
-                  child:   Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Pregnancy Tools & Resources',style: Theme.of(context).textTheme.headline4,)),
-                ),
+
 
                 FutureBuilder<List<WeeksDetail>>(
                     future: Utils.bLoC.weeks_detail(),
@@ -204,7 +188,9 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                       )
                                   ),
                                 ),
-
+                                Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text('Pregnancy Tools & Resources',style: Theme.of(context).textTheme.headline4,)),
                                 Padding(
                                     padding: EdgeInsets.only(top: 10,left: 10,right: 10,bottom: 50),
                                     child: Container(
@@ -221,6 +207,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                         onTap: () {
                                           Get.toNamed(Routes.BLOG);
                                         },
+
                                         child: Row(
                                           //crossAxisAlignment: CrossAxisAlignment.center,
                                           mainAxisAlignment: MainAxisAlignment
@@ -282,6 +269,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                                   ],),
                                               ),
                                             ),
+
                                             Flexible(
                                               flex: 1,
                                               child: Container(

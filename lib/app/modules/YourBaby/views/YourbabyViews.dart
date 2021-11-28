@@ -37,12 +37,7 @@ class _YourbabyViewsState extends State<YourbabyViews> {
 
     return SafeArea(
       child: Scaffold(
-          appBar: CustomAppBar(
-            onBackButtonPressed: Navigator.of(context).pop,
-            centerTitle: true,
-            withBackButton: true,
-            title: Utils.labels!.your_baby,
-          ),
+
           backgroundColor: Colors.white.withOpacity(0.96),
           body: CustomScrollView(slivers: <Widget>[
             SliverToBoxAdapter(

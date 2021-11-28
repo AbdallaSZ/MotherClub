@@ -156,20 +156,25 @@ class _AccountViewState extends State<AccountView> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20,top: 30),
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(Icons.favorite,size: 22,),
-                    SizedBox(width:15),
-                    Text(Utils.labels!.your_wish_list,style: GoogleFonts.roboto(
-                        fontSize:17,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
+              child: GestureDetector(
+                onTap: (){
+                  Get.toNamed(Routes.WISHLIST);
+                },
+                child: Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.favorite,size: 22,),
+                      SizedBox(width:15),
+                      Text(Utils.labels!.your_wish_list,style: GoogleFonts.roboto(
+                          fontSize:17,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
 
-                        color:Black_textColor
-                    ),),
+                          color:Black_textColor
+                      ),),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

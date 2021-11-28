@@ -55,6 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       elevation: 0,
       backgroundColor: Colors.white,
+
       automaticallyImplyLeading: withBackButton,
       leadingWidth: 100,
       leading: withBackButton
@@ -68,7 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Align(
                 alignment: Alignment.centerLeft,
-                child: Image.asset('assets/images/sort.png',height: 37,width:  Utils.deviceWidth/14,)),
+                child: Image.asset('assets/images/logo.png',)),
 
                  ] ),
       ),

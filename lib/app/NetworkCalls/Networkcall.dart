@@ -219,4 +219,40 @@ class Networkcall {
       return 'item added';
     }
   }
+  Future<dynamic> getWishlistByUserId(String userId) async {
+    final response = await http.get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wc/v3/wishlist/get_by_user/$userId?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e',
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      throw Exception('Failed to create album.');
+    } else {
+
+      print('ssssssssssssssssss${jsonDecode(response.body)}');
+      return jsonDecode(response.body);
+    }
+  }
+
+  Future<void> createWishlist(String title ,String userId ,String status) async {
+    final response = await http.post(
+      Uri.parse('https://mothersclub.me/wp-json/wc/v3/wishlist/create?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e'),
+      body: {
+        'title': '$title',
+        'user_id': '$userId',
+        'status': '$status',
+      },
+    );
+    if (response.statusCode != 200 ) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      throw Exception('Failed to Wishlist. ${response.body}');
+    } else {
+  
+    }
+  }
+
 }

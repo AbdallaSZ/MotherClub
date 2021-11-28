@@ -43,7 +43,7 @@ dependencies:
   intl: "0.17.0"
   flick_video_player:
   video_player:
-
+  flutter_paytabs_bridge: ^2.1.5
 
 
 dev_dependencies:

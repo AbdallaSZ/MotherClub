@@ -1,5 +1,5 @@
-class CreateWishlistModel {
-  CreateWishlistModel({
+class WishlistModel {
+  WishlistModel({
     this.id,
     this.userId,
     this.dateAdded,
@@ -10,20 +10,20 @@ class CreateWishlistModel {
 
   final int? id;
   final int? userId;
-  final DateTime? dateAdded;
+  final String? dateAdded;
   final String? title;
   final String? shareKey;
   final String? status;
 
-  CreateWishlistModel copyWith({
+  WishlistModel copyWith({
     int? id,
     int? userId,
-    DateTime? dateAdded,
+    String? dateAdded,
     String? title,
     String? shareKey,
     String? status,
   }) =>
-      CreateWishlistModel(
+      WishlistModel(
         id: id ?? this.id,
         userId: userId ?? this.userId,
         dateAdded: dateAdded ?? this.dateAdded,
