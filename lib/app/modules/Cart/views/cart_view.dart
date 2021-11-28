@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paytabs_bridge/BaseBillingShippingInfo.dart';
+import 'package:flutter_paytabs_bridge/PaymentSdkApms.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
+import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
+import 'package:motherclub/app/modules/Cart/views/ShippingDetailsScreen.dart';
 import 'package:motherclub/app/modules/Store/controller/storeController.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
 import 'package:motherclub/app/modules/Store/widgets/store_widget.dart';
@@ -30,86 +33,6 @@ class _StoreViewScreenState extends State<CartView> {
   bool _firstSearch = true;
   String _query = "";
 
-  Future<void> payPressed() async {
-    var billingDetails = new BillingDetails(
-        "Mohamed Adly",
-        "m.adly@paytabs.com",
-        "+201111111111",
-        "st. 12",
-        "ae",
-        "dubai",
-        "dubai",
-        "12345");
-    var shippingDetails = new ShippingDetails(
-        "Mohamed Adly",
-        "email@example.com",
-        "+201111111111",
-        "st. 12",
-        "ae",
-        "dubai",
-        "dubai",
-        "12345");
-    var configuration = PaymentSdkConfigurationDetails(
-      profileId: "*Your profile id*",
-      serverKey: "*server key*",
-      clientKey: "*client key*",
-      cartId: "12433",
-      cartDescription: "Flowers",
-      merchantName: "Flowers Store",
-      screentTitle: "Pay with Card",
-      billingDetails: billingDetails,
-      shippingDetails: shippingDetails,
-      amount: 20.0,
-      currencyCode: "AED",
-      merchantCountryCode: "ae",
-    );
-    if (Platform.isIOS) {
-      // Set up here your custom theme
-      // var theme = IOSThemeConfigurations();
-      // configuration.iOSThemeConfigurations = theme;
-    }
-    FlutterPaytabsBridge.startCardPayment(configuration, (event) {
-      setState(() {
-        if (event["status"] == "success") {
-          // Handle transaction details here.
-          var transactionDetails = event["data"];
-          print(transactionDetails);
-        } else if (event["status"] == "error") {
-          // Handle error here.
-        } else if (event["status"] == "event") {
-          // Handle events here.
-        }
-      });
-    });
-  }
-
-  Future<void> applePayPressed() async {
-    var configuration = PaymentSdkConfigurationDetails(
-        profileId: "*Your profile id*",
-        serverKey: "*server key*",
-        clientKey: "*client key*",
-        cartId: "12433",
-        cartDescription: "Flowers",
-        merchantName: "Flowers Store",
-        amount: 20.0,
-        currencyCode: "AED",
-        merchantCountryCode: "ae",
-        merchantApplePayIndentifier: "merchant.com.bunldeId",
-        simplifyApplePayValidation: true);
-    FlutterPaytabsBridge.startApplePayPayment(configuration, (event) {
-      setState(() {
-        if (event["status"] == "success") {
-          // Handle transaction details here.
-          var transactionDetails = event["data"];
-          print(transactionDetails);
-        } else if (event["status"] == "error") {
-          // Handle error here.
-        } else if (event["status"] == "event") {
-          // Handle events here.
-        }
-      });
-    });
-  }
 
   @override
   void initState() {
@@ -160,7 +83,7 @@ class _StoreViewScreenState extends State<CartView> {
                   padding: EdgeInsets.all(10),
                   height: Utils.deviceHeight / 4,
                   width: Utils.deviceWidth,
-                  child: Column(
+                  child: ListView(
                     children: [
                       SizedBox(
                         height: 10,
@@ -234,13 +157,11 @@ class _StoreViewScreenState extends State<CartView> {
                       SizedBox(
                         height: Utils.deviceHeight / 38,
                       ),
-                      CustomBUttonWidget('CHECKOUT', Utils.deviceHeight / 20,
+                      CustomBUttonWidget(Utils.labels!.checkout, Utils.deviceHeight / 20,
                           Utils.deviceWidth / 1.1, context, onTap: () {
-                        if (Platform.isIOS) {
-                          applePayPressed();
-                        } else {
-                          payPressed();
-                        }
+                       Navigator.push(context, MaterialPageRoute(builder: (c){
+                         return ShippingDetailsScreen();
+                       }));
                       }),
                     ],
                   ),
@@ -264,7 +185,7 @@ class _StoreViewScreenState extends State<CartView> {
                           width: 10,
                         ),
                         Text(
-                            "You have snapshot.data?.items.length items  in list cart",
+                            "You have ${snapshot.data?.length} items  in list cart",
                             style: GoogleFonts.roboto(
                               fontSize: 13,
                               fontStyle: FontStyle.normal,
@@ -422,7 +343,7 @@ class _StoreViewScreenState extends State<CartView> {
                                                             children: [
                                                               Icon(
                                                                 Icons.remove,
-                                                                size: 18,
+                                                                size: 15,
                                                               ),
                                                               Text('1',
                                                                   style: GoogleFonts.roboto(

@@ -203,6 +203,9 @@
   },"address":"Address",
   "@address": {
     "description": "The conventional newborn programmer greeting"
+  },"address_validation":"Enter A valid Address",
+  "@address_validation": {
+    "description": "The conventional newborn programmer greeting"
   },"save_address_as":"SAVE ADDRESS AS",
   "@save_address_as": {
     "description": "The conventional newborn programmer greeting"
@@ -259,6 +262,85 @@
 
   "baby_month": "'Baby Month'",
   "@baby_month": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "checkout": "CHECKOUT",
+  "@checkout": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"continue_": "Continue",
+  "@continue_": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"email": "Email",
+  "@email": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"phone": "phone",
+  "@phone": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"phone_validation": "Enter a valid phone",
+  "@phone_validation": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"warning": "Warning",
+  "@warning": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "The conventional newborn programmer greeting"
+  }, "confirmed": "Confirmed",
+  "@confirmed": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "password": "Password",
+  "@password": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"city": "City",
+  "@city": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "city_validation": "must be a valid city",
+  "@city_validation": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"name": "Name",
+  "@name": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"shipping_details": "Shopping Details",
+  "@shipping_details": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"zipCode": "Zip Code",
+  "@zipCode": {
+    "description": "The conventional newborn programmer greeting"
+  },
+"zipCode_validation": "Enter a valid Zip Code",
+  "@zipCode_validation": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"age": "Age",
+  "@age": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"first": "First",
+  "@first": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+"last": "Last",
+  "@last": {
     "description": "The conventional newborn programmer greeting"
   },
 
