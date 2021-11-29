@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:motherclub/app/SearchModule/SearchBloc.dart';
 import 'package:motherclub/app/modules/Categories/views/categories_views.dart';
 import 'package:motherclub/app/modules/Store/views/store_view.dart';
 import 'package:motherclub/app/modules/account/views/account_view.dart';

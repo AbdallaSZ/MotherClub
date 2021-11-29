@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/SearchModule/DataSearch.dart';
+import 'package:motherclub/app/SearchModule/SearchBloc.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
@@ -19,14 +22,15 @@ class _StoreViewScreenState extends State<StoreView> {
 
   bool _firstSearch = true;
   String _query = "";
+  SearchBloc? searchBloc ;
 
   @override
   void initState() {
     // TODO: implement initState
-
+    searchBloc =SearchBloc();
     super.initState();
   }
-
+  List<ProductModel>? data;
   _StoreViewScreenState() {
     //Register a closure to be called when the object changes.
     _searchview.addListener(() {
@@ -72,27 +76,35 @@ class _StoreViewScreenState extends State<StoreView> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         border: Border.all(color: white_color, width: 0.5),
                       ),
-                      child: TextFormField(
-                        controller: _searchview,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Black_textColor,
+                      child: GestureDetector(
+                        onTap: (){
+                          print("tapped");
+                          DataSearch myDataSearch = DataSearch( data);
+
+                          var result = showSearch(
+                              context: context,
+                              delegate:myDataSearch );
+                        },
+                        child: TextFormField(
+                          controller: _searchview,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Black_textColor,
+                            ),
+
+                            labelText: Utils.labels!.search_product,
+                            labelStyle: Theme.of(context).textTheme.bodyText2,
+                            //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                           ),
-                          suffixIcon: Icon(
-                            Icons.sort,
-                            color: Black_textColor,
-                          ),
-                          labelText: Utils.labels!.search_product,
-                          labelStyle: Theme.of(context).textTheme.bodyText2,
-                          //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                         ),
                       ),
                     ),
@@ -116,7 +128,7 @@ class _StoreViewScreenState extends State<StoreView> {
                 future: Utils.bLoC.Product_list(context),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<ProductModel>? data = snapshot.data;
+                     data = snapshot.data;
                     print(data);
                     return _firstSearch
                         ? GridView.builder(
@@ -132,7 +144,7 @@ class _StoreViewScreenState extends State<StoreView> {
                               context,
                               index,
                             ) {
-                              return ProductItem(data: data[index]);
+                              return ProductItem(data: data![index]);
                             },
                           )
                         : performSearch(data!, _query);

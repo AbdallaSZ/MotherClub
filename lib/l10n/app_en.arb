@@ -293,8 +293,13 @@
   "ok": "OK",
   "@ok": {
     "description": "The conventional newborn programmer greeting"
-  }, "confirmed": "Confirmed",
+  },
+  "confirmed": "Confirmed",
   "@confirmed": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "there_is_no_product": "There is no product for ",
+  "@there_is_no_product": {
     "description": "The conventional newborn programmer greeting"
   },
 

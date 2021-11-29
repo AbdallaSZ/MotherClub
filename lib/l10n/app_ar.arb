@@ -74,6 +74,7 @@
   "warning": "تحذير",
   "ok": "فهمت",
   "confirmed": "تم بنجاح ",
+  "there_is_no_product": "لا يوجد منتج يطابق  ",
 
   "checkout": "الانتقال للدفع",
   "comments": "التعليقات",
