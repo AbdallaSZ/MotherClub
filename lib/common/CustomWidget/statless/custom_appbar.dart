@@ -59,12 +59,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: withBackButton,
       leadingWidth: 100,
       leading: withBackButton
-          ? AppBarBackButton(
-        onPressed: () {
-           onBackButtonPressed!();
-
-        })
-          :   Container(
+          ? GestureDetector(
+        onTap: (){
+            onBackButtonPressed!();
+        },
+        child: Icon(
+        Icons.arrow_back,color: Colors.black,
+        ),
+      ) :   Container(
         child: Row(
           children: [
             Align(

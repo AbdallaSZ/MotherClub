@@ -111,12 +111,12 @@ imageSubject.close();
                                     fontWeight: FontWeight.w400,
                                     color: Black_textColor),),
                               Divider(color: Colors.transparent, height: deviceHeight /25,),
-                              EditTextwidget("First Name",_nameController ,context,validate: firstNameValidate),
+                              EditTextwidget(Utils.labels!.first+" "+Utils.labels!.name,_nameController ,context,validate: firstNameValidate),
                               Divider(
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextwidget("Last Name", _lastnameController,context,validate:lastNameValidate),
+                              EditTextwidget(Utils.labels!.last+" "+Utils.labels!.name, _lastnameController,context,validate:lastNameValidate),
                               Divider(
                                 color: Colors.transparent,
                                 height: 10,
@@ -126,19 +126,19 @@ imageSubject.close();
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextwidget("Email", _emailController,context,validate: emailValidate
+                              EditTextwidget(Utils.labels!.email, _emailController,context,validate: emailValidate
                               ),
                               Divider(
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextwidget("Password", _passwordController,context,validate: passwordValidate
+                              EditTextwidget(Utils.labels!.password, _passwordController,context,validate: passwordValidate
                              ),
                               Divider(
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextWidget(Lable: 'Your Baby Age', context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: _yourbabyController),
+                              EditTextWidget(Lable: Utils.labels!.your_baby+Utils.labels!.age, context: context, IconButton:  Icons.keyboard_arrow_down_outlined, textEditingController: _yourbabyController),
                               // EditTextWidget("Your Baby Age", context, Icons.keyboard_arrow_down_outlined),
                               Divider(
                                 color: Colors.transparent,

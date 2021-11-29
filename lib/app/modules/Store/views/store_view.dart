@@ -147,10 +147,9 @@ class _StoreViewScreenState extends State<StoreView> {
             ),
           ]),
         ),
-        Positioned.fill(
+        PositionedDirectional(
           bottom: 20,
-          right: 40,
-          left: 40,
+          end: 40,
           child: Align(
             alignment: Alignment.bottomRight,
             child: GestureDetector(
