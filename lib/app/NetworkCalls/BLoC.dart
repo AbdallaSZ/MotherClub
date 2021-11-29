@@ -17,7 +17,7 @@ class BLoC {
     List<ProductModel> productsList = <ProductModel>[];
 
     var dataFromResponse = await Utils.networkcall.getProductsAPICall(context);
-    dataFromResponse.forEach((newProduct) {
+    await dataFromResponse.forEach((newProduct) {
       List<Images> imagesOfProductList = [];
       newProduct["images"].forEach(
         (newImage) {
@@ -45,6 +45,35 @@ class BLoC {
       }
     });
     return productsList;
+  }
+
+  Future<ProductModel> getSpecficProduct(String productId) async {
+    ProductModel productsList;
+
+    var dataFromResponse = await Utils.networkcall.getProductsDetails(productId);
+
+      List<Images> imagesOfProductList = [];
+    dataFromResponse["images"].forEach(
+            (newImage) {
+          imagesOfProductList.add(
+            new Images(
+              id: newImage["id"],
+              src: newImage['src'],
+            ),
+          );
+        },
+      );
+        ProductModel productModel = new ProductModel(
+            id: dataFromResponse['id'].toString(),
+            name: dataFromResponse['name'],
+            description: dataFromResponse['description'],
+            price: dataFromResponse['price'].toString(),
+            salePrice: dataFromResponse['sale_price'].toString(),
+            regular_price: dataFromResponse['regular_price'].toString(),
+            on_sale: dataFromResponse['on_sale'],
+            total_sales: dataFromResponse['total_sales'].toString(),
+            imageslist: imagesOfProductList);
+    return productModel;
   }
 
   Future<List<WeeksModel>> weeks_list(BuildContext context) async {
@@ -220,11 +249,9 @@ class BLoC {
     await Utils.networkcall.addCartItem(id, quantity, variation);
   }
 
-
   Future<List<WishlistModel>> wishlistWithUserId(String userId) async {
     List<WishlistModel> items = [];
     var wishlistResponse = await Utils.networkcall.getWishlistByUserId(userId);
-    print('444444444444444444$wishlistResponse}');
     try {
       await wishlistResponse.forEach((wishlist) {
         print('wishlistItem ${wishlist['id']}');
@@ -241,24 +268,23 @@ class BLoC {
     } on Exception catch (e) {
       print(e);
     }
-   print('testhere${items}');
     return items;
   }
 
-
-  Future<List<WishlistProductModel>> wishlistProducts(String userId) async {
+  Future<List<WishlistProductModel>> wishlistProducts(String sharedKey) async {
     List<WishlistProductModel> items = <WishlistProductModel>[];
-    var wishlistItemsResponse = await Utils.networkcall.getCartItems();
-    wishlistItemsResponse['data'].forEach((wishlistItem) {
+    var wishlistItemsResponse =
+        await Utils.networkcall.getProductsFromWishlist(sharedKey);
+    wishlistItemsResponse.forEach((wishlistItem) {
       print('wishlistItem ${wishlistItem['id']}');
       WishlistProductModel wishlistItemModel = new WishlistProductModel(
-        itemId: wishlistItem['id'],
-        inStock: wishlistItem['title'],
-        dateAdded: wishlistItem['dateAdded'],
-        productId: wishlistItem['shareKey'],
-        meta: wishlistItem['status'],
-        price:  wishlistItem['userId'],
-        variationId: wishlistItem['userId'],
+        itemId: wishlistItem['item_id'],
+        inStock: wishlistItem['in_stock'],
+        dateAdded: wishlistItem['date_added'],
+        productId: wishlistItem['product_id'],
+        meta: wishlistItem['meta'],
+        price: wishlistItem['price'],
+        variationId: wishlistItem['variation_id'],
       );
       items.add(wishlistItemModel);
     });
@@ -266,5 +292,43 @@ class BLoC {
     return items;
   }
 
+  Future<WishlistModel> addWishlist(
+      String title, String userId, String status) async {
+    WishlistModel item;
+    var wishlistModel =
+        await Utils.networkcall.createWishlist(title, userId, status);
 
+    WishlistModel wishlistItemModel = new WishlistModel(
+      userId: wishlistModel['user_id'],
+      id: wishlistModel['id'],
+      status: wishlistModel['status'],
+      shareKey: wishlistModel['share_key'],
+      title: wishlistModel['title'],
+      dateAdded: wishlistModel['date_added'],
+    );
+    item = wishlistItemModel;
+    return item;
+  }
+
+  Future<void> addToWishlist(String productId, String sharedKey) async {
+    try {
+      await Utils.networkcall.addProductToWishlist(productId, sharedKey);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+  Future<void> delWishlist(String sharedKey) async {
+    try {
+      await Utils.networkcall.delAllWishlist(sharedKey);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+  Future<void> delWishlistProd(String prodId) async {
+    try {
+      await Utils.networkcall.delProductFromWishlist(prodId);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 }

@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/Models/wishlistModel.dart';
+import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
+import 'package:motherclub/app/modules/WishList/views/wishlist_card_item.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class WishListView extends StatefulWidget {
+  WishListView({required this.wishlist});
+
+  final WishlistModel wishlist;
+
   @override
   _StoreViewScreenState createState() => _StoreViewScreenState();
 }
@@ -51,39 +58,64 @@ class _StoreViewScreenState extends State<WishListView> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'WishList',centerTitle: true,withBackButton: true,onBackButtonPressed: () {
-          Get.back();
-        },),
+        appBar: CustomAppBar(
+          title: widget.wishlist.title,
+          centerTitle: true,
+          withBackButton: true,
+          onBackButtonPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         body: SingleChildScrollView(
           child: Column(children: [
             Container(
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
                 height: deviceHeight,
-                child: FutureBuilder<List<ProductModel>>(
-                  future: Utils.bLoC.Product_list(context),
+                child: FutureBuilder<List<WishlistProductModel>>(
+                  future:
+                      Utils.bLoC.wishlistProducts(widget.wishlist.shareKey!),
                   builder: (context, snapshot) {
+                    print('owowowowo${widget.wishlist.shareKey!}');
+                    print('owowowowo${snapshot.data}');
                     if (snapshot.hasData) {
-                      List<ProductModel>? data = snapshot.data;
-                      print(data);
-                      return _firstSearch
-                          ? GridView.builder(
-                              itemCount: data!.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
-                                childAspectRatio: (.53),
-                              ),
-                              itemBuilder: (
-                                context,
-                                index,
-                              ) {
-                                return ProductItem(data: snapshot.data![index]);
-                              },
-                            )
-                          : performSearch(data!, _query);
+                      List<WishlistProductModel>? data = snapshot.data;
+                      return snapshot.connectionState == ConnectionState.waiting
+                          ? Center(child: CircularProgressIndicator())
+                          : snapshot.hasData
+                              ? GridView.builder(
+                                  itemCount: data!.length,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 20,
+                                    mainAxisSpacing: 20,
+                                    childAspectRatio: (.6),
+                                  ),
+                                  itemBuilder: (
+                                    context,
+                                    index,
+                                  ) {
+                                    return FutureBuilder<ProductModel>(
+                                        future:
+                                            Utils.bLoC.getSpecficProduct(snapshot.data![index].productId.toString()),
+                                        builder: (context, snapshot2) {
+                                          if(snapshot2.hasData){
+                                          return WishlistCardItem(
+                                            data: snapshot2.data!,
+                                          );
+
+                                        }else{
+                                            return Center(child: CircularProgressIndicator());
+                                          }}
+
+                                        );
+                                  },
+                                )
+                              : Center(
+                                  child: Text('no wishlist yet'),
+                                );
+                      // : performSearch(data!, _query);
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }

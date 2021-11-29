@@ -13,7 +13,7 @@ class WishlistProductModel {
   final int? productId;
   final int? variationId;
   final List<dynamic>? meta;
-  final DateTime? dateAdded;
+  final String? dateAdded;
   final String? price;
   final bool? inStock;
 
@@ -22,7 +22,7 @@ class WishlistProductModel {
     int? productId,
     int? variationId,
     List<dynamic>? meta,
-    DateTime? dateAdded,
+    String? dateAdded,
     String? price,
     bool? inStock,
   }) =>

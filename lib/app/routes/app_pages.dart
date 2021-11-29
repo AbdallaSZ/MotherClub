@@ -155,11 +155,7 @@ class AppPages{
       page: () => product_details_views(),
       // binding: blog_binding(),
     ),
-    GetPage(
-      name: _Paths.WishList,
-      page: () => WishListView(),
-      // binding: blog_binding(),
-    ),
+
     GetPage(
       name: _Paths.CART,
       page: () => CartView(),

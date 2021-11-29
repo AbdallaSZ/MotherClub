@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,9 +17,9 @@ class ProductItem extends StatefulWidget {
 }
 
 class _ProductItemState extends State<ProductItem> {
-  String dropdownValue = 'default';
+  WishlistModel dropdownValue = WishlistModel();
   String newWishlist = '';
-  var items = <String>[];
+  Set<WishlistModel> items = Set();
   TextEditingController controller = TextEditingController();
 
   @override
@@ -88,119 +90,133 @@ class _ProductItemState extends State<ProductItem> {
                               content: FutureBuilder<List<WishlistModel>>(
                                   future:
                                       Utils.bLoC.wishlistWithUserId(Utils.id),
-                                  builder: (context, snapshot) {
-                                    dropdownValue = snapshot.data![0].title!;
-                                    items.clear();
-                                    snapshot.data!.forEach((element) {
-                                      items.add(element.title!);
-                                    });
-                                    items.add('default');
-                                    return StatefulBuilder(
-                                      builder: (BuildContext context,
-                                          StateSetter update) {
-                                        print('buildddddddddddddd${items}');
+                                  builder: (_, snapshot) {
+                                    if (snapshot.hasData) {
+                                      dropdownValue = snapshot.data![0];
+                                      items.clear();
+                                      items.addAll(snapshot.data!);
+                                      return snapshot.connectionState ==
+                                              ConnectionState.waiting
+                                          ? Container(
+                                              height: Utils.deviceHeight / 8,
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator()))
+                                          : StatefulBuilder(
+                                              builder: (BuildContext context,
+                                                  StateSetter update) {
 
-                                        return Container(
-                                          height: Utils.deviceHeight / 8,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          20, 0, 20, 0),
-                                                      child: DropdownButton<
-                                                          String>(
-                                                        hint: Text(
-                                                            'Choose Wishlist:'),
-                                                        itemHeight: 50.0,
-                                                        value: dropdownValue,
-                                                        isExpanded: true,
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.black),
-                                                        onChanged:
-                                                            (String? newValue) {
-                                                          print('ppppppppppppppppttttttttttttt${newValue}');
-                                                          update(() {
-                                                            dropdownValue =
-                                                                newValue!;
-                                                            print(
-                                                                'adasdkkkkkkkkkkkkkkkkkkk$dropdownValue نننننننن$items');
-                                                          });
-                                                        },
-                                                        items: items.map<
-                                                            DropdownMenuItem<
-                                                                String>>((String
-                                                            value) {
-                                                          return DropdownMenuItem<
-                                                              String>(
-                                                            value: value,
-                                                            child: Text(value),
-                                                            onTap: () {},
-                                                          );
-                                                        }).toList(),
+                                                return Container(
+                                                  height:
+                                                      Utils.deviceHeight / 8,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .fromLTRB(
+                                                                      20,
+                                                                      0,
+                                                                      20,
+                                                                      0),
+                                                              child: DropdownButton<
+                                                                  WishlistModel>(
+                                                                hint: Text(
+                                                                    'Choose Wishlist:'),
+                                                                itemHeight:
+                                                                    50.0,
+                                                                value:
+                                                                    dropdownValue,
+                                                                isExpanded:
+                                                                    true,
+                                                                style: const TextStyle(
+                                                                    color: Colors
+                                                                        .black),
+                                                                onChanged:
+                                                                    (WishlistModel?
+                                                                        newValue) {
+                                                                  update(() {
+                                                                    dropdownValue =
+                                                                        newValue!;
+                                                                  });
+                                                                },
+                                                                items: items.map<
+                                                                        DropdownMenuItem<
+                                                                            WishlistModel>>(
+                                                                    (value) {
+                                                                  return DropdownMenuItem<
+                                                                      WishlistModel>(
+                                                                    value:
+                                                                        value,
+                                                                    child: Text(
+                                                                        value
+                                                                            .title!),
+                                                                  );
+                                                                }).toList(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          IconButton(
+                                                              onPressed: () =>
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (c) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text('add wishlist name'),
+                                                                          content:
+                                                                              TextField(
+                                                                            controller:
+                                                                                controller,
+                                                                          ),
+                                                                          actions: [
+                                                                            ElevatedButton(
+                                                                              child: Text("add"),
+                                                                              onPressed: () async {
+                                                                                WishlistModel wm = await Utils.bLoC.addWishlist(controller.text, Utils.id, 'shared');
+                                                                                 items.add(wm);
+                                                                                dropdownValue = wm;
+                                                                                update(() {
+
+                                                                                  controller.text = '';
+                                                                                });
+                                                                                Navigator.of(context).pop();
+                                                                              },
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      }),
+                                                              icon: Icon(
+                                                                  Icons.add)),
+                                                        ],
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                  IconButton(
-                                                      onPressed: () =>
-                                                          showDialog(
-                                                              context: context,
-                                                              builder: (c) {
-                                                                return AlertDialog(
-                                                                  title: Text(
-                                                                      'add wishlist name'),
-                                                                  content:
-                                                                      TextField(
-                                                                    controller:
-                                                                        controller,
-                                                                  ),
-                                                                  actions: [
-                                                                    ElevatedButton(
-                                                                      child: Text(
-                                                                          "add"),
-                                                                      onPressed:
-                                                                          () async {
-                                                                        update(
-                                                                            () {
-                                                                          items.add(
-                                                                              controller.text);
-                                                                          dropdownValue =
-                                                                              controller.text;
-                                                                          controller.text =
-                                                                              '';
-                                                                        });
-                                                                        await Utils.networkcall.createWishlist(
-                                                                            dropdownValue,
-                                                                            Utils.id,
-                                                                            'shared');
-                                                                        Navigator.of(context)
-                                                                            .pop();
-                                                                      },
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              }),
-                                                      icon: Icon(Icons.add)),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
+                                                );
+                                              },
+                                            );
+                                    }
+                                    return Container(
+                                      height: Utils.deviceHeight / 8,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     );
                                   }),
                               actionsAlignment: MainAxisAlignment.spaceEvenly,
                               actions: [
                                 ElevatedButton(
                                   child: Text("YES"),
-                                  onPressed: () {
-                                    //Put your code here which you want to execute on Yes button click.
+                                  onPressed: () async {
+                                     await Utils.bLoC.addToWishlist(widget.data.id, dropdownValue.shareKey!);
                                     Navigator.of(context).pop();
                                   },
                                 ),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
+import 'package:motherclub/app/modules/WishList/views/wishlist_list_view.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -158,7 +159,11 @@ class _AccountViewState extends State<AccountView> {
               padding: const EdgeInsets.only(left: 20,top: 30),
               child: GestureDetector(
                 onTap: (){
-                  Get.toNamed(Routes.WISHLIST);
+                   // Get.toNamed(Routes.WISHLIST);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => WishlistList()),
+                  );
                 },
                 child: Container(
                   child: Row(
