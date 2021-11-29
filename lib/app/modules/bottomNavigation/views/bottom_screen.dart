@@ -56,6 +56,7 @@ class _BottomScreenState extends State<BottomScreen> {
                      centerTitle: true,
                      title: titles[currentIndex],
                      actions: [
+                       if(titles[currentIndex] == Utils.labels!.store)
                        Icon(Icons.search, color: Colors.black87,),
                        SizedBox(width: 20,),
                        Image.asset('assets/images/translate.png'),
@@ -101,11 +102,11 @@ class _BottomScreenState extends State<BottomScreen> {
     AccountView(),
   ];
   static List<String> titles= [
-    'Home',
-    'Categories',
-    'Forum',
-    'Store',
-    'My Account',
+    Utils.labels!.home,
+    Utils.labels!.category,
+    Utils.labels!.forum,
+    Utils.labels!.store,
+    Utils.labels!.my_account,
   ];
   Widget get currentPage => pages[currentIndex];
 

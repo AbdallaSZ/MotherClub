@@ -264,7 +264,7 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
 
                           isLiked = !isLiked;
                         });
-                        print("aaaaaaaaaaaaaaaaadddqwqeq${widget.data.id}");
+
                         await Utils.bLoC.delWishlistProd(widget.data.id);
                       }
 

@@ -310,7 +310,8 @@ class Networkcall {
     if (response.statusCode != 200) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
-      throw Exception('Failed to featching Products.');
+     var result =  jsonDecode(response.body);
+      return result['message'];
     } else {
       return jsonDecode(response.body);
     }

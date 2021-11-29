@@ -377,7 +377,14 @@
   "likes":"Likes",
   "@likes": {
     "description": "The conventional newborn programmer greeting"
-  },"total_post":"Total Post",
+  },
+
+  "yes":"Yes",
+  "@yes": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "total_post":"Total Post",
   "@total_post": {
     "description": "The conventional newborn programmer greeting"
   },"shopping_products":"Shopping products",

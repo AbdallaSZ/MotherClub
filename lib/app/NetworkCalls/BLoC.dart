@@ -271,10 +271,13 @@ class BLoC {
     return items;
   }
 
-  Future<List<WishlistProductModel>> wishlistProducts(String sharedKey) async {
+  Future<dynamic> wishlistProducts(String sharedKey) async {
     List<WishlistProductModel> items = <WishlistProductModel>[];
     var wishlistItemsResponse =
         await Utils.networkcall.getProductsFromWishlist(sharedKey);
+    if(wishlistItemsResponse is String){
+      return wishlistItemsResponse;
+    }
     wishlistItemsResponse.forEach((wishlistItem) {
       print('wishlistItem ${wishlistItem['id']}');
       WishlistProductModel wishlistItemModel = new WishlistProductModel(

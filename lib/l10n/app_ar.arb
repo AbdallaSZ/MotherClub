@@ -101,5 +101,8 @@
   "likes": "يحب",
   "total_post": "اجمالي البريد",
   "week_pregnancy":"أسبوع الحمل",
-  "shopping_products": "منتجات التسوق"
+  "shopping_products": "منتجات التسوق",
+  "YES": "نعم",
+  "NO": "لا",
+  "CANCEL" : "الغاء"
 }

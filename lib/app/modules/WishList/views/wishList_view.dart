@@ -72,19 +72,19 @@ class _StoreViewScreenState extends State<WishListView> {
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
                 height: deviceHeight,
-                child: FutureBuilder<List<WishlistProductModel>>(
-                  future:
-                      Utils.bLoC.wishlistProducts(widget.wishlist.shareKey!),
+                child: FutureBuilder<dynamic>(
+                  future: Utils.bLoC.wishlistProducts(widget.wishlist.shareKey!),
                   builder: (context, snapshot) {
                     print('owowowowo${widget.wishlist.shareKey!}');
                     print('owowowowo${snapshot.data}');
                     if (snapshot.hasData) {
-                      List<WishlistProductModel>? data = snapshot.data;
                       return snapshot.connectionState == ConnectionState.waiting
                           ? Center(child: CircularProgressIndicator())
                           : snapshot.hasData
-                              ? GridView.builder(
-                                  itemCount: data!.length,
+                              ? snapshot.data is String?
+                         Center(child: Text("${snapshot.data}")):
+                            GridView.builder(
+                                  itemCount: snapshot.data!.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
@@ -116,8 +116,6 @@ class _StoreViewScreenState extends State<WishListView> {
                                   child: Text('no wishlist yet'),
                                 );
                       // : performSearch(data!, _query);
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
                     }
                     return GridShimmer(
                         deviceWidth: deviceWidth, deviceHeight: deviceHeight);
