@@ -11,7 +11,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-    Utils.initializeLocality(context);
+    Utils.initializeLocality(context,myWidth: deviceWidth , myHeight: deviceHeight);
     Utils.deviceHeight = MediaQuery.of(context).size.height;
     Utils.deviceWidth = MediaQuery.of(context).size.width;
     Utils.horizontalMargin = MediaQuery.of(context).size.height / 20;

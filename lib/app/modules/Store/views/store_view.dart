@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/SearchModule/DataSearch.dart';
 import 'package:motherclub/app/SearchModule/SearchBloc.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
+import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+
+import '../../ProductDetailsModule/ProductDetailsScreen.dart';
 
 class StoreView extends StatefulWidget {
   @override
@@ -26,7 +28,6 @@ class _StoreViewScreenState extends State<StoreView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     searchBloc =SearchBloc();
     super.initState();
   }
@@ -80,10 +81,16 @@ class _StoreViewScreenState extends State<StoreView> {
                         onTap: (){
                           print("tapped");
                           DataSearch myDataSearch = DataSearch( data);
-
                           var result = showSearch(
                               context: context,
                               delegate:myDataSearch );
+                         result.then((value){
+                           if(value!=null){
+                             Navigator.push(context, MaterialPageRoute(builder: (c)=>BlocProvider(
+                                 create: (c)=>ProductDetailsBloc(),
+                                 child: ProductDetailsScreen(value.productId!))));
+                           }
+                         });
                         },
                         child: TextFormField(
                           controller: _searchview,
@@ -130,8 +137,8 @@ class _StoreViewScreenState extends State<StoreView> {
                   if (snapshot.hasData) {
                      data = snapshot.data;
                     print(data);
-                    return _firstSearch
-                        ? GridView.builder(
+                    if (_firstSearch) {
+                      return GridView.builder(
                             itemCount: data!.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
@@ -144,16 +151,23 @@ class _StoreViewScreenState extends State<StoreView> {
                               context,
                               index,
                             ) {
-                              return ProductItem(data: data![index]);
+                              return GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (c)=>BlocProvider(
+                                        create: (c)=>ProductDetailsBloc(),
+                                        child: ProductDetailsScreen(data![index].id))));
+                                  },
+                                  child: ProductItem(data: data![index]));
                             },
-                          )
-                        : performSearch(data!, _query);
+                          );
+                    } else {
+                      return performSearch(data!, _query);
+                    }
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
                   return GridShimmer(
                       deviceWidth: deviceWidth, deviceHeight: deviceHeight);
-                  return CircularProgressIndicator();
                 },
               ),
             ),

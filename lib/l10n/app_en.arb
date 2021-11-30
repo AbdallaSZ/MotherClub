@@ -199,7 +199,20 @@
   },
 
   "contact_us":"contact us",
-  "@chat": {
+  "@contact_us": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "choose_age":"Choose baby age",
+  "@choose_age": {
+    "description": "The conventional newborn programmer greeting"
+  },  "additional_information":"additional_information",
+  "@additional_information": {
+    "description": "The conventional newborn programmer greeting"
+  }, "write_review":"Write your review",
+  "@write_review": {
+    "description": "The conventional newborn programmer greeting"
+  }, "submit":"Submit",
+  "@submit": {
     "description": "The conventional newborn programmer greeting"
   },
   "select_language":"Select Language",
