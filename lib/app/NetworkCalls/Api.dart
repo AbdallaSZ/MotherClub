@@ -12,10 +12,13 @@ class NetworkService {
   static Dio dio = new Dio();
 
   static Future<dynamic> getMyData(String apiUrl, {dynamic headers})async {
-
+      print(BASE_URL+apiUrl);
      var response = await http.get(Uri.parse(BASE_URL+apiUrl), headers: headers);
+     if(response.statusCode == 200){
      var decodedResponse = decodeTheResponse(response);
      return decodedResponse;
+     }
+     else return jsonDecode(response.body)["message"];
   }
 
   static Future<http.Response> getWithBody(String apiBaseUrl, dynamic data,

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
+import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
+import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsScreen.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
@@ -230,7 +233,13 @@ Widget  HomeAppBar(String Label,double height , double width,BuildContext contex
               scrollDirection: Axis.horizontal,
               itemCount: data!.length,
               itemBuilder: (context, index) {
-                return ProductItem(data: data[index],);
+                return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>BlocProvider(
+                          create: (c)=>ProductDetailsBloc(),
+                          child: ProductDetailsScreen(data[index].id))));
+                    },
+                    child: ProductItem(data: data[index],));
                 //   Card(
                 //   // padding: EdgeInsets.all(2),
                 //   // color: Colors.yellow,

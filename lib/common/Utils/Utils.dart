@@ -27,11 +27,15 @@ class Utils
   static String email ='';
   static Locality? locality ;
   BuildContext? applicationContext ;
-
+  static  double? width , height ;
   static AppLocalizations? labels;
 
-  static initializeLocality (context){
+  static initializeLocality (context,{myWidth , myHeight}){
     Utils.labels = AppLocalizations.of(context);
+    if(myWidth !=null){
+      width = myWidth;
+      height = myHeight;
+    }
     setLocality();
   }
   static BehaviorSubject<bool> languageSubject  = BehaviorSubject();
