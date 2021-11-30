@@ -6,6 +6,7 @@ import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/WishList/views/wishlist_list_view.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
+import 'package:motherclub/app/modules/feedback/feedback_view.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
@@ -183,22 +184,30 @@ class _AccountViewState extends State<AccountView> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,top: 30),
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(Icons.message,size: 22),
-                    SizedBox(width:15),
-                    Text(Utils.labels!.chat,style: GoogleFonts.roboto(
-                        fontSize:17,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FeedBack()),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20,top: 30),
+                child: Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.message,size: 22),
+                      SizedBox(width:15),
+                      Text(Utils.labels!.contact_us,style: GoogleFonts.roboto(
+                          fontSize:17,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.normal,
 
-                        color:Black_textColor
-                    ),),
+                          color:Black_textColor
+                      ),),
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

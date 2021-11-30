@@ -171,7 +171,7 @@ class _ProductItemState extends State<ProductItem> {
                                                                           (c) {
                                                                         return AlertDialog(
                                                                           title:
-                                                                              Text('add wishlist name'),
+                                                                              Text(Utils.labels!.add_wishlist_name),
                                                                           content:
                                                                               TextField(
                                                                             controller:
@@ -179,7 +179,7 @@ class _ProductItemState extends State<ProductItem> {
                                                                           ),
                                                                           actions: [
                                                                             ElevatedButton(
-                                                                              child: Text("add"),
+                                                                              child: Text(Utils.labels!.add),
                                                                               onPressed: () async {
                                                                                 WishlistModel wm = await Utils.bLoC.addWishlist(controller.text, Utils.id, 'shared');
                                                                                  items.add(wm);
@@ -214,16 +214,15 @@ class _ProductItemState extends State<ProductItem> {
                               actionsAlignment: MainAxisAlignment.spaceEvenly,
                               actions: [
                                 ElevatedButton(
-                                  child: Text("YES"),
+                                  child: Text(Utils.labels!.yes),
                                   onPressed: () async {
                                      await Utils.bLoC.addToWishlist(widget.data.id, dropdownValue.shareKey!);
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 ElevatedButton(
-                                  child: Text("Cancel"),
+                                  child: Text(Utils.labels!.cancel),
                                   onPressed: () {
-                                    //Put your code here which you want to execute on No button click.
                                     Navigator.of(context).pop();
                                   },
                                   style: ElevatedButton.styleFrom(

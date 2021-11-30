@@ -9,7 +9,6 @@ import 'dart:math' as math;
 
 class WishlistList extends StatefulWidget {
   const WishlistList({Key? key}) : super(key: key);
-
   @override
   State<WishlistList> createState() => _WishlistListState();
 }

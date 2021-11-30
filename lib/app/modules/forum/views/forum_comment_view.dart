@@ -51,7 +51,7 @@ class ForumCommentView extends GetView<ForumController> {
               children: [
                 Container(
                   padding: EdgeInsets.all(10),
-                  height: deviceHeight/6,
+                  height: deviceHeight/5.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(0.0),
                     gradient: LinearGradient(

@@ -10,6 +10,7 @@ import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/month_details.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/Models/wishlist_item_model.dart';
+import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
@@ -50,29 +51,30 @@ class BLoC {
   Future<ProductModel> getSpecficProduct(String productId) async {
     ProductModel productsList;
 
-    var dataFromResponse = await Utils.networkcall.getProductsDetails(productId);
+    var dataFromResponse =
+        await Utils.networkcall.getProductsDetails(productId);
 
-      List<Images> imagesOfProductList = [];
+    List<Images> imagesOfProductList = [];
     dataFromResponse["images"].forEach(
-            (newImage) {
-          imagesOfProductList.add(
-            new Images(
-              id: newImage["id"],
-              src: newImage['src'],
-            ),
-          );
-        },
-      );
-        ProductModel productModel = new ProductModel(
-            id: dataFromResponse['id'].toString(),
-            name: dataFromResponse['name'],
-            description: dataFromResponse['description'],
-            price: dataFromResponse['price'].toString(),
-            salePrice: dataFromResponse['sale_price'].toString(),
-            regular_price: dataFromResponse['regular_price'].toString(),
-            on_sale: dataFromResponse['on_sale'],
-            total_sales: dataFromResponse['total_sales'].toString(),
-            imageslist: imagesOfProductList);
+      (newImage) {
+        imagesOfProductList.add(
+          new Images(
+            id: newImage["id"],
+            src: newImage['src'],
+          ),
+        );
+      },
+    );
+    ProductModel productModel = new ProductModel(
+        id: dataFromResponse['id'].toString(),
+        name: dataFromResponse['name'],
+        description: dataFromResponse['description'],
+        price: dataFromResponse['price'].toString(),
+        salePrice: dataFromResponse['sale_price'].toString(),
+        regular_price: dataFromResponse['regular_price'].toString(),
+        on_sale: dataFromResponse['on_sale'],
+        total_sales: dataFromResponse['total_sales'].toString(),
+        imageslist: imagesOfProductList);
     return productModel;
   }
 
@@ -111,42 +113,41 @@ class BLoC {
     return weeksDetailList;
   }
 
-  Future<List<FormsModel>> Forms_list(BuildContext context) async {
+  Future<List<FormsModel>> forumsList() async {
     List<FormsModel> formsLst = <FormsModel>[];
 
-    var FromResponse = await Utils.networkcall.getForumAPICall(context);
-    FromResponse.forEach((newFrom) {
-      FormsModel formmodel = new FormsModel(
-          Id: newFrom['id'].toString(),
-          Date: newFrom['date'],
-          Title: newFrom['title']['rendered'],
-          Content: newFrom['content']['rendered']);
-      formsLst.add(formmodel);
+    var fromResponse = await Utils.networkcall.getForumAPICall();
+    // var test = _networkService.convertToJson(fromResponse);
+
+    fromResponse.forEach((newFrom) {
+       FormsModel forumModel = FormsModel.fromJson(newFrom);
+       formsLst.add(forumModel);
     });
+
     return formsLst;
   }
 
-  Future<UserDetailsModel> UsersDetails(BuildContext context) async {
+  Future<UserDetailsModel> UsersDetails() async {
     UserDetailsModel userDetailsModel; //= UserDetailsModel();
 
-    var FromResponse = await Utils.networkcall.getForumAPICall(context);
+    var fromResponse = await Utils.networkcall.getForumAPICall();
     // FromResponse
-
+    print('asdieieieiu${fromResponse}asdieieieiu');
     return UserDetailsModel(
-        userId: FromResponse['user']['id'],
-        username: FromResponse['user']['username'],
-        nicename: FromResponse['user']['nicename'],
-        email: FromResponse['user']['email'],
-        url: FromResponse['user']['url'],
-        registered: FromResponse['user']['registered'],
-        displayname: FromResponse['user']['displayname'],
-        firstname: FromResponse['user']['firstname'],
-        lastname: FromResponse['user']['lastname'],
-        nickname: FromResponse['user']['nickname'],
-        description: FromResponse['user']['description'],
-        baby_age: FromResponse['user']['baby_age'],
-        pregnancy_week: FromResponse['user']['pregnancy_week'],
-        capabilities: FromResponse['user']['capabilities']);
+        userId: fromResponse['id'].toString(),
+        username: fromResponse['user']['username'],
+        nicename: fromResponse['user']['nicename'],
+        email: fromResponse['user']['email'],
+        url: fromResponse['user']['url'],
+        registered: fromResponse['user']['registered'],
+        displayname: fromResponse['user']['displayname'],
+        firstname: fromResponse['user']['firstname'],
+        lastname: fromResponse['user']['lastname'],
+        nickname: fromResponse['user']['nickname'],
+        description: fromResponse['user']['description'],
+        baby_age: fromResponse['user']['baby_age'],
+        pregnancy_week: fromResponse['user']['pregnancy_week'],
+        capabilities: fromResponse['user']['capabilities']);
   }
 
   Future<List<MonthsModel>> months_list(BuildContext context) async {
@@ -275,7 +276,7 @@ class BLoC {
     List<WishlistProductModel> items = <WishlistProductModel>[];
     var wishlistItemsResponse =
         await Utils.networkcall.getProductsFromWishlist(sharedKey);
-    if(wishlistItemsResponse is String){
+    if (wishlistItemsResponse is String) {
       return wishlistItemsResponse;
     }
     wishlistItemsResponse.forEach((wishlistItem) {
@@ -320,6 +321,7 @@ class BLoC {
       print(e);
     }
   }
+
   Future<void> delWishlist(String sharedKey) async {
     try {
       await Utils.networkcall.delAllWishlist(sharedKey);
@@ -327,6 +329,7 @@ class BLoC {
       print(e);
     }
   }
+
   Future<void> delWishlistProd(String prodId) async {
     try {
       await Utils.networkcall.delProductFromWishlist(prodId);

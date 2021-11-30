@@ -80,7 +80,7 @@
   "reply": "رد",
   "buy_again": "شراء مرة أخرى",
   "your_wish_list": "المفضلات",
-  "chat": "محادثة",
+  "contact_us": "تواصل معنا",
   "select_language": "اختيار لغة",
   "settings": "الإعدادات",
   "address": "العنوان",
@@ -102,7 +102,13 @@
   "total_post": "اجمالي البريد",
   "week_pregnancy":"أسبوع الحمل",
   "shopping_products": "منتجات التسوق",
-  "YES": "نعم",
-  "NO": "لا",
-  "CANCEL" : "الغاء"
+  "yes": "نعم",
+  "no": "لا",
+  "cancel" : "الغاء",
+  "we_are_opened_to_suggestion": "نحن منفتحون على أي اقتراح أو لمجرد الدردشة",
+  "follow_us": "تابعنا",
+  "feedback_location": "منتزه الشارقة للأبحاث والتكنولوجيا والابتكار ،\n الشارقة ، الإمارات العربية المتحدة",
+  "feedback":"تقييم",
+  "add_wishlist_name" : "اضف قائمة مفضلات",
+  "add" : "اضف"
 }

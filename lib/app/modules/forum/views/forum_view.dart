@@ -29,7 +29,7 @@ class ForumView extends GetView<ForumController> {
               children: [
                 Container(
                   padding: EdgeInsets.all(10),
-                  height: deviceHeight/6,
+                  height: deviceHeight/5.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(0.0),
                     gradient: LinearGradient(
@@ -237,13 +237,12 @@ class ForumView extends GetView<ForumController> {
                                   ]),
                             ),
                             child:FutureBuilder<List<FormsModel>>(
-                            future: Utils.bLoC.Forms_list(context),
+                            future: Utils.bLoC.forumsList(),
                             builder: (context, snapshot) {
                             if (snapshot.hasData) {
                             List<FormsModel>? data = snapshot.data;
-                            // print('datadata ${data![0].Date}');
-                            return Center(
 
+                            return Center(
                               child: Text("${data!.length}",style: GoogleFonts.roboto(
                                   fontSize:13,
                                   fontWeight: FontWeight.w400,
@@ -293,7 +292,7 @@ class ForumView extends GetView<ForumController> {
                   // color: Colors.yellowAccent,
                   width: deviceWidth,
                   child: FutureBuilder<List<FormsModel>>(
-                  future: Utils.bLoC.Forms_list(context),
+                  future: Utils.bLoC.forumsList(),
                   builder: (context, snapshot) {
                   if (snapshot.hasData) {
                         List<FormsModel>? data = snapshot.data;
@@ -302,8 +301,9 @@ class ForumView extends GetView<ForumController> {
                             itemCount: data!.length,
                             itemBuilder: (BuildContext context,int index){
                               return GestureDetector(
-                                onTap: (){
-                                  Get.toNamed(Routes.COMMENT);
+                                onTap: () async {
+                                  // await Utils.bLoC.UsersDetails();
+                                   Get.toNamed(Routes.COMMENT);
                                 },
                                 child: Card(
                                   child: Container(
@@ -319,7 +319,7 @@ class ForumView extends GetView<ForumController> {
                                       children: [
                                         Container(
                                           // padding:EdgeInsets.fromLTRB(15,17,10,0),
-                                          child: Text("${data[index].Title}",style: GoogleFonts.roboto(
+                                          child: Text("${data[index].title!.rendered}",style: GoogleFonts.roboto(
                                             fontSize: 18,
                                             fontStyle: FontStyle.normal,
                                             fontWeight: FontWeight.w700,
@@ -343,7 +343,7 @@ class ForumView extends GetView<ForumController> {
 
                                                     children: [
                                                       //Text("Aditya Diab",style: Theme.of(context).textTheme.headline1,),
-                                                      Text("${data[index].Date}",style: GoogleFonts.roboto(
+                                                      Text("${data[index].date}",style: GoogleFonts.roboto(
                                                           fontSize: 10,
 
                                                           letterSpacing: 0.35,
@@ -371,7 +371,7 @@ class ForumView extends GetView<ForumController> {
                                         ),
                                         SizedBox(height:15),
                                         Flexible(
-                                          child: Text("${data[index].Content}",style: GoogleFonts.roboto(
+                                          child: Text("${data[index].content!.rendered}",style: GoogleFonts.roboto(
                                               fontSize: 13,
                                               letterSpacing: 0.25,
                                               height: 1.4,

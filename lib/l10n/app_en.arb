@@ -41,7 +41,9 @@
   },"discount":"Discount",
   "@discount": {
     "description": "The conventional newborn programmer greeting"
-  },"create_New_Account":"Create a New Account",
+  },
+
+  "create_New_Account":"Create a New Account",
   "@create_New_Account": {
     "description": "The conventional newborn programmer greeting"
   },
@@ -186,7 +188,17 @@
   "@your_wish_list": {
     "description": "The conventional newborn programmer greeting"
   },
-  "chat":"Chat",
+  "add_wishlist_name":"Add Wish List",
+  "@add_wishlist_name": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "add":"Add",
+  "@add": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "contact_us":"contact us",
   "@chat": {
     "description": "The conventional newborn programmer greeting"
   },
@@ -381,6 +393,33 @@
 
   "yes":"Yes",
   "@yes": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "no":"No",
+  "@no": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "cancel":"Cancel",
+  "@cancel": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "we_are_opened_to_suggestion": "we are open for any suggestion or just to have a chat",
+  "@we_are_opened_to_suggestion": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "feedback_location": "Sharjah Research Technology and\n Innovation park Sharjah-UAE",
+  "@feedback_location": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "follow_us": "FOLLOW US",
+  "@follow_us": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "feedback":"Feedback",
+  "@feedback": {
     "description": "The conventional newborn programmer greeting"
   },
 

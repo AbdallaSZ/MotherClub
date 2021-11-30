@@ -42,7 +42,7 @@ class Networkcall {
     return json.decode(response.body);
   }
 
-  Future<dynamic> getForumAPICall(context) async {
+  Future<dynamic> getForumAPICall() async {
     var response = await http
         .get(
       Uri.parse(
