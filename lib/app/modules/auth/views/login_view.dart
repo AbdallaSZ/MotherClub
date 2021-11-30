@@ -241,8 +241,7 @@ class LoginView extends GetView<AuthController> {
       User? user = result.user;
       print(user!.displayName);
       if (result != null) {
-        /*Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));*/
+        Get.toNamed(Routes.BOTTOM);
       }  // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
