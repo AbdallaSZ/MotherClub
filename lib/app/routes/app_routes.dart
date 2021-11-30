@@ -18,7 +18,7 @@ abstract class Routes{
   static const ACCOUNT = _Paths.ACCOUNT;
   static const FORUM = _Paths.FORUM;
   static const PREGNANCY = _Paths.PREGNANCY;
-  static const BABY = _Paths.BABY;
+
   static const BLOG = _Paths.BLOG;
   static const COMMENT = _Paths.COMMENT;
   static const NONETWORKVIEW = _Paths.NONETWORKVIEW;
@@ -49,7 +49,6 @@ abstract class _Paths {
   static const ACCOUNT = '/account';
   static const FORUM = '/forum';
   static const PREGNANCY = '/pregnancy';
-  static const BABY = '/baby';
   static const BLOG = '/blog';
   static const COMMENT = '/comment';
   static const NONETWORKVIEW='/NonetworkView';

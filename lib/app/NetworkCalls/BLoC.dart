@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/Models/FormsModel.dart';
@@ -6,6 +8,7 @@ import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/Models/baby_model.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/month_details.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
@@ -83,7 +86,7 @@ class BLoC {
 
     var weekResponse = await Utils.networkcall.getWeeksAPICall(context);
     weekResponse.forEach((newWeek) {
-      print('newdata ${newWeek['name'].toString()}');
+
 
       WeeksModel weeksModel = new WeeksModel(
           Id: newWeek['id'].toString(),
@@ -92,7 +95,7 @@ class BLoC {
           count: newWeek['count'].toString());
       weeksLst.add(weeksModel);
     });
-    print('newdata ${weeksLst.toString()}');
+
     return weeksLst;
   }
 
@@ -101,7 +104,7 @@ class BLoC {
 
     var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
     weekDetailResponse.forEach((newWeekDetail) {
-      print('newweekdata ${newWeekDetail['link'].toString()}');
+
 
       WeeksDetail weeksDetailModel = new WeeksDetail(
           name: newWeekDetail['name'].toString(),
@@ -109,7 +112,7 @@ class BLoC {
           video_link: newWeekDetail['link'].toString());
       weeksDetailList.add(weeksDetailModel);
     });
-    print('newweekdata ${weeksDetailList.toString()}');
+
     return weeksDetailList;
   }
 
@@ -127,12 +130,25 @@ class BLoC {
     return formsLst;
   }
 
+  Future<List<BabyModel>> babyList(String slug) async {
+    List<BabyModel> babyList = <BabyModel>[];
+    var response = await Utils.networkcall.getBabyAPICall(slug);
+    var test = response['data'];
+
+    test.forEach((newFrom) {
+      BabyModel babyModel = BabyModel.fromMap(newFrom);
+      babyList.add(babyModel);
+    });
+    log(babyList.toString());
+    return babyList;
+  }
+
   Future<UserDetailsModel> UsersDetails() async {
     UserDetailsModel userDetailsModel; //= UserDetailsModel();
 
     var fromResponse = await Utils.networkcall.getForumAPICall();
     // FromResponse
-    print('asdieieieiu${fromResponse}asdieieieiu');
+
     return UserDetailsModel(
         userId: fromResponse['id'].toString(),
         username: fromResponse['user']['username'],
@@ -155,7 +171,7 @@ class BLoC {
 
     var weekResponse = await Utils.networkcall.getmonthAPICall();
     weekResponse.forEach((month) {
-      print('newdata ${month['name'].toString()}');
+
 
       MonthsModel monthsModel = new MonthsModel(
           Id: month['id'].toString(),
@@ -164,7 +180,7 @@ class BLoC {
           count: month['count'].toString());
       monthsLst.add(monthsModel);
     });
-    print('newdata ${monthsLst.toString()}');
+
     return monthsLst;
   }
 
@@ -173,7 +189,7 @@ class BLoC {
 
     var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
     weekDetailResponse.forEach((newMonthDetail) {
-      print('newweekdata ${newMonthDetail['link'].toString()}');
+
 
       MonthDetailsModel monthDetailsModel = new MonthDetailsModel(
           id: newMonthDetail['id'],
@@ -195,7 +211,7 @@ class BLoC {
           taxonomy: newMonthDetail['taxonomy']);
       monthDetailList.add(monthDetailsModel);
     });
-    print('newweekdata ${monthDetailList.toString()}');
+
     return monthDetailList;
   }
 
@@ -205,7 +221,7 @@ class BLoC {
     var categoriesResponse =
         await Utils.networkcall.geAppCategoiresAPI(context);
     categoriesResponse['data'].forEach((newProduct) {
-      print('newdata ${newProduct}');
+
       CategoriesModel categoriesModel = new CategoriesModel(
           title: newProduct['title'],
           image: newProduct['image'],
@@ -221,7 +237,7 @@ class BLoC {
 
     var cartItemsResponse = await Utils.networkcall.getCartItems();
     cartItemsResponse['data'].forEach((newCartItem) {
-      print('newdata ${newCartItem}');
+
       CartItemModel categoriesModel = new CartItemModel(
           cartHash: newCartItem['cartHash'],
           cartKey: newCartItem['cartKey'],
@@ -255,7 +271,7 @@ class BLoC {
     var wishlistResponse = await Utils.networkcall.getWishlistByUserId(userId);
     try {
       await wishlistResponse.forEach((wishlist) {
-        print('wishlistItem ${wishlist['id']}');
+
         WishlistModel wishlistModel = new WishlistModel(
           userId: wishlist['user_id'],
           id: wishlist['id'],
@@ -280,7 +296,7 @@ class BLoC {
       return wishlistItemsResponse;
     }
     wishlistItemsResponse.forEach((wishlistItem) {
-      print('wishlistItem ${wishlistItem['id']}');
+
       WishlistProductModel wishlistItemModel = new WishlistProductModel(
         itemId: wishlistItem['item_id'],
         inStock: wishlistItem['in_stock'],

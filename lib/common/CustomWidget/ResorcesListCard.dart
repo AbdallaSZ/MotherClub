@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/routes/app_pages.dart';
+
+import 'package:motherclub/app/Models/baby_model.dart';
+import 'package:motherclub/app/modules/Expert_Blogs/views/blog_views.dart';
+
 import 'package:motherclub/common/Constant/ColorConstants.dart';
-import 'package:motherclub/common/Utils/RandomColorModel.dart';
+
 import 'package:motherclub/common/Utils/Utils.dart';
 
-Widget ResorcesListCard(double height , double width,BuildContext context,String slug){
+Widget ResorcesListCard(Post post,context){
 
   return
     Container(
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.only(right: 10),
-      height: height/8,
-      width: width,
+      height: Utils.deviceHeight/7,
+      width: Utils.deviceWidth,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0),
         color: Colors.white/*RandomColorModel().getColor().withOpacity(0.5)*/ ),
 
       child: GestureDetector(
         onTap: (){
-          Get.toNamed(Routes.BLOG);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => BlogViews(post)),
+          );
         },
         child: Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,18 +32,17 @@ Widget ResorcesListCard(double height , double width,BuildContext context,String
           children: [
           Flexible(
             flex: 2,
-
-              child: Image.asset('assets/images/RectangleDemo.png')),
+              child: Image.network("https://image.freepik.com/free-photo/cute-young-girl-drinking-juice_23-2148305302.jpg"),),
+              // child: Image.network("${post.sourceImage!}"),),
           Flexible(
             flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text(Utils.labels!.your_Pregnancy,style:  Theme.of(context).textTheme.headline3),
+              Text(post.title!.rendered!,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
               Divider(height: 5,color: Colors.transparent,),
-              Text('Free knowledge and medical tips week by week as your pea-pod develops...',style: GoogleFonts.roboto(fontSize: Utils.deviceHeight/58,fontWeight: FontWeight.normal,color: Black_textColor)),
-
+              Text('${post.content!.rendered!.substring(0,30)} .......',style: GoogleFonts.roboto(fontSize: Utils.deviceHeight/58,fontWeight: FontWeight.normal,color: Black_textColor)),
             ],),
           ),
           Flexible(
@@ -57,8 +60,6 @@ Widget ResorcesListCard(double height , double width,BuildContext context,String
                     colors: [
                       CustomButton_Color,
                       CustomButton_Second_Color
-
-
                     ]),
 
                 // gradient: colorsConstants.gradient1

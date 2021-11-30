@@ -272,7 +272,7 @@
     "description": "The conventional newborn programmer greeting"
   },
 
-  "baby_month": "'Baby Month'",
+  "baby_month": "Baby Month",
   "@baby_month": {
     "description": "The conventional newborn programmer greeting"
   },
@@ -284,7 +284,10 @@
   "@continue_": {
     "description": "The conventional newborn programmer greeting"
   },
-
+  "mother_club": "Mother Club",
+  "@mother_club": {
+    "description": "The conventional newborn programmer greeting"
+  },
 "email": "Email",
   "@email": {
     "description": "The conventional newborn programmer greeting"

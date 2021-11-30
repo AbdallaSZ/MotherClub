@@ -52,7 +52,7 @@ class _RegisterViewState extends State<RegisterView> {
   BehaviorSubject<String> imageSubject = BehaviorSubject();
   RegisterBloc? _bloc;
   GlobalKey<ScaffoldState>_scaffoldKey = GlobalKey();
-  GlobalKey<FormState>_formKey = GlobalKey();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String imageText = "";
   String imageName = "Upload Profile Image" ;
 

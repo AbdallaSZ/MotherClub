@@ -57,7 +57,18 @@ class Networkcall {
         return false;
       },
     );
-    print(response.body);
+
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getBabyAPICall(String slug) async {
+    var response = await http
+        .get(Uri.parse('https://mothersclub.me/months/details?slug=$slug'))
+        .catchError(
+      (error) {
+        return error;
+      },
+    );
     return json.decode(response.body);
   }
 
@@ -299,7 +310,7 @@ class Networkcall {
       throw Exception('Failed to Wishlist. ${response.body}');
     }
   }
-  
+
   Future<dynamic> getProductsFromWishlist(String sharedKey) async {
     // final _networkService = NetworkService();
     final response = await http.get(
@@ -310,7 +321,7 @@ class Networkcall {
     if (response.statusCode != 200) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
-     var result =  jsonDecode(response.body);
+      var result = jsonDecode(response.body);
       return result['message'];
     } else {
       return jsonDecode(response.body);

@@ -80,15 +80,6 @@ class AppPages{
       page:() =>  YourPregnancyView(),
       binding: YourPregnancyBinding(),
     ),
-
-
-    GetPage(
-
-      name: _Paths.EXPERTBLOG,
-      page:() =>  blog_views(),
-      binding: blog_binding(),
-    ),
-
   GetPage(
       name: _Paths.BOTTOM,
       page: () => BottomScreen(),
@@ -125,16 +116,11 @@ class AppPages{
       // binding: AuthBinding(),
     ),
     GetPage(
-      name: _Paths.BABY,
-      page: () => YourbabyViews(),
+      name: _Paths.YOURBABY,
+      page: () => YourBabyViews(),
       binding: YourBabyBinding(),
     ),
 
-    GetPage(
-      name: _Paths.BLOG,
-      page: () => blog_views(),
-      binding: blog_binding(),
-    ),
     GetPage(
       name: _Paths.NONETWORKVIEW,
       page: () => NonetworkView(),
