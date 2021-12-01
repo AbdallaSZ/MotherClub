@@ -7,6 +7,7 @@ import 'package:motherclub/app/StateEnum.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsEvent.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsState.dart';
+import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -51,6 +52,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(withBackButton: true, onBackButtonPressed: (){
+        Navigator.pop(context);
+      },),
       body: SafeArea(
         bottom: true,
         left: true,
