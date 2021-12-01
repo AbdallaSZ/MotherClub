@@ -291,6 +291,21 @@ class Networkcall {
     }
   }
 
+  Future<void> updateWishlistName(
+      String name, String sharedKey) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://mothersclub.me/wp-json/wc/v3/wishlist/update/$sharedKey?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e'),
+      body: {
+        'title': name,
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update Wishlist name.');
+    }
+  }
+
+
   Future<void> delAllWishlist(String sharedKey) async {
     final response = await http.get(
       Uri.parse(

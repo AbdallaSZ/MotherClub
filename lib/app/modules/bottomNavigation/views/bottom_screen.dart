@@ -27,6 +27,9 @@ class BottomScreen extends StatefulWidget {
 class _BottomScreenState extends State<BottomScreen> {
   int currentIndex = 0;
   BehaviorSubject<int> rxPages = BehaviorSubject();
+  List<String> titles= [
+
+  ];
   @override
   void dispose() {
     // TODO: implement dispose
@@ -35,6 +38,7 @@ class _BottomScreenState extends State<BottomScreen> {
   }
   @override
   void initState() {
+
     // TODO: implement initState
   rxPages.sink.add(currentIndex);
 
@@ -43,7 +47,11 @@ class _BottomScreenState extends State<BottomScreen> {
   @override
   Widget build(BuildContext context) {
     Utils.initializeLocality(context);
-
+    titles= [    Utils.labels!.home,
+      Utils.labels!.category,
+      Utils.labels!.forum,
+      Utils.labels!.store,
+      Utils.labels!.my_account,];
     return StreamBuilder<bool>(
             stream: Utils.languageSubject,
             builder: (context, snapshot) {
@@ -101,13 +109,7 @@ class _BottomScreenState extends State<BottomScreen> {
     StoreView(),
     AccountView(),
   ];
-  static List<String> titles= [
-    Utils.labels!.home,
-    Utils.labels!.category,
-    Utils.labels!.forum,
-    Utils.labels!.store,
-    Utils.labels!.my_account,
-  ];
+
   Widget get currentPage => pages[currentIndex];
 
   void changePage(int _index) {

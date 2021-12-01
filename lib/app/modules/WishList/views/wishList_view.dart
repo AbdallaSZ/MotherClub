@@ -75,8 +75,7 @@ class _StoreViewScreenState extends State<WishListView> {
                 child: FutureBuilder<dynamic>(
                   future: Utils.bLoC.wishlistProducts(widget.wishlist.shareKey!),
                   builder: (context, snapshot) {
-                    print('owowowowo${widget.wishlist.shareKey!}');
-                    print('owowowowo${snapshot.data}');
+
                     if (snapshot.hasData) {
                       return snapshot.connectionState == ConnectionState.waiting
                           ? Center(child: CircularProgressIndicator())

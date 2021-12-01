@@ -305,7 +305,14 @@
   "@email": {
     "description": "The conventional newborn programmer greeting"
   },
-
+  "edit_wishlist_Name": "Edit Wish List Name",
+  "@edit_wishlist_Name": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "The conventional newborn programmer greeting"
+  },
 "phone": "phone",
   "@phone": {
     "description": "The conventional newborn programmer greeting"

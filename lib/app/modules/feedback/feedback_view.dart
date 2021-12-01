@@ -114,7 +114,7 @@ class _FeedBackState extends State<FeedBack> {
               ),
               Container(
                 width: Utils.deviceWidth,
-                height: Utils.deviceHeight/4,
+                height: Utils.deviceHeight/3.7,
                 color: Colors.pinkAccent,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

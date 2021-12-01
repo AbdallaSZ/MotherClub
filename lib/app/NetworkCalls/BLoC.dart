@@ -338,6 +338,14 @@ class BLoC {
     }
   }
 
+  Future<void> updateWishlistName(String name, String sharedKey) async {
+    try {
+      await Utils.networkcall.updateWishlistName(name, sharedKey);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
   Future<void> delWishlist(String sharedKey) async {
     try {
       await Utils.networkcall.delAllWishlist(sharedKey);

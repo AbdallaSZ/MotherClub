@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/MonthsModel.dart';
 import 'package:motherclub/app/Models/baby_model.dart';
+import 'package:motherclub/app/modules/YourBaby/views/baby_data_list.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/ResorcesListCard.dart';
 
@@ -189,65 +190,7 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                           fontWeight: FontWeight.w500,
                           color: Colors.black)),
                 ),
-                FutureBuilder<List<BabyModel>>(
-                    future: Utils.bLoC.babyList(monthSlug),
-                    builder: (context, snapshot) {
-                      return snapshot.connectionState == ConnectionState.waiting
-                          ? Center(child: CircularProgressIndicator())
-                          : Container(
-                              height: Utils.deviceHeight / 1.2,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (BuildContext _, int index) {
-                                  return Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Container(
-                                        //sheight: 500,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            color: yourbabyCard),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              child: ExpansionTile(
-                                                  onExpansionChanged:
-                                                      (value) {},
-                                                  title: Text(
-                                                    snapshot.data![index].name!,
-                                                  ),
-                                                  children: <Widget>[
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10, right: 10),
-                                                      height: deviceHeight / 3,
-                                                      child: ListView.builder(
-                                                          itemCount: snapshot
-                                                              .data![index]
-                                                              .posts!
-                                                              .length,
-                                                          scrollDirection:
-                                                              Axis.vertical,
-                                                          itemBuilder:
-                                                              (ctx, int i) {
-                                                            return ResorcesListCard(
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .posts![i],
-                                                              ctx,
-                                                            );
-                                                          }),
-                                                    )
-                                                  ]),
-                                            )
-                                          ],
-                                        ),
-                                      ));
-                                },
-                                itemCount: snapshot.data!.length,
-                              ),
-                            );
-                    }),
+                BabyDataList(monthSlug: monthSlug,),
               ]),
             ),
           )),

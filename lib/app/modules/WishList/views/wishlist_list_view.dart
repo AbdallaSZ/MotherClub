@@ -9,15 +9,20 @@ import 'dart:math' as math;
 
 class WishlistList extends StatefulWidget {
   const WishlistList({Key? key}) : super(key: key);
+
   @override
   State<WishlistList> createState() => _WishlistListState();
 }
 
 class _WishlistListState extends State<WishlistList> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        title: Utils.labels!.wish_List,
+        centerTitle: true,
         withBackButton: true,
         onBackButtonPressed: () {
           Navigator.pop(context);
@@ -26,61 +31,109 @@ class _WishlistListState extends State<WishlistList> {
       body: FutureBuilder<List<WishlistModel>>(
           future: Utils.bLoC.wishlistWithUserId(Utils.id),
           builder: (context, snapshot) {
-           return snapshot.connectionState ==ConnectionState.waiting?  Center(child: CircularProgressIndicator()):
-             snapshot.hasData
-                ? GridView.builder(
-                    itemCount: snapshot.data!.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      childAspectRatio: (.80),
-                    ),
-                    itemBuilder: (
-                      context,
-                      index,
-                    ) {
-                      return Stack(
-                        children: [
-                          GestureDetector(
-                            onTap: (){Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => WishListView(wishlist:snapshot.data![index])),
-                            );},
-                            child: Container(
-                              margin: const EdgeInsets.all(15.0),
-                              padding: const EdgeInsets.all(3.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(40),
-                                    bottomRight: Radius.circular(40),
-                                    bottomLeft: Radius.circular(40),
+            return snapshot.connectionState == ConnectionState.waiting
+                ? Center(child: CircularProgressIndicator())
+                : snapshot.hasData
+                    ? GridView.builder(
+                        itemCount: snapshot.data!.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          childAspectRatio: (.80),
+                        ),
+                        itemBuilder: (
+                          context,
+                          index,
+                        ) {
+                          return Stack(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WishListView(
+                                            wishlist: snapshot.data![index])),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(15.0),
+                                  padding: const EdgeInsets.all(3.0),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(40),
+                                        bottomRight: Radius.circular(40),
+                                        bottomLeft: Radius.circular(40),
+                                      ),
+                                      color: Color((math.Random().nextDouble() *
+                                                  0xFFFFFF)
+                                              .toInt())
+                                          .withOpacity(0.3)),
+                                  child: Center(
+                                    child: Text(
+                                      snapshot.data![index].title!,
+                                      style: TextStyle(fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
-                                  color: Color((math.Random().nextDouble() * 0xFFFFFF)
-                                          .toInt())
-                                      .withOpacity(0.3)),
-                              child: Center(
-                                child: Text(snapshot.data![index].title!,style: TextStyle(fontSize: 16),textAlign: TextAlign.center,),
+                                ),
                               ),
-                            ),
-                          ),
-                          Align(alignment: Alignment.topRight, child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(onPressed: () async {
-                              await Utils.bLoC.delWishlist(snapshot.data![index].shareKey!);
-                                setState(() {
-
-                                  print('deleted');
-                                });
-                            }, icon: Icon(Icons.delete_forever)),
-                          )),
-                        ],
+                              Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                            alignment: Alignment.centerRight,
+                                            onPressed: () async {
+                                              await Utils.bLoC.delWishlist(
+                                                  snapshot
+                                                      .data![index].shareKey!);
+                                              setState(() {
+                                                print('deleted');
+                                              });
+                                            },
+                                            icon: Icon(Icons.delete_forever)),
+                                        IconButton(
+                                          alignment: Alignment.centerLeft,
+                                            onPressed: () => showDialog(
+                                                context: context,
+                                                builder: (c) {
+                                                  return AlertDialog(
+                                                    title: Text(Utils.labels!.edit_wishlist_Name),
+                                                    content: TextField(
+                                                      controller: controller,
+                                                    ),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                        child: Text(
+                                                            Utils.labels!.edit),
+                                                        onPressed: () async {
+                                                              await Utils.bLoC.updateWishlistName( controller.text,snapshot.data![index].shareKey!);
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                          setState(() {
+                                                            controller.text='';
+                                                          });
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                            icon: Icon(Icons.edit)),
+                                      ],
+                                    ),
+                                  )),
+                            ],
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text('no wishlist yet'),
                       );
-                    },
-                  )
-                : Center(
-                    child: Text('no wishlist yet'),
-                  );
           }),
     );
   }
