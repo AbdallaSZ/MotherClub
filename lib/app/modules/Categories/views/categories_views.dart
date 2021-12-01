@@ -16,40 +16,40 @@ class CategoriesView extends GetView<CategoriesController> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-List<String> routes = [Routes.YOURPREGNANCY,Routes.YOURBABY,Routes.FORUM,Routes.STORE];
+    List<String> routes = [
+      Routes.YOURPREGNANCY,
+      Routes.YOURBABY,
+      Routes.FORUM,
+      Routes.STORE
+    ];
     return Scaffold(
         backgroundColor: Background_Color,
         body: Container(
-          padding: EdgeInsets.symmetric(vertical: deviceHeight/75,horizontal: deviceWidth/40),
+          padding: EdgeInsets.symmetric(
+              vertical: deviceHeight / 75, horizontal: deviceWidth / 40),
           height: deviceHeight,
           width: deviceWidth,
-          child:
-    FutureBuilder<List<CategoriesModel>>(
-    future: Utils.bLoC.categores_list(context),
-    builder: (context, snapshot) {
-    if (snapshot.hasData) {
-    List<CategoriesModel>? data = snapshot.data;
-
-    return ListView.builder(
-        itemCount: data!.length,
-        itemBuilder: (BuildContext context,int index){
-          return CategoriresCard(deviceHeight, deviceWidth, context,data[index],routes[index]);
-        }
-    );
-    }
-    else {
-      return ListView.builder(
-          itemCount: 10,
-          itemBuilder: (BuildContext context,int index){
-            return Card(child: FurmShimmer(deviceHeight, deviceWidth, context));
-
-          });
-    }
-    }
-    ),
-
-
-        )
-    );
+          child: FutureBuilder<List<CategoriesModel>>(
+              future: Utils.bLoC.categores_list(context),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<CategoriesModel>? data = snapshot.data;
+                  return ListView.builder(
+                      itemCount: data!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CategoriresCard(deviceHeight, deviceWidth,
+                            context, data[index], routes[index]);
+                      });
+                } else {
+                  return ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                            child: FurmShimmer(
+                                deviceHeight, deviceWidth, context));
+                      });
+                }
+              }),
+        ));
   }
 }

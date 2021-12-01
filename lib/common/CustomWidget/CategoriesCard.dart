@@ -12,7 +12,7 @@ Widget CategoriresCard(double height , double width,BuildContext context,Categor
   return
     GestureDetector(
       onTap: ()=>
-        Get.toNamed(route)
+        Get.toNamed(route,arguments: {'fromCat':true})
       ,
       child: Container(
         margin: EdgeInsets.only(top: 10),

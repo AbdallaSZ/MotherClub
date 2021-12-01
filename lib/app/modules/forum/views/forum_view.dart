@@ -23,6 +23,7 @@ class ForumView extends GetView<ForumController> {
     double deviceWidth=MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
+
           body:SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
