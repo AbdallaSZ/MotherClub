@@ -81,15 +81,15 @@ class BLoC {
     return productModel;
   }
 
-  Future<List<WeeksModel>> weeks_list(BuildContext context) async {
+  Future<List<WeeksModel>> weeks_list() async {
     List<WeeksModel> weeksLst = <WeeksModel>[];
 
-    var weekResponse = await Utils.networkcall.getWeeksAPICall(context);
+    var weekResponse = await Utils.networkcall.getWeeksAPICall();
     weekResponse.forEach((newWeek) {
 
 
       WeeksModel weeksModel = new WeeksModel(
-          Id: newWeek['id'].toString(),
+          id: newWeek['id'].toString(),
           name: newWeek['name'],
           slug: newWeek['slug'],
           count: newWeek['count'].toString());
@@ -99,21 +99,16 @@ class BLoC {
     return weeksLst;
   }
 
-  Future<List<WeeksDetail>> weeks_detail() async {
-    List<WeeksDetail> weeksDetailList = <WeeksDetail>[];
-
+  Future<WeeksDetail> weekDetails() async {
     var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
-    weekDetailResponse.forEach((newWeekDetail) {
-
-
+print('sdaggg${weekDetailResponse[0]['name']}');
       WeeksDetail weeksDetailModel = new WeeksDetail(
-          name: newWeekDetail['name'].toString(),
-          description: newWeekDetail['description'].toString(),
-          video_link: newWeekDetail['link'].toString());
-      weeksDetailList.add(weeksDetailModel);
-    });
-
-    return weeksDetailList;
+          name: weekDetailResponse[0]['name'].toString(),
+          description: weekDetailResponse[0]['description'].toString(),
+          videoLink: weekDetailResponse[0]['video_link'].toString(),
+          slug: weekDetailResponse[0]['slug'].toString(),
+      );
+    return weeksDetailModel;
   }
 
   Future<List<FormsModel>> forumsList() async {
@@ -184,36 +179,36 @@ class BLoC {
     return monthsLst;
   }
 
-  Future<List<MonthDetailsModel>> monthDetail() async {
-    List<MonthDetailsModel> monthDetailList = <MonthDetailsModel>[];
-
-    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
-    weekDetailResponse.forEach((newMonthDetail) {
-
-
-      MonthDetailsModel monthDetailsModel = new MonthDetailsModel(
-          id: newMonthDetail['id'],
-          name: newMonthDetail['name'],
-          acf: newMonthDetail['acf'],
-          addUrlVid: newMonthDetail['addUrlVid'],
-          cartItemModelAddUrlVid: newMonthDetail['cartItemModelAddUrlVid'],
-          cartItemModelDescMonth: newMonthDetail['cartItemModelDescMonth'],
-          cartItemModelImageMonth: newMonthDetail['cartItemModelImageMonth'],
-          count: newMonthDetail['count'],
-          descMonth: newMonthDetail['descMonth'],
-          description: newMonthDetail['description'],
-          imageMonth: newMonthDetail['imageMonth'],
-          link: newMonthDetail['link'],
-          links: newMonthDetail['links'],
-          meta: newMonthDetail['meta'],
-          parent: newMonthDetail['parent'],
-          slug: newMonthDetail['slug'],
-          taxonomy: newMonthDetail['taxonomy']);
-      monthDetailList.add(monthDetailsModel);
-    });
-
-    return monthDetailList;
-  }
+  // Future<List<MonthDetailsModel>> monthDetail() async {
+  //   List<MonthDetailsModel> monthDetailList = <MonthDetailsModel>[];
+  //
+  //   var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
+  //   weekDetailResponse.forEach((newMonthDetail) {
+  //
+  //
+  //     MonthDetailsModel monthDetailsModel = new MonthDetailsModel(
+  //         id: newMonthDetail['id'],
+  //         name: newMonthDetail['name'],
+  //         acf: newMonthDetail['acf'],
+  //         addUrlVid: newMonthDetail['addUrlVid'],
+  //         cartItemModelAddUrlVid: newMonthDetail['cartItemModelAddUrlVid'],
+  //         cartItemModelDescMonth: newMonthDetail['cartItemModelDescMonth'],
+  //         cartItemModelImageMonth: newMonthDetail['cartItemModelImageMonth'],
+  //         count: newMonthDetail['count'],
+  //         descMonth: newMonthDetail['descMonth'],
+  //         description: newMonthDetail['description'],
+  //         imageMonth: newMonthDetail['imageMonth'],
+  //         link: newMonthDetail['link'],
+  //         links: newMonthDetail['links'],
+  //         meta: newMonthDetail['meta'],
+  //         parent: newMonthDetail['parent'],
+  //         slug: newMonthDetail['slug'],
+  //         taxonomy: newMonthDetail['taxonomy']);
+  //     monthDetailList.add(monthDetailsModel);
+  //   });
+  //
+  //   return monthDetailList;
+  // }
 
   Future<List<CategoriesModel>> categores_list(BuildContext context) async {
     List<CategoriesModel> categories_Lst = <CategoriesModel>[];

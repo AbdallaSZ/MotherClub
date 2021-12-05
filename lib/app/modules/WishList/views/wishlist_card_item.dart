@@ -14,8 +14,10 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class WishlistCardItem extends StatefulWidget {
-  const WishlistCardItem({Key? key, required this.data}) : super(key: key);
+  const WishlistCardItem({Key? key, required this.data,required this.itemId}) : super(key: key);
   final ProductModel data;
+  final int itemId;
+
 
   @override
   State<WishlistCardItem> createState() => _WishlistCardItemState();
@@ -70,7 +72,7 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                   color: Black_textColor,
                 ),
               ),
-              Text("amd ${widget.data.price}",
+              Text("aed ${widget.data.price}",
                   style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontStyle: FontStyle.normal,
@@ -320,11 +322,12 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                                 );
                               });
                         } else {
-                          setState(() {
-                            isLiked = !isLiked;
-                          });
 
-                          await Utils.bLoC.delWishlistProd(widget.data.id);
+
+
+
+                          await Utils.bLoC.delWishlistProd(widget.itemId.toString());
+                            setState(() {isLiked = !isLiked;});
                         }
                       },
                     ),

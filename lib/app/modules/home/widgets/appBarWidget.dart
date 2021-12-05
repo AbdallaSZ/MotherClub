@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
@@ -8,6 +9,7 @@ import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/P
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsScreen.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/app/modules/YourBaby/views/baby_data_list.dart';
+import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
@@ -18,6 +20,12 @@ Widget HomeAppBar(
     String Label, double height, double width, BuildContext context) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
+  List<String> routes = [
+    Routes.YOURPREGNANCY,
+    Routes.YOURBABY,
+    Routes.FORUM,
+    Routes.STORE
+  ];
   return CustomScrollView(slivers: <Widget>[
     // SliverToBoxAdapter(
     // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
@@ -27,7 +35,7 @@ Widget HomeAppBar(
             Utils.labels!.you_are_pregnant_for,
             Utils.labels!.week,
             "9-12",
-            deviceHeight / 10,
+            deviceHeight / 8.5,
             deviceWidth,
             context)),
     SliverToBoxAdapter(
@@ -43,37 +51,43 @@ Widget HomeAppBar(
                   scrollDirection: Axis.horizontal,
                   itemCount: data!.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.all(8),
-                      color: Colors.white,
+                    return GestureDetector(
+                      onTap: (){
+                        Get.toNamed(routes[index]);
+                      },
+
                       child: Container(
-                          // decoration: BoxDecoration(color: Colors.blueGrey),
-                          height: deviceHeight / 7.65,
-                          width: deviceWidth / 4.9,
-                          child: Column(children: [
-                            Container(
-                              height: 66.66,
-                              width: 78.47,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: RandomColorModel()
-                                    .getColor()
-                                    .withOpacity(0.3),
+                        padding: EdgeInsets.all(8),
+                        color: Colors.white,
+                        child: Container(
+                            // decoration: BoxDecoration(color: Colors.blueGrey),
+                            height: deviceHeight / 7.65,
+                            width: deviceWidth / 4.9,
+                            child: Column(children: [
+                              Container(
+                                height: 66.66,
+                                width: 78.47,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: RandomColorModel()
+                                      .getColor()
+                                      .withOpacity(0.3),
+                                ),
+                                child: Image.network(data[index].image),
                               ),
-                              child: Image.network(data[index].image),
-                            ),
-                            SizedBox(height: 3),
-                            Text(
-                              '${data[index].title}',
-                              style: GoogleFonts.roboto(
-                                fontSize: 13,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500,
-                                color: Black_textColor,
+                              SizedBox(height: 3),
+                              Text(
+                                '${data[index].title}',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 13,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w500,
+                                  color: Black_textColor,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ])),
+                            ])),
+                      ),
                     );
                   },
                 );
@@ -99,28 +113,14 @@ Widget HomeAppBar(
     SliverToBoxAdapter(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              Utils.labels!.we_choose_for_you,
-              style: GoogleFonts.roboto(
-                fontSize: 18,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w700,
-                color: Black_textColor,
-              ),
-            ),
-            Text(
-              Utils.labels!.see_all,
-              style: GoogleFonts.roboto(
-                fontSize: 15,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w500,
-                color: primary_text_color,
-              ),
-            ),
-          ],
+        child: Text(
+          Utils.labels!.we_choose_for_you,
+          style: GoogleFonts.roboto(
+            fontSize: 18,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w700,
+            color: Black_textColor,
+          ),
         ),
       ),
     ),

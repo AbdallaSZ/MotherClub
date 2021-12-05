@@ -7,7 +7,6 @@ import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/Categories/views/categories_views.dart';
 import 'package:motherclub/app/modules/Store/views/store_view.dart';
 import 'package:motherclub/app/modules/account/views/account_view.dart';
-import 'package:motherclub/app/modules/bottomNavigation/controllers/bottom_conroller.dart';
 import 'package:motherclub/app/modules/forum/views/forum_view.dart';
 import 'package:motherclub/app/modules/home/views/home_views.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';

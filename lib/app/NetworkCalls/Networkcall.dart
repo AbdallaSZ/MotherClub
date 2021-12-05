@@ -114,7 +114,7 @@ class Networkcall {
 
   //todo API Call For weeks
 
-  Future<dynamic> getWeeksAPICall(context) async {
+  Future<dynamic> getWeeksAPICall() async {
     var response = await http
         .get(
       Uri.parse(
@@ -138,22 +138,16 @@ class Networkcall {
 
   Future<dynamic> getWeeksDetailAPICall() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var weekslug = preferences.getString('slug').toString();
+    var weekSlug = preferences.getString('slug').toString();
     var response = await http
         .get(
-      Uri.parse('https://mothersclub.me/pregnancy_week_details?slug=$weekslug'),
-      /*
-       headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }
-       */
+       Uri.parse('https://mothersclub.me/pregnancy_week_details?slug=$weekSlug'),
     )
         .catchError(
       (error) {
-        return false;
+        print('error');
       },
     );
-    print("DADAD  78  ${response.body}");
     return json.decode(response.body);
   }
 

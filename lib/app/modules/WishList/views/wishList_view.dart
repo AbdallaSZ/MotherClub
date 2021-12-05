@@ -102,6 +102,8 @@ class _StoreViewScreenState extends State<WishListView> {
                                           if(snapshot2.hasData){
                                           return WishlistCardItem(
                                             data: snapshot2.data!,
+                                            itemId: snapshot.data![index].itemId,
+
                                           );
 
                                         }else{

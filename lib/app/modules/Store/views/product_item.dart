@@ -57,7 +57,7 @@ class _ProductItemState extends State<ProductItem> {
                 color: Black_textColor,
               ),
             ),
-            Text("amd ${widget.data.price}",
+            Text("aed ${widget.data.price}",
                 style: GoogleFonts.roboto(
                   fontSize: 18,
                   fontStyle: FontStyle.normal,

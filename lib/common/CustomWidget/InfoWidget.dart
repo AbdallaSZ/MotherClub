@@ -31,6 +31,7 @@ Widget InfoWidget(String Label,String Label2,String label3,String label4,double 
                 children: [
 
                       Container(
+
                         // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
