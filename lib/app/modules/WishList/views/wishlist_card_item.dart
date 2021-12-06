@@ -306,7 +306,15 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                                       onPressed: () async {
                                         await Utils.bLoC.addToWishlist(
                                             widget.data.id,
-                                            dropdownValue.shareKey!);
+                                            dropdownValue.shareKey!).then((value) =>
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: const Text('Item added to the cart again'),
+                                                duration: const Duration(
+                                                    seconds: 3),
+                                              ),
+                                            ),);
                                         Navigator.of(context).pop();
                                       },
                                     ),
@@ -326,7 +334,15 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
 
 
 
-                          await Utils.bLoC.delWishlistProd(widget.itemId.toString());
+                          await Utils.bLoC.delWishlistProd(widget.itemId.toString()).then((value) =>
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(
+                                SnackBar(
+                                  content: const Text('Item removed from this wishlist'),
+                                  duration: const Duration(
+                                      seconds: 3),
+                                ),
+                              ),);
                             setState(() {isLiked = !isLiked;});
                         }
                       },

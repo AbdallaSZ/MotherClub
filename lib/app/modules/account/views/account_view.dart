@@ -43,7 +43,7 @@ class _AccountViewState extends State<AccountView> {
           child: Column(
           children: [
             // AppBarWidget("My Account",deviceHeight/9.4,deviceWidth,context),
-            InfoAccountWidget("${Utils.name}","Age: 29","Week","9-12",deviceHeight/11.6,deviceWidth,context),
+            InfoAccountWidget("${Utils.name}","Age: 29","Week","9-12",deviceHeight/10,deviceWidth,context),
             Container(
               padding: EdgeInsets.all(20),
               child: Row(

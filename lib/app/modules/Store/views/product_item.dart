@@ -110,7 +110,8 @@ class _ProductItemState extends State<ProductItem> {
                                         : StatefulBuilder(
                                             builder: (_, StateSetter update) {
                                             return Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 snapshot.hasData
                                                     ? Container(
@@ -135,9 +136,9 @@ class _ProductItemState extends State<ProductItem> {
                                                         child: Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      8.0),
+                                                                  .symmetric(
+                                                            horizontal: 8.0,
+                                                          ),
                                                           child: Row(
                                                             children: [
                                                               Expanded(
@@ -255,13 +256,25 @@ class _ProductItemState extends State<ProductItem> {
                                                                   items.add(wm);
                                                                   dropdownValue =
                                                                       wm;
+
                                                                   update(() {
                                                                     controller
                                                                         .text = '';
                                                                   });
                                                                   Navigator.of(
                                                                           context)
-                                                                      .pop();
+                                                                      .pop(  ScaffoldMessenger.of(
+                                                                      context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                      const Text(
+                                                                          'Wish list added'),
+                                                                      duration: const Duration(
+                                                                          seconds:
+                                                                          3),
+                                                                    ),
+                                                                  ),);
                                                                 },
                                                               ),
                                                             ],
@@ -277,9 +290,22 @@ class _ProductItemState extends State<ProductItem> {
                                 ElevatedButton(
                                   child: Text(Utils.labels!.yes),
                                   onPressed: () async {
-                                    await Utils.bLoC.addToWishlist(
-                                        widget.data.id,
-                                        dropdownValue.shareKey!);
+                                    await Utils.bLoC
+                                        .addToWishlist(widget.data.id,
+                                            dropdownValue.shareKey!)
+                                        .then(
+                                          (value) =>
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                            SnackBar(
+                                              content: const Text(
+                                                  'Item added to wish list'),
+                                              duration:
+                                                  const Duration(seconds: 3),
+                                            ),
+                                          ),
+                                        );
+
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -299,7 +325,17 @@ class _ProductItemState extends State<ProductItem> {
                   SizedBox(width: 15),
                   GestureDetector(
                     onTap: () async {
-                      await Utils.bLoC.addCartItems(widget.data.id, 1, '0-3');
+                      await Utils.bLoC
+                          .addCartItems(widget.data.id, 1, '0-3')
+                          .then(
+                            (value) =>
+                                ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Item added to the cart'),
+                                duration: const Duration(seconds: 3),
+                              ),
+                            ),
+                          );
                       // Get.toNamed(Routes.CART);
                     },
                     child: Container(

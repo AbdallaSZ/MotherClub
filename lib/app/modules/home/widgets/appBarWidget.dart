@@ -16,8 +16,8 @@ import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
-Widget HomeAppBar(
-    String Label, double height, double width, BuildContext context) {
+Widget homeAppBar(
+    String Label, double height, double width, BuildContext context,) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
   List<String> routes = [
@@ -46,7 +46,7 @@ Widget HomeAppBar(
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<CategoriesModel>? data = snapshot.data;
-                print('DADAD  $data');
+
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: data!.length,
@@ -159,13 +159,16 @@ Widget HomeAppBar(
                   color: Black_textColor,
                 ),
               ),
-              Text(
-                Utils.labels!.see_all,
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w500,
-                  color: primary_text_color,
+              GestureDetector(
+                onTap: ()=>Get.toNamed(Routes.STORE),
+                child: Text(
+                  Utils.labels!.see_all,
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w500,
+                    color: primary_text_color,
+                  ),
                 ),
               ),
             ],

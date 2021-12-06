@@ -26,7 +26,7 @@ class _YourBabyViewsState extends State<YourBabyViews> {
 
     Future<void> getMonthSlug() async {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('slug', monthSlug);
+      prefs.setString('monthSlug', monthSlug);
     }
 
     return SafeArea(

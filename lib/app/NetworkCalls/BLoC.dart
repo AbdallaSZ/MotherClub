@@ -164,7 +164,7 @@ print('sdaggg${weekDetailResponse[0]['name']}');
   Future<List<MonthsModel>> months_list(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];
 
-    var weekResponse = await Utils.networkcall.getmonthAPICall();
+    var weekResponse = await Utils.networkcall.getMonthAPICall();
     weekResponse.forEach((month) {
 
 

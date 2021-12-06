@@ -23,7 +23,7 @@ class HomeView extends GetResponsiveView<HomeController> {
     return SafeArea(
       child: Scaffold(
         body:
-        HomeAppBar("", deviceHeight / 9.4, deviceWidth, context),
+        homeAppBar("", deviceHeight / 9.4, deviceWidth, context),
       ),
     );
   }

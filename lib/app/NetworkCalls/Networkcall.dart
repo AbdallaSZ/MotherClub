@@ -62,8 +62,10 @@ class Networkcall {
   }
 
   Future<dynamic> getBabyAPICall(String slug) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var monthSlug = preferences.getString('monthSlug')== null? '2-month' : preferences.getString('monthSlug');
     var response = await http
-        .get(Uri.parse('https://mothersclub.me/months/details?slug=$slug'))
+        .get(Uri.parse('https://mothersclub.me/months/details?slug=$monthSlug'))
         .catchError(
       (error) {
         return error;
@@ -93,7 +95,7 @@ class Networkcall {
 
   //todo API Call For moths
 
-  Future<dynamic> getmonthAPICall() async {
+  Future<dynamic> getMonthAPICall() async {
     var response = await http
         .get(
       Uri.parse(
