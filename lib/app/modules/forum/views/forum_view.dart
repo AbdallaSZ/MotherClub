@@ -20,32 +20,33 @@ class ForumView extends GetView<ForumController> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  padding: EdgeInsets.all(10),
-                  height: deviceHeight / 10,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0.0),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: [
-                          0.0,
-                          0.1,
-                          10.0
-                        ],
-                        colors: [
-                          // Colors.deepPurple.shade400,
-                          CustomButton_Color,
-                          CustomButton_Color,
-                          CustomButton_Second_Color,
-                          // Colors.deepPurple.shade200,
-                        ]),
+                padding: EdgeInsets.all(10),
+                height: deviceHeight / 9.5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0.0),
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [
+                        0.0,
+                        0.1,
+                        10.0
+                      ],
+                      colors: [
+                        // Colors.deepPurple.shade400,
+                        CustomButton_Color,
+                        CustomButton_Color,
+                        CustomButton_Second_Color,
+                        // Colors.deepPurple.shade200,
+                      ]),
 
-                    // gradient: colorsConstants.gradient1
-                  ),
-                  child: Column(children: [
+                  // gradient: colorsConstants.gradient1
+                ),
+                child: Column(
+                  children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +125,8 @@ class ForumView extends GetView<ForumController> {
                         )
                       ],
                     ),
-
+                  ],
+                ),),
                     // AppBarWidget("Forum",deviceHeight/9.4,deviceWidth,context),
                     Container(
                       padding: EdgeInsets.all(10),
@@ -191,280 +193,277 @@ class ForumView extends GetView<ForumController> {
                               )
                             ],
                           ),
-                          ShaderMask(
-                            blendMode: BlendMode.srcIn,
-                            shaderCallback: (Rect bounds) {
-                              return ui.Gradient.linear(
-                                Offset(14.0, 24.0),
-                                Offset(24.0, 0.0),
-                                [CustomButton_Color, CustomButton_Second_Color],
-                              );
-                            },
-                            child: Text(
-                              Utils.labels!.see_all,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: 0.25,
-                                  color: Text_color),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: ShaderMask(
+                          //     blendMode: BlendMode.srcIn,
+                          //     shaderCallback: (Rect bounds) {
+                          //       return ui.Gradient.linear(
+                          //         Offset(14.0, 24.0),
+                          //         Offset(24.0, 0.0),
+                          //         [
+                          //           CustomButton_Color,
+                          //           CustomButton_Second_Color
+                          //         ],
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
 
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      height: 400,
-                      // color: Colors.yellowAccent,
-                      width: deviceWidth,
-                      child: FutureBuilder<List<FormsModel>>(
-                          future: Utils.bLoC.forumsList(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              List<FormsModel>? data = snapshot.data;
-                              // print('datadata ${data![0].Date}');
-                              return ListView.builder(
-                                  itemCount: data!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        // await Utils.bLoC.UsersDetails();
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ForumCommentView(
-                                                      formsModel: snapshot
-                                                          .data![index])),
-                                        );
-                                      },
-                                      child: Card(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(7.0),
-                                            // color: Colors.blue,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15, vertical: 15),
-                                          height: 300,
-                                          width: 270,
-                                          child: Column(
+
+              Container(
+                height: 400,
+                child: FutureBuilder<List<FormsModel>>(
+                    future: Utils.bLoC.forumsList(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<FormsModel>? data = snapshot.data;
+                        // print('datadata ${data![0].Date}');
+                        return ListView.builder(
+                            itemCount: data!.length,
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  // await Utils.bLoC.UsersDetails();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ForumCommentView(
+                                                formsModel: snapshot
+                                                    .data![index])),
+                                  );
+                                },
+                                child: Card(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(7.0),
+                                      // color: Colors.blue,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 15),
+                                    height: 300,
+                                    width: 270,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          // padding:EdgeInsets.fromLTRB(15,17,10,0),
+                                          child: Text(
+                                              "${data[index].title!.rendered}",
+                                              style: GoogleFonts.roboto(
+                                                fontSize: 18,
+                                                fontStyle:
+                                                FontStyle.normal,
+                                                fontWeight:
+                                                FontWeight.w700,
+                                                color: Black_textColor,
+                                              )),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Container(
+                                          // padding:EdgeInsets.all(15),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
                                             children: [
-                                              Container(
-                                                // padding:EdgeInsets.fromLTRB(15,17,10,0),
-                                                child: Text(
-                                                    "${data[index].title!.rendered}",
-                                                    style: GoogleFonts.roboto(
-                                                      fontSize: 18,
-                                                      fontStyle:
-                                                          FontStyle.normal,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Black_textColor,
-                                                    )),
-                                              ),
-                                              SizedBox(height: 10),
-                                              Container(
-                                                // padding:EdgeInsets.all(15),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        CircleAvatar(
-                                                          radius: 20,
-                                                          backgroundColor:
-                                                              Colors.blue,
-                                                        ),
-                                                        SizedBox(width: 10),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            //Text("Aditya Diab",style: Theme.of(context).textTheme.headline1,),
-                                                            Text(
-                                                              "${data[index].date}",
-                                                              style: GoogleFonts.roboto(
-                                                                  fontSize: 10,
-                                                                  letterSpacing:
-                                                                      0.35,
-                                                                  height: 1.5,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  color:
-                                                                      Black_textColor),
-                                                              maxLines: 2,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Icon(Icons
-                                                            .bookmark_border),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Icon(Icons.more_vert)
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(height: 15),
-                                              Flexible(
-                                                child: Text(
-                                                  "${data[index].content!.rendered}",
-                                                  style: GoogleFonts.roboto(
-                                                      fontSize: 13,
-                                                      letterSpacing: 0.25,
-                                                      height: 1.4,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: Grey_text_Color),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 30),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                          Icons.favorite,
-                                                          color:
-                                                              pinkfavorite_Color,
-                                                        ),
-                                                        SizedBox(width: 5),
-                                                        Text(
-                                                          "18 K",
-                                                          style: GoogleFonts.roboto(
-                                                              fontSize: 13,
-                                                              letterSpacing:
-                                                                  0.25,
-                                                              height: 1.3,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color:
-                                                                  Grey_text_Color),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        ShaderMask(
-                                                            blendMode:
-                                                                BlendMode.srcIn,
-                                                            shaderCallback:
-                                                                (Rect bounds) {
-                                                              return ui.Gradient
-                                                                  .linear(
-                                                                Offset(
-                                                                    4.0, 4.0),
-                                                                Offset(
-                                                                    24.0, 4.0),
-                                                                [
-                                                                  CustomButton_Color,
-                                                                  CustomButton_Second_Color
-                                                                ],
-                                                              );
-                                                            },
-                                                            child: Icon(
-                                                                Icons.reply)),
-                                                        SizedBox(width: 8),
-                                                        ShaderMask(
-                                                          blendMode:
-                                                              BlendMode.srcIn,
-                                                          shaderCallback:
-                                                              (Rect bounds) {
-                                                            return ui.Gradient
-                                                                .linear(
-                                                              Offset(
-                                                                  14.0, 24.0),
-                                                              Offset(24.0, 0.0),
-                                                              [
-                                                                CustomButton_Color,
-                                                                CustomButton_Second_Color
-                                                              ],
-                                                            );
-                                                          },
-                                                          child: Text(
-                                                              Utils.labels!
-                                                                  .reply,
-                                                              style: GoogleFonts
-                                                                  .roboto(
-                                                                fontSize: 16,
-                                                                letterSpacing:
-                                                                    0.25,
-                                                                height: 1.4,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                              )),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(height: 10),
-                                              Divider(
-                                                thickness: 1,
-                                              ),
-                                              SizedBox(height: 8),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
                                                 children: [
-                                                  Text(
-                                                    " 14 Similar Discussions Found ",
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 13,
-                                                        letterSpacing: 0.25,
-                                                        // height: 1.4,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Black_textColor),
+                                                  CircleAvatar(
+                                                    radius: 20,
+                                                    backgroundColor:
+                                                    Colors.blue,
                                                   ),
-                                                  Icon(
-                                                    Icons.play_circle_fill,
-                                                    color: Black_textColor,
-                                                  )
+                                                  SizedBox(width: 10),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                    children: [
+                                                      //Text("Aditya Diab",style: Theme.of(context).textTheme.headline1,),
+                                                      Text(
+                                                        "${data[index].date}",
+                                                        style: GoogleFonts.roboto(
+                                                            fontSize: 10,
+                                                            letterSpacing:
+                                                            0.35,
+                                                            height: 1.5,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w400,
+                                                            color:
+                                                            Black_textColor),
+                                                        maxLines: 2,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ],
-                                              )
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Icon(Icons
+                                                      .bookmark_border),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Icon(Icons.more_vert)
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  });
-                            } else {
-                              return ListView.builder(
-                                  itemCount: 10,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Card(
-                                        child: FurmShimmer(deviceHeight,
-                                            deviceWidth, context));
-                                  });
-                            }
-                          }),
-                    ),
+                                        SizedBox(height: 15),
+                                        Flexible(
+                                          child: Text(
+                                            "${data[index].content!.rendered}",
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 13,
+                                                letterSpacing: 0.25,
+                                                height: 1.4,
+                                                fontWeight:
+                                                FontWeight.w400,
+                                                color: Grey_text_Color),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 30),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.favorite,
+                                                    color:
+                                                    pinkfavorite_Color,
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Text(
+                                                    "18 K",
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 13,
+                                                        letterSpacing:
+                                                        0.25,
+                                                        height: 1.3,
+                                                        fontWeight:
+                                                        FontWeight
+                                                            .w700,
+                                                        color:
+                                                        Grey_text_Color),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  ShaderMask(
+                                                      blendMode:
+                                                      BlendMode.srcIn,
+                                                      shaderCallback:
+                                                          (Rect bounds) {
+                                                        return ui.Gradient
+                                                            .linear(
+                                                          Offset(
+                                                              4.0, 4.0),
+                                                          Offset(
+                                                              24.0, 4.0),
+                                                          [
+                                                            CustomButton_Color,
+                                                            CustomButton_Second_Color
+                                                          ],
+                                                        );
+                                                      },
+                                                      child: Icon(
+                                                          Icons.reply)),
+                                                  SizedBox(width: 8),
+                                                  ShaderMask(
+                                                    blendMode:
+                                                    BlendMode.srcIn,
+                                                    shaderCallback:
+                                                        (Rect bounds) {
+                                                      return ui.Gradient
+                                                          .linear(
+                                                        Offset(
+                                                            14.0, 24.0),
+                                                        Offset(24.0, 0.0),
+                                                        [
+                                                          CustomButton_Color,
+                                                          CustomButton_Second_Color
+                                                        ],
+                                                      );
+                                                    },
+                                                    child: Text(
+                                                        Utils.labels!
+                                                            .reply,
+                                                        style: GoogleFonts
+                                                            .roboto(
+                                                          fontSize: 16,
+                                                          letterSpacing:
+                                                          0.25,
+                                                          height: 1.4,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w700,
+                                                        )),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Divider(
+                                          thickness: 1,
+                                        ),
+                                        SizedBox(height: 8),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Text(
+                                              " 14 Similar Discussions Found ",
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 13,
+                                                  letterSpacing: 0.25,
+                                                  // height: 1.4,
+                                                  fontWeight:
+                                                  FontWeight.w400,
+                                                  color: Black_textColor),
+                                            ),
+                                            Icon(
+                                              Icons.play_circle_fill,
+                                              color: Black_textColor,
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      } else {
+                        return ListView.builder(
+                            itemCount: 10,
+                            itemBuilder:
+                                (BuildContext context, int index) {
+                              return Card(
+                                  child: FurmShimmer(deviceHeight,
+                                      deviceWidth, context));
+                            });
+                      }
+                    }),
+              ),
+
+
 
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -476,8 +475,6 @@ class ForumView extends GetView<ForumController> {
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 10),
 
-                              height: deviceHeight / 17,
-                              width: deviceWidth / 1.09,
                               // alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -522,7 +519,8 @@ class ForumView extends GetView<ForumController> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 10.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Icon(
                                           Icons.attach_file,
@@ -561,7 +559,8 @@ class ForumView extends GetView<ForumController> {
                         ),
                       ),
                     ),
-                  ]))
+
+
             ],
           ),
         ),

@@ -11,7 +11,7 @@ class AllCommentsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+
             itemCount: data!.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
