@@ -65,8 +65,7 @@ class ForumView extends GetView<ForumController> {
                                   child: CircleAvatar(
 
                                     radius: 38.0,
-                                    // backgroundImage: AssetImage(
-                                    //    'assets/ProductBg.png',)
+                                      backgroundImage:NetworkImage(Utils.prefs!.getString("imageUrl") ?? "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png")
                                   ),
                                 ),
                               ),
