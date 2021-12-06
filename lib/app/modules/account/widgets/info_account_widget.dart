@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Widget InfoAccountWidget(String Label,String Label2,String label3,String label4,double height , double width,BuildContext context){
 
@@ -40,10 +42,8 @@ Widget InfoAccountWidget(String Label,String Label2,String label3,String label4,
                     radius: 24.0,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
-
                       radius: 38.0,
-                      // backgroundImage: AssetImage(
-                      //    'assets/ProductBg.png',)
+                       backgroundImage:NetworkImage(Utils.prefs!.getString("imageUrl") ?? "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png")
                     ),
                   ),
                 ),

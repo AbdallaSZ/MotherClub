@@ -114,6 +114,7 @@ class LoginView extends GetView<AuthController> {
                              if(value['status']==true)
                              {
                                Utils.progressBar.hideOpenDialog(context);
+                                Utils.getImage(int.parse(value['user'].userId));
                                Get.offAndToNamed(Routes.BOTTOM);
                              }
                              else
@@ -140,11 +141,11 @@ class LoginView extends GetView<AuthController> {
                              color: Text_color),
                        ),
                      ),
-                     Divider(
+                    /* Divider(
                        color: Colors.transparent,
                        height: deviceHeight/27,
-                     ),
-                     Row(
+                     ),*/
+                   /*  Row(
                          children: <Widget>[
                            Expanded(
                                child: Divider(color:Black_textColor ,)
@@ -161,12 +162,12 @@ class LoginView extends GetView<AuthController> {
                                child: Divider(color:Black_textColor ,)
                            ),
                          ]
-                     ),
+                     ),*/
                      Divider(
                        color: Colors.transparent,
                        height: deviceHeight/26,
                      ),
-                     Row(
+                   /*  Row(
                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                        children: [
                          InkWell(
@@ -177,7 +178,7 @@ class LoginView extends GetView<AuthController> {
                              child: SocialButtonWidget('assets/images/Google.png',context,deviceHeight/17,deviceWidth/2.37)),
                          SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37)
                        ],
-                     ),
+                     ),*/
                      Divider(
                        color: Colors.transparent,
                        height: deviceHeight/30,

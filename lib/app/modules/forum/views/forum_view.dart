@@ -44,38 +44,39 @@ class ForumView extends GetView<ForumController> {
 
                     // gradient: colorsConstants.gradient1
                   ),
-                  child:   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child:   Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            // color: Colors.yellowAccent,
-                            child: CircleAvatar(
-                              radius: 24.0,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                // color: Colors.yellowAccent,
+                                child: CircleAvatar(
+                                  radius: 24.0,
+                                  backgroundColor: Colors.white,
+                                  child: CircleAvatar(
 
-                                radius: 38.0,
-                                // backgroundImage: AssetImage(
-                                //    'assets/ProductBg.png',)
+                                    radius: 38.0,
+                                      backgroundImage:NetworkImage(Utils.prefs!.getString("imageUrl") ?? "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png")
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(width:10),
-                          Container(
-                            // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${Utils.name}",style: GoogleFonts.roboto(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    fontStyle: FontStyle.normal,
-                                    letterSpacing: 0.25,
-                                    color: white_color),),
+                              SizedBox(width:10),
+                              Container(
+                                // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("${Utils.name}",style: GoogleFonts.roboto(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: 0.25,
+                                        color: white_color),),
 
                                 SizedBox(height:3),
                                 Text("Age: 29",style: GoogleFonts.roboto(

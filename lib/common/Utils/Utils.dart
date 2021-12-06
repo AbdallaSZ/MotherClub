@@ -1,12 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/app/NetworkCalls/BLoC.dart';
 import 'package:motherclub/app/NetworkCalls/Networkcall.dart';
 import 'package:motherclub/app/provider/UserPreferences.dart';
 import 'package:motherclub/common/Utils/ProgressBar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum Locality {
   arabic , english ,spanish ,urdu
@@ -107,5 +109,24 @@ class Utils
       return false;
     }
     // return false;
+  }
+static   SharedPreferences? prefs ;
+  static initializePref ()async{
+    prefs =await SharedPreferences.getInstance();
+  }
+
+  static ImageProvider myImage = NetworkImage("url");
+  static getImage(int id)async {
+    var myData = await NetworkService.getMyData("api/user/get_avatar/?user_id=$id&type=full");
+
+    try{
+      String url = myData["avatar"];
+      if(url.contains("empty"))
+        prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+      else
+    prefs!.setString("imageUrl", myData['avatar']);
+  }catch (e){
+      prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+    }
   }
 }

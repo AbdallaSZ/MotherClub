@@ -107,7 +107,6 @@ class _BottomScreenState extends State<BottomScreen> {
                      title: titles[currentIndex],
                      actions: [
                        if(titles[currentIndex] == Utils.labels!.store)
-                       Icon(Icons.search, color: Colors.black87,),
                        SizedBox(width: 20,),
                        GestureDetector(
                            onTap: (){
