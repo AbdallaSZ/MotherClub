@@ -106,11 +106,6 @@ class AppPages{
       // binding: AuthBinding(),
     ),
     GetPage(
-      name: _Paths.COMMENT,
-      page: () => ForumCommentView(),
-      // binding: AuthBinding(),
-    ),
-    GetPage(
       name: _Paths.CATEGORY,
       page: () => CategoriesView(),
       // binding: AuthBinding(),

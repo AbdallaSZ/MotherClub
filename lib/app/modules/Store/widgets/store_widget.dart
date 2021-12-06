@@ -73,7 +73,7 @@ Widget  storeAppBar(String Label,double height , double width,BuildContext conte
             // color: Colors.red,
             height: deviceHeight,
             child: FutureBuilder<List<ProductModel>>(
-              future: Utils.bLoC.Product_list(context),
+              future: Utils.bLoC.productList(context),
               builder: (context, snapshot) {
               if (snapshot.hasData) {
               List<ProductModel>? data = snapshot.data;

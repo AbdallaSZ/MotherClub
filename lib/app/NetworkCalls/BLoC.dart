@@ -10,14 +10,13 @@ import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
 import 'package:motherclub/app/Models/baby_model.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
-import 'package:motherclub/app/Models/month_details.dart';
+import 'package:motherclub/app/Models/replies_model.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/Models/wishlist_item_model.dart';
-import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductModel>> Product_list(BuildContext context) async {
+  Future<List<ProductModel>> productList(BuildContext context) async {
     List<ProductModel> productsList = <ProductModel>[];
 
     var dataFromResponse = await Utils.networkcall.getProductsAPICall(context);
@@ -51,8 +50,8 @@ class BLoC {
     return productsList;
   }
 
-  Future<ProductModel> getSpecficProduct(String productId) async {
-    ProductModel productsList;
+  Future<ProductModel> getSpecificProduct(String productId) async {
+
 
     var dataFromResponse =
         await Utils.networkcall.getProductsDetails(productId);
@@ -81,7 +80,7 @@ class BLoC {
     return productModel;
   }
 
-  Future<List<WeeksModel>> weeks_list() async {
+  Future<List<WeeksModel>> weeksList() async {
     List<WeeksModel> weeksLst = <WeeksModel>[];
 
     var weekResponse = await Utils.networkcall.getWeeksAPICall();
@@ -125,6 +124,20 @@ print('sdaggg${weekDetailResponse[0]['name']}');
     return formsLst;
   }
 
+  Future<List<RepliesModel>> commentsList(String postId) async {
+    List<RepliesModel> commentsLst = <RepliesModel>[];
+
+    var fromResponse = await Utils.networkcall.getCommentsAPICall(postId);
+    // var test = _networkService.convertToJson(fromResponse);
+
+    fromResponse.forEach((newFrom) {
+      RepliesModel forumModel = RepliesModel.fromMap(newFrom);
+      commentsLst.add(forumModel);
+    });
+
+    return commentsLst;
+  }
+
   Future<List<BabyModel>> babyList(String slug) async {
     List<BabyModel> babyList = <BabyModel>[];
     var response = await Utils.networkcall.getBabyAPICall(slug);
@@ -138,12 +151,12 @@ print('sdaggg${weekDetailResponse[0]['name']}');
     return babyList;
   }
 
-  Future<UserDetailsModel> UsersDetails() async {
-    UserDetailsModel userDetailsModel; //= UserDetailsModel();
+  Future<UserDetailsModel> usersDetails() async {
+    // UserDetailsModel userDetailsModel; //= UserDetailsModel();
 
     var fromResponse = await Utils.networkcall.getForumAPICall();
     // FromResponse
-
+ 
     return UserDetailsModel(
         userId: fromResponse['id'].toString(),
         username: fromResponse['user']['username'],
@@ -161,7 +174,7 @@ print('sdaggg${weekDetailResponse[0]['name']}');
         capabilities: fromResponse['user']['capabilities']);
   }
 
-  Future<List<MonthsModel>> months_list(BuildContext context) async {
+  Future<List<MonthsModel>> monthsList(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];
 
     var weekResponse = await Utils.networkcall.getMonthAPICall();
@@ -210,9 +223,9 @@ print('sdaggg${weekDetailResponse[0]['name']}');
   //   return monthDetailList;
   // }
 
-  Future<List<CategoriesModel>> categores_list(BuildContext context) async {
-    List<CategoriesModel> categories_Lst = <CategoriesModel>[];
-
+  Future<List<CategoriesModel>> categoresList(BuildContext context) async {
+    List<CategoriesModel> categoriesLst = <CategoriesModel>[];
+ 
     var categoriesResponse =
         await Utils.networkcall.geAppCategoiresAPI(context);
     categoriesResponse['data'].forEach((newProduct) {
@@ -221,10 +234,10 @@ print('sdaggg${weekDetailResponse[0]['name']}');
           title: newProduct['title'],
           image: newProduct['image'],
           description: newProduct['description']);
-      categories_Lst.add(categoriesModel);
+      categoriesLst.add(categoriesModel);
     });
 
-    return categories_Lst;
+    return categoriesLst;
   }
 
   Future<List<CartItemModel>> cartItemsList() async {

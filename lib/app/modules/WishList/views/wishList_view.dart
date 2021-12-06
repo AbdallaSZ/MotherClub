@@ -97,7 +97,7 @@ class _StoreViewScreenState extends State<WishListView> {
                                   ) {
                                     return FutureBuilder<ProductModel>(
                                         future:
-                                            Utils.bLoC.getSpecficProduct(snapshot.data![index].productId.toString()),
+                                            Utils.bLoC.getSpecificProduct(snapshot.data![index].productId.toString()),
                                         builder: (context, snapshot2) {
                                           if(snapshot2.hasData){
                                           return WishlistCardItem(

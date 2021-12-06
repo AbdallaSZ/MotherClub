@@ -100,7 +100,7 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                           color: Colors.transparent,
                         ),
                         FutureBuilder<List<MonthsModel>>(
-                            future: Utils.bLoC.months_list(context),
+                            future: Utils.bLoC.monthsList(context),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 List<MonthsModel>? data = snapshot.data;

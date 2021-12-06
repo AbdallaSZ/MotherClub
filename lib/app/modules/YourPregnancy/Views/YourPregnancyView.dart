@@ -107,7 +107,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                     color: Colors.transparent,
                   ),
                   FutureBuilder<List<WeeksModel>>(
-                      future: Utils.bLoC.weeks_list(),
+                      future: Utils.bLoC.weeksList(),
                       builder: (context, snapshot2) {
                         if (snapshot2.hasData) {
                           List<WeeksModel>? data = snapshot2.data;

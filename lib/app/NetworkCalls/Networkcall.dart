@@ -32,9 +32,6 @@ class Networkcall {
         .get(
           Uri.parse(
               'https://mothersclub.me/wp-json/wc/v3/products/$productId?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e'),
-          /*headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }*/
         )
         .catchError(
           (error) {},
@@ -46,11 +43,8 @@ class Networkcall {
     var response = await http
         .get(
       Uri.parse(
-          'https://mothersclub.me/wp-json/wp/v2/forum?per_page=100&page=1&status=publish'),
-
-      /*headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }*/
+        'https://mothersclub.me/wp-json/wp/v2/forum',
+      ),
     )
         .catchError(
       (error) {
@@ -61,9 +55,27 @@ class Networkcall {
     return json.decode(response.body);
   }
 
+  Future<dynamic> getCommentsAPICall(String postId) async {
+    var response = await http
+        .get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wp/v2/reply?_bbp_forum_id=$postId',
+      ),
+    )
+        .catchError(
+          (error) {
+        return false;
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
   Future<dynamic> getBabyAPICall(String slug) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var monthSlug = preferences.getString('monthSlug')== null? '2-month' : preferences.getString('monthSlug');
+    var monthSlug = preferences.getString('monthSlug') == null
+        ? '2-month'
+        : preferences.getString('monthSlug');
     var response = await http
         .get(Uri.parse('https://mothersclub.me/months/details?slug=$monthSlug'))
         .catchError(
@@ -143,7 +155,7 @@ class Networkcall {
     var weekSlug = preferences.getString('slug').toString();
     var response = await http
         .get(
-       Uri.parse('https://mothersclub.me/pregnancy_week_details?slug=$weekSlug'),
+      Uri.parse('https://mothersclub.me/pregnancy_week_details?slug=$weekSlug'),
     )
         .catchError(
       (error) {
@@ -287,8 +299,7 @@ class Networkcall {
     }
   }
 
-  Future<void> updateWishlistName(
-      String name, String sharedKey) async {
+  Future<void> updateWishlistName(String name, String sharedKey) async {
     final response = await http.post(
       Uri.parse(
           'https://mothersclub.me/wp-json/wc/v3/wishlist/update/$sharedKey?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e'),
@@ -300,7 +311,6 @@ class Networkcall {
       throw Exception('Failed to update Wishlist name.');
     }
   }
-
 
   Future<void> delAllWishlist(String sharedKey) async {
     final response = await http.get(

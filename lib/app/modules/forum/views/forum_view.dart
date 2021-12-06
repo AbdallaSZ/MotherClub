@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/FormsModel.dart';
 import 'package:motherclub/app/Shimmers/FurmShimmer.dart';
 import 'package:motherclub/app/modules/forum/controller/forumController.dart';
+import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
@@ -11,11 +12,6 @@ import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class ForumView extends GetView<ForumController> {
-  final Shader _linearGradient = LinearGradient(
-    colors: [CustomButton_Color, CustomButton_Second_Color],
-    begin: Alignment.centerLeft,
-    end: Alignment.bottomRight,
-  ).createShader(Rect.fromLTWH(0.0, 0.0, 320.0, 80.0));
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +26,7 @@ class ForumView extends GetView<ForumController> {
               children: [
                 Container(
                   padding: EdgeInsets.all(10),
-                  height: deviceHeight/5.5,
+                  height: deviceHeight/10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(0.0),
                     gradient: LinearGradient(
@@ -48,152 +44,81 @@ class ForumView extends GetView<ForumController> {
 
                     // gradient: colorsConstants.gradient1
                   ),
-                  child:   Column(
+                  child:   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                // color: Colors.yellowAccent,
-                                child: CircleAvatar(
-                                  radius: 24.0,
-                                  backgroundColor: Colors.white,
-                                  child: CircleAvatar(
-
-                                    radius: 38.0,
-                                    // backgroundImage: AssetImage(
-                                    //    'assets/ProductBg.png',)
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width:10),
-                              Container(
-                                // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("${Utils.name}",style: GoogleFonts.roboto(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),),
-
-                                    SizedBox(height:3),
-                                    Text("Age: 29",style: GoogleFonts.roboto(
-                                        fontSize:13,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),),
-
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-
-
                           Container(
-                            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            // color: Colors.yellowAccent,
+                            child: CircleAvatar(
+                              radius: 24.0,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
 
-                            decoration: BoxDecoration(border: Border.all(
-                                color: white_color,
-                                width: 1
+                                radius: 38.0,
+                                // backgroundImage: AssetImage(
+                                //    'assets/ProductBg.png',)
+                              ),
                             ),
-                                borderRadius: BorderRadius.circular(10)
-                            ),
+                          ),
+                          SizedBox(width:10),
+                          Container(
+                            // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(Utils.labels!.week,style: GoogleFonts.roboto(
-                                    fontSize: 12,
+                                Text("${Utils.name}",style: GoogleFonts.roboto(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: 0.25,
+                                    color: white_color),),
+
+                                SizedBox(height:3),
+                                Text("Age: 29",style: GoogleFonts.roboto(
+                                    fontSize:13,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
-                                    color: white_color),),
-                                SizedBox(height:1),
-                                Text("9-12",style: GoogleFonts.roboto(
-                                    fontSize:18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: 0.25,
                                     color: white_color),),
 
                               ],
                             ),
-                          )
-
+                          ),
                         ],
                       ),
-                      SizedBox(height:10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            child: Column(
-                              children: [
-                                Text("870",style: GoogleFonts.roboto(
-                                    fontSize:18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
-                                SizedBox(height: 3,),
 
-                                Text(Utils.labels!.following,style: GoogleFonts.roboto(
-                                    fontSize:12,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
 
-                              ],
-                            ),
-                          ),
-                          Container(height: 40, child: VerticalDivider(color: Colors.white)),
-                          Container(
-                            child: Column(
-                              children: [
-                                Text("120K",style: GoogleFonts.roboto(
-                                    fontSize:18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
-                                SizedBox(height: 3,),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
 
-                                Text(Utils.labels!.followers,style: GoogleFonts.roboto(
-                                    fontSize:12,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
+                        decoration: BoxDecoration(border: Border.all(
+                            color: white_color,
+                            width: 1
+                        ),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Column(
+                          children: [
+                            Text(Utils.labels!.week,style: GoogleFonts.roboto(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                color: white_color),),
+                            SizedBox(height:1),
+                            Text("9-12",style: GoogleFonts.roboto(
+                                fontSize:18,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: white_color),),
 
-                              ],
-                            ),
-                          ),
-                          Container(height: 40, child: VerticalDivider(color: Colors.white)),
-                          Container(
-                            child: Column(
-                              children: [
-                                Text("34K",style: GoogleFonts.roboto(
-                                    fontSize:18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
-                                SizedBox(height: 3,),
-
-                                Text(Utils.labels!.likes,style: GoogleFonts.roboto(
-                                    fontSize:12,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),),
-
-                              ],
-                            ),
-                          ),
-                          // VerticalDivider(color: white_color,thickness: 1,)
-
-                        ],
+                          ],
+                        ),
                       )
+
                     ],
                   ),
 
@@ -304,7 +229,10 @@ class ForumView extends GetView<ForumController> {
                               return GestureDetector(
                                 onTap: () async {
                                   // await Utils.bLoC.UsersDetails();
-                                   Get.toNamed(Routes.COMMENT);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ForumCommentView(formsModel: snapshot.data![index])),
+                                  );
                                 },
                                 child: Card(
                                   child: Container(
