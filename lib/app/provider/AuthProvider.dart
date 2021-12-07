@@ -49,10 +49,8 @@ class AuthProvider with ChangeNotifier {
       body: json.encode(loginData),
       headers: {'Content-Type': 'application/json'},
     );
-    print(response.body);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
-      print(responseData);
 
       var userData = responseData['data'];
 
@@ -66,7 +64,6 @@ class AuthProvider with ChangeNotifier {
       result = {'status': true, 'message': 'Successful', 'user': authUser};
     } else {
     //  final Map<String, dynamic> responseData = json.decode(response.body);
-     // print('ggggg ${responseData}');
 
       _loggedInStatus = Status.NotLoggedIn;
       notifyListeners();
@@ -78,7 +75,6 @@ class AuthProvider with ChangeNotifier {
 
 
     }
-    print('result ${result}');
     return result;
   }
 
@@ -103,10 +99,9 @@ class AuthProvider with ChangeNotifier {
       body: json.encode(registrationData),
      // headers: {'Content-Type': 'application/json'},
     );
-    print(response.statusCode);
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
-      print(responseData);
+
 
       var userData = responseData['data'];
 

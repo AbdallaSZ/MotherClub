@@ -42,7 +42,7 @@ Widget homeAppBar(
       child: Container(
         height: 120.0,
         child: FutureBuilder<List<CategoriesModel>>(
-            future: Utils.bLoC.categores_list(context),
+            future: Utils.bLoC.categoresList(context),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<CategoriesModel>? data = snapshot.data;
@@ -182,11 +182,10 @@ Widget homeAppBar(
         child: Container(
           height: 300.0,
           child: FutureBuilder<List<ProductModel>>(
-              future: Utils.bLoC.Product_list(context),
+              future: Utils.bLoC.productList(context),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<ProductModel>? data = snapshot.data;
-                  print(data);
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: data!.length,

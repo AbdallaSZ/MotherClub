@@ -12,7 +12,6 @@ class NetworkService {
   static Dio dio = new Dio();
 
   static Future<dynamic> getMyData(String apiUrl, {dynamic headers})async {
-      print(BASE_URL+apiUrl);
      var response = await http.get(Uri.parse(BASE_URL+apiUrl), headers: headers);
      if(response.statusCode == 200){
      var decodedResponse = decodeTheResponse(response);
@@ -43,7 +42,6 @@ class NetworkService {
   static Future<dynamic> post(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}})async {
    var dataEncoded = jsonEncode(data);
-   print("================= "+dataEncoded.toString());
    dio.options.headers['content-Type'] = 'application/json';
    var response = await dio.post(BASE_URL+apiBaseUrl, data:FormData.fromMap(data));
     //var decoded = decodeTheResponse(response.data);

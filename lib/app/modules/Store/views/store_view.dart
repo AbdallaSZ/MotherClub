@@ -133,11 +133,10 @@ class _StoreViewScreenState extends State<StoreView> {
                 // color: Colors.red,
                 height: deviceHeight,
                 child: FutureBuilder<List<ProductModel>>(
-                  future: Utils.bLoC.Product_list(context),
+                  future: Utils.bLoC.productList(context),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                        data = snapshot.data;
-                      print(data);
                       if (_firstSearch) {
                         return GridView.builder(
                               itemCount: data!.length,

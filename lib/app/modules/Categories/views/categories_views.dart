@@ -30,7 +30,7 @@ class CategoriesView extends GetView<CategoriesController> {
           height: deviceHeight,
           width: deviceWidth,
           child: FutureBuilder<List<CategoriesModel>>(
-              future: Utils.bLoC.categores_list(context),
+              future: Utils.bLoC.categoresList(context),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<CategoriesModel>? data = snapshot.data;

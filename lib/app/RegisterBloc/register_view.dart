@@ -361,7 +361,6 @@ imageSubject.close();
       var result = base64Encode(bytes);
     imageText = result;
     imageSubject.sink.add(imageName);
-      print(result.length);
   }
   String base64Encode(List<int> bytes) => base64.encode(bytes);
 
