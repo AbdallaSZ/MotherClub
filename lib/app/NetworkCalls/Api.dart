@@ -31,6 +31,15 @@ class NetworkService {
     return http.Response.fromStream(streamedResponse);
   }
 
+  static Future<http.Response> logout(String apiBaseUrl,
+      {dynamic headers = const {"Content-Type": "application/json"}}) async {
+    final url = Uri.parse(BASE_URL+apiBaseUrl);
+    final request = http.Request("POST", url);
+    request.headers.addAll(headers);
+    final streamedResponse = await request.send();
+    return http.Response.fromStream(streamedResponse);
+  }
+
   static Future<dynamic> post(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}})async {
    var dataEncoded = jsonEncode(data);

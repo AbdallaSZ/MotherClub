@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/WishList/views/wishlist_list_view.dart';
@@ -373,6 +374,7 @@ class _AccountViewState extends State<AccountView> {
               child: Container(
                 child: InkWell(
                   onTap: (){
+                    logout();
                     Get.offAndToNamed(Routes.LOGIN);
                     Utils.userPreferences.removeUser();
                   },
@@ -436,6 +438,10 @@ class _AccountViewState extends State<AccountView> {
       Utils.languageSubject.sink.add(true);
 
     });
+  }
+
+  void logout() {
+    NetworkService.logout("wp-json/cocart/v2/logout");
   }
 
 }
