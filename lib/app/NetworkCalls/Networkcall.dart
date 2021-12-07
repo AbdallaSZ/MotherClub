@@ -208,7 +208,6 @@ class Networkcall {
   }
 
   Future<dynamic> getCartItems() async {
-    // final _networkService = NetworkService();
     final response = await http.get(
       Uri.parse(
         'https://mothersclub.me/wp-json/cocart/v2/cart/items',
@@ -238,6 +237,7 @@ class Networkcall {
       // then parse the JSON.
       throw Exception('Failed to add item. ${response.body}');
     } else {
+      print(response.body);
       return 'item added';
     }
   }

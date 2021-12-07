@@ -44,7 +44,6 @@ class AuthProvider with ChangeNotifier {
 
     _loggedInStatus = Status.Authenticating;
     notifyListeners();
-
     Response response = await post(Uri.parse('https://mothersclub.me/wp-json/custom-plugin/login'),
       body: json.encode(loginData),
       headers: {'Content-Type': 'application/json'},
