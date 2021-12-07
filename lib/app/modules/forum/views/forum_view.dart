@@ -214,8 +214,8 @@ class ForumView extends GetView<ForumController> {
                     ),
 
 
-              Container(
-                height: 400,
+              ConstrainedBox(
+                constraints: BoxConstraints(maxHeight: 480, minHeight: 400),
                 child: FutureBuilder<List<FormsModel>>(
                     future: Utils.bLoC.forumsList(),
                     builder: (context, snapshot) {
@@ -223,6 +223,7 @@ class ForumView extends GetView<ForumController> {
                         List<FormsModel>? data = snapshot.data;
                         // print('datadata ${data![0].Date}');
                         return ListView.builder(
+                            shrinkWrap: true,
                             itemCount: data!.length,
                             itemBuilder:
                                 (BuildContext context, int index) {

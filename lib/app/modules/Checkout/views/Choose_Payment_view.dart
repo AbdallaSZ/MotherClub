@@ -96,7 +96,6 @@ class Choose_Payment_view extends GetView<AuthController> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         List<ProductModel>? data = snapshot.data;
-                                        print(data);
                                         return ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           itemCount: 2,

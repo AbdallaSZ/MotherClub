@@ -137,7 +137,6 @@ class _StoreViewScreenState extends State<StoreView> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                        data = snapshot.data;
-                      print(data);
                       if (_firstSearch) {
                         return GridView.builder(
                               itemCount: data!.length,

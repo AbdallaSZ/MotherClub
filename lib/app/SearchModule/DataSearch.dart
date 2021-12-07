@@ -59,7 +59,6 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
 
   BehaviorSubject<SearchState> _searchSubject = BehaviorSubject<SearchState>();
   List <ProductModel>search(String keyword  ){
-    print("searching in ... "+ models!.length.toString());
     List<ProductModel> result =[];
     for(var i in models!){
       if (i.name.toLowerCase().trim().contains(keyword.toLowerCase().trim())){

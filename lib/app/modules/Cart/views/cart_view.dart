@@ -1,24 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_paytabs_bridge/BaseBillingShippingInfo.dart';
-import 'package:flutter_paytabs_bridge/PaymentSdkApms.dart';
-import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
-import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
-import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
-import 'package:get/get.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Cart/views/ShippingDetailsScreen.dart';
-import 'package:motherclub/app/modules/Store/controller/storeController.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
-import 'package:motherclub/app/modules/Store/widgets/store_widget.dart';
-import 'package:motherclub/app/repository/cart_repository.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
@@ -204,7 +195,6 @@ class _StoreViewScreenState extends State<CartView> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             List<ProductModel>? data = snapshot.data;
-                            print(data);
                             return _firstSearch
                                 ? ListView.builder(
                                     scrollDirection: Axis.vertical,

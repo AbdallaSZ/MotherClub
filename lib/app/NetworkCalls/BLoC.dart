@@ -100,7 +100,6 @@ class BLoC {
 
   Future<WeeksDetail> weekDetails() async {
     var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
-print('sdaggg${weekDetailResponse[0]['name']}');
       WeeksDetail weeksDetailModel = new WeeksDetail(
           name: weekDetailResponse[0]['name'].toString(),
           description: weekDetailResponse[0]['description'].toString(),
@@ -244,27 +243,8 @@ print('sdaggg${weekDetailResponse[0]['name']}');
     List<CartItemModel> cartItemss = <CartItemModel>[];
 
     var cartItemsResponse = await Utils.networkcall.getCartItems();
-    cartItemsResponse['data'].forEach((newCartItem) {
-
-      CartItemModel categoriesModel = new CartItemModel(
-          cartHash: newCartItem['cartHash'],
-          cartKey: newCartItem['cartKey'],
-          currency: newCartItem['currency'],
-          customer: newCartItem['customer'],
-          items: newCartItem['items'],
-          itemCount: newCartItem['itemCount'],
-          itemsWeight: newCartItem['itemsWeight'],
-          coupons: newCartItem['coupons'],
-          needsPayment: newCartItem['needsPayment'],
-          needsShipping: newCartItem['needsShipping'],
-          shipping: newCartItem['shipping'],
-          fees: newCartItem['fees'],
-          taxes: newCartItem['taxes'],
-          totals: newCartItem['totals'],
-          removedItems: newCartItem['removedItems'],
-          crossSells: newCartItem['crossSells'],
-          notices: newCartItem['notices']);
-      cartItemss.add(categoriesModel);
+    cartItemsResponse.forEach((newCartItem) {
+      cartItemss.add(cartItemsResponse);
     });
 
     return cartItemss;

@@ -186,7 +186,6 @@ Widget homeAppBar(
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<ProductModel>? data = snapshot.data;
-                  print(data);
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: data!.length,

@@ -22,7 +22,6 @@ class SplashController extends GetxController {
 
       if(await Utils.checkapp()==true) {
         String Id = await Utils.userPreferences.getToken();
-        print('IDDDD $Id');
         if (Id != '') {
           getursedata();
           Get.offAndToNamed(Routes.BOTTOM);
@@ -44,7 +43,6 @@ class SplashController extends GetxController {
       Utils.name=value.display_name;
       Utils.email=value.user_email;
       Utils.ImageUrl=value.user_url;
-      print(Utils.name);
     });
   }
 

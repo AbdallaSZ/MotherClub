@@ -101,7 +101,6 @@ class Networkcall {
         return false;
       },
     );
-    print(response.body);
     return json.decode(response.body);
   }
 
@@ -122,7 +121,6 @@ class Networkcall {
         return false;
       },
     );
-    print(response.body);
     return json.decode(response.body);
   }
 
@@ -144,7 +142,6 @@ class Networkcall {
         return false;
       },
     );
-    print("DADAD  77  ${response.body}");
     return json.decode(response.body);
   }
 
@@ -184,7 +181,6 @@ class Networkcall {
         return false;
       },
     );
-    print('DATA ${response.body}');
     return json.decode(response.body);
   }
 
@@ -208,7 +204,6 @@ class Networkcall {
         return false;
       },
     );
-    print('DATA ${response.body}');
     return json.decode(response.body);
   }
 
@@ -216,16 +211,14 @@ class Networkcall {
     // final _networkService = NetworkService();
     final response = await http.get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/cocart/v2/cart?cart_key=matt_9009|1637747142|hLzbAoURNMWEFI7sKBTcwZCJJ4J1sS3OSLIxbvNnbEb|66c1bd0db16e5fe78b9729c03f1e1717e368b32f626f6a7e2d388cedf08a0bda',
+        'https://mothersclub.me/wp-json/cocart/v2/cart/items',
       ),
     );
 
     if (response.statusCode != 200) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
       throw Exception('Failed to create CartItem.');
     } else {
-      print('ssssssssssssssssss${jsonDecode(response.body)}');
+      print('cart data is here : ${jsonDecode(response.body)}');
       return jsonDecode(response.body);
     }
   }
@@ -240,14 +233,11 @@ class Networkcall {
         'variation[attribute_pa_age]': '$variation-months',
       },
     );
-    print('stCode${response.statusCode}');
     if (response.statusCode != 200) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
       throw Exception('Failed to add item. ${response.body}');
     } else {
-      print('printBody${response.body}');
-      print('printBodyDecoded${jsonDecode(response.body)}');
       return 'item added';
     }
   }
