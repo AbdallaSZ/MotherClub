@@ -214,6 +214,9 @@
   }, "submit":"Submit",
   "@submit": {
     "description": "The conventional newborn programmer greeting"
+  },"item_added":"'Item added to the cart'",
+  "@item_added": {
+    "description": "The conventional newborn programmer greeting"
   },
   "select_language":"Select Language",
   "@select_language": {

@@ -202,6 +202,7 @@ Widget homeAppBar(
                           },
                           child: ProductItem(
                             data: data[index],
+                            isLiked: false,
                           ));
                       //   Card(
                       //   // padding: EdgeInsets.all(2),
