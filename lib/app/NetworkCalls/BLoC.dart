@@ -240,14 +240,14 @@ class BLoC {
   }
 
   Future<List<CartItemModel>> cartItemsList() async {
-    List<CartItemModel> cartItemss = <CartItemModel>[];
+    List<CartItemModel> cartItems = <CartItemModel>[];
 
     var cartItemsResponse = await Utils.networkcall.getCartItems();
     cartItemsResponse.forEach((newCartItem) {
-      cartItemss.add(cartItemsResponse);
+      cartItems.add(cartItemsResponse);
     });
 
-    return cartItemss;
+    return cartItems;
   }
 
   Future<void> addCartItems(String id, int quantity, String variation) async {

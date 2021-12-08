@@ -9,9 +9,8 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class ProductItem extends StatefulWidget {
-  const ProductItem({Key? key, required this.data,required this.isLiked,}) : super(key: key);
+  const ProductItem({Key? key, required this.data}) : super(key: key);
   final ProductModel data;
-  final bool isLiked;
 
   @override
   State<ProductItem> createState() => _ProductItemState();
@@ -147,11 +146,8 @@ class _ProductItemState extends State<ProductItem> {
           start: 15,
           child: GestureDetector(
           child: Icon(
-          widget.isLiked ?
-          Icons.favorite:
           Icons.favorite_border,
             size: 28,
-            color: widget.isLiked ?  Colors.red : Colors.grey,
           ),
           onTap: () {
             showDialog(
