@@ -239,20 +239,40 @@ class BLoC {
     return categoriesLst;
   }
 
-  Future<List<CartItemModel>> cartItemsList() async {
-    List<CartItemModel> cartItems = <CartItemModel>[];
+  Future<dynamic> cartItemsList() async {
+    List<dynamic> cartItems = <Item>[];
+  try {
+    var response = await Utils.networkcall.getCartItems();
 
-    var cartItemsResponse = await Utils.networkcall.getCartItems();
-    cartItemsResponse.forEach((newCartItem) {
-      cartItems.add(cartItemsResponse);
-    });
-
-    return cartItems;
+      if(cartItems != [])
+      {
+        CartItemModel.fromJson(response).items!.forEach((element) {
+      cartItems.add(element);
+      });
+      return cartItems;
+      }
+     else{
+     return [];
+      }
+  } on Exception catch (e) {
+    throw Exception('Failed. $e');
+  }
   }
 
-  Future<void> addCartItems(String id, int quantity, String variation) async {
-    await Utils.networkcall.addCartItem(id, quantity, variation);
+  Future<String> addCartItems(String id, int quantity, String variation) async {
+    var res = await Utils.networkcall.addCartItem(id, quantity, variation);
+    return res;
   }
+
+  Future<String> delCartItems(String itemId) async {
+    var res = await Utils.networkcall.deleteFromCartItem(itemId);
+    return res;
+  }
+  Future<String> clearCart() async {
+    var res = await Utils.networkcall.clearCartItem();
+    return res;
+  }
+
 
   Future<List<WishlistModel>> wishlistWithUserId(String userId) async {
     List<WishlistModel> items = [];

@@ -89,7 +89,7 @@ class _ProductItemState extends State<ProductItem> {
                               ),
                               content: FutureBuilder<List<WishlistModel>>(
                                   future:
-                                      Utils.bLoC.wishlistWithUserId(Utils.id),
+                                  Utils.bLoC.wishlistWithUserId(Utils.id),
                                   builder: (BuildContext context, snapshot) {
                                     if (snapshot.hasData) {
                                       dropdownValue = snapshot.data![0];
@@ -97,193 +97,203 @@ class _ProductItemState extends State<ProductItem> {
                                       items.addAll(snapshot.data!);
                                     }
                                     return snapshot.connectionState ==
-                                            ConnectionState.waiting
+                                        ConnectionState.waiting
                                         ? Container(
-                                            alignment: Alignment.center,
-                                            width: Utils.deviceWidth / 3,
-                                            height: Utils.deviceHeight / 20,
-                                            child: Center(
-                                              child:
-                                                  CircularProgressIndicator(),
-                                            ),
-                                          )
+                                      alignment: Alignment.center,
+                                      width: Utils.deviceWidth / 3,
+                                      height: Utils.deviceHeight / 20,
+                                      child: Center(
+                                        child:
+                                        CircularProgressIndicator(),
+                                      ),
+                                    )
                                         : StatefulBuilder(
-                                            builder: (_, StateSetter update) {
-                                            return Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                snapshot.hasData
-                                                    ? Container(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        width:
-                                                            Utils.deviceWidth /
-                                                                3,
-                                                        height:
-                                                            Utils.deviceHeight /
-                                                                20,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width: .7),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                            horizontal: 8.0,
-                                                          ),
-                                                          child: Row(
-                                                            children: [
-                                                              Expanded(
-                                                                child:
-                                                                    DropdownButtonHideUnderline(
-                                                                  child: DropdownButton<
-                                                                      WishlistModel>(
-                                                                    hint:
-                                                                        Container(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      child:
-                                                                          Text(
-                                                                        'Choose Wishlist:',
-                                                                      ),
-                                                                    ),
-                                                                    itemHeight:
-                                                                        50.0,
-                                                                    value:
-                                                                        dropdownValue,
-                                                                    isExpanded:
-                                                                        true,
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: Colors
-                                                                          .blueGrey,
-                                                                    ),
-                                                                    onChanged:
-                                                                        (WishlistModel?
-                                                                            newValue) {
-                                                                      update(
-                                                                          () {
-                                                                        dropdownValue =
-                                                                            newValue!;
-                                                                      });
-                                                                    },
-                                                                    items: items
-                                                                        .map<DropdownMenuItem<WishlistModel>>(
-                                                                            (value) {
-                                                                      return DropdownMenuItem<
-                                                                          WishlistModel>(
-                                                                        value:
-                                                                            value,
-                                                                        child:
-                                                                            Text(
-                                                                          value
-                                                                              .title!,
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                        ),
-                                                                      );
-                                                                    }).toList(),
-                                                                  ),
-                                                                ),
+                                        builder: (_, StateSetter update) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            children: [
+                                              snapshot.hasData
+                                                  ? Container(
+                                                alignment:
+                                                Alignment.center,
+                                                width:
+                                                Utils.deviceWidth /
+                                                    3,
+                                                height:
+                                                Utils.deviceHeight /
+                                                    20,
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(10),
+                                                  border: Border.all(
+                                                      color:
+                                                      Colors.grey,
+                                                      width: .7),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                  const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 8.0,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child:
+                                                        DropdownButtonHideUnderline(
+                                                          child: DropdownButton<
+                                                              WishlistModel>(
+                                                            hint:
+                                                            Container(
+                                                              alignment:
+                                                              Alignment
+                                                                  .center,
+                                                              child:
+                                                              Text(
+                                                                'Choose Wishlist:',
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          border: Border.all(
-                                                            color: Colors.grey,
-                                                            width: .7,
-                                                          ),
-                                                        ),
-                                                        width:
-                                                            Utils.deviceWidth /
-                                                                3,
-                                                        height:
-                                                            Utils.deviceHeight /
-                                                                20,
-                                                        child: Center(
-                                                          child: Text(
-                                                            'No Wish list yet',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey),
+                                                            ),
+                                                            itemHeight:
+                                                            50.0,
+                                                            value:
+                                                            dropdownValue,
+                                                            isExpanded:
+                                                            true,
+                                                            style:
+                                                            const TextStyle(
+                                                              color: Colors
+                                                                  .blueGrey,
+                                                            ),
+                                                            onChanged:
+                                                                (WishlistModel?
+                                                            newValue) {
+                                                              update(
+                                                                      () {
+                                                                    dropdownValue =
+                                                                    newValue!;
+                                                                  });
+                                                            },
+                                                            items: items
+                                                                .map<
+                                                                DropdownMenuItem<
+                                                                    WishlistModel>>(
+                                                                    (value) {
+                                                                  return DropdownMenuItem<
+                                                                      WishlistModel>(
+                                                                    value:
+                                                                    value,
+                                                                    child:
+                                                                    Text(
+                                                                      value
+                                                                          .title!,
+                                                                      textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                    ),
+                                                                  );
+                                                                }).toList(),
                                                           ),
                                                         ),
                                                       ),
-                                                IconButton(
-                                                    onPressed: () => showDialog(
-                                                        context: context,
-                                                        builder: (c) {
-                                                          return AlertDialog(
-                                                            title: Text(Utils
-                                                                .labels!
-                                                                .add_wishlist_name),
-                                                            content: TextField(
-                                                              controller:
-                                                                  controller,
-                                                            ),
-                                                            actions: [
-                                                              ElevatedButton(
-                                                                child: Text(
-                                                                    Utils
-                                                                        .labels!
-                                                                        .add),
-                                                                onPressed:
-                                                                    () async {
-                                                                  WishlistModel wm = await Utils
-                                                                      .bLoC
-                                                                      .addWishlist(
-                                                                          controller
-                                                                              .text,
-                                                                          Utils
-                                                                              .id,
-                                                                          'shared');
-                                                                  items.add(wm);
-                                                                  dropdownValue =
-                                                                      wm;
-
-                                                                  update(() {
-                                                                    controller
-                                                                        .text = '';
-                                                                  });
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop(
-                                                                    ScaffoldMessenger.of(
-                                                                            context)
-                                                                        .showSnackBar(
-                                                                      SnackBar(
-                                                                        content:
-                                                                            const Text('Wish list added'),
-                                                                        duration:
-                                                                            const Duration(seconds: 3),
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                },
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                                  : Container(
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(10),
+                                                  border: Border.all(
+                                                    color: Colors.grey,
+                                                    width: .7,
+                                                  ),
+                                                ),
+                                                width:
+                                                Utils.deviceWidth /
+                                                    3,
+                                                height:
+                                                Utils.deviceHeight /
+                                                    20,
+                                                child: Center(
+                                                  child: Text(
+                                                    'No Wish list yet',
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .grey),
+                                                  ),
+                                                ),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () =>
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (c) {
+                                                            return AlertDialog(
+                                                              title: Text(Utils
+                                                                  .labels!
+                                                                  .add_wishlist_name),
+                                                              content: TextField(
+                                                                controller:
+                                                                controller,
                                                               ),
-                                                            ],
-                                                          );
-                                                        }),
-                                                    icon: Icon(Icons.add)),
-                                              ],
-                                            );
-                                          });
+                                                              actions: [
+                                                                ElevatedButton(
+                                                                  child: Text(
+                                                                      Utils
+                                                                          .labels!
+                                                                          .add),
+                                                                  onPressed:
+                                                                      () async {
+                                                                    WishlistModel wm = await Utils
+                                                                        .bLoC
+                                                                        .addWishlist(
+                                                                        controller
+                                                                            .text,
+                                                                        Utils
+                                                                            .id,
+                                                                        'shared');
+                                                                    items.add(
+                                                                        wm);
+                                                                    dropdownValue =
+                                                                        wm;
+
+                                                                    update(() {
+                                                                      controller
+                                                                          .text =
+                                                                      '';
+                                                                    });
+                                                                    Navigator
+                                                                        .of(
+                                                                        context)
+                                                                        .pop(
+                                                                      ScaffoldMessenger
+                                                                          .of(
+                                                                          context)
+                                                                          .showSnackBar(
+                                                                        SnackBar(
+                                                                          content:
+                                                                          const Text(
+                                                                              'Wish list added'),
+                                                                          duration:
+                                                                          const Duration(
+                                                                              seconds: 3),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            );
+                                                          }),
+                                                  icon: Icon(Icons.add)),
+                                            ],
+                                          );
+                                        });
                                   }),
                               actionsAlignment: MainAxisAlignment.spaceEvenly,
                               actions: [
@@ -292,19 +302,19 @@ class _ProductItemState extends State<ProductItem> {
                                   onPressed: () async {
                                     await Utils.bLoC
                                         .addToWishlist(widget.data.id,
-                                            dropdownValue.shareKey!)
+                                        dropdownValue.shareKey!)
                                         .then(
                                           (value) =>
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
                                             SnackBar(
                                               content: const Text(
                                                   'Item added to wish list'),
                                               duration:
-                                                  const Duration(seconds: 3),
+                                              const Duration(seconds: 3),
                                             ),
                                           ),
-                                        );
+                                    );
 
                                     Navigator.of(context).pop();
                                   },
@@ -354,9 +364,9 @@ class _ProductItemState extends State<ProductItem> {
                                       children: [
                                         Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                             children: [
                                               // SizedBox(height:23),
                                               Expanded(
@@ -364,35 +374,38 @@ class _ProductItemState extends State<ProductItem> {
                                                   child: Column(
                                                     children: [
                                                       Image.network(
-                                                        '${widget.data.imageslist[0].src}',
+                                                        '${widget.data
+                                                            .imageslist[0]
+                                                            .src}',
                                                         height: 100,
                                                         width: 155,
                                                       ),
                                                       Text(
                                                         "${widget.data.name}",
                                                         style:
-                                                            GoogleFonts.roboto(
+                                                        GoogleFonts.roboto(
                                                           fontSize: 13,
                                                           fontStyle:
-                                                              FontStyle.normal,
+                                                          FontStyle.normal,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                          FontWeight.w500,
                                                           color:
-                                                              Black_textColor,
+                                                          Black_textColor,
                                                         ),
                                                       ),
                                                       Text(
                                                           Utils.labels!.amd +
-                                                              " ${widget.data.price}",
+                                                              " ${widget.data
+                                                                  .price}",
                                                           style: GoogleFonts
                                                               .roboto(
                                                             fontSize: 18,
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontWeight:
-                                                                FontWeight.w700,
+                                                            FontWeight.w700,
                                                             color:
-                                                                Black_textColor,
+                                                            Black_textColor,
                                                           )),
                                                     ],
                                                   )),
@@ -402,7 +415,7 @@ class _ProductItemState extends State<ProductItem> {
                                                 flex: 2,
                                                 child: Align(
                                                   alignment:
-                                                      Alignment.bottomCenter,
+                                                  Alignment.bottomCenter,
                                                   child: Column(
                                                     children: [
                                                       Row(
@@ -412,43 +425,46 @@ class _ProductItemState extends State<ProductItem> {
                                                           Expanded(
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets
-                                                                      .all(5),
+                                                              EdgeInsets
+                                                                  .all(5),
                                                               alignment: Alignment
                                                                   .bottomCenter,
                                                               decoration:
-                                                                  BoxDecoration(
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .red,
-                                                                        width:
-                                                                            1,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.all(
-                                                                              Radius.circular(10.0))),
+                                                              BoxDecoration(
+                                                                  border:
+                                                                  Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    width:
+                                                                    1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                      Radius
+                                                                          .circular(
+                                                                          10.0))),
                                                               height: Utils
-                                                                      .deviceHeight /
+                                                                  .deviceHeight /
                                                                   22,
                                                               //width: Utils.deviceWidth/5,
                                                               child: Row(
                                                                 crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .center,
+                                                                CrossAxisAlignment
+                                                                    .center,
                                                                 mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                                 children: [
                                                                   GestureDetector(
                                                                     onTap: () {
                                                                       update(
-                                                                          () {
-                                                                        if (quantity >
-                                                                            1)
-                                                                          quantity--;
-                                                                      });
+                                                                              () {
+                                                                            if (quantity >
+                                                                                1)
+                                                                              quantity--;
+                                                                          });
                                                                     },
                                                                     child: Icon(
                                                                       Icons
@@ -456,20 +472,23 @@ class _ProductItemState extends State<ProductItem> {
                                                                       size: 15,
                                                                     ),
                                                                   ),
-                                                                  Text(quantity.toString(),
-                                                                      style: GoogleFonts.roboto(
+                                                                  Text(quantity
+                                                                      .toString(),
+                                                                      style: GoogleFonts
+                                                                          .roboto(
                                                                           fontSize:
-                                                                              16,
+                                                                          16,
                                                                           fontWeight: FontWeight
                                                                               .normal,
                                                                           color:
-                                                                              Colors.black)),
+                                                                          Colors
+                                                                              .black)),
                                                                   GestureDetector(
                                                                     onTap: () {
                                                                       update(
-                                                                          () {
-                                                                        quantity++;
-                                                                      });
+                                                                              () {
+                                                                            quantity++;
+                                                                          });
                                                                     },
                                                                     child: Icon(
                                                                       Icons.add,
@@ -490,73 +509,87 @@ class _ProductItemState extends State<ProductItem> {
                                                           Expanded(
                                                             child: Container(
                                                               padding:
-                                                                  EdgeInsets
-                                                                      .all(5),
+                                                              EdgeInsets
+                                                                  .all(5),
                                                               alignment: Alignment
                                                                   .bottomCenter,
                                                               decoration:
-                                                                  BoxDecoration(
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Colors
-                                                                            .red,
-                                                                        width:
-                                                                            1,
-                                                                      ),
-                                                                      borderRadius:
-                                                                          BorderRadius.all(
-                                                                              Radius.circular(10.0))),
+                                                              BoxDecoration(
+                                                                  border:
+                                                                  Border
+                                                                      .all(
+                                                                    color: Colors
+                                                                        .red,
+                                                                    width:
+                                                                    1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                      Radius
+                                                                          .circular(
+                                                                          10.0))),
                                                               height: Utils
-                                                                      .deviceHeight /
+                                                                  .deviceHeight /
                                                                   22,
                                                               //width: Utils.deviceWidth/5,
                                                               child:
                                                               DropdownButtonHideUnderline(
-                                                                    child: DropdownButton<
-                                                                        String>(
-                                                                value:
-                                                                      variation,
-                                                                icon:
-                                                                      const Icon(
+                                                                child:
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  value:
+                                                                  variation,
+                                                                  icon:
+                                                                  const Icon(
                                                                     Icons
                                                                         .arrow_drop_down,
                                                                     size: 20,
-                                                                ),
-
-                                                                elevation: 16,
-                                                                style:
-                                                                      const TextStyle(
+                                                                  ),
+                                                                  elevation: 16,
+                                                                  style:
+                                                                  const TextStyle(
                                                                     color: Colors
                                                                         .lightBlue,
-                                                                        decoration: TextDecoration.none,
-                                                                ),
-                                                                onChanged: (String?
-                                                                      newValue) {
+                                                                    decoration:
+                                                                    TextDecoration
+                                                                        .none,
+                                                                  ),
+                                                                  onChanged:
+                                                                      (String?
+                                                                  newValue) {
                                                                     update(() {
                                                                       variation =
-                                                                          newValue!;
+                                                                      newValue!;
                                                                     });
-                                                                },
-                                                                items: dropDItems.map<
+                                                                  },
+                                                                  items: dropDItems
+                                                                      .map<
                                                                       DropdownMenuItem<
-                                                                          String>>((String
+                                                                          String>>((
+                                                                      String
                                                                       value) {
                                                                     return DropdownMenuItem<
                                                                         String>(
                                                                       value:
-                                                                          value,
-                                                                      child: Text(
-                                                                          '$value Months', style:
-                                                                      const TextStyle(
-                                                                        color: Colors
-                                                                            .lightBlue,
-                                                                        decoration: TextDecoration.none,
-                                                                      ),),
+                                                                      value,
+                                                                      child:
+                                                                      Text(
+                                                                        '$value Months',
+                                                                        style:
+                                                                        const TextStyle(
+                                                                          color:
+                                                                          Colors
+                                                                              .lightBlue,
+                                                                          decoration:
+                                                                          TextDecoration
+                                                                              .none,
+                                                                        ),
+                                                                      ),
                                                                     );
-                                                                }).toList(),
+                                                                  }).toList(),
+                                                                ),
                                                               ),
-                                                                  ),
                                                             ),
                                                           ),
                                                         ],
@@ -570,26 +603,22 @@ class _ProductItemState extends State<ProductItem> {
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.blue),
                                           onPressed: () async {
-                                            await Utils.bLoC
+                                            String res = await Utils.bLoC
                                                 .addCartItems(widget.data.id,
-                                                    quantity, variation)
-                                                .then(
-                                                  (value) =>
-                                                      Navigator.pop(context),
-                                                )
-                                                .then(
-                                                  (value) =>
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
+                                                quantity, variation);
+                                                  Navigator.pop(context);
+                                                   ScaffoldMessenger.of(
+                                                      context)
+                                                      .showSnackBar(
                                                     SnackBar(
-                                                      content: const Text(
-                                                          'Item added to the cart'),
-                                                      duration: const Duration(
+                                                      content: Text(
+                                                        res,
+                                                      ),
+                                                      duration:
+                                                      const Duration(
                                                           seconds: 3),
                                                     ),
-                                                  ),
-                                                );
+                                                  );
                                           },
                                           child: Text('Add To Cart'),
                                         ),

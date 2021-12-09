@@ -1,6 +1,7 @@
 //import 'dart:convert' as convert;
 //import 'dart:convert';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 //import 'dart:io';
@@ -9,6 +10,7 @@ import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/NetworkCalls/Api.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Networkcall {
@@ -210,22 +212,21 @@ class Networkcall {
   Future<dynamic> getCartItems() async {
     final response = await http.get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/cocart/v2/cart/items',
+        'https://mothersclub.me/wp-json/cocart/v2/cart?cart_key=\'${Utils.id}\'',
       ),
     );
 
     if (response.statusCode != 200) {
       throw Exception('Failed to create CartItem.');
     } else {
-      print('cart data is here : ${jsonDecode(response.body)}');
-      return jsonDecode(response.body);
+
+      return response.body;
     }
   }
 
   Future<String> addCartItem(String id, int quantity, String variation) async {
-    final _networkService = NetworkService();
     final response = await http.post(
-      Uri.parse('https://mothersclub.me/wp-json/cocart/v2/cart/add-item'),
+      Uri.parse('https://mothersclub.me//wp-json/cocart/v2/cart/add-item?cart_key=\'${Utils.id}\''),
       body: {
         'id': '$id',
         'quantity': '$quantity',
@@ -235,12 +236,47 @@ class Networkcall {
     if (response.statusCode != 200) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
-      throw Exception('Failed to add item. ${response.body}');
+      var res = json.decode(response.body);
+      return res['message'];
+      throw Exception(response.body);
     } else {
-      print(response.body);
+      log(response.body);
       return 'item added';
     }
   }
+
+  Future<String> deleteFromCartItem(String itemId,) async {
+    final response = await http.delete(
+      Uri.parse('https://mothersclub.me/wp-json/cocart/v2/cart/item/$itemId?cart_key=\'${Utils.id}\''),
+    );
+    if (response.statusCode != 200) {
+
+      var res = json.decode(response.body);
+      return res['message'];
+    } else {
+      log(response.body);
+      return 'item deleted';
+    }
+  }
+
+  Future<String> clearCartItem() async {
+    final response = await http.post(
+      Uri.parse('https://mothersclub.me/wp-json/cocart/v2/cart/clear?cart_key=\'${Utils.id}\''),
+    );
+    if (response.statusCode != 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var res = json.decode(response.body);
+      return res['message'];
+      throw Exception(response.body);
+    } else {
+      log(response.body);
+      return 'item deleted';
+    }
+  }
+
+
+
 
   Future<dynamic> getWishlistByUserId(String userId) async {
     final response = await http.get(
@@ -249,7 +285,7 @@ class Networkcall {
       ),
     );
     if (response.statusCode != 200) {
-      throw Exception('Failed to create album.');
+      throw Exception('Failed to Fetch wishlist.');
     } else {
       return jsonDecode(response.body);
     }
