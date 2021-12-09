@@ -143,9 +143,7 @@ class _StoreViewScreenState extends State<StoreView> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
-                                childAspectRatio: (.53),
+                                childAspectRatio: (.68),
                               ),
                               itemBuilder: (
                                 context,
@@ -157,7 +155,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                           create: (c)=>ProductDetailsBloc(),
                                           child: ProductDetailsScreen(data![index].id))));
                                     },
-                                    child: ProductItem(data: data![index]));
+                                    child: ProductItem(data: data![index],isLiked: false,));
                               },
                             );
                       } else {

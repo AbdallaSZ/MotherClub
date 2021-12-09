@@ -87,9 +87,7 @@ class _StoreViewScreenState extends State<WishListView> {
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    childAspectRatio: (.6),
+                                    childAspectRatio: (.65),
                                   ),
                                   itemBuilder: (
                                     context,

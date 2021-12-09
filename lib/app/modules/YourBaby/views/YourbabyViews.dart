@@ -81,7 +81,9 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                                 ),
                                 CircleAvatar(
                                   radius: 20,
-                                  backgroundColor: Colors.white,
+                                  backgroundImage: NetworkImage(Utils.prefs!
+                                      .getString("imageUrl") ??
+                                      "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png"),
                                 )
                               ],
                             )

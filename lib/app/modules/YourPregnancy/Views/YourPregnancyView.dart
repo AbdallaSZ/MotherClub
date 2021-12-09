@@ -78,17 +78,11 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                       ),
                       Row(
                         children: [
-                          Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
                           CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.white,
+                            backgroundImage: NetworkImage(Utils.prefs!
+                              .getString("imageUrl") ??
+                                "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png"),
                           )
                         ],
                       )
