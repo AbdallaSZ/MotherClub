@@ -96,16 +96,301 @@ class _ProductItemState extends State<ProductItem> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        await Utils.bLoC
-                            .addCartItems(widget.data.id, 1, '0-3')
-                            .then(
-                              (value) =>
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:  Text(Utils.labels!.item_added),
-                                  duration: const Duration(seconds: 3),
+                        showModalBottomSheet<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            int quantity = 1;
+                            List<String> dropDItems = [
+                              "0-3",
+                              "3-6",
+                              "6-9",
+                              "9-12",
+                            ];
+                            String variation = '0-3';
+                            return StatefulBuilder(builder: (context, update) {
+                              return Container(
+                                height: 220,
+                                child: Card(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10),
+                                    width: Utils.deviceWidth / 2.1,
+                                    // height: deviceHeight/2.98,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: white_color,
+                                    ),
+
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              children: [
+                                                // SizedBox(height:23),
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Column(
+                                                      children: [
+                                                        Image.network(
+                                                          '${widget.data
+                                                              .imageslist[0]
+                                                              .src}',
+                                                          height: 100,
+                                                          width: 155,
+                                                        ),
+                                                        Text(
+                                                          "${widget.data.name}",
+                                                          style:
+                                                          GoogleFonts.roboto(
+                                                            fontSize: 13,
+                                                            fontStyle:
+                                                            FontStyle.normal,
+                                                            fontWeight:
+                                                            FontWeight.w500,
+                                                            color:
+                                                            Black_textColor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                            Utils.labels!.amd +
+                                                                " ${widget.data
+                                                                    .price}",
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                              fontSize: 18,
+                                                              fontStyle: FontStyle
+                                                                  .normal,
+                                                              fontWeight:
+                                                              FontWeight.w700,
+                                                              color:
+                                                              Black_textColor,
+                                                            )),
+                                                      ],
+                                                    )),
+
+                                                // SizedBox(height:10),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Align(
+                                                    alignment:
+                                                    Alignment.bottomCenter,
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Text('Quantity'),
+                                                            SizedBox(width: 10),
+                                                            Expanded(
+                                                              child: Container(
+                                                                padding:
+                                                                EdgeInsets
+                                                                    .all(5),
+                                                                alignment: Alignment
+                                                                    .bottomCenter,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                    border:
+                                                                    Border
+                                                                        .all(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width:
+                                                                      1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .all(
+                                                                        Radius
+                                                                            .circular(
+                                                                            10.0))),
+                                                                height: Utils
+                                                                    .deviceHeight /
+                                                                    22,
+                                                                //width: Utils.deviceWidth/5,
+                                                                child: Row(
+                                                                  crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                                  mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                                  children: [
+                                                                    GestureDetector(
+                                                                      onTap: () {
+                                                                        update(
+                                                                                () {
+                                                                              if (quantity >
+                                                                                  1)
+                                                                                quantity--;
+                                                                            });
+                                                                      },
+                                                                      child: Icon(
+                                                                        Icons
+                                                                            .remove,
+                                                                        size: 15,
+                                                                      ),
+                                                                    ),
+                                                                    Text(quantity
+                                                                        .toString(),
+                                                                        style: GoogleFonts
+                                                                            .roboto(
+                                                                            fontSize:
+                                                                            16,
+                                                                            fontWeight: FontWeight
+                                                                                .normal,
+                                                                            color:
+                                                                            Colors
+                                                                                .black)),
+                                                                    GestureDetector(
+                                                                      onTap: () {
+                                                                        update(
+                                                                                () {
+                                                                              quantity++;
+                                                                            });
+                                                                      },
+                                                                      child: Icon(
+                                                                        Icons.add,
+                                                                        size: 18,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(height: 15),
+                                                        Row(
+                                                          children: [
+                                                            Text('Variation'),
+                                                            SizedBox(width: 10),
+                                                            Expanded(
+                                                              child: Container(
+                                                                padding:
+                                                                EdgeInsets
+                                                                    .all(5),
+                                                                alignment: Alignment
+                                                                    .bottomCenter,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                    border:
+                                                                    Border
+                                                                        .all(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      width:
+                                                                      1,
+                                                                    ),
+                                                                    borderRadius:
+                                                                    BorderRadius
+                                                                        .all(
+                                                                        Radius
+                                                                            .circular(
+                                                                            10.0))),
+                                                                height: Utils
+                                                                    .deviceHeight /
+                                                                    22,
+                                                                //width: Utils.deviceWidth/5,
+                                                                child:
+                                                                DropdownButtonHideUnderline(
+                                                                  child:
+                                                                  DropdownButton<
+                                                                      String>(
+                                                                    value:
+                                                                    variation,
+                                                                    icon:
+                                                                    const Icon(
+                                                                      Icons
+                                                                          .arrow_drop_down,
+                                                                      size: 20,
+                                                                    ),
+                                                                    elevation: 16,
+                                                                    style:
+                                                                    const TextStyle(
+                                                                      color: Colors
+                                                                          .lightBlue,
+                                                                      decoration:
+                                                                      TextDecoration
+                                                                          .none,
+                                                                    ),
+                                                                    onChanged:
+                                                                        (String?
+                                                                    newValue) {
+                                                                      update(() {
+                                                                        variation =
+                                                                        newValue!;
+                                                                      });
+                                                                    },
+                                                                    items: dropDItems
+                                                                        .map<
+                                                                        DropdownMenuItem<
+                                                                            String>>((
+                                                                        String
+                                                                        value) {
+                                                                      return DropdownMenuItem<
+                                                                          String>(
+                                                                        value:
+                                                                        value,
+                                                                        child:
+                                                                        Text(
+                                                                          '$value Months',
+                                                                          style:
+                                                                          const TextStyle(
+                                                                            color:
+                                                                            Colors
+                                                                                .lightBlue,
+                                                                            decoration:
+                                                                            TextDecoration
+                                                                                .none,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }).toList(),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ]),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.blue),
+                                            onPressed: () async {
+                                              String res = await Utils.bLoC
+                                                  .addCartItems(widget.data.id,
+                                                  quantity, variation);
+                                              Navigator.pop(context);
+                                              ScaffoldMessenger.of(
+                                                  context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    res,
+                                                  ),
+                                                  duration:
+                                                  const Duration(
+                                                      seconds: 3),
+                                                ),
+                                              );
+                                            },
+                                            child: Text('Add To Cart'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              );
+                            });
+                          },
                         );
                         // Get.toNamed(Routes.CART);
                       },

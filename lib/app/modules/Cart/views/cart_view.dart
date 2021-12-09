@@ -47,7 +47,6 @@ class _StoreViewScreenState extends State<CartView> {
                   title: 'Your Cart',
                 ),
                 bottomSheet: Card(
-
                   color: Colors.white,
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -173,27 +172,38 @@ class _StoreViewScreenState extends State<CartView> {
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return Dismissible(
-
-                              background: Container(color: Colors.red,child: Align(child: Icon(Icons.delete_forever_outlined),),),
+                              background: Container(
+                                color: Colors.red,
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    child: Icon(Icons.delete_forever_outlined,size: 50,color: Colors.white,),
+                                  ),
+                                ),
+                              ),
+                              direction: DismissDirection.endToStart,
                               onDismissed: (direction) async {
                                 // Remove the item from the data source.
-                                await Utils.bLoC.delCartItems(data[index].itemKey!).then((value) =>  ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(content: Text('${data[index].title} has deleted'))));
-                                setState(() {
-
-                                });
+                                await Utils.bLoC
+                                    .delCartItems(data[index].itemKey!)
+                                    .then((value) => ScaffoldMessenger.of(
+                                            context)
+                                        .showSnackBar(SnackBar(
+                                            content: Text(
+                                                '${data[index].title} has deleted'))));
+                                setState(() {});
                               },
                               key: Key(data[index].title!),
                               child: Card(
                                 child: Container(
                                   padding: EdgeInsets.all(10),
-                                  width: deviceWidth ,
-                                   height: deviceHeight/5,
+                                  width: deviceWidth,
+                                  height: deviceHeight / 5,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: white_color,
                                   ),
-
                                   child: SingleChildScrollView(
                                     child: Row(
                                         mainAxisAlignment:
@@ -221,8 +231,10 @@ class _StoreViewScreenState extends State<CartView> {
                                                     "${data[index].title}",
                                                     style: GoogleFonts.roboto(
                                                       fontSize: 13,
-                                                      fontStyle: FontStyle.normal,
-                                                      fontWeight: FontWeight.w500,
+                                                      fontStyle:
+                                                          FontStyle.normal,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                       color: Black_textColor,
                                                     ),
                                                   ),
@@ -230,7 +242,11 @@ class _StoreViewScreenState extends State<CartView> {
                                                 SizedBox(height: 15),
                                                 Align(
                                                   alignment: Alignment.topLeft,
-                                                  child: Text(data[index].meta!.variation!.age!,
+                                                  child: Text(
+                                                      data[index]
+                                                          .meta!
+                                                          .variation!
+                                                          .age!,
                                                       style: GoogleFonts.roboto(
                                                         fontSize: 14,
                                                         fontStyle:
@@ -272,17 +288,20 @@ class _StoreViewScreenState extends State<CartView> {
                                                           BorderRadius.all(
                                                               Radius.circular(
                                                                   10.0))),
-                                                  height: Utils.deviceHeight / 25,
+                                                  height:
+                                                      Utils.deviceHeight / 25,
                                                   //width: Utils.deviceWidth/5,
-                                                  child: Text(data[index].quantity!.value.toString(),
-                                                      style:
-                                                          GoogleFonts.roboto(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .normal,
-                                                              color: Colors
-                                                                  .black))),
+                                                  child: Text(
+                                                      data[index]
+                                                          .quantity!
+                                                          .value
+                                                          .toString(),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          color:
+                                                              Colors.black))),
                                             ),
                                           ),
                                         ]),

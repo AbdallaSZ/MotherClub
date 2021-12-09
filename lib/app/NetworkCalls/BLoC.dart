@@ -226,7 +226,7 @@ class BLoC {
     List<CategoriesModel> categoriesLst = <CategoriesModel>[];
  
     var categoriesResponse =
-        await Utils.networkcall.geAppCategoiresAPI(context);
+        await Utils.networkcall.geAppCategoriesAPI(context);
     categoriesResponse['data'].forEach((newProduct) {
 
       CategoriesModel categoriesModel = new CategoriesModel(

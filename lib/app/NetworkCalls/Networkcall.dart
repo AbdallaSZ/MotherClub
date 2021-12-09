@@ -166,7 +166,7 @@ class Networkcall {
 
   //todo API Call For App Categories
 
-  Future<dynamic> geAppCategoiresAPI(context) async {
+  Future<dynamic> geAppCategoriesAPI(context) async {
     var response = await http
         .get(
       Uri.parse('https://mothersclub.me/front-page'),

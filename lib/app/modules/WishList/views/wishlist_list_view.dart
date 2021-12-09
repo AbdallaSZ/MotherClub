@@ -85,52 +85,52 @@ class _WishlistListState extends State<WishlistList> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     GestureDetector(
-                                        onTap: () => showDialog(
-                                            context: context,
-                                            builder: (c) {
-                                              return AlertDialog(
-                                                title: Text(Utils.labels!
-                                                    .edit_wishlist_Name),
-                                                content: TextField(
-                                                  controller: controller,
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    child: Text(
-                                                        Utils.labels!.edit),
-                                                    onPressed: () async {
-                                                      await Utils.bLoC
-                                                          .updateWishlistName(
-                                                              controller.text,
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .shareKey!)
-                                                          .then(
-                                                            (value) =>
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                              SnackBar(
-                                                                content: const Text(
-                                                                    'Wish list name edited !'),
-                                                                duration:
-                                                                    const Duration(
-                                                                        seconds:
-                                                                            3),
-                                                              ),
+                                      onTap: () => showDialog(
+                                          context: context,
+                                          builder: (c) {
+                                            return AlertDialog(
+                                              title: Text(Utils
+                                                  .labels!.edit_wishlist_Name),
+                                              content: TextField(
+                                                controller: controller,
+                                              ),
+                                              actions: [
+                                                ElevatedButton(
+                                                  child:
+                                                      Text(Utils.labels!.edit),
+                                                  onPressed: () async {
+                                                    await Utils.bLoC
+                                                        .updateWishlistName(
+                                                            controller.text,
+                                                            snapshot
+                                                                .data![index]
+                                                                .shareKey!)
+                                                        .then(
+                                                          (value) =>
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                            SnackBar(
+                                                              content: const Text(
+                                                                  'Wish list name edited !'),
+                                                              duration:
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          3),
                                                             ),
-                                                          );
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {
-                                                        controller.text = '';
-                                                      });
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                        child: Icon(Icons.edit_outlined)),
+                                                          ),
+                                                        );
+                                                    Navigator.of(context).pop();
+                                                    setState(() {
+                                                      controller.text = '';
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          }),
+                                      child: Icon(Icons.edit_outlined),
+                                    ),
                                     GestureDetector(
                                         onTap: () async {
                                           await Utils.bLoC
@@ -138,8 +138,8 @@ class _WishlistListState extends State<WishlistList> {
                                                   .data![index].shareKey!)
                                               .then(
                                                 (value) => ScaffoldMessenger.of(
-                                                        context)
-                                                    .showSnackBar(
+                                                  context,
+                                                ).showSnackBar(
                                                   SnackBar(
                                                     content: const Text(
                                                         'Wish list deleted'),
@@ -153,7 +153,8 @@ class _WishlistListState extends State<WishlistList> {
                                             print('deleted');
                                           });
                                         },
-                                        child: Icon(Icons.delete_forever_outlined)),
+                                        child: Icon(
+                                            Icons.delete_forever_outlined)),
                                   ],
                                 ),
                               ),

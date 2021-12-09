@@ -24,14 +24,16 @@ class _StoreViewScreenState extends State<StoreView> {
 
   bool _firstSearch = true;
   String _query = "";
-  SearchBloc? searchBloc ;
+  SearchBloc? searchBloc;
 
   @override
   void initState() {
-    searchBloc =SearchBloc();
+    searchBloc = SearchBloc();
     super.initState();
   }
+
   List<ProductModel>? data;
+
   _StoreViewScreenState() {
     //Register a closure to be called when the object changes.
     _searchview.addListener(() {
@@ -79,19 +81,22 @@ class _StoreViewScreenState extends State<StoreView> {
                           border: Border.all(color: white_color, width: 0.5),
                         ),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             print("tapped");
-                            DataSearch myDataSearch = DataSearch( data);
+                            DataSearch myDataSearch = DataSearch(data);
                             var result = showSearch(
-                                context: context,
-                                delegate:myDataSearch );
-                           result.then((value){
-                             if(value!=null){
-                               Navigator.push(context, MaterialPageRoute(builder: (c)=>BlocProvider(
-                                   create: (c)=>ProductDetailsBloc(),
-                                   child: ProductDetailsScreen(value.productId!))));
-                             }
-                           });
+                                context: context, delegate: myDataSearch);
+                            result.then((value) {
+                              if (value != null) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (c) => BlocProvider(
+                                            create: (c) => ProductDetailsBloc(),
+                                            child: ProductDetailsScreen(
+                                                value.productId!))));
+                              }
+                            });
                           },
                           child: TextFormField(
                             controller: _searchview,
@@ -136,28 +141,36 @@ class _StoreViewScreenState extends State<StoreView> {
                   future: Utils.bLoC.productList(context),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                       data = snapshot.data;
+                      data = snapshot.data;
                       if (_firstSearch) {
                         return GridView.builder(
-                              itemCount: data!.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: (.68),
-                              ),
-                              itemBuilder: (
-                                context,
-                                index,
-                              ) {
-                                return GestureDetector(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (c)=>BlocProvider(
-                                          create: (c)=>ProductDetailsBloc(),
-                                          child: ProductDetailsScreen(data![index].id))));
-                                    },
-                                    child: ProductItem(data: data![index],isLiked: false,));
-                              },
-                            );
+                          itemCount: data!.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: (.68),
+                          ),
+                          itemBuilder: (
+                            context,
+                            index,
+                          ) {
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (c) => BlocProvider(
+                                              create: (c) =>
+                                                  ProductDetailsBloc(),
+                                              child: ProductDetailsScreen(
+                                                  data![index].id))));
+                                },
+                                child: ProductItem(
+                                  data: data![index],
+                                 // isLiked: false,
+                                ));
+                          },
+                        );
                       } else {
                         return performSearch(data!, _query);
                       }
@@ -178,7 +191,7 @@ class _StoreViewScreenState extends State<StoreView> {
               alignment: Alignment.bottomRight,
               child: GestureDetector(
                 onTap: () {
-                   Get.toNamed(Routes.CART);
+                  Get.toNamed(Routes.CART);
                 },
                 child: Container(
                     height: 60,
