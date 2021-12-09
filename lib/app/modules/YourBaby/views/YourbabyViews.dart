@@ -105,12 +105,12 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                             future: Utils.bLoC.monthsList(context),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                List<MonthsModel>? data = snapshot.data;
+
 
                                 return Container(
                                   height: deviceHeight / 12,
                                   child: ListView.builder(
-                                      itemCount: 10,
+                                      itemCount: snapshot.data!.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder:
                                           (BuildContext context, int index) {

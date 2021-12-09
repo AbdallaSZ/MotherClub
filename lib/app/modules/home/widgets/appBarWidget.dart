@@ -8,11 +8,10 @@ import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsScreen.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
-import 'package:motherclub/app/modules/YourBaby/views/baby_data_list.dart';
+import 'package:motherclub/app/modules/article_part/articles.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
@@ -134,9 +133,7 @@ Widget homeAppBar(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
           child: SingleChildScrollView(
-            child: BabyDataList(
-              monthSlug: '',
-            ),
+            child: ChooseForYouWidget(),
           ),
         ),
       ),

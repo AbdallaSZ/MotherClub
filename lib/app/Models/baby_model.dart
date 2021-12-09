@@ -249,6 +249,7 @@ class Post {
     @required this.lastEditorUsedJetpack,
     @required this.yoastWpseoPrimaryMonths,
     @required this.links,
+    @required this.image,
   });
 
   final int? id;
@@ -275,6 +276,7 @@ class Post {
   final SourceImageEnum ?postSourceImage;
   final SourceImage? sourceImage;
   final String ?postUrlSourceImg;
+  final String ?image;
   final UrlSourceImg ?urlSourceImg;
   final String ?yoastWpseoContentScore;
   final YoastWpseoFocuskeywords ?yoastWpseoFocuskeywords;
@@ -309,6 +311,7 @@ class Post {
     editLock: json["_edit_lock"] == null ? null : json["_edit_lock"],
     editLast: json["_edit_last"] == null ? null : json["_edit_last"],
     thumbnailId: json["_thumbnail_id"] == null ? null : json["_thumbnail_id"],
+    image: json["image"] == null ? null : json["image"],
     postSourceImage: json["source_image"] == null ? null : sourceImageEnumValues.map[json["source_image"]],
     sourceImage: json["_source_image"] == null ? null : sourceImageValues.map[json["_source_image"]],
     postUrlSourceImg: json["url_source_img"] == null ? null : json["url_source_img"],
@@ -332,6 +335,7 @@ class Post {
     "status": status == null ? null : statusValues.reverse[status],
     "type": type == null ? null : typeValues.reverse[type],
     "link": link == null ? null : link,
+    "image": image == null ? null : image,
     "title": title == null ? null : title!.toMap(),
     "content": content == null ? null : content!.toMap(),
     "featured_media": featuredMedia == null ? null : featuredMedia,

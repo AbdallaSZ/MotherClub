@@ -32,7 +32,7 @@ Widget ResorcesListCard(Post post,context){
           children: [
           Flexible(
             flex: 2,
-              child: Image.network("https://image.freepik.com/free-photo/cute-young-girl-drinking-juice_23-2148305302.jpg"),),
+              child: Image.network(post.image!),),
               // child: Image.network("${post.sourceImage!}"),),
           Flexible(
             flex: 3,

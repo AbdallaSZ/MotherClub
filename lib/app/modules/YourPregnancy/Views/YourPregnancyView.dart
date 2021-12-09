@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/modules/article_part/article_content.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -108,7 +109,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                           return Container(
                             height: deviceHeight / 12,
                             child: ListView.builder(
-                                itemCount: 10,
+                                itemCount: snapshot2.data!.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
@@ -315,6 +316,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                   ),
                                 ),
                               )),
+
                         ],
                       );
 

@@ -42,7 +42,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: kToolbarHeight + extraHeight,
       title: Text(
         '$title',
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black,fontSize: titleSize),
+
       ),
       // style: Theme.of(context).textTheme.bodyText1.copyWith(
       //   fontWeight: FontWeight.w400,

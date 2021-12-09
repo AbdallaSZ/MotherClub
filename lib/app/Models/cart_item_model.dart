@@ -585,7 +585,7 @@ class Shipping {
     totalPackages: json["total_packages"] == null ? null : json["total_packages"],
     showPackageDetails: json["show_package_details"] == null ? null : json["show_package_details"],
     hasCalculatedShipping: json["has_calculated_shipping"] == null ? null : json["has_calculated_shipping"],
-    packages: json["packages"] == null ? null : Packages.fromMap(json["packages"]),
+    packages: json["packages"] is List ? null : Packages.fromMap(json["packages"]),
   );
 
   Map<String, dynamic> toMap() => {

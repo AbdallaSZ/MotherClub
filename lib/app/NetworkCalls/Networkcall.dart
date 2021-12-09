@@ -65,7 +65,7 @@ class Networkcall {
       ),
     )
         .catchError(
-          (error) {
+      (error) {
         return false;
       },
     );
@@ -126,7 +126,6 @@ class Networkcall {
     return json.decode(response.body);
   }
 
-  //todo API Call For weeks
 
   Future<dynamic> getWeeksAPICall() async {
     var response = await http
@@ -219,14 +218,14 @@ class Networkcall {
     if (response.statusCode != 200) {
       throw Exception('Failed to create CartItem.');
     } else {
-
       return response.body;
     }
   }
 
   Future<String> addCartItem(String id, int quantity, String variation) async {
     final response = await http.post(
-      Uri.parse('https://mothersclub.me//wp-json/cocart/v2/cart/add-item?cart_key=\'${Utils.id}\''),
+      Uri.parse(
+          'https://mothersclub.me//wp-json/cocart/v2/cart/add-item?cart_key=\'${Utils.id}\''),
       body: {
         'id': '$id',
         'quantity': '$quantity',
@@ -245,12 +244,14 @@ class Networkcall {
     }
   }
 
-  Future<String> deleteFromCartItem(String itemId,) async {
+  Future<String> deleteFromCartItem(
+    String itemId,
+  ) async {
     final response = await http.delete(
-      Uri.parse('https://mothersclub.me/wp-json/cocart/v2/cart/item/$itemId?cart_key=\'${Utils.id}\''),
+      Uri.parse(
+          'https://mothersclub.me/wp-json/cocart/v2/cart/item/$itemId?cart_key=\'${Utils.id}\''),
     );
     if (response.statusCode != 200) {
-
       var res = json.decode(response.body);
       return res['message'];
     } else {
@@ -261,7 +262,8 @@ class Networkcall {
 
   Future<String> clearCartItem() async {
     final response = await http.post(
-      Uri.parse('https://mothersclub.me/wp-json/cocart/v2/cart/clear?cart_key=\'${Utils.id}\''),
+      Uri.parse(
+          'https://mothersclub.me/wp-json/cocart/v2/cart/clear?cart_key=\'${Utils.id}\''),
     );
     if (response.statusCode != 200) {
       // If the server did return a 201 CREATED response,
@@ -274,9 +276,6 @@ class Networkcall {
       return 'item deleted';
     }
   }
-
-
-
 
   Future<dynamic> getWishlistByUserId(String userId) async {
     final response = await http.get(
@@ -373,5 +372,14 @@ class Networkcall {
     } else {
       return jsonDecode(response.body);
     }
+  }
+
+  Future<dynamic> getArticles() async {
+    final response = await http.get(
+      Uri.parse(
+        'https://mothersclub.me/pregnancy-we-choose-you',
+      ),
+    );
+      return jsonDecode(response.body);
   }
 }

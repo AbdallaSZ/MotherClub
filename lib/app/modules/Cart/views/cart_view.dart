@@ -12,6 +12,7 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:rxdart/rxdart.dart';
 
 class CartView extends StatefulWidget {
   @override
@@ -19,10 +20,12 @@ class CartView extends StatefulWidget {
 }
 
 class _StoreViewScreenState extends State<CartView> {
+
+  BehaviorSubject<int> rxItemsCount = BehaviorSubject();
   @override
   void initState() {
     // TODO: implement initState
-
+    rxItemsCount.sink.add(0);
     super.initState();
   }
 
@@ -35,7 +38,10 @@ class _StoreViewScreenState extends State<CartView> {
       child: FutureBuilder<dynamic>(
           future: Utils.bLoC.cartItemsList(),
           builder: (context, snapshot) {
-            List<Item>? data = snapshot.data;
+            List<dynamic>? data = snapshot.data;
+            if(data != null)
+            rxItemsCount.sink.add(data.length);
+
             if (snapshot.hasData) {
               return Scaffold(
                 appBar: CustomAppBar(
@@ -151,13 +157,18 @@ class _StoreViewScreenState extends State<CartView> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text("You have ${data!.length} items  in list cart",
-                              style: GoogleFonts.roboto(
-                                fontSize: 13,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.green,
-                              ))
+                          StreamBuilder<int>(
+                            stream: rxItemsCount.stream,
+                            builder: (context, snapshot2) {
+                              return Text("You have ${snapshot2.data} items  in list cart",
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 13,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.green,
+                                  ));
+                            }
+                          )
                         ],
                       ),
                     ),
@@ -169,7 +180,7 @@ class _StoreViewScreenState extends State<CartView> {
 
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: data.length,
+                          itemCount: data!.length,
                           itemBuilder: (context, index) {
                             return Dismissible(
                               background: Container(
@@ -192,7 +203,8 @@ class _StoreViewScreenState extends State<CartView> {
                                         .showSnackBar(SnackBar(
                                             content: Text(
                                                 '${data[index].title} has deleted'))));
-                                setState(() {});
+                                data.removeAt(index);
+                                rxItemsCount.sink.add(data.length);
                               },
                               key: Key(data[index].title!),
                               child: Card(

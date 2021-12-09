@@ -64,6 +64,7 @@ class ForumCommentView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 15),
@@ -79,6 +80,7 @@ class ForumCommentView extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       child: Column(
+
                         children: [
                           Container(
                             // padding:EdgeInsets.fromLTRB(15,17,10,0),
@@ -135,9 +137,10 @@ class ForumCommentView extends StatelessWidget {
                     future:
                         Utils.bLoC.commentsList(this.formsModel.id.toString()),
                     builder: (context, snapshot) {
-                      return snapshot.connectionState == ConnectionState.waiting
+                      return (snapshot.connectionState == ConnectionState.waiting ||!snapshot.hasData||snapshot.data!.length==0)
                           ? Container()
                           : Column(
+
                               children: [
                                 Container(
                                   padding: EdgeInsets.all(10),
