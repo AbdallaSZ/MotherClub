@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:motherclub/app/Models/order_model.dart';
+import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({required this.data, Key? key}) : super(key: key);
@@ -21,8 +23,8 @@ class OrderItem extends StatelessWidget {
             height: 80.89,
             width: 116.25,
           ),
-          Text('${data.total}',),
-          Text('${formatter.format(data.dateCreated!)}',),
+          Text('${data.total}',style: TextStyle(fontSize: 12,color: primary_text_color),),
+          Text('${formatter.format(data.dateCreated!)}',style: TextStyle(fontSize: 10)),
         ],
       ),
     );
