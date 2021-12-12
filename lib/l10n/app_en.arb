@@ -10,6 +10,9 @@
    "store":"Store",
   "@store": {
     "description": "The conventional newborn programmer greeting"
+  }, "error":"Some Error Happened",
+  "@error": {
+    "description": "The conventional newborn programmer greeting"
   },
   "logout":"Log out",
   "@logout": {

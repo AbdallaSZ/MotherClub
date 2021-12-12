@@ -245,7 +245,7 @@ class BLoC {
   try {
     var response = await Utils.networkcall.getCartItems();
 
-      if(cartItems != [])
+      if(response!="[]")
       {
         CartItemModel.fromJson(response).items!.forEach((element) {
       cartItems.add(element);

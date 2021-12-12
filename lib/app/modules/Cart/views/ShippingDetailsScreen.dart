@@ -7,6 +7,8 @@ import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Dialogs/Dialogs.dart';
+import 'package:motherclub/app/modules/orders/OrderRequestModel.dart';
+import 'package:motherclub/app/modules/orders/orderRepo.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/EditTextWithoutIcon.dart';
@@ -15,7 +17,9 @@ import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ShippingDetailsScreen extends StatefulWidget {
-  const ShippingDetailsScreen({Key? key}) : super(key: key);
+  List <dynamic>?data ;
+  double total ;
+  ShippingDetailsScreen(this.data, this.total);
 
   @override
   _ShippingDetailsScreenState createState() => _ShippingDetailsScreenState();
@@ -179,7 +183,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       screentTitle: "Pay with Card",
       billingDetails: billingDetails,
       shippingDetails: shippingDetails,
-      amount: 20.0,
+      amount: widget.total,
       currencyCode: "AED",
       merchantCountryCode: "ae",
     );
@@ -189,9 +193,15 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
+    createOrder(shippingDetails, billingDetails);
     FlutterPaytabsBridge.startCardPayment(configuration, (event)async {
         print(event);
-      if (event["status"] == "success") {
+      if(event["status"] == "event"){
+        await showDialog(context: context, builder:  (c){
+          return Dialogs.warningDialog(Utils.labels!.warning,Utils.labels!.error, Utils.labels!.ok, backFunction);
+        });
+      }
+       else if (event["status"] == "success") {
 
          if(event["data"]["responseStatus"] == 'A') {
           await  showDialog(context: context, builder:  (c){
@@ -206,7 +216,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
          }
         var transactionDetails = event["data"];
 
-      } else if (event["status"] == "error") {
+      }
+      else if (event["status"] == "error") {
       await showDialog(context: context, builder:  (c){
           return Dialogs.warningDialog(Utils.labels!.warning, event["data"]["paymentResult"]["responseMessage"], Utils.labels!.ok, backFunction);
         });
@@ -226,7 +237,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         cartId: "12433",
         cartDescription: "Mother Club",
         merchantName: "Mother club Store",
-        amount: 20.0,
+        amount: widget.total,
         currencyCode: "AED",
         merchantCountryCode: "ae",
         merchantApplePayIndentifier: "merchant.com.bunldeId",
@@ -268,6 +279,31 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       return true;
     }
     return false;
+  }
+
+  void createOrder(ShippingDetails shippingDetails , BillingDetails billingDetails) async{
+    var productData = getProductData();
+    OrderRequestModel orderRequestModel = OrderRequestModel(
+    "ds","asdas",true,billingDetails,shippingDetails,
+        productData,
+        [
+      ShippingLines(
+        methodId: "",
+        methodTitle: "",
+        total: ""
+      ),
+    ]
+    );
+    OrderRepo.createRepo(orderRequestModel);
+
+  }
+
+  List<LineItems> getProductData() {
+    List<LineItems> lineItems =[];
+    for ( var i in widget.data!){
+    lineItems.add(LineItems(i.id, i.quantity.value));
+    }
+    return lineItems;
   }
 }
 

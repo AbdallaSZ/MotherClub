@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/cart_item_model.dart';
 
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Cart/views/ShippingDetailsScreen.dart';
@@ -20,13 +21,19 @@ class CartView extends StatefulWidget {
 class _StoreViewScreenState extends State<CartView> {
 
   BehaviorSubject<int> rxItemsCount = BehaviorSubject();
+  List data = [];
   @override
   void initState() {
     // TODO: implement initState
     rxItemsCount.sink.add(0);
     super.initState();
   }
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    rxItemsCount.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -41,6 +48,7 @@ class _StoreViewScreenState extends State<CartView> {
             rxItemsCount.sink.add(data.length);
 
             if (snapshot.hasData) {
+
               return Scaffold(
                 appBar: CustomAppBar(
                   onBackButtonPressed: () {
@@ -69,7 +77,7 @@ class _StoreViewScreenState extends State<CartView> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(Utils.labels!.amd + ' 180',
+                            Text(Utils.labels!.amd+" " + getTotal(data),
                                 style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
@@ -90,7 +98,7 @@ class _StoreViewScreenState extends State<CartView> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(Utils.labels!.amd + '180',
+                            Text(Utils.labels!.amd + "0",
                                 style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
@@ -114,7 +122,7 @@ class _StoreViewScreenState extends State<CartView> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text(Utils.labels!.amd + '180',
+                            Text(Utils.labels!.amd + " "+getTotal(data),
                                 style: GoogleFonts.roboto(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
@@ -131,7 +139,7 @@ class _StoreViewScreenState extends State<CartView> {
                             context, onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (c) {
-                            return ShippingDetailsScreen();
+                            return ShippingDetailsScreen(data,double.parse(getTotal(data!)));
                           }));
                         }),
                       ],
@@ -336,6 +344,14 @@ class _StoreViewScreenState extends State<CartView> {
           }),
       //  }),
     );
+  }
+
+  String getTotal(List<dynamic>? data) {
+    double total = 0 ;
+    for( var i in data!){
+   total+= i!.quantity.value * double.parse(i.price) ;
+  }
+    return total.toString();
   }
 
 // Widget? _showBottomSheet() {

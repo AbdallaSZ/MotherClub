@@ -43,9 +43,16 @@ class NetworkService {
       {dynamic headers = const {"Content-Type": "application/json"}})async {
    var dataEncoded = jsonEncode(data);
    dio.options.headers['content-Type'] = 'application/json';
-   var response = await dio.post(BASE_URL+apiBaseUrl, data:FormData.fromMap(data));
+   var response = await dio.post(BASE_URL+apiBaseUrl, data:FormData.fromMap(data),);
     //var decoded = decodeTheResponse(response.data);
     return response.data;
+  }static Future<dynamic> createOrder(String apiBaseUrl, dynamic data,
+      {dynamic headers = const {"Content-Type": "application/json"}})async {
+   var dataEncoded = jsonEncode(data);
+   dio.options.headers['content-Type'] = 'application/json';
+   var response = await http.post(Uri.parse(BASE_URL+apiBaseUrl), body:dataEncoded,);
+    var decoded = decodeTheResponse(response);
+    return decoded;
   }
  static decodeTheResponse (http.Response response){
     return jsonDecode(response.body);
