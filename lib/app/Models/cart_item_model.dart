@@ -43,7 +43,7 @@ class CartItemModel {
   final List<dynamic> ?crossSells;
   final List<dynamic> ?notices;
 
-  factory CartItemModel.fromJson(String str) => CartItemModel.fromMap(json.decode(str));
+  factory CartItemModel.fromJson(String str) => CartItemModel.fromMap(jsonDecode(str));
 
   String toJson() => json.encode(toMap());
 
@@ -60,7 +60,7 @@ class CartItemModel {
     needsShipping: json["needs_shipping"] == null ? null : json["needs_shipping"],
     shipping: json["shipping"] == null ? null : Shipping.fromMap(json["shipping"]),
     fees: json["fees"] == null ? null : List<dynamic>.from(json["fees"].map((x) => x)),
-    taxes: json["taxes"] == null ? null : List<dynamic>.from(json["taxes"].map((x) => x)),
+    //taxes: json["taxes"] == null ? null : List<dynamic>.from(json["taxes"].map((x) => x)),
     totals: json["totals"] == null ? null : CartItemModelTotals.fromMap(json["totals"]),
     removedItems: json["removed_items"] == null ? null : List<dynamic>.from(json["removed_items"].map((x) => x)),
     crossSells: json["cross_sells"] == null ? null : List<dynamic>.from(json["cross_sells"].map((x) => x)),
@@ -514,7 +514,7 @@ class TaxData {
     this.total,
   });
 
-  final List<dynamic> ?subtotal;
+  final Map<String,dynamic> ?subtotal;
   final List<dynamic> ?total;
 
   factory TaxData.fromJson(String str) => TaxData.fromMap(json.decode(str));
@@ -522,12 +522,9 @@ class TaxData {
   String toJson() => json.encode(toMap());
 
   factory TaxData.fromMap(Map<String, dynamic> json) => TaxData(
-    subtotal: json["subtotal"] == null ? null : List<dynamic>.from(json["subtotal"].map((x) => x)),
-    total: json["total"] == null ? null : List<dynamic>.from(json["total"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
-    "subtotal": subtotal == null ? null : List<dynamic>.from(subtotal!.map((x) => x)),
     "total": total == null ? null : List<dynamic>.from(total!.map((x) => x)),
   };
 }
@@ -712,7 +709,7 @@ class FlatRate4 {
     label: json["label"] == null ? null : json["label"],
     cost: json["cost"] == null ? null : json["cost"],
     html: json["html"] == null ? null : json["html"],
-    taxes: json["taxes"] == null ? null : List<dynamic>.from(json["taxes"].map((x) => x)),
+    //taxes: json["taxes"] == null ? null : List<dynamic>.from(json["taxes"].map((x) => x)),
     chosenMethod: json["chosen_method"] == null ? null : json["chosen_method"],
   );
 
