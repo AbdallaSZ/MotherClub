@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
-import 'package:motherclub/app/Models/cart_item_model.dart';
+
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Cart/views/ShippingDetailsScreen.dart';
-import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';

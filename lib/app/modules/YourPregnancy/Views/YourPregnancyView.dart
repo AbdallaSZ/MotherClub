@@ -315,12 +315,9 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                     ],
                                   ),
                                 ),
-                              )),
-
+                              ),),
                         ],
                       );
-
-
               }),
         ),
       ]),

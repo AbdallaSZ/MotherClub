@@ -11,6 +11,7 @@ import 'package:motherclub/app/Models/WeeksModel.dart';
 import 'package:motherclub/app/Models/baby_model.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/choose_for_you_model.dart';
+import 'package:motherclub/app/Models/order_model.dart';
 import 'package:motherclub/app/Models/replies_model.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/Models/wishlist_item_model.dart';
@@ -379,6 +380,17 @@ class BLoC {
       articlesList.add(chooseForYouModel);
     });
     return articlesList;
+  }
+
+  Future<List<OrderModel>> orders() async {
+    List<OrderModel> ordersList = <OrderModel>[];
+    var response = await Utils.networkcall.getOrders();
+
+    response.forEach((newFrom) {
+      OrderModel order = OrderModel.fromMap(newFrom);
+      ordersList.add(order);
+    });
+    return ordersList;
   }
 
 }
