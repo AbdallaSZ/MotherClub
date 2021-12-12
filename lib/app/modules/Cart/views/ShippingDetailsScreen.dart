@@ -183,7 +183,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       screentTitle: "Pay with Card",
       billingDetails: billingDetails,
       shippingDetails: shippingDetails,
-      amount: 20.0,
+      amount: widget.total,
       currencyCode: "AED",
       merchantCountryCode: "ae",
     );
