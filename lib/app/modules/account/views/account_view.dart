@@ -11,6 +11,7 @@ import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart'
 import 'package:motherclub/app/modules/feedback/feedback_view.dart';
 import 'package:motherclub/app/modules/orders/order_item.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
+import 'package:motherclub/common/Constant/AppConstant.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
@@ -48,9 +49,7 @@ class _AccountViewState extends State<AccountView> {
             InfoAccountWidget("${Utils.name}", "Age: 29", "Week", "9-12",
                 deviceHeight / 10, deviceWidth, context),
 
-
             FutureBuilder<List<OrderModel>>(
-
               future: Utils.bLoC.orders(),
               builder: (context, snapshot) {
                 return Column(
@@ -100,7 +99,8 @@ class _AccountViewState extends State<AccountView> {
                                 child: Center(
                                   child: Text(
                                     snapshot.hasData
-                                        ?  snapshot.data!.length.toString() : '0',
+                                        ? snapshot.data!.length.toString()
+                                        : '0',
                                     style: GoogleFonts.roboto(
                                         fontSize: 13,
                                         fontWeight: FontWeight.w400,
@@ -137,14 +137,94 @@ class _AccountViewState extends State<AccountView> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: snapshot.hasData
-                          ?  ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                          ? ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight: 130, minHeight: 56.0),
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
-                                  return OrderItem(data: snapshot.data![index]);
+                                  return Stack(
+                                    children: [
+                                      OrderItem(data: snapshot.data![index]),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Align(
+                                          alignment: Alignment.topLeft,
+                                          child: GestureDetector(
+                                              onTap: () async {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (c) {
+                                                      return AlertDialog(
+                                                        title: Text(Utils
+                                                            .labels!
+                                                            .remove_order),
+                                                        actions: [
+                                                          ElevatedButton(
+                                                            child: Text(Utils
+                                                                .labels!.yes),
+                                                            onPressed:
+                                                                () async {
+                                                              await Utils.bLoC
+                                                                  .delOrder(snapshot
+                                                                      .data![
+                                                                          index]
+                                                                      .id
+                                                                      .toString())
+                                                                  .then(
+                                                                    (value) =>
+                                                                        ScaffoldMessenger
+                                                                            .of(
+                                                                      context,
+                                                                    ).showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            const Text('Order deleted'),
+                                                                        duration:
+                                                                            const Duration(
+                                                                          seconds:
+                                                                              3,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                              setState(() {
+                                                                print(
+                                                                    'deleted');
+                                                              });
+
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                          ElevatedButton(
+                                                            child: Text(Utils
+                                                                .labels!
+                                                                .cancel),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    primary:
+                                                                        Colors
+                                                                            .red),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                              child: Icon(Icons
+                                                  .delete_forever_outlined)),
+                                        ),
+                                      ),
+                                    ],
+                                  );
                                 },
                               ),
                             )

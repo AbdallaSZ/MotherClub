@@ -460,7 +460,10 @@
   },"shopping_products":"Shopping products",
   "@shopping_products": {
     "description": "The conventional newborn programmer greeting"
-  }
+  },
 
-
+  "remove_order" : "Deleting orders",
+  "@remove_order": {
+    "description": "The conventional newborn programmer greeting"
   }
+}
