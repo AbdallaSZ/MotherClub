@@ -23,7 +23,11 @@ class _OrderDetailsState extends State<OrderDetails> {
     rxItemsCount.sink.add(false);
     super.initState();
   }
-
+  @override
+  void dispose() {
+    rxItemsCount.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

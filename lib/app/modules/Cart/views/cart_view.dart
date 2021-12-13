@@ -1,9 +1,9 @@
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/Models/cart_item_model.dart';
+
 
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/Cart/views/ShippingDetailsScreen.dart';
@@ -24,13 +24,11 @@ class _StoreViewScreenState extends State<CartView> {
   List data = [];
   @override
   void initState() {
-    // TODO: implement initState
     rxItemsCount.sink.add(0);
     super.initState();
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     rxItemsCount.close();
     super.dispose();
   }
@@ -264,7 +262,7 @@ class _StoreViewScreenState extends State<CartView> {
                                                       data[index]
                                                           .meta!
                                                           .variation!
-                                                          .age!,
+                                                          .age!.toString(),
                                                       style: GoogleFonts.roboto(
                                                         fontSize: 14,
                                                         fontStyle:
