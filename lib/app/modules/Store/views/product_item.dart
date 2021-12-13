@@ -473,8 +473,8 @@ class _ProductItemState extends State<ProductItem> {
                                   mainAxisAlignment:
                                   MainAxisAlignment.center,
                                   children: [
-                                    snapshot.hasData
-                                        ? Container(
+                                    //snapshot.hasData ?
+                                    Container(
                                       alignment:
                                       Alignment.center,
                                       width:
@@ -513,7 +513,7 @@ class _ProductItemState extends State<ProductItem> {
                                                         .center,
                                                     child:
                                                     Text(
-                                                      'Choose Wishlist:',
+                                                      '${Utils.labels!.no_wish_list_yet}',
                                                     ),
                                                   ),
                                                   itemHeight:
@@ -558,33 +558,33 @@ class _ProductItemState extends State<ProductItem> {
                                           ],
                                         ),
                                       ),
-                                    )
-                                        : Container(
-                                      decoration:
-                                      BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(10),
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: .7,
-                                        ),
-                                      ),
-                                      width:
-                                      Utils.deviceWidth /
-                                          3,
-                                      height:
-                                      Utils.deviceHeight /
-                                          20,
-                                      child: Center(
-                                        child: Text(
-                                          'No Wish list yet',
-                                          style: TextStyle(
-                                              color: Colors
-                                                  .grey),
-                                        ),
-                                      ),
                                     ),
+                                    //     : Container(
+                                    //   decoration:
+                                    //   BoxDecoration(
+                                    //     borderRadius:
+                                    //     BorderRadius
+                                    //         .circular(10),
+                                    //     border: Border.all(
+                                    //       color: Colors.grey,
+                                    //       width: .7,
+                                    //     ),
+                                    //   ),
+                                    //   width:
+                                    //   Utils.deviceWidth /
+                                    //       3,
+                                    //   height:
+                                    //   Utils.deviceHeight /
+                                    //       20,
+                                    //   child: Center(
+                                    //     child: Text(
+                                    //       'No Wish list yet',
+                                    //       style: TextStyle(
+                                    //           color: Colors
+                                    //               .grey),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     IconButton(
                                         onPressed: () => showDialog(
                                             context: context,

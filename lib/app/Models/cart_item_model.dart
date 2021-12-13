@@ -27,7 +27,7 @@ class CartItemModel {
 
   final String ?cartHash;
   final String ?cartKey;
-  final Currency? currency;
+  final Currency ?currency;
   final Customer ?customer;
   final List<Item> ?items;
   final int ?itemCount;
@@ -37,11 +37,11 @@ class CartItemModel {
   final bool ?needsShipping;
   final Shipping ?shipping;
   final List<dynamic> ?fees;
-  final Taxes? taxes;
+  final Taxes ?taxes;
   final CartItemModelTotals ?totals;
   final List<RemovedItem> ?removedItems;
-  final List<dynamic> ?crossSells;
-  final List<dynamic> ?notices;
+  final List<dynamic>?crossSells;
+  final List<dynamic>?notices;
 
   factory CartItemModel.fromJson(String str) => CartItemModel.fromMap(json.decode(str));
 
@@ -58,11 +58,11 @@ class CartItemModel {
     coupons: json["coupons"] == null ? null : List<dynamic>.from(json["coupons"].map((x) => x)),
     needsPayment: json["needs_payment"] == null ? null : json["needs_payment"],
     needsShipping: json["needs_shipping"] == null ? null : json["needs_shipping"],
-    shipping: json["shipping"] == null ? null : Shipping.fromMap(json["shipping"]),
+    //shipping: json["shipping"] == null ? null : Shipping.fromMap(json["shipping"]),
     fees: json["fees"] == null ? null : List<dynamic>.from(json["fees"].map((x) => x)),
     taxes: json["taxes"] == null ? null : Taxes.fromMap(json["taxes"]),
     totals: json["totals"] == null ? null : CartItemModelTotals.fromMap(json["totals"]),
-    removedItems: json["removed_items"] == null ? null : List<RemovedItem>.from(json["removed_items"].map((x) => RemovedItem.fromMap(x))),
+  //  removedItems: json["removed_items"] == null ? null : List<RemovedItem>.from(json["removed_items"].map((x) => RemovedItem.fromMap(x))),
     crossSells: json["cross_sells"] == null ? null : List<dynamic>.from(json["cross_sells"].map((x) => x)),
     notices: json["notices"] == null ? null : List<dynamic>.from(json["notices"].map((x) => x)),
   );
@@ -78,11 +78,11 @@ class CartItemModel {
     "coupons": coupons == null ? null : List<dynamic>.from(coupons!.map((x) => x)),
     "needs_payment": needsPayment == null ? null : needsPayment,
     "needs_shipping": needsShipping == null ? null : needsShipping,
-    "shipping": shipping == null ? null : shipping!.toMap(),
+    //"shipping": shipping == null ? null : shipping!.toMap(),
     "fees": fees == null ? null : List<dynamic>.from(fees!.map((x) => x)),
     "taxes": taxes == null ? null : taxes!.toMap(),
     "totals": totals == null ? null : totals!.toMap(),
-    "removed_items": removedItems == null ? null : List<dynamic>.from(removedItems!.map((x) => x.toMap())),
+   // "removed_items": removedItems == null ? null : List<dynamic>.from(removedItems!.map((x) => x.toMap())),
     "cross_sells": crossSells == null ? null : List<dynamic>.from(crossSells!.map((x) => x)),
     "notices": notices == null ? null : List<dynamic>.from(notices!.map((x) => x)),
   };
@@ -102,10 +102,10 @@ class Currency {
   final String ?currencyCode;
   final String ?currencySymbol;
   final int ?currencyMinorUnit;
-  final String?currencyDecimalSeparator;
-  final String?currencyThousandSeparator;
-  final String?currencyPrefix;
-  final String?currencySuffix;
+  final String ?currencyDecimalSeparator;
+  final String ?currencyThousandSeparator;
+  final String ?currencyPrefix;
+  final String ?currencySuffix;
 
   factory Currency.fromJson(String str) => Currency.fromMap(json.decode(str));
 
@@ -138,7 +138,7 @@ class Customer {
     this.shippingAddress,
   });
 
-  final BillingAddress? billingAddress;
+  final BillingAddress ?billingAddress;
   final ShippingAddress ?shippingAddress;
 
   factory Customer.fromJson(String str) => Customer.fromMap(json.decode(str));
@@ -278,15 +278,15 @@ class Item {
   });
 
   final String ?itemKey;
-  final int ?id;
+  final int? id;
   final String ?name;
   final String ?title;
   final String ?price;
   final Quantity ?quantity;
   final ItemTaxData ?taxData;
   final ItemTotals ?totals;
-  final String? slug;
-  final Meta ?meta;
+  final String ?slug;
+  final ItemMeta ?meta;
   final String? backorders;
   final CartItemData? cartItemData;
   final String ?featuredImage;
@@ -305,7 +305,7 @@ class Item {
     taxData: json["tax_data"] == null ? null : ItemTaxData.fromMap(json["tax_data"]),
     totals: json["totals"] == null ? null : ItemTotals.fromMap(json["totals"]),
     slug: json["slug"] == null ? null : json["slug"],
-    meta: json["meta"] == null ? null : Meta.fromMap(json["meta"]),
+    meta: json["meta"] == null ? null : ItemMeta.fromMap(json["meta"]),
     backorders: json["backorders"] == null ? null : json["backorders"],
     cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
     featuredImage: json["featured_image"] == null ? null : json["featured_image"],
@@ -398,8 +398,8 @@ final attributePaAgeValues = EnumValues({
   "0-3-months": AttributePaAge.THE_03_MONTHS
 });
 
-class Meta {
-  Meta({
+class ItemMeta {
+  ItemMeta({
     this.productType,
     this.sku,
     this.dimensions,
@@ -407,30 +407,30 @@ class Meta {
     this.variation,
   });
 
-  final ProductType ?productType;
+  final String ?productType;
   final Sku ?sku;
   final Dimensions? dimensions;
   final int? weight;
   final MetaVariation ?variation;
 
-  factory Meta.fromJson(String str) => Meta.fromMap(json.decode(str));
+  factory ItemMeta.fromJson(String str) => ItemMeta.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Meta.fromMap(Map<String, dynamic> json) => Meta(
-    productType: json["product_type"] == null ? null : productTypeValues.map![json["product_type"]],
+  factory ItemMeta.fromMap(Map<String, dynamic> json) => ItemMeta(
+    productType: json["product_type"] == null ? null : json["product_type"],
     sku: json["sku"] == null ? null : skuValues.map![json["sku"]],
     dimensions: json["dimensions"] == null ? null : Dimensions.fromMap(json["dimensions"]),
     weight: json["weight"] == null ? null : json["weight"],
-    variation: json["variation"] == null ? null : MetaVariation.fromMap(json["variation"]),
+    variation: json["variation"] == null || json["variation"] is List ?  null : MetaVariation.fromMap(json["variation"]),
   );
 
   Map<String, dynamic> toMap() => {
-    "product_type": productType == null ? null : productTypeValues.reverse![productType],
+    "product_type": productType == null ? null : productType,
     "sku": sku == null ? null : skuValues.reverse![sku],
     "dimensions": dimensions == null ? null : dimensions!.toMap(),
     "weight": weight == null ? null : weight,
-    "variation": variation == null ? null : variation!.toMap(),
+    "variation": variation,
   };
 }
 
@@ -472,13 +472,7 @@ final unitValues = EnumValues({
   "cm": Unit.CM
 });
 
-enum ProductType { VARIATION }
-
-final productTypeValues = EnumValues({
-  "variation": ProductType.VARIATION
-});
-
-enum Sku { EMPTY, BFF01, MB01 }
+enum Sku { EMPTY, MB01, BFF01 }
 
 final skuValues = EnumValues({
   "BFF01": Sku.BFF01,
@@ -491,15 +485,16 @@ class MetaVariation {
     this.age,
   });
 
-  final Age ?age;
+  final String ?age;
 
   factory MetaVariation.fromJson(String str) => MetaVariation.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory MetaVariation.fromMap(Map<String, dynamic> json) => MetaVariation(
-    age: json["Age"] == null ? null : ageValues.map![json["Age"]],
+    age: json["Age"] == null ? null : json["Age"],
   );
+
 
   Map<String, dynamic> toMap() => {
     "Age": age == null ? null : ageValues.reverse![age],
@@ -569,14 +564,14 @@ class Subtotal {
     this.the1,
   });
 
-  final int ?the1;
+  final double ?the1;
 
   factory Subtotal.fromJson(String str) => Subtotal.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Subtotal.fromMap(Map<String, dynamic> json) => Subtotal(
-    the1: json["1"] == null ? null : json["1"],
+    the1: json["1"] == null ? null : json["1"].toDouble(),
   );
 
   Map<String, dynamic> toMap() => {
@@ -593,9 +588,9 @@ class ItemTotals {
   });
 
   final int ?subtotal;
-  final int ?subtotalTax;
+  final double ?subtotalTax;
   final int ?total;
-  final int ?tax;
+  final double ?tax;
 
   factory ItemTotals.fromJson(String str) => ItemTotals.fromMap(json.decode(str));
 
@@ -603,9 +598,9 @@ class ItemTotals {
 
   factory ItemTotals.fromMap(Map<String, dynamic> json) => ItemTotals(
     subtotal: json["subtotal"] == null ? null : json["subtotal"],
-    subtotalTax: json["subtotal_tax"] == null ? null : json["subtotal_tax"],
+    subtotalTax: json["subtotal_tax"] == null ? null : json["subtotal_tax"].toDouble(),
     total: json["total"] == null ? null : json["total"],
-    tax: json["tax"] == null ? null : json["tax"],
+    tax: json["tax"] == null ? null : json["tax"].toDouble(),
   );
 
   Map<String, dynamic> toMap() => {
@@ -642,7 +637,7 @@ class RemovedItem {
   final RemovedItemTaxData ?taxData;
   final ItemTotals ?totals;
   final String ?slug;
-  final Meta? meta;
+  final RemovedItemMeta ?meta;
   final String ?backorders;
   final CartItemData ?cartItemData;
   final String ?featuredImage;
@@ -661,7 +656,7 @@ class RemovedItem {
     taxData: json["tax_data"] == null ? null : RemovedItemTaxData.fromMap(json["tax_data"]),
     totals: json["totals"] == null ? null : ItemTotals.fromMap(json["totals"]),
     slug: json["slug"] == null ? null : json["slug"],
-    meta: json["meta"] == null ? null : Meta.fromMap(json["meta"]),
+    meta: json["meta"] == null ? null : RemovedItemMeta.fromMap(json["meta"]),
     backorders: json["backorders"] == null ? null : json["backorders"],
     cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
     featuredImage: json["featured_image"] == null ? null : json["featured_image"],
@@ -684,6 +679,48 @@ class RemovedItem {
   };
 }
 
+class RemovedItemMeta {
+  RemovedItemMeta({
+    this.productType,
+    this.sku,
+    this.dimensions,
+    this.weight,
+    this.variation,
+  });
+
+  final ProductType ?productType;
+  final Sku ?sku;
+  final Dimensions? dimensions;
+  final int ?weight;
+  final MetaVariation ?variation;
+
+  factory RemovedItemMeta.fromJson(String str) => RemovedItemMeta.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory RemovedItemMeta.fromMap(Map<String, dynamic> json) => RemovedItemMeta(
+    productType: json["product_type"] == null ? null : productTypeValues.map![json["product_type"]],
+    sku: json["sku"] == null ? null : skuValues.map![json["sku"]],
+    dimensions: json["dimensions"] == null ? null : Dimensions.fromMap(json["dimensions"]),
+    weight: json["weight"] == null ? null : json["weight"],
+    variation: json["variation"] == null ? null : MetaVariation.fromMap(json["variation"]),
+  );
+
+  Map<String, dynamic> toMap() => {
+    "product_type": productType == null ? null : productTypeValues.reverse![productType],
+    "sku": sku == null ? null : skuValues.reverse![sku],
+    "dimensions": dimensions == null ? null : dimensions!.toMap(),
+    "weight": weight == null ? null : weight,
+    "variation": variation == null ? null : variation!.toMap(),
+  };
+}
+
+enum ProductType { VARIATION }
+
+final productTypeValues = EnumValues({
+  "variation": ProductType.VARIATION
+});
+
 class RemovedItemTaxData {
   RemovedItemTaxData({
     this.subtotal,
@@ -698,8 +735,9 @@ class RemovedItemTaxData {
   String toJson() => json.encode(toMap());
 
   factory RemovedItemTaxData.fromMap(Map<String, dynamic> json) => RemovedItemTaxData(
-    subtotal: json["subtotal"] == null ? null : List<dynamic>.from(json["subtotal"].map((x) => x)),
-    total: json["total"] == null ? null : List<dynamic>.from(json["total"].map((x) => x)),
+    subtotal: json["subtotal"] == null || json["subtotal"] is List ?  null : json["subtotal"],
+    total: json["total"] == null || json["total"] is List ?  null : json["total"],
+    //subtotal: json["subtotal"] == null ? null : List<dynamic>.from(json["subtotal"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
@@ -717,8 +755,8 @@ class Shipping {
   });
 
   final int ?totalPackages;
-  final bool ?showPackageDetails;
-  final bool ?hasCalculatedShipping;
+  final bool? showPackageDetails;
+  final bool? hasCalculatedShipping;
   final Packages ?packages;
 
   factory Shipping.fromJson(String str) => Shipping.fromMap(json.decode(str));
@@ -770,7 +808,7 @@ class Default {
     this.formattedDestination,
   });
 
-  final String ?packageName;
+  final String? packageName;
   final Rates ?rates;
   final String ?packageDetails;
   final int ?index;
@@ -836,12 +874,12 @@ class FlatRate4 {
     this.chosenMethod,
   });
 
-  final String ?key;
-  final String ?methodId;
+  final String? key;
+  final String? methodId;
   final int ?instanceId;
   final String ?label;
-  final String? cost;
-  final String? html;
+  final String ?cost;
+  final String ?html;
   final Subtotal? taxes;
   final bool ?chosenMethod;
 
@@ -886,11 +924,11 @@ class FreeShipping1 {
 
   final String ?key;
   final String ?methodId;
-  final int ?instanceId;
-  final String ?label;
+  final int? instanceId;
+  final String? label;
   final String ?cost;
   final String ?html;
-  final List<dynamic>? taxes;
+  final List<dynamic> ?taxes;
   final bool ?chosenMethod;
 
   factory FreeShipping1.fromJson(String str) => FreeShipping1.fromMap(json.decode(str));
@@ -925,7 +963,7 @@ class Taxes {
     this.aeTax1,
   });
 
-  final AeTax1 ?aeTax1;
+  final AeTax1? aeTax1;
 
   factory Taxes.fromJson(String str) => Taxes.fromMap(json.decode(str));
 

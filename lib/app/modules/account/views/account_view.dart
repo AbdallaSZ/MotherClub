@@ -10,6 +10,7 @@ import 'package:motherclub/app/modules/WishList/views/wishlist_list_view.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/modules/feedback/feedback_view.dart';
 import 'package:motherclub/app/modules/orders/order_item.dart';
+import 'package:motherclub/app/modules/orders/orders_gridview.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/AppConstant.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -121,14 +122,22 @@ class _AccountViewState extends State<AccountView> {
                                 [CustomButton_Color, CustomButton_Second_Color],
                               );
                             },
-                            child: Text(
-                              Utils.labels!.see_all,
-                              style: GoogleFonts.roboto(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: 0.25,
-                                  color: Text_color),
+                            child: GestureDetector(
+                             onTap: (){
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => OrderGridView()),
+                               );
+                             },
+                              child: Text(
+                                Utils.labels!.see_all,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: 0.25,
+                                    color: Text_color),
+                              ),
                             ),
                           ),
                         ],
@@ -136,10 +145,10 @@ class _AccountViewState extends State<AccountView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: snapshot.hasData
+                      child:(snapshot.hasData && snapshot.data!.length != 0)
                           ? ConstrainedBox(
                               constraints: BoxConstraints(
-                                  maxHeight: 130, minHeight: 56.0),
+                                  maxHeight: 130, minHeight: 0),
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -228,7 +237,7 @@ class _AccountViewState extends State<AccountView> {
                                 },
                               ),
                             )
-                          : Container(),
+                          : Container(height: 0,),
                     ),
                   ],
                 );
