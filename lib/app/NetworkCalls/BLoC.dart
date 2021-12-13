@@ -53,8 +53,6 @@ class BLoC {
   }
 
   Future<ProductModel> getSpecificProduct(String productId) async {
-
-
     var dataFromResponse =
         await Utils.networkcall.getProductsDetails(productId);
 
@@ -78,7 +76,9 @@ class BLoC {
         regular_price: dataFromResponse['regular_price'].toString(),
         on_sale: dataFromResponse['on_sale'],
         total_sales: dataFromResponse['total_sales'].toString(),
-        imageslist: imagesOfProductList);
+        imageslist: imagesOfProductList,
+
+    );
     return productModel;
   }
 
@@ -391,6 +391,14 @@ class BLoC {
       ordersList.add(order);
     });
     return ordersList;
+  }
+  Future<void> delOrder(String orderId) async {
+ try {
+   await Utils.networkcall.deleteOrder(orderId);
+ } on Exception catch (e) {
+   print(e);
+ }
+
   }
 
 }

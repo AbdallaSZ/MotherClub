@@ -64,79 +64,76 @@ class _StoreViewScreenState extends State<StoreView> {
             child: Column(children: [
               // AppBarWidget("Store", deviceHeight / 9.4, deviceWidth, context),
 
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Card(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: deviceHeight / 17,
-                        width: deviceWidth / 1.09,
-                        // alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          border: Border.all(color: white_color, width: 0.5),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            print("tapped");
-                            DataSearch myDataSearch = DataSearch(data);
-                            var result = showSearch(
-                                context: context, delegate: myDataSearch);
-                            result.then((value) {
-                              if (value != null) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (c) => BlocProvider(
-                                            create: (c) => ProductDetailsBloc(),
-                                            child: ProductDetailsScreen(
-                                                value.productId!))));
-                              }
-                            });
-                          },
-                          child: TextFormField(
-                            controller: _searchview,
-                            enabled: false,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Black_textColor,
-                              ),
-
-                              labelText: Utils.labels!.search_product,
-                              labelStyle: Theme.of(context).textTheme.bodyText2,
-                              //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              Card(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: deviceHeight / 17,
+                      width: deviceWidth / 1.09,
+                      // alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        border: Border.all(color: white_color, width: 0.5),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          print("tapped");
+                          DataSearch myDataSearch = DataSearch(data);
+                          var result = showSearch(
+                              context: context, delegate: myDataSearch);
+                          result.then((value) {
+                            if (value != null) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (c) => BlocProvider(
+                                          create: (c) => ProductDetailsBloc(),
+                                          child: ProductDetailsScreen(
+                                              value.productId!))));
+                            }
+                          });
+                        },
+                        child: TextFormField(
+                          controller: _searchview,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Black_textColor,
                             ),
+
+                            labelText: Utils.labels!.search_product,
+                            labelStyle: Theme.of(context).textTheme.bodyText2,
+                            //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                           ),
                         ),
                       ),
-                      // SizedBox(width: 10,),
-                      // Icon(Icons.sort,color: Colors.black,size: 25,),
-                      /*Icon(Icons.arrow_back,color: Colors.black,),
-                              SizedBox(width: 20,),
-                              Text('Category List',style: Theme.of(context).textTheme.headline1,),
+                    ),
+                    // SizedBox(width: 10,),
+                    // Icon(Icons.sort,color: Colors.black,size: 25,),
+                    /*Icon(Icons.arrow_back,color: Colors.black,),
+                            SizedBox(width: 20,),
+                            Text('Category List',style: Theme.of(context).textTheme.headline1,),
 */
-                    ],
-                  ),
+                  ],
                 ),
               ),
-              SizedBox(height: 0),
+
 
               Container(
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
-                height: deviceHeight,
+                height: deviceHeight - 120,
                 child: FutureBuilder<List<ProductModel>>(
                   future: Utils.bLoC.productList(context),
                   builder: (context, snapshot) {
