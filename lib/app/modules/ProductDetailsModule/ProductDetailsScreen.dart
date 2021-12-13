@@ -40,7 +40,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
     productDetailsBloc = BlocProvider.of<ProductDetailsBloc>(context);
     productDetailsBloc!.add(ProductDetailsEvent(widget.id));
     itemNumberController.text = 1.toString();
-
+    rxItemsCount.sink.add(1);
     tabController = TabController(
       initialIndex: 0,
       length: 2,
@@ -236,7 +236,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
           SizedBox(
             height: 10,
           ),
-          _buildAddToCartSection(),
+          _buildAddToCartSection(model),
         ],
       ),
     );
@@ -276,20 +276,69 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
       ],
     );
   }
+BehaviorSubject<int> rxItemsCount = BehaviorSubject();
 
-  _buildAddToCartSection() {
+  buildCountItem(Icon icon, Function onPress) {
+    return Container(
+      width: 25,
+      height: 25,
+      padding: EdgeInsets.all(2),
+      alignment: Alignment.center,
+      child: GestureDetector(
+          onTap: () {
+            onPress();
+          },
+          child: icon),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade400), shape: BoxShape.rectangle),
+    );
+  }
+  _buildAddToCartSection(ProductDetailsModel model) {
+    int stockQuantity = model.stockQuantity ?? 3;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
-          flex: 1,
-          child: TextFormField(
-            controller: itemNumberController,
-            keyboardType: TextInputType.number,
-            focusNode: FocusNode(),
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)))),
+          flex: 2,
+          child: StreamBuilder<int>(
+            stream: rxItemsCount.stream,
+            builder: (context, snapshot) {
+              if(snapshot.hasData)
+              return Row(children: [
+                buildCountItem(
+                    Icon(
+                      Icons.remove,
+                      color:
+                      snapshot.data! > 1 ? Color(0xffFF4550) : Colors.grey,
+                      size: 15,
+                    ), () {
+                  if(snapshot.data! > 1)
+                    rxItemsCount.sink.add((snapshot.data!) - 1);
+                }),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(snapshot.data!.toString(),
+                    style: TextStyle(fontSize: 14 , color: Colors.black87)),
+                SizedBox(
+                  width: 10,
+                ),
+                buildCountItem(
+                    Icon(
+                      Icons.add,
+                      color: snapshot.data! < stockQuantity
+                          ? Color(0xffFF4550)
+                          : Colors.grey,
+                      size: 15,
+                    ), () {
+                  if(snapshot.data! < stockQuantity)
+                    rxItemsCount.sink.add((snapshot.data!) + 1);
+                })
+
+              ],);
+            else
+              return Container();
+            }
           ),
         ),
         SizedBox(

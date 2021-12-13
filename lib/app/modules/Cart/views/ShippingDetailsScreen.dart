@@ -63,13 +63,6 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(Utils.labels!.create_New_Account,style: Theme.of(context).textTheme.headline1),
-                  SizedBox(width:10),
-                  Text(Utils.labels!.create_New_Account_to_see,
-                    style: GoogleFonts.roboto(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: Black_textColor),),
                   Divider(color: Colors.transparent, height: deviceHeight /25,),
                   EditTextwidget(Utils.labels!.name,_nameController ,context,validate: nameValidate),
                   Divider(
