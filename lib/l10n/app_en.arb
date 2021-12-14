@@ -26,6 +26,22 @@
   "@forum": {
     "description": "The conventional newborn programmer greeting"
   },
+  "change_password":"Change Password",
+  "@change_password": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "password_changed_successfully": "Password has been changed",
+  "@password_changed_successfully": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "new_password": "New Password",
+  "@new_password": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "current_password": "Current Password",
+  "@current_password": {
+    "description": "The conventional newborn programmer greeting"
+  },
   "category":"Category",
   "@category": {
     "description": "The conventional newborn programmer greeting"
