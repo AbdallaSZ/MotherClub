@@ -240,8 +240,8 @@ class BLoC {
     return categoriesLst;
   }
 
-  Future<dynamic> cartItemsList() async {
-    List<dynamic> cartItems = <Item>[];
+  Future<List<Item>> cartItemsList() async {
+    List<Item> cartItems = <Item>[];
   try {
     var response = await Utils.networkcall.getCartItems();
 

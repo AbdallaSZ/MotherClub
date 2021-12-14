@@ -123,5 +123,6 @@
   "feedback":"تقييم",
   "add_wishlist_name" : "اضف قائمة مفضلات",
   "add" : "اضف",
-  "remove_order" : "حذف طلب"
+  "remove_order" : "حذف طلب",
+  "no_wish_list_yet": "لا يوجد قائمة مفضلات بعد"
 }

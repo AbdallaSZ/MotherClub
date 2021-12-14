@@ -484,5 +484,9 @@
   "remove_order" : "Deleting orders",
   "@remove_order": {
     "description": "The conventional newborn programmer greeting"
+  },
+  "no_wish_list_yet": "No Wish list yet",
+  "@no_wish_list_yet": {
+    "description": "The conventional newborn programmer greeting"
   }
 }
