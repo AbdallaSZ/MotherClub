@@ -186,7 +186,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
-    createOrder(shippingDetails, billingDetails);
+
     FlutterPaytabsBridge.startCardPayment(configuration, (event)async {
         print(event);
       if(event["status"] == "event"){
@@ -195,8 +195,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         });
       }
        else if (event["status"] == "success") {
-
-         if(event["data"]["responseStatus"] == 'A') {
+        createOrder(shippingDetails, billingDetails, event["data"]["paymentInfo"]["cardScheme"],event["data"]["paymentInfo"]["cardType"]);
+         if(event["data"]["paymentResult"]["responseStatus"] == 'A') {
           await  showDialog(context: context, builder:  (c){
               return Dialogs.warningDialog(Utils.labels!.confirmed, event["data"]["paymentResult"]["responseMessage"], Utils.labels!.ok, backFunction);
             });
@@ -207,8 +207,6 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
              });
 
          }
-        var transactionDetails = event["data"];
-
       }
       else if (event["status"] == "error") {
       await showDialog(context: context, builder:  (c){
@@ -274,10 +272,10 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     return false;
   }
 
-  void createOrder(ShippingDetails shippingDetails , BillingDetails billingDetails) async{
+  void createOrder(ShippingDetails shippingDetails , BillingDetails billingDetails, String paymentMethod , String cardType) async{
     var productData = getProductData();
     OrderRequestModel orderRequestModel = OrderRequestModel(
-    "ds","asdas",true,billingDetails,shippingDetails,
+        paymentMethod,cardType,true,billingDetails,shippingDetails,
         productData,
         [
       ShippingLines(
@@ -288,7 +286,6 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     ]
     );
     OrderRepo.createRepo(orderRequestModel);
-
   }
 
   List<LineItems> getProductData() {

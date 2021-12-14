@@ -268,7 +268,7 @@ imageSubject.close();
                   BlocListener<RegisterBloc, RegisterState>
                     (listener: (con , state )async{
                     if(state.resultState == ResultState.Loading){
-                      Utils.progressBar.showLoadingIndicator("Registering",context);
+                      Utils.progressBar.showLoadingIndicator(Utils.labels!.register,context);
                     }else if(state.resultState == ResultState.Success){
                       auth.login(_usernameController.text, _passwordController.text).then((value) {
                         print('loginAuth ${value['status']}');
