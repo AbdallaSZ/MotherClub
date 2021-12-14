@@ -4,19 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
 import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
-import 'package:motherclub/common/CustomWidget/CustomLogoWidget.dart';
-import 'package:motherclub/common/CustomWidget/CustomeToggleWidget.dart';
-import 'package:motherclub/common/CustomWidget/DottedContainerWidget.dart';
-import 'package:motherclub/common/CustomWidget/EditTextField.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:motherclub/common/CustomWidget/EditTextWithoutIcon.dart';
-import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
+
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
@@ -77,11 +72,11 @@ class Select_Address_view extends GetView<AuthController> {
                               child: Container(
 
 
-                                child: FutureBuilder<List<ProductModel>>(
+                                child: FutureBuilder<List<ProductDetailsModel>>(
                                     future: Utils.bLoC.productList(context),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-                                        List<ProductModel>? data = snapshot.data;
+                                        List<ProductDetailsModel>? data = snapshot.data;
                                         print(data);
                                         return ListView.builder(
                                           scrollDirection: Axis.vertical,

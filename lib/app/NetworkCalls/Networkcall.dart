@@ -229,7 +229,7 @@ class Networkcall {
       body: {
         'id': '$id',
         'quantity': '$quantity',
-        'variation[attribute_pa_age]': '$variation-months',
+        'variation[attribute_pa_age]': '$variation',
       },
     );
     if (response.statusCode != 200) {

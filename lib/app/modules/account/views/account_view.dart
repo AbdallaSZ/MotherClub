@@ -190,7 +190,7 @@ class _AccountViewState extends State<AccountView> {
                                                                     ).showSnackBar(
                                                                       SnackBar(
                                                                         content:
-                                                                            const Text('Order deleted'),
+                                                                        Text('${Utils.labels!.order} ${Utils.labels!.has_deleted}'),
                                                                         duration:
                                                                             const Duration(
                                                                           seconds:

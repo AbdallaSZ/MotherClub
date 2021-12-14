@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/Models/FormsModel.dart';
 import 'package:motherclub/app/Models/MonthsModel.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
+import 'package:motherclub/app/Models/ProductModel.dart' as pm;
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
@@ -18,56 +19,33 @@ import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductModel>> productList(BuildContext context) async {
-    List<ProductModel> productsList = <ProductModel>[];
+  Future<List<ProductDetailsModel>> productList(BuildContext context) async {
+    List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
 
     var dataFromResponse = await Utils.networkcall.getProductsAPICall(context);
     await dataFromResponse.forEach((newProduct) {
-      List<Images> imagesOfProductList = [];
-      newProduct["images"].forEach(
-        (newImage) {
-          imagesOfProductList.add(
-            new Images(
-              id: newImage["id"],
-              src: newImage['src'],
-            ),
-          );
-        },
-      );
-      if (imagesOfProductList.length != 0) {
-        ProductModel productModel = new ProductModel(
-            id: newProduct['id'].toString(),
-            name: newProduct['name'],
-            description: newProduct['description'],
-            price: newProduct['price'].toString(),
-            salePrice: newProduct['sale_price'].toString(),
-            regular_price: newProduct['regular_price'].toString(),
-            on_sale: newProduct['on_sale'],
-            total_sales: newProduct['total_sales'].toString(),
-            imageslist: imagesOfProductList);
-
-        productsList.add(productModel);
-      }
+      ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
+      productsList.add(prodModel);
     });
     return productsList;
   }
 
-  Future<ProductModel> getSpecificProduct(String productId) async {
+  Future<pm.ProductModel> getSpecificProduct(String productId) async {
     var dataFromResponse =
         await Utils.networkcall.getProductsDetails(productId);
 
-    List<Images> imagesOfProductList = [];
+    List<pm.Images> imagesOfProductList = [];
     dataFromResponse["images"].forEach(
       (newImage) {
         imagesOfProductList.add(
-          new Images(
+          new pm.Images(
             id: newImage["id"],
             src: newImage['src'],
           ),
         );
       },
     );
-    ProductModel productModel = new ProductModel(
+    pm.ProductModel productModel = new pm.ProductModel(
         id: dataFromResponse['id'].toString(),
         name: dataFromResponse['name'],
         description: dataFromResponse['description'],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/SearchModule/SearchModel.dart';
 import 'package:motherclub/app/StateEnum.dart';
@@ -11,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 import 'SearchBloc.dart';
 /// search screen to user if he will write character to get tour or trips or category
 class DataSearch extends SearchDelegate<SearchInfo?> {
-  List<ProductModel>? models;
+  List<ProductDetailsModel>? models;
 
   DataSearch(this.models) : super(
     searchFieldLabel: Utils.labels!.search_product,
@@ -58,10 +59,10 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
   StreamController<String> myStream = StreamController<String>.broadcast();
 
   BehaviorSubject<SearchState> _searchSubject = BehaviorSubject<SearchState>();
-  List <ProductModel>search(String keyword  ){
-    List<ProductModel> result =[];
+  List <ProductDetailsModel>search(String keyword  ){
+    List<ProductDetailsModel> result =[];
     for(var i in models!){
-      if (i.name.toLowerCase().trim().contains(keyword.toLowerCase().trim())){
+      if (i.name!.toLowerCase().trim().contains(keyword.toLowerCase().trim())){
         result.add(i);
       }
     }
@@ -127,15 +128,15 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
                       itemBuilder: (c, index) {
                         return GestureDetector(
                           onTap: () {
-                            close(context, SearchInfo(state.data!.searchResultProducts![index].id));
+                            close(context, SearchInfo(state.data!.searchResultProducts![index].id.toString()));
                           },
                           child: Column(
                             children: [
                               ListTile(
                                 tileColor: Colors.white,
-                                leading: Image.network(state.data!.searchResultProducts![index].imageslist[0].src,width: 60,height: 60,fit: BoxFit.fill),
+                                leading: Image.network(state.data!.searchResultProducts![index].images![0].src!,width: 60,height: 60,fit: BoxFit.fill),
                                 title: Text(
-                                    state.data!.searchResultProducts![index].name,
+                                    state.data!.searchResultProducts![index].name!,
                                     style: TextStyle(fontSize: 15,
                                       fontWeight: FontWeight.normal,
                                       color: Colors.black,)),

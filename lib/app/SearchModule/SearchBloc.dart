@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/StateEnum.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
@@ -22,10 +23,10 @@ class SearchBloc extends Bloc<SearchEvent , SearchState>{
     }
 
   }
-  List <ProductModel>search(String keyword, List<ProductModel> models ){
-    List<ProductModel> result =[];
+  List <ProductDetailsModel>search(String keyword, List<ProductDetailsModel> models ){
+    List<ProductDetailsModel> result =[];
     for(var i in models){
-      if (i.name.toLowerCase().trim().contains(keyword.toLowerCase().trim())){
+      if (i.name!.toLowerCase().trim().contains(keyword.toLowerCase().trim())){
         result.add(i);
       }
     }
@@ -36,12 +37,12 @@ class SearchBloc extends Bloc<SearchEvent , SearchState>{
 }
 class SearchEvent {
   String keyword;
-  List<ProductModel> models ;
+  List<ProductDetailsModel> models ;
   SearchEvent(this.keyword,this.models);
 }
 class SearchState{
 
-  List<ProductModel>? searchResultProducts ;
+  List<ProductDetailsModel>? searchResultProducts ;
   ResultState resultState ;
   String? errorMessage ;
 

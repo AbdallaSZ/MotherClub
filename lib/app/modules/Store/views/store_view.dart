@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/SearchModule/DataSearch.dart';
 import 'package:motherclub/app/SearchModule/SearchBloc.dart';
@@ -32,7 +33,7 @@ class _StoreViewScreenState extends State<StoreView> {
     super.initState();
   }
 
-  List<ProductModel>? data;
+  List<ProductDetailsModel>? data;
 
   _StoreViewScreenState() {
     //Register a closure to be called when the object changes.
@@ -134,7 +135,7 @@ class _StoreViewScreenState extends State<StoreView> {
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
                 height: deviceHeight - 120,
-                child: FutureBuilder<List<ProductModel>>(
+                child: FutureBuilder<List<ProductDetailsModel>>(
                   future: Utils.bLoC.productList(context),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
@@ -160,7 +161,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                               create: (c) =>
                                                   ProductDetailsBloc(),
                                               child: ProductDetailsScreen(
-                                                  data![index].id))));
+                                                  data![index].id.toString()))));
                                 },
                                 child: ProductItem(
                                   data: data![index],

@@ -386,7 +386,7 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(
                                       SnackBar(
-                                        content: const Text('Item added to the cart again'),
+                                        content:  Text(Utils.labels!.item_added_to_the_cart_again),
                                         duration: const Duration(
                                             seconds: 3),
                                       ),
@@ -414,7 +414,7 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(
                         SnackBar(
-                          content: const Text('Item removed from this wishlist'),
+                          content: Text(Utils.labels!.item_removed_from_this_wishlist),
                           duration: const Duration(
                               seconds: 3),
                         ),

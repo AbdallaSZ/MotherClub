@@ -17,7 +17,6 @@ class ProductDetailsModel {
   String? price;
   String? regularPrice;
   String? salePrice;
-
   bool? onSale;
   bool? purchasable;
   int? totalSales;

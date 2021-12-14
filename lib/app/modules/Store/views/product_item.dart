@@ -1,26 +1,92 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({Key? key, required this.data}) : super(key: key);
-  final ProductModel data;
+  final ProductDetailsModel data;
 
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
 
 class _ProductItemState extends State<ProductItem> {
+  BehaviorSubject<String> rxSelectedAgeSubject = BehaviorSubject();
   WishlistModel dropdownValue = WishlistModel();
   String newWishlist = '';
   Set<WishlistModel> items = Set();
   TextEditingController controller = TextEditingController();
+  TextEditingController itemNumberController = TextEditingController();
+  BehaviorSubject<int> rxItemsCount = BehaviorSubject();
+  int stockQuantity = 3;
+
+  @override
+  void dispose() {
+    rxSelectedAgeSubject.close();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    stockQuantity = widget.data.stockQuantity!;
+    itemNumberController.text = 1.toString();
+    rxItemsCount.sink.add(1);
+
+    super.initState();
+  }
+
+  _buildCountItem(Icon icon, Function onPress) {
+    return Container(
+      width: 25,
+      height: 25,
+      padding: EdgeInsets.all(2),
+      alignment: Alignment.center,
+      child: GestureDetector(
+          onTap: () {
+            onPress();
+          },
+          child: icon),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade400),
+          shape: BoxShape.rectangle),
+    );
+  }
+
+  _buildAgeSection(ProductDetailsModel model) {
+    rxSelectedAgeSubject.sink.add(widget.data.attributes![0].options![0]);
+    return StreamBuilder<String>(
+        stream: rxSelectedAgeSubject.stream,
+        builder: (context, snapshot) {
+          return DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: snapshot.data,
+              items: model.attributes![0].options!
+                  .toSet()
+                  .toList()
+                  .map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (_) {
+                rxSelectedAgeSubject.sink.add(_!);
+              },
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +114,9 @@ class _ProductItemState extends State<ProductItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex:6,
+                flex: 6,
                 child: Image.network(
-                  '${widget.data.imageslist[0].src}',
+                  '${widget.data.images![0].src}',
                   fit: BoxFit.contain,
                 ),
               ),
@@ -73,9 +139,11 @@ class _ProductItemState extends State<ProductItem> {
                   ),
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Expanded(
-                flex:1,
+                flex: 1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -99,14 +167,6 @@ class _ProductItemState extends State<ProductItem> {
                         showModalBottomSheet<void>(
                           context: context,
                           builder: (BuildContext context) {
-                            int quantity = 1;
-                            List<String> dropDItems = [
-                              "0-3",
-                              "3-6",
-                              "6-9",
-                              "9-12",
-                            ];
-                            String variation = '0-3';
                             return StatefulBuilder(builder: (context, update) {
                               return Container(
                                 height: 220,
@@ -125,9 +185,9 @@ class _ProductItemState extends State<ProductItem> {
                                         children: [
                                           Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                                  MainAxisAlignment.start,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 // SizedBox(height:23),
                                                 Expanded(
@@ -135,38 +195,37 @@ class _ProductItemState extends State<ProductItem> {
                                                     child: Column(
                                                       children: [
                                                         Image.network(
-                                                          '${widget.data
-                                                              .imageslist[0]
-                                                              .src}',
+                                                          '${widget.data.images![0].src}',
                                                           height: 100,
                                                           width: 155,
                                                         ),
                                                         Text(
                                                           "${widget.data.name}",
-                                                          style:
-                                                          GoogleFonts.roboto(
+                                                          style: GoogleFonts
+                                                              .roboto(
                                                             fontSize: 13,
-                                                            fontStyle:
-                                                            FontStyle.normal,
+                                                            fontStyle: FontStyle
+                                                                .normal,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color:
-                                                            Black_textColor,
+                                                                Black_textColor,
                                                           ),
                                                         ),
                                                         Text(
                                                             Utils.labels!.amd +
-                                                                " ${widget.data
-                                                                    .price}",
+                                                                " ${widget.data.price}",
                                                             style: GoogleFonts
                                                                 .roboto(
                                                               fontSize: 18,
-                                                              fontStyle: FontStyle
-                                                                  .normal,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .normal,
                                                               fontWeight:
-                                                              FontWeight.w700,
+                                                                  FontWeight
+                                                                      .w700,
                                                               color:
-                                                              Black_textColor,
+                                                                  Black_textColor,
                                                             )),
                                                       ],
                                                     )),
@@ -174,189 +233,111 @@ class _ProductItemState extends State<ProductItem> {
                                                 // SizedBox(height:10),
                                                 Expanded(
                                                   flex: 2,
-                                                  child: Align(
-                                                    alignment:
-                                                    Alignment.bottomCenter,
-                                                    child: Column(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Text('Quantity'),
-                                                            SizedBox(width: 10),
-                                                            Expanded(
-                                                              child: Container(
-                                                                padding:
-                                                                EdgeInsets
-                                                                    .all(5),
-                                                                alignment: Alignment
-                                                                    .bottomCenter,
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                    Border
-                                                                        .all(
-                                                                      color: Colors
-                                                                          .red,
-                                                                      width:
-                                                                      1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .all(
-                                                                        Radius
-                                                                            .circular(
-                                                                            10.0))),
-                                                                height: Utils
-                                                                    .deviceHeight /
-                                                                    22,
-                                                                //width: Utils.deviceWidth/5,
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        update(
-                                                                                () {
-                                                                              if (quantity >
-                                                                                  1)
-                                                                                quantity--;
-                                                                            });
-                                                                      },
-                                                                      child: Icon(
-                                                                        Icons
-                                                                            .remove,
-                                                                        size: 15,
-                                                                      ),
-                                                                    ),
-                                                                    Text(quantity
-                                                                        .toString(),
-                                                                        style: GoogleFonts
-                                                                            .roboto(
-                                                                            fontSize:
-                                                                            16,
-                                                                            fontWeight: FontWeight
-                                                                                .normal,
-                                                                            color:
-                                                                            Colors
-                                                                                .black)),
-                                                                    GestureDetector(
-                                                                      onTap: () {
-                                                                        update(
-                                                                                () {
-                                                                              quantity++;
-                                                                            });
-                                                                      },
-                                                                      child: Icon(
-                                                                        Icons.add,
-                                                                        size: 18,
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        SizedBox(height: 15),
-                                                        Row(
-                                                          children: [
-                                                            Text('Variation'),
-                                                            SizedBox(width: 10),
-                                                            Expanded(
-                                                              child: Container(
-                                                                padding:
-                                                                EdgeInsets
-                                                                    .all(5),
-                                                                alignment: Alignment
-                                                                    .bottomCenter,
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                    border:
-                                                                    Border
-                                                                        .all(
-                                                                      color: Colors
-                                                                          .red,
-                                                                      width:
-                                                                      1,
-                                                                    ),
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .all(
-                                                                        Radius
-                                                                            .circular(
-                                                                            10.0))),
-                                                                height: Utils
-                                                                    .deviceHeight /
-                                                                    22,
-                                                                //width: Utils.deviceWidth/5,
-                                                                child:
-                                                                DropdownButtonHideUnderline(
-                                                                  child:
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                    value:
-                                                                    variation,
-                                                                    icon:
-                                                                    const Icon(
-                                                                      Icons
-                                                                          .arrow_drop_down,
-                                                                      size: 20,
-                                                                    ),
-                                                                    elevation: 16,
-                                                                    style:
-                                                                    const TextStyle(
-                                                                      color: Colors
-                                                                          .lightBlue,
-                                                                      decoration:
-                                                                      TextDecoration
-                                                                          .none,
-                                                                    ),
-                                                                    onChanged:
-                                                                        (String?
-                                                                    newValue) {
-                                                                      update(() {
-                                                                        variation =
-                                                                        newValue!;
-                                                                      });
-                                                                    },
-                                                                    items: dropDItems
-                                                                        .map<
-                                                                        DropdownMenuItem<
-                                                                            String>>((
-                                                                        String
-                                                                        value) {
-                                                                      return DropdownMenuItem<
-                                                                          String>(
-                                                                        value:
-                                                                        value,
-                                                                        child:
-                                                                        Text(
-                                                                          '$value Months',
-                                                                          style:
-                                                                          const TextStyle(
-                                                                            color:
-                                                                            Colors
-                                                                                .lightBlue,
-                                                                            decoration:
-                                                                            TextDecoration
-                                                                                .none,
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Text(Utils.labels!.quantity),
+                                                          SizedBox(width: 10),
+                                                          Expanded(
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5),
+                                                              alignment: Alignment
+                                                                  .bottomCenter,
+                                                              height: 40,
+                                                              child: StreamBuilder<
+                                                                      int>(
+                                                                  stream:
+                                                                      rxItemsCount
+                                                                          .stream,
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    if (snapshot
+                                                                        .hasData)
+                                                                      return Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceEvenly,
+                                                                        children: [
+                                                                          _buildCountItem(
+                                                                              Icon(
+                                                                                Icons.remove,
+                                                                                color: snapshot.data! > 1 ? Color(0xffFF4550) : Colors.grey,
+                                                                                size: 15,
+                                                                              ),
+                                                                              () {
+                                                                            if (snapshot.data! >
+                                                                                1)
+                                                                              rxItemsCount.sink.add((snapshot.data!) - 1);
+                                                                          }),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                10,
                                                                           ),
-                                                                        ),
+                                                                          Text(
+                                                                              snapshot.data!.toString(),
+                                                                              style: TextStyle(fontSize: 14, color: Colors.black87)),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                10,
+                                                                          ),
+                                                                          _buildCountItem(
+                                                                              Icon(
+                                                                                Icons.add,
+                                                                                color: snapshot.data! < stockQuantity ? Color(0xffFF4550) : Colors.grey,
+                                                                                size: 15,
+                                                                              ),
+                                                                              () {
+                                                                            if (snapshot.data! <
+                                                                                stockQuantity)
+                                                                              rxItemsCount.sink.add((snapshot.data!) + 1);
+                                                                          })
+                                                                        ],
                                                                       );
-                                                                    }).toList(),
-                                                                  ),
-                                                                ),
-                                                              ),
+                                                                    else
+                                                                      return Container();
+                                                                  }),
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 15),
+                                                      Row(
+                                                        children: [
+                                                          Text(Utils.labels!.variation),
+                                                          SizedBox(width: 10),
+                                                          Expanded(
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5),
+                                                              alignment: Alignment
+                                                                  .bottomCenter,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Colors
+                                                                            .red,
+                                                                        width:
+                                                                            1,
+                                                                      ),
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(10.0))),
+                                                              height: 40,
+                                                              //width: Utils.deviceWidth/5,
+                                                              child:
+                                                                  _buildAgeSection(
+                                                                      widget
+                                                                          .data),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ]),
@@ -364,24 +345,28 @@ class _ProductItemState extends State<ProductItem> {
                                             style: ElevatedButton.styleFrom(
                                                 primary: Colors.blue),
                                             onPressed: () async {
+                                              print(widget.data.id);
                                               String res = await Utils.bLoC
-                                                  .addCartItems(widget.data.id,
-                                                  quantity, variation);
+                                                  .addCartItems(
+                                                      widget.data.id.toString(),
+                                                      int.parse(rxItemsCount
+                                                          .value
+                                                          .toString()),
+                                                      rxSelectedAgeSubject
+                                                          .value);
                                               Navigator.pop(context);
-                                              ScaffoldMessenger.of(
-                                                  context)
+                                              ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
                                                   content: Text(
                                                     res,
                                                   ),
-                                                  duration:
-                                                  const Duration(
+                                                  duration: const Duration(
                                                       seconds: 3),
                                                 ),
                                               );
                                             },
-                                            child: Text('Add To Cart'),
+                                            child: Text(Utils.labels!.add_to_cart),
                                           ),
                                         ],
                                       ),
@@ -430,258 +415,224 @@ class _ProductItemState extends State<ProductItem> {
           top: 15,
           start: 15,
           child: GestureDetector(
-          child: Icon(
-          Icons.favorite_border,
-            size: 28,
-          ),
-          onTap: () {
-            showDialog(
-                context: context,
-                builder: (c) {
-                  // dropdownValue = snapshot.data[0].title!;
-                  return AlertDialog(
-                    title: Container(
-                      height: 50,
-                      child: Image.asset(
-                        'assets/images/addLike.png',
-                        scale: 3,
+            child: Icon(
+              Icons.favorite_border,
+              size: 28,
+            ),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (c) {
+                    // dropdownValue = snapshot.data[0].title!;
+                    return AlertDialog(
+                      title: Container(
+                        height: 50,
+                        child: Image.asset(
+                          'assets/images/addLike.png',
+                          scale: 3,
+                        ),
                       ),
-                    ),
-                    content: FutureBuilder<List<WishlistModel>>(
-                        future:
-                        Utils.bLoC.wishlistWithUserId(Utils.id),
-                        builder: (BuildContext context, snapshot) {
-                          if (snapshot.hasData) {
-                            dropdownValue = snapshot.data![0];
-                            items.clear();
-                            items.addAll(snapshot.data!);
-                          }
-                          return snapshot.connectionState ==
-                              ConnectionState.waiting
-                              ? Container(
-                            alignment: Alignment.center,
-                            width: Utils.deviceWidth / 3,
-                            height: Utils.deviceHeight / 20,
-                            child: Center(
-                              child:
-                              CircularProgressIndicator(),
-                            ),
-                          )
-                              : StatefulBuilder(
-                              builder: (_, StateSetter update) {
-                                return Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.center,
-                                  children: [
-                                    //snapshot.hasData ?
-                                    Container(
-                                      alignment:
-                                      Alignment.center,
-                                      width:
-                                      Utils.deviceWidth /
-                                          3,
-                                      height:
-                                      Utils.deviceHeight /
-                                          20,
-                                      decoration:
-                                      BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(10),
-                                        border: Border.all(
-                                            color:
-                                            Colors.grey,
-                                            width: .7),
-                                      ),
-                                      child: Padding(
-                                        padding:
-                                        const EdgeInsets
-                                            .symmetric(
-                                          horizontal: 8.0,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child:
-                                              DropdownButtonHideUnderline(
-                                                child: DropdownButton<
-                                                    WishlistModel>(
-                                                  hint:
-                                                  Container(
-                                                    alignment:
-                                                    Alignment
-                                                        .center,
-                                                    child:
-                                                    Text(
-                                                      '${Utils.labels!.no_wish_list_yet}',
-                                                    ),
-                                                  ),
-                                                  itemHeight:
-                                                  50.0,
-                                                  value:
-                                                  dropdownValue,
-                                                  isExpanded:
-                                                  true,
-                                                  style:
-                                                  const TextStyle(
-                                                    color: Colors
-                                                        .blueGrey,
-                                                  ),
-                                                  onChanged:
-                                                      (WishlistModel?
-                                                  newValue) {
-                                                    update(
-                                                            () {
+                      content: FutureBuilder<List<WishlistModel>>(
+                          future: Utils.bLoC.wishlistWithUserId(Utils.id),
+                          builder: (BuildContext context, snapshot) {
+                            if (snapshot.hasData) {
+                              dropdownValue = snapshot.data![0];
+                              items.clear();
+                              items.addAll(snapshot.data!);
+                            }
+                            return snapshot.connectionState ==
+                                    ConnectionState.waiting
+                                ? Container(
+                                    alignment: Alignment.center,
+                                    width: Utils.deviceWidth / 3,
+                                    height: Utils.deviceHeight / 20,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  )
+                                : StatefulBuilder(
+                                    builder: (_, StateSetter update) {
+                                    return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        //snapshot.hasData ?
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: Utils.deviceWidth / 3,
+                                          height: Utils.deviceHeight / 20,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                                color: Colors.grey, width: .7),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child:
+                                                      DropdownButtonHideUnderline(
+                                                    child: DropdownButton<
+                                                        WishlistModel>(
+                                                      hint: Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          '${Utils.labels!.no_wish_list_yet}',
+                                                        ),
+                                                      ),
+                                                      itemHeight: 50.0,
+                                                      value: dropdownValue,
+                                                      isExpanded: true,
+                                                      style: const TextStyle(
+                                                        color: Colors.blueGrey,
+                                                      ),
+                                                      onChanged: (WishlistModel?
+                                                          newValue) {
+                                                        update(() {
                                                           dropdownValue =
-                                                          newValue!;
+                                                              newValue!;
                                                         });
-                                                  },
-                                                  items: items
-                                                      .map<DropdownMenuItem<WishlistModel>>(
+                                                      },
+                                                      items: items.map<
+                                                              DropdownMenuItem<
+                                                                  WishlistModel>>(
                                                           (value) {
                                                         return DropdownMenuItem<
                                                             WishlistModel>(
-                                                          value:
-                                                          value,
-                                                          child:
-                                                          Text(
-                                                            value
-                                                                .title!,
-                                                            textAlign:
-                                                            TextAlign.center,
+                                                          value: value,
+                                                          child: Text(
+                                                            value.title!,
+                                                            textAlign: TextAlign
+                                                                .center,
                                                           ),
                                                         );
                                                       }).toList(),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    //     : Container(
-                                    //   decoration:
-                                    //   BoxDecoration(
-                                    //     borderRadius:
-                                    //     BorderRadius
-                                    //         .circular(10),
-                                    //     border: Border.all(
-                                    //       color: Colors.grey,
-                                    //       width: .7,
-                                    //     ),
-                                    //   ),
-                                    //   width:
-                                    //   Utils.deviceWidth /
-                                    //       3,
-                                    //   height:
-                                    //   Utils.deviceHeight /
-                                    //       20,
-                                    //   child: Center(
-                                    //     child: Text(
-                                    //       'No Wish list yet',
-                                    //       style: TextStyle(
-                                    //           color: Colors
-                                    //               .grey),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    IconButton(
-                                        onPressed: () => showDialog(
-                                            context: context,
-                                            builder: (c) {
-                                              return AlertDialog(
-                                                title: Text(Utils
-                                                    .labels!
-                                                    .add_wishlist_name),
-                                                content: TextField(
-                                                  controller:
-                                                  controller,
-                                                ),
-                                                actions: [
-                                                  ElevatedButton(
-                                                    child: Text(
-                                                        Utils
-                                                            .labels!
-                                                            .add),
-                                                    onPressed:
-                                                        () async {
-                                                      WishlistModel wm = await Utils
-                                                          .bLoC
-                                                          .addWishlist(
-                                                          controller
-                                                              .text,
-                                                          Utils
-                                                              .id,
-                                                          'shared');
-                                                      items.add(wm);
-                                                      dropdownValue =
-                                                          wm;
-
-                                                      update(() {
-                                                        controller
-                                                            .text = '';
-                                                      });
-                                                      Navigator.of(
-                                                          context)
-                                                          .pop(  ScaffoldMessenger.of(
-                                                          context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content:
-                                                          const Text(
-                                                              'Wish list added'),
-                                                          duration: const Duration(
-                                                              seconds:
-                                                              3),
-                                                        ),
-                                                      ),);
-                                                    },
+                                                    ),
                                                   ),
-                                                ],
-                                              );
-                                            }),
-                                        icon: Icon(Icons.add)),
-                                  ],
-                                );
-                              });
-                        }),
-                    actionsAlignment: MainAxisAlignment.spaceEvenly,
-                    actions: [
-                      ElevatedButton(
-                        child: Text(Utils.labels!.yes),
-                        onPressed: () async {
-                          await Utils.bLoC
-                              .addToWishlist(widget.data.id,
-                              dropdownValue.shareKey!)
-                              .then(
-                                (value) =>
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                  SnackBar(
-                                    content: const Text(
-                                        'Item added to wish list'),
-                                    duration:
-                                    const Duration(seconds: 3),
-                                  ),
-                                ),
-                          );
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        //     : Container(
+                                        //   decoration:
+                                        //   BoxDecoration(
+                                        //     borderRadius:
+                                        //     BorderRadius
+                                        //         .circular(10),
+                                        //     border: Border.all(
+                                        //       color: Colors.grey,
+                                        //       width: .7,
+                                        //     ),
+                                        //   ),
+                                        //   width:
+                                        //   Utils.deviceWidth /
+                                        //       3,
+                                        //   height:
+                                        //   Utils.deviceHeight /
+                                        //       20,
+                                        //   child: Center(
+                                        //     child: Text(
+                                        //       'No Wish list yet',
+                                        //       style: TextStyle(
+                                        //           color: Colors
+                                        //               .grey),
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        IconButton(
+                                            onPressed: () => showDialog(
+                                                context: context,
+                                                builder: (c) {
+                                                  return AlertDialog(
+                                                    title: Text(Utils.labels!
+                                                        .add_wishlist_name),
+                                                    content: TextField(
+                                                      controller: controller,
+                                                    ),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                        child: Text(
+                                                            Utils.labels!.add),
+                                                        onPressed: () async {
+                                                          WishlistModel wm =
+                                                              await Utils.bLoC
+                                                                  .addWishlist(
+                                                                      controller
+                                                                          .text,
+                                                                      Utils.id,
+                                                                      'shared');
+                                                          items.add(wm);
+                                                          dropdownValue = wm;
 
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      ElevatedButton(
-                        child: Text(Utils.labels!.cancel),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.red),
-                      ),
-                    ],
-                  );
-                });
-          },
-        ),)
+                                                          update(() {
+                                                            controller.text =
+                                                                '';
+                                                          });
+                                                          Navigator.of(context)
+                                                              .pop(
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content:Text(
+                                                                    '${Utils.labels!.wish_List} ${Utils.labels!.added}' ),
+                                                                duration:
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            3),
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                }),
+                                            icon: Icon(Icons.add)),
+                                      ],
+                                    );
+                                  });
+                          }),
+                      actionsAlignment: MainAxisAlignment.spaceEvenly,
+                      actions: [
+                        ElevatedButton(
+                          child: Text(Utils.labels!.yes),
+                          onPressed: () async {
+                            await Utils.bLoC
+                                .addToWishlist(widget.data.id.toString(),
+                                    dropdownValue.shareKey!)
+                                .then(
+                                  (value) => ScaffoldMessenger.of(context)
+                                      .showSnackBar(
+                                    SnackBar(
+                                      content: Text(Utils.labels!.item_added),
+                                      duration: Duration(seconds: 3),
+                                    ),
+                                  ),
+                                );
+
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        ElevatedButton(
+                          child: Text(Utils.labels!.cancel),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(primary: Colors.red),
+                        ),
+                      ],
+                    );
+                  });
+            },
+          ),
+        )
       ],
     );
   }

@@ -64,7 +64,7 @@ class CartItemModel {
     totals: json["totals"] == null ? null : CartItemModelTotals.fromMap(json["totals"]),
   //  removedItems: json["removed_items"] == null ? null : List<RemovedItem>.from(json["removed_items"].map((x) => RemovedItem.fromMap(x))),
     crossSells: json["cross_sells"] == null ? null : List<dynamic>.from(json["cross_sells"].map((x) => x)),
-    notices: json["notices"] == null ? null : List<dynamic>.from(json["notices"].map((x) => x)),
+   // notices: json["notices"] == null ? null : List<dynamic>.from(json["notices"].map((x) => x)),
   );
 
   Map<String, dynamic> toMap() => {
@@ -84,7 +84,7 @@ class CartItemModel {
     "totals": totals == null ? null : totals!.toMap(),
    // "removed_items": removedItems == null ? null : List<dynamic>.from(removedItems!.map((x) => x.toMap())),
     "cross_sells": crossSells == null ? null : List<dynamic>.from(crossSells!.map((x) => x)),
-    "notices": notices == null ? null : List<dynamic>.from(notices!.map((x) => x)),
+  //  "notices": notices == null ? null : List<dynamic>.from(notices!.map((x) => x)),
   };
 }
 

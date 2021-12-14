@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -72,11 +73,11 @@ Widget  storeAppBar(String Label,double height , double width,BuildContext conte
             padding: EdgeInsets.all(10),
             // color: Colors.red,
             height: deviceHeight,
-            child: FutureBuilder<List<ProductModel>>(
+            child: FutureBuilder<List<ProductDetailsModel>>(
               future: Utils.bLoC.productList(context),
               builder: (context, snapshot) {
               if (snapshot.hasData) {
-              List<ProductModel>? data = snapshot.data;
+              List<ProductDetailsModel>? data = snapshot.data;
               return  GridView.builder(
               itemCount:data!.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -97,7 +98,7 @@ Widget  storeAppBar(String Label,double height , double width,BuildContext conte
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:[
                     SizedBox(height:23),
-                    Image.network('${data[index].imageslist[0].src}',height: 130,width: 155,),
+                    Image.network('${data[index].images![0]}',height: 130,width: 155,),
                     SizedBox(height:15),
 
                     Text("${data[index].name}",style: GoogleFonts.roboto(
@@ -109,7 +110,7 @@ Widget  storeAppBar(String Label,double height , double width,BuildContext conte
                     ),
                     ),
                     SizedBox(height:15),
-                    Text(Utils.labels!.amd+ data[index].price,style: GoogleFonts.roboto(
+                    Text(Utils.labels!.amd+ data[index].price!,style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w700,

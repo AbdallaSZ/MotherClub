@@ -472,5 +472,59 @@
   "no_wish_list_yet": "No Wish list yet",
   "@no_wish_list_yet": {
     "description": "The conventional newborn programmer greeting"
+  },
+  "variation": "Variation",
+  "@variation": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "quantity": "Variation",
+  "@quantity": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "you_have": "You have",
+  "@you_have": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "items_in_your_cart": "items in your cart",
+  "@items_in_your_cart": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "your_cart": "Your Cart",
+  "@your_cart": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "has_deleted": "has deleted",
+  "@has_deleted": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "added": "added",
+  "@added": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "edited": "edited",
+  "@edited": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "order": "order",
+  "@order": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "some_fields_are_invalid": "some fields are invalid",
+  "@some_fields_are_invalid": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "item_removed_from_this_wishlist": "Item removed from this wishlist !",
+  "@item_removed_from_this_wishlist": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "item_added_to_the_cart_again": "item added to the cart again",
+  "@item_added_to_the_cart_again": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "you_have_to_agree_the_terms": "You have to agree the terms",
+  "@you_have_to_agree_the_terms": {
+    "description": "The conventional newborn programmer greeting"
   }
 }
