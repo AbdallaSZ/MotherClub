@@ -57,7 +57,7 @@ class LoginView extends GetView<AuthController> {
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-               CustomLogoWidget("",deviceHeight/4.3,deviceWidth,context),
+               CustomLogoWidget("",deviceHeight/4,deviceWidth,context),
                Container(
                  padding: const EdgeInsets.only(left: 20,right: 20),
                  child: Column(

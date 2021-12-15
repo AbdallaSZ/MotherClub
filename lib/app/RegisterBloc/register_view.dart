@@ -95,7 +95,7 @@ imageSubject.close();
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomLogoWidget("Back to ",deviceHeight/4.3,deviceWidth,context),
+                      CustomLogoWidget("Back to ",deviceHeight/4,deviceWidth,context),
                       Container(
                         padding: const EdgeInsets.only(left: 20,right: 20),
                         child: Form(

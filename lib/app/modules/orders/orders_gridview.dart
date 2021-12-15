@@ -26,7 +26,7 @@ class _OrderGridViewState extends State<OrderGridView> {
             future: Utils.bLoC.orders(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                  return GridView.builder(
+                  return !(snapshot.data!.length == 0) ?GridView.builder(
                     itemCount: snapshot.data!.length,
                     gridDelegate:
                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -118,10 +118,9 @@ class _OrderGridViewState extends State<OrderGridView> {
                         ],
                       );
                     },
-                  );
-
+                  ) :Center(child: Text("No Orders Yet  !"));
               } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
+                return Center(child: Text("${snapshot.error}"));
               }
               return GridShimmer(
                   deviceWidth: Utils.deviceWidth, deviceHeight: Utils.deviceHeight);

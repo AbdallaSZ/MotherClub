@@ -159,7 +159,7 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                               Row(
                                 children: [
                                   Text(
-                                    '...',
+                                    Utils.name,
                                     style: GoogleFonts.roboto(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                               ),
                               SizedBox(height: 3),
                               Text(
-                                '${Utils.labels!.you_are_pregnant_for} ..',
+                                'Age : ...',
                                 style: GoogleFonts.roboto(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -195,12 +195,13 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                       child: Column(
                         children: [
                           Text(
-                            '....',
+                            'Week   ....',
                             style: GoogleFonts.roboto(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 color: white_color),
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
