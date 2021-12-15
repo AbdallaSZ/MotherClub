@@ -232,7 +232,7 @@ class _StoreViewScreenState extends State<CartView> {
                                               Expanded(
                                                   flex: 2,
                                                   child: Image.network(
-                                                    '${data![index].featuredImage}',
+                                                    '${data[index].featuredImage}',
                                                     height: 100,
                                                     width: 155,
                                                   )),

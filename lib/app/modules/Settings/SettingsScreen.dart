@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/Settings/UserRepo.dart';
@@ -10,6 +14,7 @@ import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/EditTextWithoutIcon.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:rxdart/rxdart.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -87,6 +92,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 30,bottom: 30),
+                  child: GestureDetector(
+                    onTap: () {
+                    },
+                    child: Stack(
+                      children: [
+                        StreamBuilder<File>(
+                          stream: imageSubject.stream,
+                          builder: (context, snapshot) {
+                            return Container(
+                              height:100 ,
+                              width:100 ,
+                                child: CircleAvatar(
+                                  foregroundImage:  getImage(snapshot)
+                                  ,
+                              )
+                            );
+                          }
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 30,
+                            child: GestureDetector(
+                              onTap: (){
+                                openImagePicker();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.black12
+                          ),
+                          alignment: Alignment.center,
+                          child: Icon(Icons.camera_alt_outlined, color: Colors.redAccent,),
+                        ),
+                            ))
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 30),
               child: GestureDetector(
@@ -258,6 +310,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+  String imageText = "";
+  String imageName = "Upload Profile Image" ;
+  File? imageFile ;
+  BehaviorSubject<File> imageSubject = BehaviorSubject();
+  void openImagePicker() async{
+    final ImagePicker _picker = ImagePicker();
+    // Pick an image
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final path = image!.path;
+    imageName = image.name;
+    imageFile  = File(path);
+    final bytes = await imageFile!.readAsBytes();
+    var result = base64Encode(bytes);
+    imageText = result;
+    showDialog(context: context, builder: (c){
+      return AlertDialog(
+        title: Text(Utils.labels!.warning),
+        content: Text(Utils.labels!.are_you_sure_to_select_this_image ),
+        actions: [
+          FlatButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Text(Utils.labels!.no)),
+          FlatButton(onPressed: (){
+            Navigator.pop(context);
+            imageSubject.sink.add(imageFile!);
+            uploadImage();
+          }, child: Text(Utils.labels!.yes, style: TextStyle(color: Colors.greenAccent),)),
+
+        ],
+      );
+    });
+  }
+  String base64Encode(List<int> bytes) => base64.encode(bytes);
 
   submit() {
     if(formKey.currentState!.validate()){
@@ -359,6 +444,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String? passwordValidate(String? s) {
     if (s!.length < 8) return Utils.labels!.password_must_be_more_than;
     return null;
+  }
+
+  ImageProvider getImage(AsyncSnapshot<File> snapshot) {
+    if(!snapshot.hasData) {
+     return NetworkImage(Utils.prefs!
+          .getString("imageUrl") ??
+          "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+    }
+    else return FileImage(snapshot.data!);
+  }
+
+  void uploadImage() {
+    Utils.progressBar.showLoadingIndicator(Utils.labels!.change_password,context);
+
+    UserRepo.uploadImage(imageText).then((value) {
+      Utils.progressBar.hideOpenDialog(context);
+      if(value['data']['success']){
+        scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(Utils.labels!.image_uploaded_successfully),));
+        Utils.prefs!.setString("imageUrl", value["data"]["avatar_url_thumb"]);
+        print(Utils.prefs!.getString("imageUrl"));
+
+      }
+      else   scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(Utils.labels!.error),));
+
+    });
   }
 
 

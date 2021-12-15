@@ -38,6 +38,14 @@
   "@new_password": {
     "description": "The conventional newborn programmer greeting"
   },
+  "are_you_sure_to_select_this_image": "Are you sure you want to change the image ? ",
+  "@are_you_sure_to_select_this_image": {
+    "description": "The conventional newborn programmer greeting"
+  },
+   "image_uploaded_successfully": "The image has been changed successfully ",
+  "@image_uploaded_successfully": {
+    "description": "The conventional newborn programmer greeting"
+  },
   "current_password": "Current Password",
   "@current_password": {
     "description": "The conventional newborn programmer greeting"

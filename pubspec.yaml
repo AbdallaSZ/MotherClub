@@ -34,6 +34,7 @@ dependencies:
   progress_indicators: ^1.0.0
   awesome_loader: ^0.0.3
   flutter_otp_text_field: ^1.0.0
+
   carousel_slider: ^4.0.0
   rxdart: ^0.27.3
   dio: ^4.0.4
@@ -44,11 +45,18 @@ dependencies:
   flick_video_player:
   video_player:
   flutter_paytabs_bridge: ^2.1.5
+  flutter_launcher_icons: ^0.9.1
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+    android: "ic_launcher"
+    ios: true
+    image_path: "assets/icon/icon.png"
 
 flutter:
   uses-material-design: true
@@ -57,6 +65,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icon/icon.png
     - assets/logo.png
 
 
