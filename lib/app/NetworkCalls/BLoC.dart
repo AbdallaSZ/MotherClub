@@ -9,6 +9,7 @@ import 'package:motherclub/app/Models/ProductModel.dart' as pm;
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/app/Models/WeeksDetail.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/app/Models/baby_model.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/choose_for_you_model.dart';
@@ -130,27 +131,28 @@ class BLoC {
   }
 
   Future<UserDetailsModel> usersDetails() async {
-    // UserDetailsModel userDetailsModel; //= UserDetailsModel();
-
-    var fromResponse = await Utils.networkcall.getForumAPICall();
-    // FromResponse
- 
-    return UserDetailsModel(
-        userId: fromResponse['id'].toString(),
-        username: fromResponse['user']['username'],
-        nicename: fromResponse['user']['nicename'],
-        email: fromResponse['user']['email'],
-        url: fromResponse['user']['url'],
-        registered: fromResponse['user']['registered'],
-        displayname: fromResponse['user']['displayname'],
-        firstname: fromResponse['user']['firstname'],
-        lastname: fromResponse['user']['lastname'],
-        nickname: fromResponse['user']['nickname'],
-        description: fromResponse['user']['description'],
-        baby_age: fromResponse['user']['baby_age'],
-        pregnancy_week: fromResponse['user']['pregnancy_week'],
-        capabilities: fromResponse['user']['capabilities']);
+    var fromResponse = await Utils.networkcall.getUser();
+    UserDetailsModel _userDetailsModel= UserDetailsModel.fromMap(fromResponse);
+    return _userDetailsModel;
   }
+
+
+
+
+  Future<AuthModel> authData(String userName, String password) async {
+    var fromResponse = await Utils.networkcall.getAuthData(userName,password);
+    AuthModel _authData= AuthModel.fromMap(fromResponse);
+    return _authData;
+  }
+
+
+
+
+
+
+
+
+
 
   Future<List<MonthsModel>> monthsList(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];

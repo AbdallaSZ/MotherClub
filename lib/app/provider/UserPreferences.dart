@@ -1,4 +1,5 @@
 import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
@@ -8,7 +9,6 @@ class UserPreferences {
   late final SharedPreferences prefs;
 
   Future<bool> saveUser(UserModel user) async {
-
     prefs.setString("ID", user.userId);
     prefs.setString("user_login", user.user_login);
     prefs.setString("user_pass", user.user_pass);
@@ -20,6 +20,13 @@ class UserPreferences {
     setAttributeToUtils(user);
     return prefs.commit();
   }
+
+  Future<bool> saveAuth(AuthModel authData) async {
+    prefs.setString("cookie", authData.cookie!);
+    setAuthDataUtils(authData);
+    return prefs.commit();
+  }
+
 initialize()async{
   prefs = await SharedPreferences.getInstance();
   print("Shared Preference ready");
@@ -52,7 +59,13 @@ initialize()async{
     String user_registered = prefs.getString("user_registered")??'';
     String display_name = prefs.getString("display_name")??'';
 
+
     return UserModel(userId:userId, user_login: user_login, user_pass: user_pass, user_nicename: user_nicename, user_email: user_email, user_url: user_url, user_registered: user_registered, display_name: display_name);
+  }
+
+  Future<String> getAuthData()async{
+    String cookie = prefs.getString("cookie")??'';
+    return cookie;
   }
 
   void removeUser() async {
@@ -65,6 +78,8 @@ initialize()async{
     prefs.remove("user_url");
     prefs.remove("user_registered");
     prefs.remove("display_name");
+    prefs.remove("cookie");
+
   }
 
   Future<String> getToken() async {
@@ -78,4 +93,9 @@ initialize()async{
     Utils.email=value.user_email;
     Utils.ImageUrl=value.user_url;
   }
+
+  void setAuthDataUtils(AuthModel authData) {
+    Utils.cookie = authData.cookie!;
+  }
+
 }

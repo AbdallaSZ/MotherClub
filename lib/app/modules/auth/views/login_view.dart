@@ -105,7 +105,7 @@ class LoginView extends GetView<AuthController> {
                      InkWell(
                          onTap: ()
                          {
-                           Utils.progressBar.showLoadingIndicator('Loging', context);
+                           Utils.progressBar.showLoadingIndicator('Logging', context);
                            final Future<Map<String, dynamic>> successfulMessage =
                            auth.login(_userNameController.text, _passwordController.text);
                            successfulMessage.then((value){

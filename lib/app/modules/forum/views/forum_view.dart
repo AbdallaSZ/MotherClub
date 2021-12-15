@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/FormsModel.dart';
 import 'package:motherclub/app/Shimmers/FurmShimmer.dart';
+import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/modules/forum/controller/forumController.dart';
 import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
@@ -24,7 +25,7 @@ class ForumView extends GetView<ForumController> {
             children: [
               Container(
                 padding: EdgeInsets.all(10),
-                height: deviceHeight / 9.5,
+                height: deviceHeight / 8.3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(0.0),
                   gradient: LinearGradient(
@@ -45,88 +46,8 @@ class ForumView extends GetView<ForumController> {
 
                   // gradient: colorsConstants.gradient1
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              // color: Colors.yellowAccent,
-                              child: CircleAvatar(
-                                radius: 24.0,
-                                backgroundColor: Colors.white,
-                                child: CircleAvatar(
-                                    radius: 38.0,
-                                    backgroundImage: NetworkImage(Utils.prefs!
-                                            .getString("imageUrl") ??
-                                        "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png")),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Container(
-                              // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${Utils.name}",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),
-                                  ),
-                                  SizedBox(height: 3),
-                                  Text(
-                                    "Age: 29",
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: white_color, width: 1),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Column(
-                            children: [
-                              Text(
-                                Utils.labels!.week,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),
-                              ),
-                              SizedBox(height: 1),
-                              Text(
-                                "9-12",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    color: white_color),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),),
+                child:   InfoAccountWidget(
+                    deviceHeight / 10, deviceWidth, context),),
                     // AppBarWidget("Forum",deviceHeight/9.4,deviceWidth,context),
                     Container(
                       padding: EdgeInsets.all(10),

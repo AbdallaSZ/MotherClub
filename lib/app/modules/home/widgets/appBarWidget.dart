@@ -32,7 +32,7 @@ Widget homeAppBar(
     SliverToBoxAdapter(
         child: InfoWidget(
             Utils.labels!.hi + ", ${Utils.name}",
-            Utils.labels!.you_are_pregnant_for,
+
             Utils.labels!.week,
             "9-12",
             deviceHeight / 8.5,

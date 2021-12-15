@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:motherclub/app/Models/UserModel.dart';
 import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/app/provider/UserPreferences.dart';
 import 'package:motherclub/common/Constant/URL.dart';
 import 'dart:async';
@@ -55,7 +56,13 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(userData);
 
+
+
       Utils.userPreferences.saveUser(authUser);
+
+      AuthModel _authData = await Utils.bLoC.authData(email, password);
+
+      Utils.userPreferences.saveAuth(_authData);
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
@@ -120,33 +127,33 @@ class AuthProvider with ChangeNotifier {
     }
     return result;
   }
-  static Future<Response> onValue(Response response) async {
-    var result;
-    final Map<String, dynamic> responseData = json.decode(response.body);
-
-    if (response.statusCode == 200) {
-
-      var userData = responseData['data'];
-
-      UserModel authUser = UserModel.fromJson(userData);
-
-      Utils.userPreferences.saveUser(authUser);
-      result = {
-        'status': true,
-        'message': 'Successfully registered',
-        'data': authUser
-      };
-    } else {
-
-      result = {
-        'status': false,
-        'message': 'Registration failed',
-        'data': responseData
-      };
-    }
-
-    return result;
-  }
+  // static Future<Response> onValue(Response response) async {
+  //   var result;
+  //   final Map<String, dynamic> responseData = json.decode(response.body);
+  //
+  //   if (response.statusCode == 200) {
+  //
+  //     var userData = responseData['data'];
+  //
+  //     UserModel authUser = UserModel.fromJson(userData);
+  //
+  //     Utils.userPreferences.saveUser(authUser);
+  //     result = {
+  //       'status': true,
+  //       'message': 'Successfully registered',
+  //       'data': authUser
+  //     };
+  //   } else {
+  //
+  //     result = {
+  //       'status': false,
+  //       'message': 'Registration failed',
+  //       'data': responseData
+  //     };
+  //   }
+  //
+  //   return result;
+  // }
 
   static onError(error) {
     print("the error is $error.detail");

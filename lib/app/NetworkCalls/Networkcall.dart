@@ -88,19 +88,44 @@ class Networkcall {
     return json.decode(response.body);
   }
 
-  Future<dynamic> getprofileAPICall(context) async {
+  Future<dynamic> getProfileAPICall() async {
     var response = await http
         .get(
       Uri.parse(
           'https://mothersclub.me/api/user/get_currentuserinfo/?cookie=nitin_9009|1636021311|r6o6ajAqtUVGCocy9vbkh2YDCaOr5HJe5v2paB5slu2|67b19463e33bf9df05f78569fdbda7bc30333c2ed83a56a29636c21e0b01a95b'),
-
-      /*headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }*/
     )
         .catchError(
       (error) {
         return false;
+      },
+    );
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getAuthData(String userName, String password) async {
+    var response = await http
+        .get(
+      Uri.parse(
+           'https://mothersclub.me/api/user/generate_auth_cookie/?username=$userName&password=$password'),
+    )
+        .catchError(
+      (error) {
+        return error;
+      },
+    );
+    return json.decode(response.body);
+  }
+
+
+  Future<dynamic> getUser() async {
+    var response = await http
+        .get(
+      Uri.parse(
+          'https://mothersclub.me/api/user/get_user_meta/?cookie=${Utils.cookie}'),
+    )
+        .catchError(
+          (error) {
+        return error;
       },
     );
     return json.decode(response.body);
@@ -125,7 +150,6 @@ class Networkcall {
     );
     return json.decode(response.body);
   }
-
 
   Future<dynamic> getWeeksAPICall() async {
     var response = await http
@@ -239,7 +263,7 @@ class Networkcall {
       return res['message'];
       throw Exception(response.body);
     } else {
-      log(response.body);
+
       return 'item added';
     }
   }
@@ -255,7 +279,6 @@ class Networkcall {
       var res = json.decode(response.body);
       return res['message'];
     } else {
-      log(response.body);
       return 'item deleted';
     }
   }
@@ -272,7 +295,7 @@ class Networkcall {
       return res['message'];
       throw Exception(response.body);
     } else {
-      log(response.body);
+
       return 'item deleted';
     }
   }
@@ -380,9 +403,8 @@ class Networkcall {
         'https://mothersclub.me/pregnancy-we-choose-you',
       ),
     );
-      return jsonDecode(response.body);
+    return jsonDecode(response.body);
   }
-
 
   Future<dynamic> getOrders() async {
     ///to do .. add user id filtering &customer=${Utils.id} at the end of the link
@@ -402,8 +424,4 @@ class Networkcall {
     );
     return jsonDecode(response.body);
   }
-
 }
-
-
-
