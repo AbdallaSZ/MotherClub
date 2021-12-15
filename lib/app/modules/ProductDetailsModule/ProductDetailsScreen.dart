@@ -344,29 +344,49 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
         SizedBox(
           width: 8,
         ),
-        Expanded(
-          flex: 4,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
+        GestureDetector(
+          onTap: ()async {
+            String res = await Utils.bLoC
+                .addCartItems(widget.id,
+                rxItemsCount.value, rxSelectedAgeSubject.value);
+            Navigator.pop(context);
+            ScaffoldMessenger.of(
+                context)
+                .showSnackBar(
+              SnackBar(
+                content: Text(
+                  res,
                 ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  Utils.labels!.add_to_cart,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                )
-              ],
+                duration:
+                const Duration(
+                    seconds: 3),
+              ),
+            );
+          },
+          child: Expanded(
+            flex: 4,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    Utils.labels!.add_to_cart,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  )
+                ],
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.purple.shade400,
+                  borderRadius: BorderRadius.circular(8)),
             ),
-            decoration: BoxDecoration(
-                color: Colors.purple.shade400,
-                borderRadius: BorderRadius.circular(8)),
           ),
         )
       ],

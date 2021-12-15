@@ -23,6 +23,10 @@ class Utils
   static double verticalMargin=0.0;
   static String id ='';
   static String name ='';
+  static String pass ='';
+  static String cookie ='';
+
+  static String userName ='';
   static String payTabsServerKey ='SDJNZDNMBJ-J2MW66NTLR-KBZWWBWBLM';
   static String payTabsClientKey ='C2KMHQ-2P7N6M-NVGGQ7-RG2HKN';
   static String ImageUrl ='';

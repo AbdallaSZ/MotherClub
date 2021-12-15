@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
-Widget createFilteredListView(List<ProductModel> data) {
+Widget createFilteredListView(List<ProductDetailsModel> data) {
   return new Flexible(
     child: data.length==0? Container(
       alignment: Alignment.center,
@@ -31,7 +32,7 @@ Widget createFilteredListView(List<ProductModel> data) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
                   SizedBox(height:23),
-                  Image.network('${data[index].imageslist[0].src}',height: 130,width: 155,),
+                  Image.network('${data[index].images![0].src}',height: 130,width: 155,),
                   SizedBox(height:15),
 
                   Text("${data[index].name}",style: GoogleFonts.roboto(

@@ -126,5 +126,18 @@
   "add_wishlist_name" : "اضف قائمة مفضلات",
   "add" : "اضف",
   "remove_order" : "حذف طلب",
-  "no_wish_list_yet": "لا يوجد قائمة مفضلات بعد"
+  "no_wish_list_yet": "لا يوجد قائمة مفضلات بعد",
+  "variation": "نوع",
+  "quantity": "كمية",
+  "items_in_your_cart": "منتجات في سلتك",
+  "you_have": "انت لديك",
+  "your_cart": "سلتك",
+  "added": "اضيفت",
+  "has_deleted": "حذفت",
+  "order": "طلب",
+  "edited": "عدلت",
+  "some_fields_are_invalid": "بعض الخانات غير صحيحة",
+  "item_removed_from_this_wishlist": "تم حذف عنصر من قائمة المفضلات!",
+  "item_added_to_the_cart_again": "تم اضافة عنصر الى السلة مرة اخرى",
+  "you_have_to_agree_the_terms": "لقد وافقت على الاتفاقية"
 }

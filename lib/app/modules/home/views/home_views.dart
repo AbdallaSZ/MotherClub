@@ -5,12 +5,14 @@ import 'package:motherclub/app/modules/home/controllers/home_controllers.dart';
 import 'package:motherclub/app/modules/home/widgets/appBarWidget.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
+import 'package:motherclub/common/Utils/Utils.dart';
 
 
 class HomeView extends GetResponsiveView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    print('hhhi${Utils.cookie}');
     double deviceHeight = MediaQuery
         .of(context)
         .size

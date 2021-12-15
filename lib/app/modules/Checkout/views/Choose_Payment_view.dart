@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
@@ -91,11 +92,11 @@ class Choose_Payment_view extends GetView<AuthController> {
                               child: Container(
                                 
                                 
-                                child: FutureBuilder<List<ProductModel>>(
+                                child: FutureBuilder<List<ProductDetailsModel>>(
                                     future: Utils.bLoC.productList(context),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-                                        List<ProductModel>? data = snapshot.data;
+                                        List<ProductDetailsModel>? data = snapshot.data;
                                         return ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           itemCount: 2,

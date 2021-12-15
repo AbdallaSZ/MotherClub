@@ -324,13 +324,13 @@ imageSubject.close();
   if(validated){
     fireRegisterEvent();
   }else {
-    showSnackBar("Some fields are invalid ");
+    showSnackBar(Utils.labels!.some_fields_are_invalid);
   }
   }
 
   bool checkOnInput() {
   if(!_checkbox){
-    showSnackBar("You have to agree the terms  ");
+    showSnackBar(Utils.labels!.you_have_to_agree_the_terms);
         }else {
   if(_formKey.currentState!.validate()){
     return true;

@@ -111,8 +111,7 @@ class _WishlistListState extends State<WishlistList> {
                                                                       .of(context)
                                                                   .showSnackBar(
                                                             SnackBar(
-                                                              content: const Text(
-                                                                  'Wish list name edited !'),
+                                                              content:    Text('${Utils.labels!.wish_List} ${Utils.labels!.name} ${Utils.labels!.edited}'),
                                                               duration:
                                                                   const Duration(
                                                                       seconds:
@@ -141,8 +140,7 @@ class _WishlistListState extends State<WishlistList> {
                                                   context,
                                                 ).showSnackBar(
                                                   SnackBar(
-                                                    content: const Text(
-                                                        'Wish list deleted'),
+                                                    content:    Text('${Utils.labels!.wish_List} ${Utils.labels!.has_deleted}'),
                                                     duration: const Duration(
                                                       seconds: 3,
                                                     ),

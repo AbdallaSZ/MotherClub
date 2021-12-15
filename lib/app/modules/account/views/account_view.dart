@@ -46,7 +46,7 @@ class _AccountViewState extends State<AccountView> {
         child: Column(
           children: [
             // AppBarWidget("My Account",deviceHeight/9.4,deviceWidth,context),
-            InfoAccountWidget("${Utils.name}", "Age: 29", "Week", "9-12",
+            InfoAccountWidget(
                 deviceHeight / 10, deviceWidth, context),
 
             FutureBuilder<List<OrderModel>>(
@@ -189,7 +189,7 @@ class _AccountViewState extends State<AccountView> {
                                                                     ).showSnackBar(
                                                                       SnackBar(
                                                                         content:
-                                                                            const Text('Order deleted'),
+                                                                        Text('${Utils.labels!.order} ${Utils.labels!.has_deleted}'),
                                                                         duration:
                                                                             const Duration(
                                                                           seconds:

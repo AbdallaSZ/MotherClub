@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Shimmers/Product_Shimmer.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
@@ -31,7 +32,7 @@ Widget homeAppBar(
     SliverToBoxAdapter(
         child: InfoWidget(
             Utils.labels!.hi + ", ${Utils.name}",
-            Utils.labels!.you_are_pregnant_for,
+
             Utils.labels!.week,
             "9-12",
             deviceHeight / 8.5,
@@ -178,11 +179,11 @@ Widget homeAppBar(
         padding: const EdgeInsets.only(left: 10.0),
         child: Container(
           height: 300.0,
-          child: FutureBuilder<List<ProductModel>>(
+          child: FutureBuilder<List<ProductDetailsModel>>(
               future: Utils.bLoC.productList(context),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List<ProductModel>? data = snapshot.data;
+                  List<ProductDetailsModel>? data = snapshot.data;
                   return ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: data!.length,
@@ -195,7 +196,7 @@ Widget homeAppBar(
                                     builder: (c) => BlocProvider(
                                         create: (c) => ProductDetailsBloc(),
                                         child: ProductDetailsScreen(
-                                            data[index].id))));
+                                            data[index].id.toString()))));
                           },
                           child: ProductItem(
                             data: data[index],
