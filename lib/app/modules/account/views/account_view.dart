@@ -323,7 +323,12 @@ class _AccountViewState extends State<AccountView> {
               padding: const EdgeInsets.only(left: 20, top: 30),
               child: GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (c)=>SettingsScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (c)=>SettingsScreen())).whenComplete(() {
+                    print("sad");
+                    setState(() {
+
+                    });
+                  });
                 },
                 child: Container(
                   child: Row(

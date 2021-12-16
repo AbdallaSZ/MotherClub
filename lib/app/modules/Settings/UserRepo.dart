@@ -7,7 +7,7 @@ class UserRepo {
     return response;
   }
   static Future<dynamic > uploadImage (String image64)async{
-   var response =  await NetworkService.uploadImage("upload_image",{
+   var response =  await NetworkService.uploadImage("wp-json/custom-plugin/upload_image",{
      "user_id":int.parse(Utils.id),
      "image":image64
    });

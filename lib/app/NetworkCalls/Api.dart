@@ -49,10 +49,10 @@ class NetworkService {
   }
   static Future<dynamic> uploadImage(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}})async {
-   var response = await http.post(Uri.parse(BASE_URL+apiBaseUrl),body: FormData.fromMap(data));
-       var decoded = decodeTheResponse(response);
+   var response = await dio.post(BASE_URL+apiBaseUrl,data: FormData.fromMap(data));
+    //   var decoded = decodeTheResponse(response);
 
-   return decoded;
+   return response.data;
   }
   static Future<dynamic> createOrder(String apiBaseUrl, dynamic data,
       {dynamic headers = const {"Content-Type": "application/json"}})async {
