@@ -27,7 +27,7 @@ class SplashController extends GetxController {
   // }
 
   Future<void> loading() async {
-    Timer(Duration(seconds: 5), () async {
+    Timer(Duration(seconds: 10), () async {
 
       if(await Utils.checkapp()==true) {
         String Id = await Utils.userPreferences.getToken();
