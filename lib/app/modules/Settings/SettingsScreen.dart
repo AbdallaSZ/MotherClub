@@ -108,8 +108,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           stream: imageSubject.stream,
                           builder: (context, snapshot) {
                             return Container(
-                              height:100 ,
-                              width:100 ,
+                              height:150 ,
+                              width:150 ,
                                 child: CircleAvatar(
                                   foregroundImage:  getImage(snapshot)
                                   ,
@@ -119,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         Positioned(
                           bottom: 0,
-                          left: 30,
+                            left:55,
                             child: GestureDetector(
                               onTap: (){
                                 openImagePicker();
