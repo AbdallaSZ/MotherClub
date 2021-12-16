@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/Settings/UserRepo.dart';
+import 'package:motherclub/app/modules/account/views/account_view.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/EditTextWithoutIcon.dart';
