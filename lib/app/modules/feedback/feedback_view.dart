@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:motherclub/app/Models/wishlistModel.dart';
-import 'package:motherclub/app/modules/WishList/views/wishList_view.dart';
-import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
-import 'dart:math' as math;
 
 class FeedBack extends StatefulWidget {
   const FeedBack({Key? key}) : super(key: key);
@@ -46,7 +41,7 @@ class _FeedBackState extends State<FeedBack> {
                         Text('Mother’s Club',style: TextStyle(color: Colors.pinkAccent,fontSize: 24),),
                         TextFormField(
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.person,color: Colors.pinkAccent,),
+                            icon: const Icon(Icons.person_outline,color: Colors.pinkAccent,),
                             hintText: 'Enter your full name',
                             labelText: 'Name',
                           ),
@@ -59,7 +54,7 @@ class _FeedBackState extends State<FeedBack> {
                         ),
                         TextFormField(
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.phone,color: Colors.pinkAccent,),
+                            icon: const Icon(Icons.email_outlined,color: Colors.pinkAccent,),
                             hintText: 'Enter an Email',
                             labelText: 'Email',
                           ),
@@ -75,9 +70,9 @@ class _FeedBackState extends State<FeedBack> {
                           maxLines: null,
                           minLines: 5,
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.message,color: Colors.pinkAccent,),
+                            icon: const Icon(Icons.message_outlined,color: Colors.pinkAccent,),
                             hintText: 'Enter your message',
-                            labelText: 'Dob',
+                            labelText: 'Message',
                           ),
                           validator: (value) {
                             if (value!.length < 40) {
