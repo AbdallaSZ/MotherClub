@@ -74,13 +74,13 @@ class LoginView extends GetView<AuthController> {
                        ),
 
                      Divider(color: Colors.transparent, height: deviceHeight /25,),
-                     EditTextWidget(Lable: 'Username', context: context, IconButton: Icons.person_outline, textEditingController: _userNameController),
+                     EditTextWidget(Lable: Utils.labels!.username, context: context, IconButton: Icons.person_outline, textEditingController: _userNameController),
 
                      Divider(
                        color: Colors.transparent,
                        height: 10,
                      ),
-                     EditTextWidget(Lable: 'Password', context: context, IconButton: Icons.lock_open, textEditingController: _passwordController),
+                     EditTextWidget(Lable: Utils.labels!.password, context: context, IconButton: Icons.lock_open, textEditingController: _passwordController),
                      Align(
                        alignment: Alignment.topLeft,
                        child: Row(
@@ -92,7 +92,7 @@ class LoginView extends GetView<AuthController> {
                              },
                            ),
                            Text(
-                             'Remember Me?',
+                             Utils.labels!.remember_me,
                              style: Theme.of(context).textTheme.bodyText2,
                            ),
                          ],
@@ -120,21 +120,21 @@ class LoginView extends GetView<AuthController> {
                              else
                              {
                                Utils.progressBar.hideOpenDialog(context);
-                               CoolAlert.show(context: context,text: ' Please check your username or password ',title: 'Something went wrong', type: CoolAlertType.error);
+                               CoolAlert.show(context: context,text: Utils.labels!.please_check_username_password,title: Utils.labels!.something_went_wrong, type: CoolAlertType.error);
                              }
 
                            });
 
                           // Get.offAndToNamed(Routes.BOTTOM);
                          },
-                         child:CustomBUttonWidget("Login", deviceHeight/17 , deviceWidth/1.1, context)),
+                         child:CustomBUttonWidget(Utils.labels!.login, deviceHeight/17 , deviceWidth/1.1, context)),
                      Divider(
                        color: Colors.transparent,
                        height: deviceHeight/31,
                      ),
                      Center(
                        child: Text(
-                         'Forgot Password?',
+                         Utils.labels!.forget_password,
                          style: GoogleFonts.roboto(
                              fontSize: 16,
                              fontWeight: FontWeight.w500,
@@ -193,7 +193,7 @@ class LoginView extends GetView<AuthController> {
                            mainAxisAlignment: MainAxisAlignment.center,
                            children: [
                              Text(
-                               'Don’t have an account?',
+                               Utils.labels!.dont_have_an_account,
                                style: GoogleFonts.roboto(
                                    fontSize: 16,
                                    fontWeight: FontWeight.w500,
@@ -203,7 +203,7 @@ class LoginView extends GetView<AuthController> {
                              SizedBox(
                                width: 1,
                              ),
-                             Text('Register',
+                             Text(Utils.labels!.register,
                                style: GoogleFonts.roboto(
                                    fontSize: 16,
                                    fontWeight: FontWeight.w500,

@@ -54,7 +54,7 @@ class _RegisterViewState extends State<RegisterView> {
   GlobalKey<ScaffoldState>_scaffoldKey = GlobalKey();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String imageText = "";
-  String imageName = "Upload Profile Image" ;
+  String imageName = Utils.labels!.upload_profile_image ;
 
 @override
   void initState() {
@@ -121,7 +121,7 @@ imageSubject.close();
                                 color: Colors.transparent,
                                 height: 10,
                               ),
-                              EditTextwidget("Username", _usernameController,context,validate:userNameValidate
+                              EditTextwidget(Utils.labels!.username, _usernameController,context,validate:userNameValidate
                               ),Divider(
                                 color: Colors.transparent,
                                 height: 10,

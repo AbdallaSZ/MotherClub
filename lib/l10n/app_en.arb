@@ -34,6 +34,33 @@
   "@password_changed_successfully": {
     "description": "The conventional newborn programmer greeting"
   },
+  "please_check_username_password": " Please check your username or password ",
+  "@please_check_username_password": {
+    "description": "The conventional newborn programmer greeting"
+  },"login": "login",
+  "@login": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "forget_password": "Forget Password ? ",
+  "@forget_password": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "dont_have_an_account": "Don’t have an account?",
+  "@dont_have_an_account": {
+    "description": "The conventional newborn programmer greeting"
+  }, "username": "Username",
+  "@username": {
+    "description": "The conventional newborn programmer greeting"
+  }, "remember_me": "Remember Me?",
+  "@remember_me": {
+    "description": "The conventional newborn programmer greeting"
+  }, "upload_profile_image": "Upload Profile Image ",
+  "@upload_profile_image": {
+    "description": "The conventional newborn programmer greeting"
+  },  "something_went_wrong": "Something went wrong",
+  "@something_went_wrong": {
+    "description": "The conventional newborn programmer greeting"
+  },
   "new_password": "New Password",
   "@new_password": {
     "description": "The conventional newborn programmer greeting"
