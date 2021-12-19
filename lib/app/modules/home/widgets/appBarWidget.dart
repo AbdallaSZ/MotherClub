@@ -31,7 +31,7 @@ Widget homeAppBar(
     // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
     SliverToBoxAdapter(
         child: InfoWidget(
-            Utils.labels!.hi + ", ${Utils.name}",
+            Utils.labels!.hi + ", ${Utils.name=="" ? Utils.labels!.guest : Utils.name}",
 
             Utils.labels!.week,
             "9-12",

@@ -51,7 +51,7 @@ Widget InfoWidget(String Label,String label3, String label4,
                       ),
                       SizedBox(height: 3),
                       Text(
-                        '${Utils.labels!.you_are_pregnant_for} ${snapshot.data!.babyAge}',
+                        '${Utils.labels!.you_are_pregnant_for} ${snapshot.data!.babyAge ?? " "}',
                         style: GoogleFonts.roboto(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
@@ -79,7 +79,7 @@ Widget InfoWidget(String Label,String label3, String label4,
                       //     color: white_color),),
                       // SizedBox(height:1),
                       Text(
-                        "${snapshot.data!.weeksUser}",
+                        "${snapshot.data!.weeksUser ?? ""}",
                         style: GoogleFonts.roboto(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,

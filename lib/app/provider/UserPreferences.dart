@@ -79,7 +79,8 @@ initialize()async{
     prefs.remove("user_registered");
     prefs.remove("display_name");
     prefs.remove("cookie");
-
+    prefs.clear();
+    Utils.deleteUserData();
   }
 
   Future<String> getToken() async {

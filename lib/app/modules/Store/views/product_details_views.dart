@@ -237,7 +237,7 @@ class product_details_viewsState extends State<product_details_views> {
                       Icon(Icons.add)
                     ],)
                   ),
-    CustomBUttonWidget(Utils.labels!.add_to_cart, Utils.deviceHeight/17 , Utils.deviceWidth/2.3, context),
+                  CustomBUttonWidget(Utils.labels!.add_to_cart, Utils.deviceHeight/17 , Utils.deviceWidth/2.3, context),
 
     ],)
 

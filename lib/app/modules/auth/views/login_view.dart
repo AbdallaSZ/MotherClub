@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:motherclub/app/language/LangaugeBloc.dart';
+import 'package:motherclub/app/language/LanguageEvent.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
 import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
@@ -16,6 +18,7 @@ import 'package:motherclub/common/CustomWidget/EditTextField.dart';
 import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
 import 'package:motherclub/common/CustomWidget/progressButton.dart';
 import 'package:motherclub/common/CustomWidget/progressbar.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +60,7 @@ class LoginView extends GetView<AuthController> {
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: [
-               CustomLogoWidget("",deviceHeight/4,deviceWidth,context),
+               CustomLogoWidget("",deviceHeight/4,deviceWidth,context,false),
                Container(
                  padding: const EdgeInsets.only(left: 20,right: 20),
                  child: Column(
@@ -128,11 +131,22 @@ class LoginView extends GetView<AuthController> {
                           // Get.offAndToNamed(Routes.BOTTOM);
                          },
                          child:CustomBUttonWidget(Utils.labels!.login, deviceHeight/17 , deviceWidth/1.1, context)),
-                     Divider(
+                    SizedBox(height: 16,),
+                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlatButton(
+                            onPressed: () {
+                              Get.offAndToNamed(Routes.BOTTOM);
+                            },
+                            child: Text(Utils.labels!.proceed_as_guest, style: TextStyle(color: CustomButton_Color, fontSize: 22),))
+                      ],
+                    ),
+                     /*Divider(
                        color: Colors.transparent,
-                       height: deviceHeight/31,
-                     ),
-                     Center(
+                       height: deviceHeight/75,
+                     ),*/
+                     /*Center(
                        child: Text(
                          Utils.labels!.forget_password,
                          style: GoogleFonts.roboto(
@@ -140,7 +154,7 @@ class LoginView extends GetView<AuthController> {
                              fontWeight: FontWeight.w500,
                              color: Text_color),
                        ),
-                     ),
+                     ),*/
                     /* Divider(
                        color: Colors.transparent,
                        height: deviceHeight/27,
@@ -163,10 +177,10 @@ class LoginView extends GetView<AuthController> {
                            ),
                          ]
                      ),*/
-                     Divider(
+                     /*Divider(
                        color: Colors.transparent,
                        height: deviceHeight/26,
-                     ),
+                     ),*/
                    /*  Row(
                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                        children: [
@@ -248,4 +262,44 @@ class LoginView extends GetView<AuthController> {
     }
   }
 
- }
+  String _radioValue = Utils.locality == Locality.english
+      ? "en"
+      : Utils.locality == Locality.arabic
+      ? "ar"
+      : Utils.locality == Locality.spanish
+      ? "es"
+      : "ur"; //Initial definition of radio button value
+  String? choice;
+  LanguageBloc? _bloc;
+
+  void radioButtonChanges(String? value) {
+    Get.back();
+      _radioValue = value!;
+      switch (value) {
+        case 'en':
+          choice = value;
+          break;
+        case 'ar':
+          choice = value;
+          break;
+        default:
+          choice = null;
+      }
+      debugPrint(choice); //Debug the choice in console
+
+    //      Strings.isEnglish = value;
+
+    if (choice == "en") {
+      _bloc!.add(LanguageEvent( Locale("en", "")));
+      Get.updateLocale(Locale("en", ""));
+    } else if (choice == "ar") {
+      _bloc!.add(LanguageEvent(  Locale("ar", "")));
+      Get.updateLocale(Locale("ar", ""));
+    }
+    Future.delayed(Duration(milliseconds: 500)).then((value) {
+      Utils.languageSubject.sink.add(true);
+
+    });
+  }
+
+}

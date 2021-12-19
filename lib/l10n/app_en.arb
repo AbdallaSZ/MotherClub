@@ -104,8 +104,8 @@
 
 
 
-  "create_New_Account_to_see":"Create an account to see all your information and alos you will be able to share your experience with others and learn other mothers experiment’s.",
-  "@create_New_Account_to_see": {
+  "create_new_account_to_see":"Create an account to see all your information and allows you will be able to share your experience with others and learn other mothers experiment’s.",
+  "@create_new_account_to_see": {
     "description": "The conventional newborn programmer greeting"
   },
 
@@ -113,13 +113,26 @@
   "@agree_for_news": {
     "description": "The conventional newborn programmer greeting"
   },
+  "proceed_as_guest": "Proceed as a guest",
+  "@proceed_as_guest": {
+    "description": "The conventional newborn programmer greeting"
+  },
 
   "total":"Total",
   "@total": {
     "description": "The conventional newborn programmer greeting"
+  },"guest":"Guest",
+  "@guest": {
+    "description": "The conventional newborn programmer greeting"
+  },"you_have_to_login_first":"You have to login first ",
+  "@you_have_to_login_first": {
+    "description": "The conventional newborn programmer greeting"
   },
   "sizes":"Sizes:",
   "@sizes": {
+    "description": "The conventional newborn programmer greeting"
+  },"not_now":"Not now",
+  "@not_now": {
     "description": "The conventional newborn programmer greeting"
   },"done":"Done",
   "@done": {

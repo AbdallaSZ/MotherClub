@@ -11,6 +11,7 @@ import 'package:motherclub/app/modules/Store/views/product_item.dart';
 import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 import '../../ProductDetailsModule/ProductDetailsScreen.dart';
@@ -189,7 +190,10 @@ class _StoreViewScreenState extends State<StoreView> {
               alignment: Alignment.bottomRight,
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.CART);
+                  if(Utils.id != "")Get.toNamed(Routes.CART);
+                  else showDialog(context: context, builder: (c){
+                    return loginDialog;
+                  });
                 },
                 child: Container(
                     height: 60,

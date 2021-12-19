@@ -10,6 +10,7 @@ import 'package:motherclub/app/modules/account/views/account_view.dart';
 import 'package:motherclub/app/modules/forum/views/forum_view.dart';
 import 'package:motherclub/app/modules/home/views/home_views.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
 class a {
@@ -273,8 +274,14 @@ class _BottomScreenState extends State<BottomScreen> {
   Widget get currentPage => pages[currentIndex];
 
   void changePage(int _index) {
+    if(Utils.id== ""&&(_index == 2 || _index == 4) ){
+      showDialog(context: context, builder: (c){
+        return loginDialog;
+      });
+    }else {
     currentIndex = _index;
 
     rxPages.sink.add(_index);
+  }
   }
 }

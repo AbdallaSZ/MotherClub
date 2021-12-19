@@ -8,6 +8,7 @@ import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -38,7 +39,7 @@ class _ProductItemState extends State<ProductItem> {
   @override
   void initState() {
     // TODO: implement initState
-    stockQuantity = widget.data.stockQuantity!;
+    stockQuantity = widget.data.stockQuantity ?? 2;
     itemNumberController.text = 1.toString();
     rxItemsCount.sink.add(1);
 
@@ -164,6 +165,7 @@ class _ProductItemState extends State<ProductItem> {
                   children: [
                     GestureDetector(
                       onTap: () async {
+                        if(Utils.id != "")
                         showModalBottomSheet<void>(
                           context: context,
                           builder: (BuildContext context) {
@@ -377,6 +379,11 @@ class _ProductItemState extends State<ProductItem> {
                             });
                           },
                         );
+                        else {
+                          showDialog(context: context, builder: (c){
+                            return loginDialog;
+                          });
+                        }
                         // Get.toNamed(Routes.CART);
                       },
                       child: Container(
