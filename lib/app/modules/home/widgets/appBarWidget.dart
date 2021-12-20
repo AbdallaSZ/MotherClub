@@ -32,7 +32,7 @@ Widget homeAppBar(
     Routes.STORE
   ];
   return CustomScrollView(slivers: <Widget>[
-    // SliverToBoxAdap ter(
+    // SliverToBoxAdapter(
     // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
     SliverPadding(
         padding: EdgeInsets.only(
@@ -116,14 +116,7 @@ Widget homeAppBar(
                               Text(
                                 '${data[index].title}',
                                 style: GoogleFonts.roboto(
-                                  fontSize: SizeHelper.of(context).help(
-                                    mobileSmall: 6,
-                                    mobileNormal: 8,
-                                    mobileLarge: 10,
-                                    tabletNormal: 12,
-                                    tabletExtraLarge: 14,
-                                    desktopLarge: 16,
-                                  ),
+                                  fontSize: 13,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
                                   color: Black_textColor,
@@ -223,7 +216,7 @@ Widget homeAppBar(
 
     SliverToBoxAdapter(
       child: SizedBox(
-        height: 40,
+        height: 29,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Row(

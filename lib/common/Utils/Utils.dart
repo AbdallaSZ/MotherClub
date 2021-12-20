@@ -133,4 +133,13 @@ static   SharedPreferences? prefs ;
       prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
     }
   }
+
+  static void deleteUserData() {
+    id= "";
+    name="";
+    pass ='';
+    cookie ='';
+    userName ='';
+
+  }
 }

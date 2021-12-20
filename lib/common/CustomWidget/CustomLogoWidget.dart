@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 
-Widget CustomLogoWidget(String Label,double height , double width,BuildContext context){
+Widget CustomLogoWidget(String Label,double height , double width,BuildContext context, bool isBack){
 
   return
     Container(
@@ -16,13 +16,17 @@ Widget CustomLogoWidget(String Label,double height , double width,BuildContext c
           children: [
             Row(
               children: [
-                Icon(Icons.arrow_back,size: 33,),
+                isBack ? GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back,size: 33,)) : Container(),
                 SizedBox(width:10),
                 Text(Label),
               ],
             ),
 
-            Image.asset('assets/images/translate.png')
+          //  Image.asset('assets/images/translate.png')
           ],
         ),
         Container(

@@ -176,7 +176,7 @@ Widget InfoWidget() {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            Utils.labels!.hi + ", ${Utils.name}",
+                            Utils.labels!.hi + ", ${Utils.name=="" ? Utils.labels!.guest : Utils.name}",
                             style: GoogleFonts.roboto(
                                 fontSize: SizeHelper.of(context).help(
                                   mobileSmall: 10,

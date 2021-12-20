@@ -23,9 +23,11 @@ class w extends a {}
 class s extends w {}
 
 class BottomScreen extends StatefulWidget {
+
   @override
   _BottomScreenState createState() => _BottomScreenState();
 }
+
 
 class _BottomScreenState extends State<BottomScreen> {
   int currentIndex = 0;
@@ -68,6 +70,7 @@ class _BottomScreenState extends State<BottomScreen> {
     }
     Future.delayed(Duration(milliseconds: 500)).then((value) {
       Utils.languageSubject.sink.add(true);
+
     });
   }
 
@@ -396,8 +399,14 @@ class _BottomScreenState extends State<BottomScreen> {
   Widget get currentPage => pages[currentIndex];
 
   void changePage(int _index) {
+    if(Utils.id== ""&&(_index == 2 || _index == 4) ){
+      showDialog(context: context, builder: (c){
+        return loginDialog;
+      });
+    }else {
     currentIndex = _index;
 
     rxPages.sink.add(_index);
+  }
   }
 }

@@ -95,7 +95,7 @@ imageSubject.close();
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomLogoWidget("Back to ",deviceHeight/4,deviceWidth,context),
+                      CustomLogoWidget("",deviceHeight/4,deviceWidth,context,true),
                       Container(
                         padding: const EdgeInsets.only(left: 20,right: 20),
                         child: Form(
@@ -105,7 +105,7 @@ imageSubject.close();
                             children: [
                               Text(Utils.labels!.create_New_Account,style: Theme.of(context).textTheme.headline1),
                               SizedBox(width:10),
-                              Text(Utils.labels!.create_New_Account_to_see,
+                              Text(Utils.labels!.create_new_account_to_see,
                                 style: GoogleFonts.roboto(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -192,6 +192,7 @@ imageSubject.close();
                                   StreamBuilder<bool>(
                                       stream: checkBoxSubject.stream,
                                       builder: (context, snapshot) {
+                                        if(snapshot.hasData)
                                         return Checkbox(
                                           value: snapshot.data,
                                           activeColor: pinkfavorite_Color,
@@ -200,7 +201,10 @@ imageSubject.close();
                                             _checkbox = value;
                                           },
                                         );
+                                        else
+                                          return Container();
                                       }
+
                                   ),
                                   RichText(
                                     text: TextSpan(
