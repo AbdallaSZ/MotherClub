@@ -39,27 +39,27 @@ class product_details_viewsState extends State<product_details_views> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-
         backgroundColor: Colors.white,
-        title: Text(Utils.labels!.item_Details,style: TextStyle(color: Colors.black),),
+        title: Text(
+          Utils.labels!.item_Details,
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Container(
         color: Color(0xffE5E5E5),
         padding: EdgeInsets.all(10),
         child: Column(
-        //  mainAxisAlignment: MainAxisAlignment.center,
-         // crossAxisAlignment: CrossAxisAlignment.center,
+          //  mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
             carouselSlider = CarouselSlider(
-
               items: imgList.map((imgUrl) {
                 return Builder(
                   builder: (BuildContext context) {
                     return Container(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
-                     // margin: EdgeInsets.symmetric(horizontal: 10.0),
+                      // margin: EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
                         color: Colors.green,
                       ),
@@ -71,26 +71,26 @@ class product_details_viewsState extends State<product_details_views> {
                   },
                 );
               }).toList(),
-             options: CarouselOptions(
-      height: 200,
-      aspectRatio: 16/9,
-      viewportFraction: 0.8,
-      initialPage: 0,
-      enableInfiniteScroll: true,
-      reverse: false,
-      autoPlay: true,
-      autoPlayInterval: Duration(seconds: 3),
-      autoPlayAnimationDuration: Duration(milliseconds: 800),
-      autoPlayCurve: Curves.fastOutSlowIn,
-      enlargeCenterPage: true,
-     // onPageChanged: callbackFunction,
-      scrollDirection: Axis.horizontal,
-    ),
+              options: CarouselOptions(
+                height: 200,
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.8,
+                initialPage: 0,
+                enableInfiniteScroll: true,
+                reverse: false,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enlargeCenterPage: true,
+                // onPageChanged: callbackFunction,
+                scrollDirection: Axis.horizontal,
+              ),
             ),
             SizedBox(
               height: 20,
             ),
-           /* Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: map<Widget>(imgList, (index, url) {
                 return Container(
@@ -110,145 +110,177 @@ class product_details_viewsState extends State<product_details_views> {
 
             Container(
               padding: EdgeInsets.all(15),
-              height:  MediaQuery.of(context).size.height/1.7,
+              height: MediaQuery.of(context).size.height / 1.7,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(20.0),topLeft:Radius.circular(20.0)
-                )
-              ),
-              child: Column(children: [
-                Row(
-                 children: [
-
-                   Expanded(
-                     flex:1,
-                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Text(Utils.labels!.maternity_Bladder,style: Theme.of(context).textTheme.headline4,),
-                      Divider(height: 5,color: Colors.transparent,),
-                      Row(
-                        //crossAxisAlignment: CrossAxisAlignment.start,
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.red)),
-                         SizedBox(width: Utils.deviceWidth/8,),
-                          Text(Utils.labels!.amd+'150',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey)),
-
-                        ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      topLeft: Radius.circular(20.0))),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              Utils.labels!.maternity_Bladder,
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            Divider(
+                              height: 5,
+                              color: Colors.transparent,
+                            ),
+                            Row(
+                              //crossAxisAlignment: CrossAxisAlignment.start,
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(Utils.labels!.amd + '150',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red)),
+                                SizedBox(
+                                  width: Utils.deviceWidth / 8,
+                                ),
+                                Text(Utils.labels!.amd + '150',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey)),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-
-
-
-
-
-                    ],),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ))
+                    ],
                   ),
-                   Align(alignment:Alignment.topLeft,child: Icon(Icons.favorite,color: Colors.red,))
-
-                ],),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)
-                        )
-                    ),
-                    height: 60,
-                    width: Utils.deviceWidth/2.5,
-                    child:  Text(Utils.labels!.description,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.white)),
-
+                  SizedBox(
+                    height: 20,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)
-                        )
-                    ),
-                    height: 60,
-                    width: Utils.deviceWidth/2.5,
-                    child:  Text(Utils.labels!.review,style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.grey)),
-
-                  )
-                ],),
-    SizedBox(
-    height: 10,
-    ),
-                Text(Utils.labels!.magnetic_Energy,style: GoogleFonts.roboto(fontSize: 14,fontWeight: FontWeight.normal,color: Colors.grey)),
-                SizedBox(
-                  height: 10,
-                ),
-
-                Align(
-                  alignment: Alignment.topLeft,
-                    child: Text(Utils.labels!.sizes,style: Theme.of(context).textTheme.headline4,)),
-                Container(
-                  height: 60,
-                  child: ListView.builder(
-
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: 50,
-                        width: 100,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.all(8),
-                        color: CustomButton_Color.withOpacity(0.1),
-                        child: Text('10.5 cm',style: GoogleFonts.roboto(fontSize: 16,fontWeight: FontWeight.normal,color: Colors.red)),
-
-
-                      );
-                    },
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        height: 60,
+                        width: Utils.deviceWidth / 2.5,
+                        child: Text(Utils.labels!.description,
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.white)),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        height: 60,
+                        width: Utils.deviceWidth / 2.5,
+                        child: Text(Utils.labels!.review,
+                            style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey)),
+                      )
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: Utils.deviceHeight/9,
-                ),
-                Row(
-                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
-    children: [
-
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(Utils.labels!.magnetic_Energy,
+                      style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey)),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        Utils.labels!.sizes,
+                        style: Theme.of(context).textTheme.headline4,
+                      )),
                   Container(
-                    padding: EdgeInsets.all(15),
-                    alignment: Alignment.center,
-                 decoration: BoxDecoration(
-
-                     border: Border.all(color: Colors.red,
-                        width: 1,),
-    borderRadius: BorderRadius.all(Radius.circular(10.0))
-
-    ),
-                    height: Utils.deviceHeight/17,
-                    width: Utils.deviceWidth/2.7,
-                    child:  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      Icon(Icons.remove),
-                      Text('1',style: GoogleFonts.roboto(fontSize: 18,fontWeight: FontWeight.normal,color: Colors.black)),
-                      Icon(Icons.add)
-                    ],)
+                    height: 60,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 50,
+                          width: 100,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.all(8),
+                          color: CustomButton_Color.withOpacity(0.1),
+                          child: Text('10.5 cm',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.red)),
+                        );
+                      },
+                    ),
                   ),
-                  CustomBUttonWidget(Utils.labels!.add_to_cart, Utils.deviceHeight/17 , Utils.deviceWidth/2.3, context),
-
-    ],)
-
-              ],),
+                  SizedBox(
+                    height: Utils.deviceHeight / 9,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(15),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.red,
+                                width: 1,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          height: Utils.deviceHeight / 17,
+                          width: Utils.deviceWidth / 2.7,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Icons.remove),
+                              Text('1',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black)),
+                              Icon(Icons.add)
+                            ],
+                          )),
+                      CustomBUttonWidget(
+                          Utils.labels!.add_to_cart,
+                          Utils.deviceHeight / 17,
+                          Utils.deviceWidth / 2.3,
+                          context),
+                    ],
+                  )
+                ],
+              ),
             ),
-
           ],
         ),
       ),
     );
   }
-
-
 }

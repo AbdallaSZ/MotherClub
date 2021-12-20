@@ -8,6 +8,7 @@ import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/P
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsEvent.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsState.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -346,6 +347,14 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
         ),
         GestureDetector(
           onTap: ()async {
+          if(Utils.id == ""){
+            showDialog(
+                context: context,
+                builder: (c) {
+                  return loginDialog;
+                });
+          }
+           else {
             String res = await Utils.bLoC
                 .addCartItems(widget.id,
                 rxItemsCount.value, rxSelectedAgeSubject.value);
@@ -362,6 +371,7 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
                     seconds: 3),
               ),
             );
+          }
           },
           child: Expanded(
             flex: 4,
