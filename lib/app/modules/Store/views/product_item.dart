@@ -620,6 +620,12 @@ class _ProductItemState extends State<ProductItem> {
               ),
             ),
             onTap: () {
+            if(Utils.id == ""){
+              showDialog(context: context, builder: (c){
+                return loginDialog;
+              });
+            }
+            else
               showDialog(
                   context: context,
                   builder: (c) {
