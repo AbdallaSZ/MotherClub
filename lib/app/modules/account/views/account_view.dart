@@ -13,13 +13,9 @@ import 'package:motherclub/app/modules/feedback/feedback_view.dart';
 import 'package:motherclub/app/modules/orders/order_item.dart';
 import 'package:motherclub/app/modules/orders/orders_gridview.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
-import 'package:motherclub/common/Constant/AppConstant.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
-import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:size_helper/size_helper.dart';
 
 class AccountView extends StatefulWidget {
@@ -38,22 +34,12 @@ class _AccountViewState extends State<AccountView> {
 
   @override
   Widget build(BuildContext context) {
-    var h3 = SizeHelper.of(context).help(
-      mobileSmall: 10,
-      mobileNormal: 12,
-      mobileLarge: 14,
-      tabletNormal: 16,
-      tabletExtraLarge: 18,
-      desktopLarge: 20,
-    );
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // AppBarWidget("My Account",deviceHeight/9.4,deviceWidth,context),
             InfoAccountWidget(),
-
             FutureBuilder<List<OrderModel>>(
               future: Utils.bLoC.orders(),
               builder: (context, snapshot) {
@@ -185,13 +171,13 @@ class _AccountViewState extends State<AccountView> {
                           ? ConstrainedBox(
                               constraints: BoxConstraints(
                                   maxHeight: SizeHelper.of(context).help(
-                                    mobileSmall: 100,
-                                    mobileNormal: 110,
-                                    mobileLarge: 120,
-                                    mobileExtraLarge: 130,
-                                    tabletNormal: 140,
-                                    tabletLarge: 150,
-                                    tabletExtraLarge: 170,
+                                    mobileSmall: 120,
+                                    mobileNormal: 140,
+                                    mobileLarge: 145,
+                                    mobileExtraLarge: 150,
+                                    tabletNormal: 160,
+                                    tabletLarge: 170,
+                                    tabletExtraLarge: 180,
                                     desktopLarge: 200,
                                   ),
                                   minHeight: 0),

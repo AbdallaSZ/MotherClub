@@ -11,6 +11,7 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'dart:ui' as ui;
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:size_helper/size_helper.dart';
 
 class ForumView extends GetView<ForumController> {
   @override
@@ -19,152 +20,133 @@ class ForumView extends GetView<ForumController> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                height: deviceHeight / 8.3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0.0),
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      stops: [
-                        0.0,
-                        0.1,
-                        10.0
-                      ],
-                      colors: [
-                        // Colors.deepPurple.shade400,
-                        CustomButton_Color,
-                        CustomButton_Color,
-                        CustomButton_Second_Color,
-                        // Colors.deepPurple.shade200,
-                      ]),
-
-                  // gradient: colorsConstants.gradient1
-                ),
-                child:   InfoAccountWidget(),),
-                    // AppBarWidget("Forum",deviceHeight/9.4,deviceWidth,context),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(width: 15),
-                              Text(
-                                Utils.labels!.total_post,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal,
-                                    letterSpacing: 0.25,
-                                    color: Black_textColor),
-                              ),
-                              SizedBox(
-                                width: 9,
-                              ),
-                              Container(
-                                height: 21,
-                                width: 35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      stops: [
-                                        0.0,
-                                        0.1,
-                                        10.0
-                                      ],
-                                      colors: [
-                                        // Colors.deepPurple.shade400,
-                                        CustomButton_Color,
-                                        CustomButton_Color,
-                                        CustomButton_Second_Color,
-                                        // Colors.deepPurple.shade200,
-                                      ]),
-                                ),
-                                child: FutureBuilder<List<FormsModel>>(
-                                    future: Utils.bLoC.forumsList(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        List<FormsModel>? data = snapshot.data;
-
-                                        return Center(
-                                          child: Text(
-                                            "${data!.length}",
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                letterSpacing: 0.25,
-                                                color: white_color),
-                                          ),
-                                        );
-                                      } else {
-                                        return Container();
-                                      }
-                                    }),
-                              )
-                            ],
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child: ShaderMask(
-                          //     blendMode: BlendMode.srcIn,
-                          //     shaderCallback: (Rect bounds) {
-                          //       return ui.Gradient.linear(
-                          //         Offset(14.0, 24.0),
-                          //         Offset(24.0, 0.0),
-                          //         [
-                          //           CustomButton_Color,
-                          //           CustomButton_Second_Color
-                          //         ],
-                          //       );
-                          //     },
-                          //   ),
-                          // ),
-                        ],
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            InfoAccountWidget(),
+            // AppBarWidget("Forum",deviceHeight/9.4,deviceWidth,context),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 15),
+                      Text(
+                        Utils.labels!.total_post,
+                        style: GoogleFonts.roboto(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.25,
+                            color: Black_textColor),
                       ),
-                    ),
+                      SizedBox(
+                        width: 9,
+                      ),
+                      Container(
+                        height: 21,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              stops: [
+                                0.0,
+                                0.1,
+                                10.0
+                              ],
+                              colors: [
+                                // Colors.deepPurple.shade400,
+                                CustomButton_Color,
+                                CustomButton_Color,
+                                CustomButton_Second_Color,
+                                // Colors.deepPurple.shade200,
+                              ]),
+                        ),
+                        child: FutureBuilder<List<FormsModel>>(
+                            future: Utils.bLoC.forumsList(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<FormsModel>? data = snapshot.data;
 
+                                return Center(
+                                  child: Text(
+                                    "${data!.length}",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        fontStyle: FontStyle.normal,
+                                        letterSpacing: 0.25,
+                                        color: white_color),
+                                  ),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            }),
+                      )
+                    ],
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: ShaderMask(
+                  //     blendMode: BlendMode.srcIn,
+                  //     shaderCallback: (Rect bounds) {
+                  //       return ui.Gradient.linear(
+                  //         Offset(14.0, 24.0),
+                  //         Offset(24.0, 0.0),
+                  //         [
+                  //           CustomButton_Color,
+                  //           CustomButton_Second_Color
+                  //         ],
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
 
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 480, minHeight: 400),
-                child: FutureBuilder<List<FormsModel>>(
-                    future: Utils.bLoC.forumsList(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List<FormsModel>? data = snapshot.data;
-                        // print('datadata ${data![0].Date}');
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: data!.length,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return GestureDetector(
+            Flexible(
+              flex: 5,
+              child: FutureBuilder<List<FormsModel>>(
+                  future: Utils.bLoC.forumsList(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<FormsModel>? data = snapshot.data;
+                      // print('datadata ${data![0].Date}');
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: data!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
                                 onTap: () {
                                   // await Utils.bLoC.UsersDetails();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            ForumCommentView(
-                                                formsModel: snapshot
-                                                    .data![index])),
+                                        builder: (context) => ForumCommentView(
+                                            formsModel: snapshot.data![index])),
                                   );
                                 },
                                 child: Card(
+                                  color: Colors.blueGrey,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(7.0),
-                                      // color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.white,
+                                          spreadRadius: 1,
+                                          blurRadius: 5,
+                                          offset: Offset(0,0), // changes position of shadow
+                                        ),
+                                      ],
                                     ),
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 15),
@@ -177,55 +159,74 @@ class ForumView extends GetView<ForumController> {
                                           child: Text(
                                               "${data[index].title!.rendered}",
                                               style: GoogleFonts.roboto(
-                                                fontSize: 18,
-                                                fontStyle:
-                                                FontStyle.normal,
-                                                fontWeight:
-                                                FontWeight.w700,
+                                                fontSize:
+                                                    SizeHelper.of(context).help(
+                                                  mobileSmall: 10,
+                                                  mobileNormal: 12,
+                                                  mobileLarge: 14,
+                                                  tabletNormal: 16,
+                                                  tabletExtraLarge: 18,
+                                                  desktopLarge: 20,
+                                                ),
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w700,
                                                 color: Black_textColor,
                                               )),
                                         ),
                                         SizedBox(height: 10),
                                         Container(
-                                          // padding:EdgeInsets.all(15),
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Row(
                                                 children: [
                                                   CircleAvatar(
                                                     radius: 20,
                                                     backgroundColor:
-                                                    Colors.blue,
+                                                        Colors.blue,
                                                   ),
                                                   SizedBox(width: 10),
                                                   Column(
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       //Text("Aditya Diab",style: Theme.of(context).textTheme.headline1,),
                                                       Text(
                                                         "${data[index].date}",
-                                                        style: GoogleFonts.roboto(
-                                                            fontSize: 10,
-                                                            letterSpacing:
-                                                            0.35,
-                                                            height: 1.5,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w400,
-                                                            color:
-                                                            Black_textColor),
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: SizeHelper.of(
+                                                                        context)
+                                                                    .help(
+                                                                  mobileSmall:
+                                                                      6,
+                                                                  mobileNormal:
+                                                                      8,
+                                                                  mobileLarge:
+                                                                      10,
+                                                                  tabletNormal:
+                                                                      12,
+                                                                  tabletExtraLarge:
+                                                                      14,
+                                                                  desktopLarge:
+                                                                      16,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.35,
+                                                                height: 1.5,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color:
+                                                                    Black_textColor),
                                                         maxLines: 2,
                                                       )
                                                     ],
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           ),
                                         ),
@@ -234,11 +235,18 @@ class ForumView extends GetView<ForumController> {
                                           child: Text(
                                             "${data[index].content!.rendered}",
                                             style: GoogleFonts.roboto(
-                                                fontSize: 13,
+                                                fontSize:
+                                                    SizeHelper.of(context).help(
+                                                  mobileSmall: 6,
+                                                  mobileNormal: 8,
+                                                  mobileLarge: 10,
+                                                  tabletNormal: 12,
+                                                  tabletExtraLarge: 14,
+                                                  desktopLarge: 16,
+                                                ),
                                                 letterSpacing: 0.25,
                                                 height: 1.4,
-                                                fontWeight:
-                                                FontWeight.w400,
+                                                fontWeight: FontWeight.w400,
                                                 color: Grey_text_Color),
                                           ),
                                         ),
@@ -334,20 +342,27 @@ class ForumView extends GetView<ForumController> {
                                         Divider(
                                           thickness: 1,
                                         ),
-                                       SizedBox(height: 8),
+                                        SizedBox(height: 8),
                                         Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
                                               "Open Post",
                                               style: GoogleFonts.roboto(
-                                                  fontSize: 16,
+                                                  fontSize:
+                                                      SizeHelper.of(context)
+                                                          .help(
+                                                    mobileSmall: 10,
+                                                    mobileNormal: 12,
+                                                    mobileLarge: 14,
+                                                    tabletNormal: 16,
+                                                    tabletExtraLarge: 18,
+                                                    desktopLarge: 20,
+                                                  ),
                                                   letterSpacing: 2,
                                                   // height: 1.4,
-                                                  fontWeight:
-                                                  FontWeight.w400,
+                                                  fontWeight: FontWeight.w400,
                                                   color: Black_textColor),
                                             ),
                                             Icon(
@@ -360,121 +375,113 @@ class ForumView extends GetView<ForumController> {
                                     ),
                                   ),
                                 ),
-                              );
-                            });
-                      } else {
-                        return ListView.builder(
-                            itemCount: 10,
-                            itemBuilder:
-                                (BuildContext context, int index) {
-                              return Card(
-                                  child: FurmShimmer(deviceHeight,
-                                      deviceWidth, context));
-                            });
-                      }
-                    }),
-              ),
-
-
-
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Card(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-
-                              // alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                                border:
-                                    Border.all(color: white_color, width: 0.5),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.chat,
-                                        color: Black_textColor,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Container(
-                                        width: 200,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            hintText: Utils
-                                                .labels!.write_your_experience,
-                                            hintStyle: GoogleFonts.roboto(
-                                                fontSize: 13,
-                                                letterSpacing: 0.25,
-                                                height: 1.9,
-                                                fontWeight: FontWeight.w400,
-                                                color: Black_textColor),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Icon(
-                                          Icons.attach_file,
-                                          color: Black_textColor,
-                                        ),
-                                        SizedBox(width: 15),
-                                        ShaderMask(
-                                            blendMode: BlendMode.srcIn,
-                                            shaderCallback: (Rect bounds) {
-                                              return ui.Gradient.linear(
-                                                Offset(14.0, 24.0),
-                                                Offset(24.0, 0.0),
-                                                [
-                                                  CustomButton_Color,
-                                                  CustomButton_Second_Color
-                                                ],
-                                              );
-                                            },
-                                            child: Icon(
-                                              Icons.send,
-                                              color: Black_textColor,
-                                            )),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                            );
+                          });
+                    } else {
+                      return ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Card(
+                                child: FurmShimmer(
+                                    deviceHeight, deviceWidth, context));
+                          });
+                    }
+                  }),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Container(
+                height: SizeHelper.of(context).help(
+                  mobileSmall: 20,
+                  mobileNormal: 25,
+                  mobileLarge: 30,
+                  tabletNormal: 40,
+                  tabletExtraLarge: 45,
+                  desktopLarge: 50,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.chat,
+                      color: Black_textColor,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xffe0e0e0),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset:
+                                    Offset(0, 0), // changes position of shadow
                               ),
+                            ],
+                          ),
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(15),
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              hintText: Utils.labels!.write_your_experience,
+                              hintStyle: GoogleFonts.roboto(
+                                  fontSize: SizeHelper.of(context).help(
+                                    mobileSmall: 10,
+                                    mobileNormal: 12,
+                                    mobileLarge: 13,
+                                    tabletNormal: 15,
+                                    tabletExtraLarge: 16,
+                                    desktopLarge: 17,
+                                  ),
+                                  letterSpacing: 0.25,
+                                  fontWeight: FontWeight.w400,
+                                  color: Black_textColor),
                             ),
-                            // SizedBox(width: 10,),
-                            // Icon(Icons.sort,color: Colors.black,size: 25,),
-                            /*Icon(Icons.arrow_back,color: Colors.black,),
-                        SizedBox(width: 20,),
-                        Text('Category List',style: Theme.of(context).textTheme.headline1,),
-*/
-                          ],
+                          ),
                         ),
                       ),
                     ),
-
-
-            ],
-          ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (Rect bounds) {
+                                return ui.Gradient.linear(
+                                  Offset(14.0, 24.0),
+                                  Offset(24.0, 0.0),
+                                  [
+                                    CustomButton_Color,
+                                    CustomButton_Second_Color
+                                  ],
+                                );
+                              },
+                              child: Icon(
+                                Icons.send,
+                                color: Black_textColor,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

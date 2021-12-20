@@ -24,11 +24,9 @@ class w extends a {}
 class s extends w {}
 
 class BottomScreen extends StatefulWidget {
-
   @override
   _BottomScreenState createState() => _BottomScreenState();
 }
-
 
 class _BottomScreenState extends State<BottomScreen> {
   int currentIndex = 0;
@@ -71,7 +69,6 @@ class _BottomScreenState extends State<BottomScreen> {
     }
     Future.delayed(Duration(milliseconds: 500)).then((value) {
       Utils.languageSubject.sink.add(true);
-
     });
   }
 
@@ -257,6 +254,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   ),
                   body: currentPage,
                   bottomNavigationBar: BottomNavigationBar(
+
                     type: BottomNavigationBarType.fixed,
                     // backgroundColor: Color(0xFF6200EE),
                     // selectedItemColor: Colors.purple,
@@ -280,16 +278,17 @@ class _BottomScreenState extends State<BottomScreen> {
                             ),
                           ),
                           title: Text(
-                            Utils.labels!.home,  style: TextStyle(
-                            fontSize: SizeHelper.of(context).help(
-                              mobileSmall: 6,
-                              mobileNormal: 8,
-                              mobileLarge: 10,
-                              tabletNormal: 12,
-                              tabletExtraLarge: 14,
-                              desktopLarge: 16,
+                            Utils.labels!.home,
+                            style: TextStyle(
+                              fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 6,
+                                mobileNormal: 8,
+                                mobileLarge: 10,
+                                tabletNormal: 12,
+                                tabletExtraLarge: 14,
+                                desktopLarge: 16,
+                              ),
                             ),
-                          ),
                           )),
                       BottomNavigationBarItem(
                           icon: Icon(
@@ -303,16 +302,19 @@ class _BottomScreenState extends State<BottomScreen> {
                               desktopLarge: 25,
                             ),
                           ),
-                          title: Text(Utils.labels!.category,  style: TextStyle(
-                            fontSize: SizeHelper.of(context).help(
-                              mobileSmall: 6,
-                              mobileNormal: 8,
-                              mobileLarge: 10,
-                              tabletNormal: 12,
-                              tabletExtraLarge: 14,
-                              desktopLarge: 16,
+                          title: Text(
+                            Utils.labels!.category,
+                            style: TextStyle(
+                              fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 6,
+                                mobileNormal: 8,
+                                mobileLarge: 10,
+                                tabletNormal: 12,
+                                tabletExtraLarge: 14,
+                                desktopLarge: 16,
+                              ),
                             ),
-                          ),)),
+                          )),
                       BottomNavigationBarItem(
                           icon: Icon(
                             Icons.forum,
@@ -325,16 +327,19 @@ class _BottomScreenState extends State<BottomScreen> {
                               desktopLarge: 25,
                             ),
                           ),
-                          title: Text(Utils.labels!.forum,  style: TextStyle(
-                            fontSize: SizeHelper.of(context).help(
-                              mobileSmall: 6,
-                              mobileNormal: 8,
-                              mobileLarge: 10,
-                              tabletNormal: 12,
-                              tabletExtraLarge: 14,
-                              desktopLarge: 16,
+                          title: Text(
+                            Utils.labels!.forum,
+                            style: TextStyle(
+                              fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 6,
+                                mobileNormal: 8,
+                                mobileLarge: 10,
+                                tabletNormal: 12,
+                                tabletExtraLarge: 14,
+                                desktopLarge: 16,
+                              ),
                             ),
-                          ),)),
+                          )),
                       BottomNavigationBarItem(
                           icon: Icon(
                             Icons.shopping_basket,
@@ -347,16 +352,19 @@ class _BottomScreenState extends State<BottomScreen> {
                               desktopLarge: 25,
                             ),
                           ),
-                          title: Text(Utils.labels!.store,  style: TextStyle(
-                            fontSize: SizeHelper.of(context).help(
-                              mobileSmall: 6,
-                              mobileNormal: 8,
-                              mobileLarge: 10,
-                              tabletNormal: 12,
-                              tabletExtraLarge: 14,
-                              desktopLarge: 16,
+                          title: Text(
+                            Utils.labels!.store,
+                            style: TextStyle(
+                              fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 6,
+                                mobileNormal: 8,
+                                mobileLarge: 10,
+                                tabletNormal: 12,
+                                tabletExtraLarge: 14,
+                                desktopLarge: 16,
+                              ),
                             ),
-                          ),)),
+                          )),
                       BottomNavigationBarItem(
                           icon: Icon(
                             Icons.account_circle,
@@ -400,14 +408,16 @@ class _BottomScreenState extends State<BottomScreen> {
   Widget get currentPage => pages[currentIndex];
 
   void changePage(int _index) {
-    if(Utils.id== ""&&(_index == 2 || _index == 4) ){
-      showDialog(context: context, builder: (c){
-        return loginDialog;
-      });
-    }else {
-    currentIndex = _index;
+    if (Utils.id == "" && (_index == 2 || _index == 4)) {
+      showDialog(
+          context: context,
+          builder: (c) {
+            return loginDialog;
+          });
+    } else {
+      currentIndex = _index;
 
-    rxPages.sink.add(_index);
-  }
+      rxPages.sink.add(_index);
+    }
   }
 }

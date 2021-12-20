@@ -81,6 +81,8 @@ Widget InfoWidget() {
                       ],
                     ),
                     Container(
+                      height: 59,
+                      width: 48,
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       decoration: BoxDecoration(
                           border: Border.all(color: white_color, width: 1),
@@ -212,6 +214,8 @@ Widget InfoWidget() {
                       ),
                     ),
                     Container(
+                      height: 59,
+                      width: 48,
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       decoration: BoxDecoration(
                           border: Border.all(color: white_color, width: 1),
