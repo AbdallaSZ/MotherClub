@@ -28,7 +28,6 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
-
   final Shader linearGradient = LinearGradient(
     colors: <Color>[
       CustomButton_Color,
@@ -39,7 +38,7 @@ class _AccountViewState extends State<AccountView> {
 
   @override
   Widget build(BuildContext context) {
-   var h3 = SizeHelper.of(context).help(
+    var h3 = SizeHelper.of(context).help(
       mobileSmall: 10,
       mobileNormal: 12,
       mobileLarge: 14,
@@ -67,13 +66,17 @@ class _AccountViewState extends State<AccountView> {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.shopping_basket,size: SizeHelper.of(context).help(mobileSmall: 15,
-                                mobileNormal: 17,
-                                mobileLarge: 19,
-                                tabletNormal: 21,
-                                tabletExtraLarge: 23,
-                                desktopLarge: 25,
-                              ),),
+                              Icon(
+                                Icons.shopping_basket,
+                                size: SizeHelper.of(context).help(
+                                  mobileSmall: 15,
+                                  mobileNormal: 17,
+                                  mobileLarge: 19,
+                                  tabletNormal: 21,
+                                  tabletExtraLarge: 23,
+                                  desktopLarge: 25,
+                                ),
+                              ),
                               SizedBox(width: 10),
                               Text(
                                 Utils.labels!.your_orders,
@@ -148,12 +151,13 @@ class _AccountViewState extends State<AccountView> {
                               );
                             },
                             child: GestureDetector(
-                             onTap: (){
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => OrderGridView()),
-                               );
-                             },
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrderGridView()),
+                                );
+                              },
                               child: Text(
                                 Utils.labels!.see_all,
                                 style: GoogleFonts.roboto(
@@ -177,10 +181,20 @@ class _AccountViewState extends State<AccountView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child:(snapshot.hasData && snapshot.data!.length != 0)
+                      child: (snapshot.hasData && snapshot.data!.length != 0)
                           ? ConstrainedBox(
                               constraints: BoxConstraints(
-                                  maxHeight: 130, minHeight: 0),
+                                  maxHeight: SizeHelper.of(context).help(
+                                    mobileSmall: 100,
+                                    mobileNormal: 110,
+                                    mobileLarge: 120,
+                                    mobileExtraLarge: 130,
+                                    tabletNormal: 140,
+                                    tabletLarge: 150,
+                                    tabletExtraLarge: 170,
+                                    desktopLarge: 200,
+                                  ),
+                                  minHeight: 0),
                               child: ListView.builder(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
@@ -222,7 +236,7 @@ class _AccountViewState extends State<AccountView> {
                                                                     ).showSnackBar(
                                                                       SnackBar(
                                                                         content:
-                                                                        Text('${Utils.labels!.order} ${Utils.labels!.has_deleted}'),
+                                                                            Text('${Utils.labels!.order} ${Utils.labels!.has_deleted}'),
                                                                         duration:
                                                                             const Duration(
                                                                           seconds:
@@ -269,7 +283,9 @@ class _AccountViewState extends State<AccountView> {
                                 },
                               ),
                             )
-                          : Container(height: 0,),
+                          : Container(
+                              height: 0,
+                            ),
                     ),
                   ],
                 );
@@ -280,13 +296,17 @@ class _AccountViewState extends State<AccountView> {
               child: Container(
                 child: Row(
                   children: [
-                    Icon(Icons.touch_app, size: SizeHelper.of(context).help(mobileSmall: 15,
-                      mobileNormal: 17,
-                      mobileLarge: 19,
-                      tabletNormal: 21,
-                      tabletExtraLarge: 23,
-                      desktopLarge: 25,
-                    ),),
+                    Icon(
+                      Icons.touch_app,
+                      size: SizeHelper.of(context).help(
+                        mobileSmall: 15,
+                        mobileNormal: 17,
+                        mobileLarge: 19,
+                        tabletNormal: 21,
+                        tabletExtraLarge: 23,
+                        desktopLarge: 25,
+                      ),
+                    ),
                     SizedBox(width: 15),
                     Text(
                       Utils.labels!.buy_again,
@@ -322,7 +342,8 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(
                         Icons.favorite,
-                        size:SizeHelper.of(context).help(mobileSmall: 15,
+                        size: SizeHelper.of(context).help(
+                          mobileSmall: 15,
                           mobileNormal: 17,
                           mobileLarge: 19,
                           tabletNormal: 21,
@@ -363,13 +384,17 @@ class _AccountViewState extends State<AccountView> {
                 child: Container(
                   child: Row(
                     children: [
-                      Icon(Icons.message, size: SizeHelper.of(context).help(mobileSmall: 15,
-                        mobileNormal: 17,
-                        mobileLarge: 19,
-                        tabletNormal: 21,
-                        tabletExtraLarge: 23,
-                        desktopLarge: 25,
-                      ),),
+                      Icon(
+                        Icons.message,
+                        size: SizeHelper.of(context).help(
+                          mobileSmall: 15,
+                          mobileNormal: 17,
+                          mobileLarge: 19,
+                          tabletNormal: 21,
+                          tabletExtraLarge: 23,
+                          desktopLarge: 25,
+                        ),
+                      ),
                       SizedBox(width: 15),
                       Text(
                         Utils.labels!.contact_us,
@@ -394,12 +419,11 @@ class _AccountViewState extends State<AccountView> {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 30),
               child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (c)=>SettingsScreen())).whenComplete(() {
-                    print("sad");
-                    setState(() {
-
-                    });
+                onTap: () {
+                  Navigator.push(context,
+                          MaterialPageRoute(builder: (c) => SettingsScreen()))
+                      .whenComplete(() {
+                    setState(() {});
                   });
                 },
                 child: Container(
@@ -407,7 +431,8 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(
                         Icons.settings,
-                        size: SizeHelper.of(context).help(mobileSmall: 15,
+                        size: SizeHelper.of(context).help(
+                          mobileSmall: 15,
                           mobileNormal: 17,
                           mobileLarge: 19,
                           tabletNormal: 21,
@@ -415,13 +440,16 @@ class _AccountViewState extends State<AccountView> {
                           desktopLarge: 25,
                         ),
                       ),
-                      SizedBox(width: SizeHelper.of(context).help(mobileSmall: 15,
-                        mobileNormal: 17,
-                        mobileLarge: 19,
-                        tabletNormal: 21,
-                        tabletExtraLarge: 23,
-                        desktopLarge: 25,
-                      ),),
+                      SizedBox(
+                        width: SizeHelper.of(context).help(
+                          mobileSmall: 15,
+                          mobileNormal: 17,
+                          mobileLarge: 19,
+                          tabletNormal: 21,
+                          tabletExtraLarge: 23,
+                          desktopLarge: 25,
+                        ),
+                      ),
                       Text(
                         Utils.labels!.settings,
                         style: GoogleFonts.roboto(
@@ -453,13 +481,17 @@ class _AccountViewState extends State<AccountView> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.power_settings_new, size: SizeHelper.of(context).help(mobileSmall: 15,
-                        mobileNormal: 17,
-                        mobileLarge: 19,
-                        tabletNormal: 21,
-                        tabletExtraLarge: 23,
-                        desktopLarge: 25,
-                      ),),
+                      Icon(
+                        Icons.power_settings_new,
+                        size: SizeHelper.of(context).help(
+                          mobileSmall: 15,
+                          mobileNormal: 17,
+                          mobileLarge: 19,
+                          tabletNormal: 21,
+                          tabletExtraLarge: 23,
+                          desktopLarge: 25,
+                        ),
+                      ),
                       SizedBox(width: 15),
                       Text(
                         Utils.labels!.logout,
@@ -486,7 +518,6 @@ class _AccountViewState extends State<AccountView> {
       ),
     ));
   }
-
 
   void logout() {
     NetworkService.logout("wp-json/cocart/v2/logout");

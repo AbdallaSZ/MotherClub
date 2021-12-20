@@ -10,6 +10,7 @@ import 'package:motherclub/app/modules/account/views/account_view.dart';
 import 'package:motherclub/app/modules/forum/views/forum_view.dart';
 import 'package:motherclub/app/modules/home/views/home_views.dart';
 import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
+import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:size_helper/size_helper.dart';

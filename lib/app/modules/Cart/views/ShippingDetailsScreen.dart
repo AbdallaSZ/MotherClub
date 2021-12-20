@@ -186,7 +186,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
-
+    createOrder(shippingDetails, billingDetails,'','');
     FlutterPaytabsBridge.startCardPayment(configuration, (event)async {
         print(event);
       if(event["status"] == "event"){
@@ -195,7 +195,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         });
       }
        else if (event["status"] == "success") {
-        createOrder(shippingDetails, billingDetails, event["data"]["paymentInfo"]["cardScheme"],event["data"]["paymentInfo"]["cardType"]);
+        // createOrder(shippingDetails, billingDetails, event["data"]["paymentInfo"]["cardScheme"],event["data"]["paymentInfo"]["cardType"]);
          if(event["data"]["paymentResult"]["responseStatus"] == 'A') {
           await  showDialog(context: context, builder:  (c){
               return Dialogs.warningDialog(Utils.labels!.confirmed, event["data"]["paymentResult"]["responseMessage"], Utils.labels!.ok, backFunction);
@@ -281,7 +281,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       ShippingLines(
         methodId: "",
         methodTitle: "",
-        total: ""
+        total: widget.total.toString(),
       ),
     ]
     );
