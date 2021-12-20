@@ -54,11 +54,10 @@ class NetworkService {
 
    return response.data;
   }
-  static Future<dynamic> createOrder(String apiBaseUrl, dynamic data,
-      {dynamic headers = const {"Content-Type": "application/json"}})async {
+  static Future<dynamic> createOrder(String apiBaseUrl, dynamic data)async {
    var dataEncoded = jsonEncode(data);
-   dio.options.headers['content-Type'] = 'application/json';
-   var response = await http.post(Uri.parse(BASE_URL+apiBaseUrl), body:dataEncoded,);
+   dynamic headers = const {'Content-Type': 'application/json'};
+   var response = await http.post(Uri.parse(BASE_URL+apiBaseUrl), body:dataEncoded,headers: headers);
     var decoded = decodeTheResponse(response);
     return decoded;
   }

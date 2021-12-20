@@ -186,6 +186,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
+    createOrder(shippingDetails, billingDetails, "","");
+
 
     FlutterPaytabsBridge.startCardPayment(configuration, (event)async {
         print(event);
@@ -195,7 +197,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         });
       }
        else if (event["status"] == "success") {
-        createOrder(shippingDetails, billingDetails, event["data"]["paymentInfo"]["cardScheme"],event["data"]["paymentInfo"]["cardType"]);
+       // createOrder(shippingDetails, billingDetails, event["data"]["paymentInfo"]["cardScheme"],event["data"]["paymentInfo"]["cardType"]);
          if(event["data"]["paymentResult"]["responseStatus"] == 'A') {
           await  showDialog(context: context, builder:  (c){
               return Dialogs.warningDialog(Utils.labels!.confirmed, event["data"]["paymentResult"]["responseMessage"], Utils.labels!.ok, backFunction);
@@ -279,9 +281,9 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         productData,
         [
       ShippingLines(
-        methodId: "",
+        methodId: "asas",
         methodTitle: "",
-        total: ""
+        total: widget.total.toString()
       ),
     ]
     );
@@ -291,7 +293,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
   List<LineItems> getProductData() {
     List<LineItems> lineItems =[];
     for ( var i in widget.data!){
-    lineItems.add(LineItems(i.id, i.quantity.value));
+    lineItems.add(LineItems(i.id, i.quantity.value,variationId: i.id));
     }
     return lineItems;
   }
