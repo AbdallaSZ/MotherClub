@@ -15,9 +15,14 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:size_helper/size_helper.dart';
 
 Widget homeAppBar(
-    String Label, double height, double width, BuildContext context,) {
+  String Label,
+  double height,
+  double width,
+  BuildContext context,
+) {
   double deviceHeight = MediaQuery.of(context).size.height;
   double deviceWidth = MediaQuery.of(context).size.width;
   List<String> routes = [
@@ -27,46 +32,78 @@ Widget homeAppBar(
     Routes.STORE
   ];
   return CustomScrollView(slivers: <Widget>[
-    // SliverToBoxAdapter(
+    // SliverToBoxAdap ter(
     // child: AppBarWidget("",deviceHeight/9.4,deviceWidth,context)),
-    SliverToBoxAdapter(
-        child: InfoWidget(
-            Utils.labels!.hi + ", ${Utils.name}",
-
-            Utils.labels!.week,
-            "9-12",
-            deviceHeight / 8.5,
-            deviceWidth,
-            context)),
-    SliverToBoxAdapter(
-      child: Container(
-        height: 120.0,
-        child: FutureBuilder<List<CategoriesModel>>(
-            future: Utils.bLoC.categoresList(context),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<CategoriesModel>? data = snapshot.data;
-
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: data!.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: (){
-                        Get.toNamed(routes[index]);
-                      },
-
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        color: Colors.white,
-                        child: Container(
-                            // decoration: BoxDecoration(color: Colors.blueGrey),
-                            height: deviceHeight / 7.65,
-                            width: deviceWidth / 4.9,
-                            child: Column(children: [
+    SliverPadding(
+        padding: EdgeInsets.only(
+          bottom: SizeHelper.of(context).help(
+            mobileSmall: 15,
+            mobileNormal: 17,
+            mobileLarge: 19,
+            tabletNormal: 21,
+            tabletExtraLarge: 23,
+            desktopLarge: 25,
+          ),
+        ),
+        sliver: SliverToBoxAdapter(child: InfoWidget())),
+    SliverPadding(
+      padding: EdgeInsets.only(
+        bottom: SizeHelper.of(context).help(
+          mobileSmall: 15,
+          mobileNormal: 17,
+          mobileLarge: 19,
+          tabletNormal: 21,
+          tabletExtraLarge: 23,
+          desktopLarge: 25,
+        ),
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Container(
+          height: SizeHelper.of(context).help(
+            mobileSmall: 90,
+            mobileNormal: 100,
+            mobileLarge: 110,
+            tabletNormal: 120,
+            tabletExtraLarge: 130,
+            desktopLarge: 140,
+          ),
+          width: Utils.width,
+          child: FutureBuilder<List<CategoriesModel>>(
+              future: Utils.bLoC.categoresList(context),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<CategoriesModel>? data = snapshot.data;
+                  return Center(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: data!.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Get.toNamed(routes[index]);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Container(
+                                child: Column(children: [
                               Container(
-                                height: 66.66,
-                                width: 78.47,
+                                height: SizeHelper.of(context).help(
+                                  mobileSmall: 60,
+                                  mobileNormal: 65,
+                                  mobileLarge: 70,
+                                  tabletNormal: 75,
+                                  tabletExtraLarge: 80,
+                                  desktopLarge: 85,
+                                ),
+                                width: SizeHelper.of(context).help(
+                                  mobileSmall: 60,
+                                  mobileNormal: 65,
+                                  mobileLarge: 70,
+                                  tabletNormal: 75,
+                                  tabletExtraLarge: 80,
+                                  desktopLarge: 85,
+                                ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: RandomColorModel()
@@ -79,7 +116,14 @@ Widget homeAppBar(
                               Text(
                                 '${data[index].title}',
                                 style: GoogleFonts.roboto(
-                                  fontSize: 13,
+                                  fontSize: SizeHelper.of(context).help(
+                                    mobileSmall: 6,
+                                    mobileNormal: 8,
+                                    mobileLarge: 10,
+                                    tabletNormal: 12,
+                                    tabletExtraLarge: 14,
+                                    desktopLarge: 16,
+                                  ),
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
                                   color: Black_textColor,
@@ -87,26 +131,40 @@ Widget homeAppBar(
                                 textAlign: TextAlign.center,
                               ),
                             ])),
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return snapshot.hasData
-                        ? ProductShimer(height, width, context)
-                        : Card(
-                            // padding: EdgeInsets.all(2),
-                            // color: Colors.yellow,
-                            child: ProductShimer(height, width, context),
-                          );
-                  },
-                );
-              }
-            }),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: SizeHelper.of(context).help(
+                            mobileSmall: 0,
+                            mobileNormal: 0,
+                            mobileLarge: 0,
+                            tabletNormal: 40,
+                            tabletExtraLarge: 60,
+                            desktopLarge: 80,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return snapshot.hasData
+                          ? ProductShimer(height, width, context)
+                          : Card(
+                              // padding: EdgeInsets.all(2),
+                              // color: Colors.yellow,
+                              child: ProductShimer(height, width, context),
+                            );
+                    },
+                  );
+                }
+              }),
+        ),
       ),
     ),
 
@@ -116,7 +174,14 @@ Widget homeAppBar(
         child: Text(
           Utils.labels!.we_choose_for_you,
           style: GoogleFonts.roboto(
-            fontSize: 18,
+            fontSize: SizeHelper.of(context).help(
+              mobileSmall: 10,
+              mobileNormal: 12,
+              mobileLarge: 14,
+              tabletNormal: 16,
+              tabletExtraLarge: 18,
+              desktopLarge: 20,
+            ),
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w700,
             color: Black_textColor,
@@ -128,12 +193,28 @@ Widget homeAppBar(
     // To convert this infinite list to a list with three items,
     // uncomment the following line:
     // if (index > 3) return null;
-    SliverToBoxAdapter(
-      child: SizedBox(
-        height: 340,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
-          child: SingleChildScrollView(
+    SliverPadding(
+      padding: EdgeInsets.only(
+        bottom: SizeHelper.of(context).help(
+          mobileSmall: 10,
+          mobileNormal: 15,
+          mobileLarge: 20,
+          tabletNormal: 40,
+          tabletExtraLarge: 45,
+          desktopLarge: 50,
+        ),
+      ),
+      sliver : SliverToBoxAdapter(
+        child: SizedBox(
+          height: SizeHelper.of(context).help(
+            mobileSmall: 180,
+            mobileLarge: 200.0,
+            tabletNormal: 240.0,
+            tabletExtraLarge: 325.0,
+            desktopLarge: 380.0,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
             child: ChooseForYouWidget(),
           ),
         ),
@@ -142,7 +223,7 @@ Widget homeAppBar(
 
     SliverToBoxAdapter(
       child: SizedBox(
-        height: 29,
+        height: 40,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Row(
@@ -151,18 +232,32 @@ Widget homeAppBar(
               Text(
                 Utils.labels!.shopping_products,
                 style: GoogleFonts.roboto(
-                  fontSize: 20,
+                  fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 10,
+                    mobileNormal: 12,
+                    mobileLarge: 14,
+                    tabletNormal: 16,
+                    tabletExtraLarge: 18,
+                    desktopLarge: 20,
+                  ),
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w700,
                   color: Black_textColor,
                 ),
               ),
               GestureDetector(
-                onTap: ()=>Get.toNamed(Routes.STORE),
+                onTap: () => Get.toNamed(Routes.STORE),
                 child: Text(
                   Utils.labels!.see_all,
                   style: GoogleFonts.roboto(
-                    fontSize: 16,
+                    fontSize: SizeHelper.of(context).help(
+                      mobileSmall: 6,
+                      mobileNormal: 8,
+                      mobileLarge: 10,
+                      tabletNormal: 12,
+                      tabletExtraLarge: 14,
+                      desktopLarge: 16,
+                    ),
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w500,
                     color: primary_text_color,
@@ -178,7 +273,13 @@ Widget homeAppBar(
       child: Padding(
         padding: const EdgeInsets.only(left: 10.0),
         child: Container(
-          height: 300.0,
+          height: SizeHelper.of(context).help(
+            mobileSmall: 180,
+            mobileLarge: 200.0,
+            tabletNormal: 240.0,
+            tabletExtraLarge: 325.0,
+            desktopLarge: 380.0,
+          ),
           child: FutureBuilder<List<ProductDetailsModel>>(
               future: Utils.bLoC.productList(context),
               builder: (context, snapshot) {
@@ -200,7 +301,7 @@ Widget homeAppBar(
                           },
                           child: ProductItem(
                             data: data[index],
-                         //   isLiked: false,
+                            //   isLiked: false,
                           ));
                       //   Card(
                       //   // padding: EdgeInsets.all(2),

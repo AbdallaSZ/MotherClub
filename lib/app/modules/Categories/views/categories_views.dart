@@ -10,6 +10,7 @@ import 'package:motherclub/common/CustomWidget/CategoriesCard.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:size_helper/size_helper.dart';
 
 class CategoriesView extends GetView<CategoriesController> {
   @override
@@ -34,12 +35,28 @@ class CategoriesView extends GetView<CategoriesController> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<CategoriesModel>? data = snapshot.data;
-                  return ListView.builder(
-                      itemCount: data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CategoriresCard(deviceHeight, deviceWidth,
-                            context, data[index], routes[index]);
-                      });
+                  return Center(
+                    child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: SizeHelper.of(context).help(
+                              mobileSmall: 0,
+                              mobileNormal: 0,
+                              mobileLarge: 0,
+                              tabletNormal: 35,
+                              tabletExtraLarge: 40,
+                              desktopLarge: 50,
+                            ),
+
+                          );
+                        },
+                      shrinkWrap: true,
+                        itemCount: data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CategoriresCard(deviceHeight, deviceWidth,
+                              context, data[index], routes[index]);
+                        }),
+                  );
                 } else {
                   return ListView.builder(
                       itemCount: 10,

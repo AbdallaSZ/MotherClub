@@ -1,15 +1,5 @@
-//import 'dart:convert' as convert;
-//import 'dart:convert';
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
-//import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:motherclub/app/Models/ProductModel.dart';
-import 'package:motherclub/app/Models/cart_item_model.dart';
-import 'package:motherclub/app/Models/wishlistModel.dart';
-import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -106,7 +96,7 @@ class Networkcall {
     var response = await http
         .get(
       Uri.parse(
-           'https://mothersclub.me/api/user/generate_auth_cookie/?username=$userName&password=$password'),
+          'https://mothersclub.me/api/user/generate_auth_cookie/?username=$userName&password=$password'),
     )
         .catchError(
       (error) {
@@ -116,7 +106,6 @@ class Networkcall {
     return json.decode(response.body);
   }
 
-
   Future<dynamic> getUser() async {
     var response = await http
         .get(
@@ -124,7 +113,7 @@ class Networkcall {
           'https://mothersclub.me/api/user/get_user_meta/?cookie=${Utils.cookie}'),
     )
         .catchError(
-          (error) {
+      (error) {
         return error;
       },
     );
@@ -172,12 +161,13 @@ class Networkcall {
 
   //todo API Call For weeksdetails
 
-  Future<dynamic> getWeeksDetailAPICall() async {
+  Future<dynamic> getWeeksDetailAPICall(String slug) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var weekSlug = preferences.getString('slug').toString();
     var response = await http
         .get(
-      Uri.parse('https://mothersclub.me/pregnancy_week_details?slug=$weekSlug'),
+
+      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=$slug'),
     )
         .catchError(
       (error) {
@@ -263,7 +253,6 @@ class Networkcall {
       return res['message'];
       throw Exception(response.body);
     } else {
-
       return 'item added';
     }
   }
@@ -295,7 +284,6 @@ class Networkcall {
       return res['message'];
       throw Exception(response.body);
     } else {
-
       return 'item deleted';
     }
   }
@@ -423,5 +411,28 @@ class Networkcall {
       ),
     );
     return jsonDecode(response.body);
+  }
+
+  Future<dynamic> sendFeedback(
+      String userName, String userEmail, String feedbackMessage) async {
+    final response = await http.post(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/custom-plugin/feedback',
+      ),
+      body: {
+        'user_id': '${Utils.id}',
+        'user_name': '$userName',
+        'user_email': '$userEmail',
+        'feedback_message': '$feedbackMessage',
+      },
+    );
+    if (response.statusCode != 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var result = jsonDecode(response.body);
+      return result['message'];
+    } else {
+      return jsonDecode(response.body);
+    }
   }
 }

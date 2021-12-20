@@ -46,8 +46,7 @@ class ForumView extends GetView<ForumController> {
 
                   // gradient: colorsConstants.gradient1
                 ),
-                child:   InfoAccountWidget(
-                    deviceHeight / 10, deviceWidth, context),),
+                child:   InfoAccountWidget(),),
                     // AppBarWidget("Forum",deviceHeight/9.4,deviceWidth,context),
                     Container(
                       padding: EdgeInsets.all(10),

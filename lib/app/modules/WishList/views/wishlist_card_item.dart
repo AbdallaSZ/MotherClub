@@ -45,8 +45,8 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            width: Utils.deviceWidth / 2.2,
-            height: Utils.deviceHeight / 3.2,
+            width: Utils.deviceWidth / 2.6,
+            height: Utils.deviceHeight / 3.6,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -78,6 +78,7 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                         "${widget.data.name}",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.roboto(
                           fontSize: 13,
                           height: 1.1,
@@ -93,9 +94,10 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                 Expanded(
                   flex:1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("${widget.data.price} " + Utils.labels!.amd,
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.roboto(
                             fontSize: 18,
                             fontStyle: FontStyle.normal,
@@ -105,55 +107,20 @@ class _WishlistCardItemState extends State<WishlistCardItem> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          await Utils.bLoC
-                              .addCartItems(widget.data.id, 1, '0-3')
-                              .then(
-                                (value) =>
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:  Text(Utils.labels!.item_added),
-                                    duration: const Duration(seconds: 3),
-                                  ),
-                                ),
-                          );
-                          // Get.toNamed(Routes.CART);
-                        },
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25.0),
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              stops: [0.0, 0.1, 10.0],
-                              colors: [
-                                // Colors.deepPurple.shade400,
-                                CustomButton_Color,
-                                CustomButton_Color,
-                                CustomButton_Second_Color,
-                                // Colors.deepPurple.shade200,
-                              ],
-                            ),
-
-                            // gradient: colorsConstants.gradient1
-                          ),
-                          child: Icon(
-                            Icons.add_shopping_cart,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       GestureDetector(
+                //         child: Container(
+                //           width: 40,
+                //           height: 40,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

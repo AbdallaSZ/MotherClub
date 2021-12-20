@@ -20,6 +20,7 @@ import 'package:motherclub/common/CustomWidget/InfoWidget.dart';
 import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:size_helper/size_helper.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -38,16 +39,21 @@ class _AccountViewState extends State<AccountView> {
 
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
+   var h3 = SizeHelper.of(context).help(
+      mobileSmall: 10,
+      mobileNormal: 12,
+      mobileLarge: 14,
+      tabletNormal: 16,
+      tabletExtraLarge: 18,
+      desktopLarge: 20,
+    );
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             // AppBarWidget("My Account",deviceHeight/9.4,deviceWidth,context),
-            InfoAccountWidget(
-                deviceHeight / 10, deviceWidth, context),
+            InfoAccountWidget(),
 
             FutureBuilder<List<OrderModel>>(
               future: Utils.bLoC.orders(),
@@ -61,12 +67,25 @@ class _AccountViewState extends State<AccountView> {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.shopping_basket),
+                              Icon(Icons.shopping_basket,size: SizeHelper.of(context).help(mobileSmall: 15,
+                                mobileNormal: 17,
+                                mobileLarge: 19,
+                                tabletNormal: 21,
+                                tabletExtraLarge: 23,
+                                desktopLarge: 25,
+                              ),),
                               SizedBox(width: 10),
                               Text(
                                 Utils.labels!.your_orders,
                                 style: GoogleFonts.roboto(
-                                    fontSize: 18,
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 10,
+                                      mobileNormal: 12,
+                                      mobileLarge: 14,
+                                      tabletNormal: 16,
+                                      tabletExtraLarge: 18,
+                                      desktopLarge: 20,
+                                    ),
                                     fontWeight: FontWeight.w500,
                                     fontStyle: FontStyle.normal,
                                     letterSpacing: 0.25,
@@ -102,7 +121,14 @@ class _AccountViewState extends State<AccountView> {
                                         ? snapshot.data!.length.toString()
                                         : '0',
                                     style: GoogleFonts.roboto(
-                                        fontSize: 13,
+                                        fontSize: SizeHelper.of(context).help(
+                                          mobileSmall: 10,
+                                          mobileNormal: 12,
+                                          mobileLarge: 14,
+                                          tabletNormal: 16,
+                                          tabletExtraLarge: 18,
+                                          desktopLarge: 20,
+                                        ),
                                         fontWeight: FontWeight.w400,
                                         fontStyle: FontStyle.normal,
                                         letterSpacing: 0.25,
@@ -131,7 +157,14 @@ class _AccountViewState extends State<AccountView> {
                               child: Text(
                                 Utils.labels!.see_all,
                                 style: GoogleFonts.roboto(
-                                    fontSize: 13,
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 6,
+                                      mobileNormal: 8,
+                                      mobileLarge: 10,
+                                      tabletNormal: 12,
+                                      tabletExtraLarge: 14,
+                                      desktopLarge: 16,
+                                    ),
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                     letterSpacing: 0.25,
@@ -247,12 +280,25 @@ class _AccountViewState extends State<AccountView> {
               child: Container(
                 child: Row(
                   children: [
-                    Icon(Icons.touch_app, size: 22),
+                    Icon(Icons.touch_app, size: SizeHelper.of(context).help(mobileSmall: 15,
+                      mobileNormal: 17,
+                      mobileLarge: 19,
+                      tabletNormal: 21,
+                      tabletExtraLarge: 23,
+                      desktopLarge: 25,
+                    ),),
                     SizedBox(width: 15),
                     Text(
                       Utils.labels!.buy_again,
                       style: GoogleFonts.roboto(
-                          fontSize: 17,
+                          fontSize: SizeHelper.of(context).help(
+                            mobileSmall: 10,
+                            mobileNormal: 12,
+                            mobileLarge: 14,
+                            tabletNormal: 16,
+                            tabletExtraLarge: 18,
+                            desktopLarge: 20,
+                          ),
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
                           color: Black_textColor),
@@ -276,13 +322,26 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(
                         Icons.favorite,
-                        size: 22,
+                        size:SizeHelper.of(context).help(mobileSmall: 15,
+                          mobileNormal: 17,
+                          mobileLarge: 19,
+                          tabletNormal: 21,
+                          tabletExtraLarge: 23,
+                          desktopLarge: 25,
+                        ),
                       ),
                       SizedBox(width: 15),
                       Text(
                         Utils.labels!.your_wish_list,
                         style: GoogleFonts.roboto(
-                            fontSize: 17,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             color: Black_textColor),
@@ -304,12 +363,25 @@ class _AccountViewState extends State<AccountView> {
                 child: Container(
                   child: Row(
                     children: [
-                      Icon(Icons.message, size: 22),
+                      Icon(Icons.message, size: SizeHelper.of(context).help(mobileSmall: 15,
+                        mobileNormal: 17,
+                        mobileLarge: 19,
+                        tabletNormal: 21,
+                        tabletExtraLarge: 23,
+                        desktopLarge: 25,
+                      ),),
                       SizedBox(width: 15),
                       Text(
                         Utils.labels!.contact_us,
                         style: GoogleFonts.roboto(
-                            fontSize: 17,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             color: Black_textColor),
@@ -335,12 +407,32 @@ class _AccountViewState extends State<AccountView> {
                     children: [
                       Icon(
                         Icons.settings,
+                        size: SizeHelper.of(context).help(mobileSmall: 15,
+                          mobileNormal: 17,
+                          mobileLarge: 19,
+                          tabletNormal: 21,
+                          tabletExtraLarge: 23,
+                          desktopLarge: 25,
+                        ),
                       ),
-                      SizedBox(width: 15),
+                      SizedBox(width: SizeHelper.of(context).help(mobileSmall: 15,
+                        mobileNormal: 17,
+                        mobileLarge: 19,
+                        tabletNormal: 21,
+                        tabletExtraLarge: 23,
+                        desktopLarge: 25,
+                      ),),
                       Text(
                         Utils.labels!.settings,
                         style: GoogleFonts.roboto(
-                            fontSize: 17,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             color: Black_textColor),
@@ -361,12 +453,25 @@ class _AccountViewState extends State<AccountView> {
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.power_settings_new, size: 22),
+                      Icon(Icons.power_settings_new, size: SizeHelper.of(context).help(mobileSmall: 15,
+                        mobileNormal: 17,
+                        mobileLarge: 19,
+                        tabletNormal: 21,
+                        tabletExtraLarge: 23,
+                        desktopLarge: 25,
+                      ),),
                       SizedBox(width: 15),
                       Text(
                         Utils.labels!.logout,
                         style: GoogleFonts.roboto(
-                            fontSize: 17,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             color: Black_textColor),

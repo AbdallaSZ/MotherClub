@@ -9,6 +9,7 @@ import 'package:motherclub/common/CustomWidget/ResorcesListCard.dart';
 
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:size_helper/size_helper.dart';
 
 class YourBabyViews extends StatefulWidget {
   @override
@@ -37,7 +38,14 @@ class _YourBabyViewsState extends State<YourBabyViews> {
             child: SingleChildScrollView(
               child: Column(children: [
                 Container(
-                  height: deviceHeight / 3.5,
+                  height: SizeHelper.of(context).help(
+                    mobileSmall: 100,
+                    mobileNormal: 140,
+                    mobileLarge: 180,
+                    tabletNormal: 200,
+                    tabletExtraLarge: 250,
+                    desktopLarge: 300,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(0.0),
                     gradient: LinearGradient(colors: [
@@ -63,29 +71,36 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                                 },
                                 icon: Icon(
                                   Icons.arrow_back_ios,
+                                  size: SizeHelper.of(context).help(
+                                    mobileSmall: 15,
+                                    mobileNormal: 17,
+                                    mobileLarge: 19,
+                                    tabletNormal: 21,
+                                    tabletExtraLarge: 23,
+                                    desktopLarge: 25,
+                                  ),
                                   color: Colors.white,
                                 )),
                             Text(
                               Utils.labels!.your_baby,
-                              style: Theme.of(context).textTheme.headline1,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 15,
+                                  mobileNormal: 17,
+                                  mobileLarge: 19,
+                                  tabletNormal: 21,
+                                  tabletExtraLarge: 23,
+                                  desktopLarge: 25,
+                                ),
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.search,
-                                  color: Colors.white,
-                                  size: 25,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                CircleAvatar(
-                                  radius: 20,
-                                  backgroundImage: NetworkImage(Utils.prefs!
+                            CircleAvatar(
+                              radius: 20,
+                              backgroundImage: NetworkImage(Utils.prefs!
                                       .getString("imageUrl") ??
-                                      "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png"),
-                                )
-                              ],
+                                  "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png"),
                             )
                           ],
                         ),
@@ -95,7 +110,17 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                         ),
                         Text(
                           Utils.labels!.baby_month,
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
+                          ),
                         ),
                         Divider(
                           height: 15,
@@ -105,19 +130,41 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                             future: Utils.bLoC.monthsList(context),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-
-
                                 return Container(
-                                  height: deviceHeight / 12,
+                                  height: SizeHelper.of(context).help(
+                                    mobileSmall: 30,
+                                    mobileNormal: 40,
+                                    mobileLarge: 50,
+                                    tabletNormal: 60,
+                                    tabletExtraLarge: 85,
+                                    desktopLarge: 90,
+                                  ),
                                   child: ListView.builder(
                                       itemCount: snapshot.data!.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Container(
-                                          margin: EdgeInsets.only(left: 5),
+                                          margin: EdgeInsets.symmetric(
+                                            horizontal:
+                                            SizeHelper.of(context).help(
+                                              mobileSmall: 3,
+                                              mobileNormal: 5,
+                                              mobileLarge: 8,
+                                              tabletNormal: 10,
+                                              tabletExtraLarge: 13,
+                                              desktopLarge: 15,
+                                            ),
+                                          ),
                                           // height: deviceHeight/,
-                                          width: deviceWidth / 7,
+                                          width: SizeHelper.of(context).help(
+                                            mobileSmall: 30,
+                                            mobileNormal: 40,
+                                            mobileLarge: 50,
+                                            tabletNormal: 70,
+                                            tabletExtraLarge: 80,
+                                            desktopLarge: 100,
+                                          ),
                                           decoration: BoxDecoration(
                                             color: tappedIndex == index
                                                 ? blue_color
@@ -188,11 +235,20 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                   child: Text(
                       'Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.',
                       style: GoogleFonts.roboto(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                          fontSize: SizeHelper.of(context).help(
+                            mobileSmall: 10,
+                            mobileNormal: 12,
+                            mobileLarge: 14,
+                            tabletNormal: 16,
+                            tabletExtraLarge: 18,
+                            desktopLarge: 20,
+                          ),
+                          fontWeight: FontWeight.w400,
                           color: Colors.black)),
                 ),
-                BabyDataList(monthSlug: monthSlug,),
+                BabyDataList(
+                  monthSlug: monthSlug,
+                ),
               ]),
             ),
           )),

@@ -520,7 +520,7 @@
   "@remove_order": {
     "description": "The conventional newborn programmer greeting"
   },
-  "no_wish_list_yet": "No Wish list yet",
+  "no_wish_list_yet": "No Wish list",
   "@no_wish_list_yet": {
     "description": "The conventional newborn programmer greeting"
   },
@@ -528,7 +528,7 @@
   "@variation": {
     "description": "The conventional newborn programmer greeting"
   },
-  "quantity": "Variation",
+  "quantity": "Quantity",
   "@quantity": {
     "description": "The conventional newborn programmer greeting"
   },
@@ -576,6 +576,14 @@
   },
   "you_have_to_agree_the_terms": "You have to agree the terms",
   "@you_have_to_agree_the_terms": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "feedback_sent": "Feedback successfully sent!",
+  "@feedback_sent": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "pregnancy_tools_resources": "Pregnancy Tools & Resources",
+  "@pregnancy_tools_resources": {
     "description": "The conventional newborn programmer greeting"
   }
 }

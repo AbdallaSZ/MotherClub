@@ -7,9 +7,6 @@ Widget CustomLogoWidget(String Label,double height , double width,BuildContext c
 
   return
     Container(
-    height: height,
-
-
     padding: EdgeInsets.fromLTRB(10, height/18, 10, 0),
     child:
     Column(

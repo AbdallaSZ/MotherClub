@@ -4,16 +4,22 @@ import 'package:motherclub/app/Models/UserDetailsModel.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:size_helper/size_helper.dart';
 
-Widget InfoAccountWidget(double height, double width, BuildContext context) {
+Widget InfoAccountWidget() {
   return FutureBuilder<UserDetailsModel>(
       future: Utils.bLoC.usersDetails(),
       builder: (context, snapshot) {
         return snapshot.hasData
             ? Container(
-                height: height,
-                width: width,
-                // color: white_color,
+                width: double.infinity,
+                height: SizeHelper.of(context).help(
+                  mobileSmall: 48,
+                  mobileLarge: 58,
+                  tabletNormal: 68,
+                  tabletExtraLarge: 88,
+                  desktopLarge: 108,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -36,7 +42,7 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
@@ -56,26 +62,36 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                           // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    '${Utils.name}',
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),
-                                  ),
-
-                                ],
+                              Text(
+                                '${Utils.name}',
+                                style: GoogleFonts.roboto(
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 10,
+                                      mobileNormal: 12,
+                                      mobileLarge: 14,
+                                      tabletNormal: 16,
+                                      tabletExtraLarge: 18,
+                                      desktopLarge: 20,
+                                    ),
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: 0.4,
+                                    color: white_color),
                               ),
                               SizedBox(height: 3),
                               Text(
                                 'Age : ${snapshot.data!.babyAge}',
                                 style: GoogleFonts.roboto(
-                                    fontSize: 13,
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 6,
+                                      mobileNormal: 8,
+                                      mobileLarge: 10,
+                                      tabletNormal: 12,
+                                      tabletExtraLarge: 14,
+                                      desktopLarge: 16,
+                                    ),
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                     letterSpacing: 0.25,
@@ -94,11 +110,35 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                           border: Border.all(color: white_color, width: 1),
                           borderRadius: BorderRadius.circular(10)),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "${snapshot.data!.weeksUser}",
                             style: GoogleFonts.roboto(
-                                fontSize: 15,
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 6,
+                                  mobileNormal: 8,
+                                  mobileLarge: 10,
+                                  tabletNormal: 12,
+                                  tabletExtraLarge: 14,
+                                  desktopLarge: 16,
+                                ),
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: white_color),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "Week",
+                            style: GoogleFonts.roboto(
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 6,
+                                  mobileNormal: 8,
+                                  mobileLarge: 10,
+                                  tabletNormal: 12,
+                                  tabletExtraLarge: 14,
+                                  desktopLarge: 16,
+                                ),
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 color: white_color),
@@ -110,9 +150,14 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                   ],
                 ))
             : Container(
-                height: height,
-                width: width,
-                // color: white_color,
+            width: double.infinity,
+                height: SizeHelper.of(context).help(
+                  mobileSmall: 48,
+                  mobileLarge: 58,
+                  tabletNormal: 68,
+                  tabletExtraLarge: 88,
+                  desktopLarge: 108,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -133,9 +178,10 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                 padding: EdgeInsets.fromLTRB(18, 9, 7, 9),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
@@ -155,26 +201,36 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                           // padding: EdgeInsets.fromLTRB(18, 13, 10, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    Utils.name,
-                                    style: GoogleFonts.roboto(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        fontStyle: FontStyle.normal,
-                                        letterSpacing: 0.25,
-                                        color: white_color),
-                                  ),
-
-                                ],
+                              Text(
+                                '${Utils.name}',
+                                style: GoogleFonts.roboto(
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 10,
+                                      mobileNormal: 12,
+                                      mobileLarge: 14,
+                                      tabletNormal: 16,
+                                      tabletExtraLarge: 18,
+                                      desktopLarge: 20,
+                                    ),
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal,
+                                    letterSpacing: 0.25,
+                                    color: white_color),
                               ),
                               SizedBox(height: 3),
                               Text(
                                 'Age : ...',
                                 style: GoogleFonts.roboto(
-                                    fontSize: 13,
+                                    fontSize: SizeHelper.of(context).help(
+                                      mobileSmall: 6,
+                                      mobileNormal: 8,
+                                      mobileLarge: 10,
+                                      tabletNormal: 12,
+                                      tabletExtraLarge: 14,
+                                      desktopLarge: 16,
+                                    ),
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                     letterSpacing: 0.25,
@@ -193,11 +249,35 @@ Widget InfoAccountWidget(double height, double width, BuildContext context) {
                           border: Border.all(color: white_color, width: 1),
                           borderRadius: BorderRadius.circular(10)),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Week   ....',
+                            " ... ",
                             style: GoogleFonts.roboto(
-                                fontSize: 15,
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 6,
+                                  mobileNormal: 8,
+                                  mobileLarge: 10,
+                                  tabletNormal: 12,
+                                  tabletExtraLarge: 14,
+                                  desktopLarge: 16,
+                                ),
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.normal,
+                                color: white_color),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "${Utils.labels!.week}",
+                            style: GoogleFonts.roboto(
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 6,
+                                  mobileNormal: 8,
+                                  mobileLarge: 10,
+                                  tabletNormal: 12,
+                                  tabletExtraLarge: 14,
+                                  desktopLarge: 16,
+                                ),
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal,
                                 color: white_color),
