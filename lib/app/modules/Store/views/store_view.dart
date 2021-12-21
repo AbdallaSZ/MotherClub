@@ -16,6 +16,7 @@ import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
 import '../../ProductDetailsModule/ProductDetailsScreen.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class StoreView extends StatefulWidget {
   @override
@@ -24,15 +25,18 @@ class StoreView extends StatefulWidget {
 
 class _StoreViewScreenState extends State<StoreView> {
   var _searchview = new TextEditingController();
-
-  bool _firstSearch = true;
-  String _query = "";
   SearchBloc? searchBloc;
+  static int _pageSize = 10;
 
+  final PagingController<int, ProductDetailsModel> _pagingController =
+  PagingController(firstPageKey: 1);
   @override
   void initState() {
     searchBloc = SearchBloc();
     super.initState();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
   }
 
   List<ProductDetailsModel>? data;
@@ -42,15 +46,8 @@ class _StoreViewScreenState extends State<StoreView> {
     _searchview.addListener(() {
       if (_searchview.text.isEmpty) {
         //Notify the framework that the internal state of this object has changed.
-        setState(() {
-          _firstSearch = true;
-          _query = "";
-        });
       } else {
-        setState(() {
-          _firstSearch = false;
-          _query = _searchview.text;
-        });
+
       }
     });
   }
@@ -120,7 +117,7 @@ class _StoreViewScreenState extends State<StoreView> {
                         child: GestureDetector(
                           onTap: () {
                             print("tapped");
-                            DataSearch myDataSearch = DataSearch(data);
+                            DataSearch myDataSearch = DataSearch();
                             var result = showSearch(
                                 context: context, delegate: myDataSearch);
                             result.then((value) {
@@ -168,92 +165,18 @@ class _StoreViewScreenState extends State<StoreView> {
                   ),
                 ),
 
-                Container(
-                  // padding: EdgeInsets.symmetric(
-                  //   horizontal: SizeHelper.of(context).help(
-                  //     mobileSmall: 0,
-                  //     mobileNormal: 10,
-                  //     mobileLarge: 20,
-                  //     tabletNormal: 40,
-                  //     tabletExtraLarge: 50,
-                  //     desktopLarge: 60,
-                  //   ),
-                  // ),
-                  height: Utils.deviceHeight -
-                      SizeHelper.of(context).help(
-                        mobileSmall: 100,
-                        mobileNormal: 160,
-                        mobileLarge: 180,
-                        tabletNormal: 200,
-                        tabletExtraLarge: 220,
-                        desktopLarge: 250,
-                      ),
-                  child: FutureBuilder<List<ProductDetailsModel>>(
-                    future: Utils.bLoC.productList(context),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        data = snapshot.data;
-                        if (_firstSearch) {
-                          return GridView.builder(
-                            itemCount: data!.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount:SizeHelper.of(context).help(
-                                      mobileSmall: 2,
-                                      mobileNormal: 2,
-                                      mobileLarge: 2,
-                                      mobileExtraLarge: 2,
-                                      tabletNormal: 2,
-                                      tabletLarge: 3,
-                                      tabletExtraLarge: 3,
-                                      desktopLarge: 4,
-                                    ),
-                                    childAspectRatio:
-                                        SizeHelper.of(context).help(
-                                      mobileSmall: .5,
-                                      mobileNormal: .5,
-                                      mobileLarge: .6,
-                                      tabletNormal: .6,
-                                      tabletExtraLarge: .7,
-                                      desktopLarge: 1,
-                                    )),
-                            itemBuilder: (
-                              context,
-                              index,
-                            ) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (c) => BlocProvider(
-                                          create: (c) => ProductDetailsBloc(),
-                                          child: ProductDetailsScreen(
-                                            data![index].id.toString(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: ProductItem(
-                                    data: data![index],
-                                    // isLiked: false,
-                                  ));
-                            },
-                          );
-                        } else {
-                          return performSearch(data!, _query);
-                        }
-                      } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      }
-                      return GridShimmer(
-                          deviceWidth: deviceWidth, deviceHeight: deviceHeight);
-                    },
-                  ),
-                ),
-              ],
-            ),
+              Container(
+                padding: EdgeInsets.all(10),
+                // color: Colors.red,
+                height: deviceHeight - 200,
+                child:  PagedGridView(pagingController: _pagingController, builderDelegate: PagedChildBuilderDelegate<ProductDetailsModel>(
+                  itemBuilder: (context, item, index) => buildProductItem(item,),
+                ), gridDelegate:    SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: (.68),
+                ))
+              ),
+            ]),
           ),
           PositionedDirectional(
             bottom: 20,
@@ -262,10 +185,14 @@ class _StoreViewScreenState extends State<StoreView> {
               alignment: Alignment.bottomRight,
               child: GestureDetector(
                 onTap: () {
-                  if(Utils.id != "")Get.toNamed(Routes.CART);
-                  else showDialog(context: context, builder: (c){
-                    return loginDialog;
-                  });
+                  if (Utils.id != "")
+                    Get.toNamed(Routes.CART);
+                  else
+                    showDialog(
+                        context: context,
+                        builder: (c) {
+                          return loginDialog;
+                        });
                 },
                 child: Container(
                     height: 60,
@@ -299,5 +226,41 @@ class _StoreViewScreenState extends State<StoreView> {
         ]),
       ),
     );
+  }
+
+  GestureDetector buildProductItem( ProductDetailsModel model) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => BlocProvider(
+                      create: (c) => ProductDetailsBloc(),
+                      child:
+                          ProductDetailsScreen(model.id.toString()))));
+        },
+        child: ProductItem(
+          data: model,
+          // isLiked: false,
+        ));
+  }
+int page =1 ;
+  Future<void> _fetchPage(int pageKey) async {
+
+    try {
+      var newItems = await Utils.bLoC.productList(context, page: page, perPage: _pageSize);
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+      page +=1;
+    }
+    catch (error) {
+      _pagingController.error = error;
+    }
+
   }
 }
