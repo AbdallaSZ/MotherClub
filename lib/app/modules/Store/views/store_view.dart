@@ -15,6 +15,7 @@ import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 import '../../ProductDetailsModule/ProductDetailsScreen.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class StoreView extends StatefulWidget {
   @override
@@ -23,15 +24,18 @@ class StoreView extends StatefulWidget {
 
 class _StoreViewScreenState extends State<StoreView> {
   var _searchview = new TextEditingController();
-
-  bool _firstSearch = true;
-  String _query = "";
   SearchBloc? searchBloc;
+  static int _pageSize = 10;
 
+  final PagingController<int, ProductDetailsModel> _pagingController =
+  PagingController(firstPageKey: 1);
   @override
   void initState() {
     searchBloc = SearchBloc();
     super.initState();
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
   }
 
   List<ProductDetailsModel>? data;
@@ -41,15 +45,8 @@ class _StoreViewScreenState extends State<StoreView> {
     _searchview.addListener(() {
       if (_searchview.text.isEmpty) {
         //Notify the framework that the internal state of this object has changed.
-        setState(() {
-          _firstSearch = true;
-          _query = "";
-        });
       } else {
-        setState(() {
-          _firstSearch = false;
-          _query = _searchview.text;
-        });
+
       }
     });
   }
@@ -131,55 +128,16 @@ class _StoreViewScreenState extends State<StoreView> {
                 ),
               ),
 
-
               Container(
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
                 height: deviceHeight - 120,
-                child: FutureBuilder<List<ProductDetailsModel>>(
-                  future: Utils.bLoC.productList(context),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      data = snapshot.data;
-                      if (_firstSearch) {
-                        return GridView.builder(
-                          itemCount: data!.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: (.68),
-                          ),
-                          itemBuilder: (
-                            context,
-                            index,
-                          ) {
-                            return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (c) => BlocProvider(
-                                              create: (c) =>
-                                                  ProductDetailsBloc(),
-                                              child: ProductDetailsScreen(
-                                                  data![index].id.toString()))));
-                                },
-                                child: ProductItem(
-                                  data: data![index],
-                                 // isLiked: false,
-                                ));
-                          },
-                        );
-                      } else {
-                        return performSearch(data!, _query);
-                      }
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
-                    return GridShimmer(
-                        deviceWidth: deviceWidth, deviceHeight: deviceHeight);
-                  },
-                ),
+                child:  PagedGridView(pagingController: _pagingController, builderDelegate: PagedChildBuilderDelegate<ProductDetailsModel>(
+                  itemBuilder: (context, item, index) => buildProductItem(item,),
+                ), gridDelegate:    SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: (.68),
+                ))
               ),
             ]),
           ),
@@ -190,10 +148,14 @@ class _StoreViewScreenState extends State<StoreView> {
               alignment: Alignment.bottomRight,
               child: GestureDetector(
                 onTap: () {
-                  if(Utils.id != "")Get.toNamed(Routes.CART);
-                  else showDialog(context: context, builder: (c){
-                    return loginDialog;
-                  });
+                  if (Utils.id != "")
+                    Get.toNamed(Routes.CART);
+                  else
+                    showDialog(
+                        context: context,
+                        builder: (c) {
+                          return loginDialog;
+                        });
                 },
                 child: Container(
                     height: 60,
@@ -227,5 +189,41 @@ class _StoreViewScreenState extends State<StoreView> {
         ]),
       ),
     );
+  }
+
+  GestureDetector buildProductItem( ProductDetailsModel model) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => BlocProvider(
+                      create: (c) => ProductDetailsBloc(),
+                      child:
+                          ProductDetailsScreen(model.id.toString()))));
+        },
+        child: ProductItem(
+          data: model,
+          // isLiked: false,
+        ));
+  }
+
+
+  Future<void> _fetchPage(int pageKey) async {
+
+    try {
+      var newItems = await Utils.bLoC.productList(context, page: pageKey, perPage: _pageSize);
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    }
+    catch (error) {
+      _pagingController.error = error;
+    }
+
   }
 }
