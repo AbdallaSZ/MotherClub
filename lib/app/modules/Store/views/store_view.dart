@@ -117,7 +117,7 @@ class _StoreViewScreenState extends State<StoreView> {
                         child: GestureDetector(
                           onTap: () {
                             print("tapped");
-                            DataSearch myDataSearch = DataSearch(data);
+                            DataSearch myDataSearch = DataSearch();
                             var result = showSearch(
                                 context: context, delegate: myDataSearch);
                             result.then((value) {
@@ -168,7 +168,7 @@ class _StoreViewScreenState extends State<StoreView> {
               Container(
                 padding: EdgeInsets.all(10),
                 // color: Colors.red,
-                height: deviceHeight - 120,
+                height: deviceHeight - 200,
                 child:  PagedGridView(pagingController: _pagingController, builderDelegate: PagedChildBuilderDelegate<ProductDetailsModel>(
                   itemBuilder: (context, item, index) => buildProductItem(item,),
                 ), gridDelegate:    SliverGridDelegateWithFixedCrossAxisCount(
@@ -244,12 +244,11 @@ class _StoreViewScreenState extends State<StoreView> {
           // isLiked: false,
         ));
   }
-
-
+int page =1 ;
   Future<void> _fetchPage(int pageKey) async {
 
     try {
-      var newItems = await Utils.bLoC.productList(context, page: pageKey, perPage: _pageSize);
+      var newItems = await Utils.bLoC.productList(context, page: page, perPage: _pageSize);
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);
@@ -257,6 +256,7 @@ class _StoreViewScreenState extends State<StoreView> {
         final nextPageKey = pageKey + newItems.length;
         _pagingController.appendPage(newItems, nextPageKey);
       }
+      page +=1;
     }
     catch (error) {
       _pagingController.error = error;

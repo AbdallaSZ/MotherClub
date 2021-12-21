@@ -12,9 +12,9 @@ import 'package:rxdart/rxdart.dart';
 import 'SearchBloc.dart';
 /// search screen to user if he will write character to get tour or trips or category
 class DataSearch extends SearchDelegate<SearchInfo?> {
-  List<ProductDetailsModel>? models;
 
-  DataSearch(this.models) : super(
+
+  DataSearch() : super(
     searchFieldLabel: Utils.labels!.search_product,
 
     ///     keyboardType: TextInputType.text,
@@ -37,6 +37,30 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
 
   @override
   Widget buildLeading(BuildContext context) {
+    myStream.stream.listen((query) async{
+      /*try {*/
+
+        if((query!="" || query.isNotEmpty) && query.length > 1) {
+          _searchSubject.sink.add(SearchState(
+              ResultState.Loading));
+          var myResult = await search(query);
+          if (myResult.length > 0)
+            _searchSubject.sink.add(SearchState(
+                ResultState.Success, searchResultProducts: myResult));
+          else
+            _searchSubject.sink.add(SearchState(ResultState.Error,
+                errorMessage: Utils.labels!.there_is_no_product + query));
+        }
+        else {
+          _searchSubject.sink.add(SearchState(ResultState.Error,
+              errorMessage:  query));
+        }
+     /* }catch(c){
+        _searchSubject.sink.add(SearchState(ResultState.Error,
+            errorMessage: c.toString()));
+      }*/
+
+    });
     // TODO: implement buildLeading
     return GestureDetector(
       onTap: () {
@@ -50,6 +74,7 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
 
   @override
   Widget buildResults(BuildContext context) {
+
     // TODO: implement buildResults
     return Container(
     );
@@ -59,50 +84,15 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
   StreamController<String> myStream = StreamController<String>.broadcast();
 
   BehaviorSubject<SearchState> _searchSubject = BehaviorSubject<SearchState>();
-  List <ProductDetailsModel>search(String keyword  ){
+  search(String keyword  )async{
     List<ProductDetailsModel> result =[];
-    for(var i in models!){
-      if (i.name!.toLowerCase().trim().contains(keyword.toLowerCase().trim())){
-        result.add(i);
-      }
-    }
+    result = await Utils.bLoC.search( keyword);
     return result;
-
   }
   @override
   Widget buildSuggestions(BuildContext context) {
     debugPrint("user 's query now :  $query");
-
-    // TODO: implement buildSuggestions
-    if (query.isEmpty || query == "" ) {
       myStream.sink.add(query);
-    }
-
-    else {
-      myStream.stream.listen((query) async{
-        try { _searchSubject.sink.add(SearchState(
-            ResultState.Loading));
-        if(query!="" || query.isNotEmpty) {
-          var myResult = search(query);
-          if (myResult.length > 0)
-            _searchSubject.sink.add(SearchState(
-                ResultState.Success, searchResultProducts: myResult));
-          else
-            _searchSubject.sink.add(SearchState(ResultState.Error,
-                errorMessage: Utils.labels!.there_is_no_product + query));
-        }else{
-          _searchSubject.sink.add(SearchState(ResultState.Error,
-              errorMessage:  query));
-        }
-        }catch(c){
-          _searchSubject.sink.add(SearchState(ResultState.Error,
-              errorMessage: c.toString()));
-        }
-
-      });
-      myStream.sink.add(query);
-
-    }
     return Container(
       height:MediaQuery.of(context).size.height,
       color: Colors.white,
@@ -117,6 +107,7 @@ class DataSearch extends SearchDelegate<SearchInfo?> {
           return  Padding(
               padding: EdgeInsets.all(16),
               child: ListView(
+                shrinkWrap: true,
                 children: [
                   state.data!.searchResultProducts!.length > 0 ? Padding(
                     padding: EdgeInsetsDirectional.only(start: 16),

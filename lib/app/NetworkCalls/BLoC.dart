@@ -29,6 +29,15 @@ class BLoC {
       productsList.add(prodModel);
     });
     return productsList;
+  }  Future<List<ProductDetailsModel>> search( String keyword) async {
+    List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
+
+    var dataFromResponse = await Utils.networkcall.searchProducts(keyword);
+    await dataFromResponse.forEach((newProduct) {
+      ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
+      productsList.add(prodModel);
+    });
+    return productsList;
   }
 
   Future<pm.ProductModel> getSpecificProduct(String productId) async {

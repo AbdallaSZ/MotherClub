@@ -17,6 +17,19 @@ class Networkcall {
           (error) {},
         );
     return json.decode(response.body);
+  }  Future<dynamic> searchProducts(String keyword) async {
+    var response = await http
+        .get(
+          Uri.parse(
+              'https://mothersclub.me/wp-json/wc/v3/products?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e&search=$keyword'),
+          /*headers: {
+         "Authorization": RemoteConfig.config["AuthorizationToken"],
+       }*/
+        )
+        .catchError(
+          (error) {},
+        );
+    return json.decode(response.body);
   }
 
   Future<dynamic> getProductsDetails(String productId) async {
