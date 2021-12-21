@@ -373,30 +373,27 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
             );
           }
           },
-          child: Expanded(
-            flex: 4,
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.shopping_cart,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    Utils.labels!.add_to_cart,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.purple.shade400,
-                  borderRadius: BorderRadius.circular(8)),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.shopping_cart,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  Utils.labels!.add_to_cart,
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                )
+              ],
             ),
+            decoration: BoxDecoration(
+                color: Colors.purple.shade400,
+                borderRadius: BorderRadius.circular(8)),
           ),
         )
       ],

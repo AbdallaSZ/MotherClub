@@ -47,16 +47,15 @@ class BLoC {
       },
     );
     pm.ProductModel productModel = new pm.ProductModel(
-        id: dataFromResponse['id'].toString(),
-        name: dataFromResponse['name'],
-        description: dataFromResponse['description'],
-        price: dataFromResponse['price'].toString(),
-        salePrice: dataFromResponse['sale_price'].toString(),
-        regular_price: dataFromResponse['regular_price'].toString(),
-        on_sale: dataFromResponse['on_sale'],
-        total_sales: dataFromResponse['total_sales'].toString(),
-        imageslist: imagesOfProductList,
-
+      id: dataFromResponse['id'].toString(),
+      name: dataFromResponse['name'],
+      description: dataFromResponse['description'],
+      price: dataFromResponse['price'].toString(),
+      salePrice: dataFromResponse['sale_price'].toString(),
+      regular_price: dataFromResponse['regular_price'].toString(),
+      on_sale: dataFromResponse['on_sale'],
+      total_sales: dataFromResponse['total_sales'].toString(),
+      imageslist: imagesOfProductList,
     );
     return productModel;
   }
@@ -66,8 +65,6 @@ class BLoC {
 
     var weekResponse = await Utils.networkcall.getWeeksAPICall();
     weekResponse.forEach((newWeek) {
-
-
       WeeksModel weeksModel = new WeeksModel(
           id: newWeek['id'].toString(),
           name: newWeek['name'],
@@ -79,14 +76,14 @@ class BLoC {
     return weeksLst;
   }
 
-  Future<WeeksDetail> weekDetails() async {
-    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall();
-      WeeksDetail weeksDetailModel = new WeeksDetail(
-          name: weekDetailResponse[0]['name'].toString(),
-          description: weekDetailResponse[0]['description'].toString(),
-          videoLink: weekDetailResponse[0]['video_link'].toString(),
-          slug: weekDetailResponse[0]['slug'].toString(),
-      );
+  Future<WeeksDetail> weekDetails(String slug) async {
+    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(slug);
+    WeeksDetail weeksDetailModel = new WeeksDetail(
+      name: weekDetailResponse[0]['name'].toString(),
+      description: weekDetailResponse[0]['description'].toString(),
+      videoLink: weekDetailResponse[0]['video_link'].toString(),
+      slug: weekDetailResponse[0]['slug'].toString(),
+    );
     return weeksDetailModel;
   }
 
@@ -97,8 +94,8 @@ class BLoC {
     // var test = _networkService.convertToJson(fromResponse);
 
     fromResponse.forEach((newFrom) {
-       FormsModel forumModel = FormsModel.fromJson(newFrom);
-       formsLst.add(forumModel);
+      FormsModel forumModel = FormsModel.fromJson(newFrom);
+      formsLst.add(forumModel);
     });
 
     return formsLst;
@@ -132,35 +129,21 @@ class BLoC {
 
   Future<UserDetailsModel> usersDetails() async {
     var fromResponse = await Utils.networkcall.getUser();
-    UserDetailsModel _userDetailsModel= UserDetailsModel.fromMap(fromResponse);
+    UserDetailsModel _userDetailsModel = UserDetailsModel.fromMap(fromResponse);
     return _userDetailsModel;
   }
 
-
-
-
   Future<AuthModel> authData(String userName, String password) async {
-    var fromResponse = await Utils.networkcall.getAuthData(userName,password);
-    AuthModel _authData= AuthModel.fromMap(fromResponse);
+    var fromResponse = await Utils.networkcall.getAuthData(userName, password);
+    AuthModel _authData = AuthModel.fromMap(fromResponse);
     return _authData;
   }
-
-
-
-
-
-
-
-
-
 
   Future<List<MonthsModel>> monthsList(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];
 
     var weekResponse = await Utils.networkcall.getMonthAPICall();
     weekResponse.forEach((month) {
-
-
       MonthsModel monthsModel = new MonthsModel(
           Id: month['id'].toString(),
           name: month['name'],
@@ -205,11 +188,10 @@ class BLoC {
 
   Future<List<CategoriesModel>> categoresList(BuildContext context) async {
     List<CategoriesModel> categoriesLst = <CategoriesModel>[];
- 
+
     var categoriesResponse =
         await Utils.networkcall.geAppCategoriesAPI(context);
     categoriesResponse['data'].forEach((newProduct) {
-
       CategoriesModel categoriesModel = new CategoriesModel(
           title: newProduct['title'],
           image: newProduct['image'],
@@ -222,22 +204,20 @@ class BLoC {
 
   Future<List<Item>> cartItemsList() async {
     List<Item> cartItems = <Item>[];
-  try {
-    var response = await Utils.networkcall.getCartItems();
+    try {
+      var response = await Utils.networkcall.getCartItems();
 
-      if(response!="[]")
-      {
+      if (response != "[]") {
         CartItemModel.fromJson(response).items!.forEach((element) {
-      cartItems.add(element);
-      });
-      return cartItems;
+          cartItems.add(element);
+        });
+        return cartItems;
+      } else {
+        return [];
       }
-     else{
-     return [];
-      }
-  } on Exception catch (e) {
-    throw Exception('Failed. $e');
-  }
+    } on Exception catch (e) {
+      throw Exception('Failed. $e');
+    }
   }
 
   Future<String> addCartItems(String id, int quantity, String variation) async {
@@ -249,18 +229,17 @@ class BLoC {
     var res = await Utils.networkcall.deleteFromCartItem(itemId);
     return res;
   }
+
   Future<String> clearCart() async {
     var res = await Utils.networkcall.clearCartItem();
     return res;
   }
-
 
   Future<List<WishlistModel>> wishlistWithUserId(String userId) async {
     List<WishlistModel> items = [];
     var wishlistResponse = await Utils.networkcall.getWishlistByUserId(userId);
     try {
       await wishlistResponse.forEach((wishlist) {
-
         WishlistModel wishlistModel = new WishlistModel(
           userId: wishlist['user_id'],
           id: wishlist['id'],
@@ -285,7 +264,6 @@ class BLoC {
       return wishlistItemsResponse;
     }
     wishlistItemsResponse.forEach((wishlistItem) {
-
       WishlistProductModel wishlistItemModel = new WishlistProductModel(
         itemId: wishlistItem['item_id'],
         inStock: wishlistItem['in_stock'],
@@ -372,13 +350,21 @@ class BLoC {
     });
     return ordersList;
   }
-  Future<void> delOrder(String orderId) async {
- try {
-   await Utils.networkcall.deleteOrder(orderId);
- } on Exception catch (e) {
-   print(e);
- }
 
+  Future<void> delOrder(String orderId) async {
+    try {
+      await Utils.networkcall.deleteOrder(orderId);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> sendFeedB(String userName, String userEmail, String feedbackMessage) async {
+    try {
+      await Utils.networkcall.sendFeedback(userName, userEmail, feedbackMessage);
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
 }

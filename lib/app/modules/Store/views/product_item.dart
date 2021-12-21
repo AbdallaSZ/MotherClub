@@ -11,6 +11,7 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:size_helper/size_helper.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({Key? key, required this.data}) : super(key: key);
@@ -78,7 +79,14 @@ class _ProductItemState extends State<ProductItem> {
                   .map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value),
+                  child: Text(value,style: TextStyle(fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 6,
+                    mobileNormal: 8,
+                    mobileLarge: 10,
+                    tabletNormal: 12,
+                    tabletExtraLarge: 14,
+                    desktopLarge: 16,
+                  ),),textAlign: TextAlign.center,),
                 );
               }).toList(),
               onChanged: (_) {
@@ -94,10 +102,47 @@ class _ProductItemState extends State<ProductItem> {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          width: Utils.deviceWidth / 2.2,
-          height: Utils.deviceHeight / 3.2,
+          margin: EdgeInsets.symmetric(
+              horizontal: SizeHelper.of(context).help(
+                mobileSmall: 7,
+                mobileNormal: 8,
+                mobileLarge: 10,
+                tabletNormal: 12,
+                tabletExtraLarge: 13,
+                desktopLarge: 14,
+              ),
+              vertical: SizeHelper.of(context).help(
+                mobileSmall: 7,
+                mobileNormal: 8,
+                mobileLarge: 10,
+                tabletNormal: 12,
+                tabletExtraLarge: 13,
+                desktopLarge: 14,
+              )),
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeHelper.of(context).help(
+              mobileSmall: 7,
+              mobileNormal: 8,
+              mobileLarge: 10,
+              tabletNormal: 12,
+              tabletExtraLarge: 13,
+              desktopLarge: 14,
+            ),
+          ),
+          height: SizeHelper.of(context).help(
+            mobileSmall: 180,
+            mobileLarge: 200.0,
+            tabletNormal: 240.0,
+            tabletExtraLarge: 325.0,
+            desktopLarge: 380.0,
+          ),
+          width: SizeHelper.of(context).help(
+            mobileSmall: 140,
+            mobileLarge: 160,
+            tabletNormal: 200,
+            tabletExtraLarge: 280,
+            desktopLarge: 340,
+          ),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -122,15 +167,23 @@ class _ProductItemState extends State<ProductItem> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Flexible(
                     child: Text(
                       "${widget.data.name}",
+                      textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.roboto(
-                        fontSize: 13,
+                        fontSize: SizeHelper.of(context).help(
+                          mobileSmall: 8,
+                          mobileNormal: 10,
+                          mobileLarge: 11,
+                          tabletNormal: 14,
+                          tabletExtraLarge: 16,
+                          desktopLarge: 18,
+                        ),
                         height: 1.1,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w500,
@@ -146,13 +199,21 @@ class _ProductItemState extends State<ProductItem> {
               Expanded(
                 flex: 1,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("${widget.data.price} " + Utils.labels!.amd,
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.roboto(
-                          fontSize: 18,
+                          fontSize: SizeHelper.of(context).help(
+                            mobileSmall: 7,
+                            mobileNormal: 9,
+                            mobileLarge: 11,
+                            tabletNormal: 13,
+                            tabletExtraLarge: 15,
+                            desktopLarge: 17,
+                          ),
                           fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w700,
+
                           color: Black_textColor,
                         )),
                   ],
@@ -171,7 +232,14 @@ class _ProductItemState extends State<ProductItem> {
                           builder: (BuildContext context) {
                             return StatefulBuilder(builder: (context, update) {
                               return Container(
-                                height: 220,
+                                height: SizeHelper.of(context).help(
+                                  mobileSmall: 100,
+                                  mobileNormal: 150,
+                                  mobileLarge: 200,
+                                  tabletNormal: 250,
+                                  tabletExtraLarge: 300,
+                                  desktopLarge: 350,
+                                ),
                                 child: Card(
                                   child: Container(
                                     padding: EdgeInsets.all(10),
@@ -193,19 +261,54 @@ class _ProductItemState extends State<ProductItem> {
                                               children: [
                                                 // SizedBox(height:23),
                                                 Expanded(
-                                                    flex: 2,
+                                                    flex: SizeHelper.of(context)
+                                                        .help(
+                                                      mobileSmall: 1,
+                                                      mobileNormal: 1,
+                                                      mobileLarge: 1,
+                                                      tabletNormal: 2,
+                                                      tabletExtraLarge: 3,
+                                                      desktopLarge: 4,
+                                                    ),
                                                     child: Column(
                                                       children: [
                                                         Image.network(
                                                           '${widget.data.images![0].src}',
-                                                          height: 100,
-                                                          width: 155,
+                                                          height: SizeHelper.of(
+                                                                  context)
+                                                              .help(
+                                                            mobileSmall: 55,
+                                                            mobileNormal: 60,
+                                                            mobileLarge: 80,
+                                                            tabletNormal: 100,
+                                                            tabletExtraLarge:
+                                                                110,
+                                                            desktopLarge: 120,
+                                                          ),
+                                                          width: SizeHelper.of(
+                                                                  context)
+                                                              .help(
+                                                            mobileSmall: 120,
+                                                            mobileNormal: 130,
+                                                            mobileLarge: 140,
+                                                            tabletNormal: 155,
+                                                            tabletExtraLarge:
+                                                                170,
+                                                            desktopLarge: 190,
+                                                          ),
                                                         ),
                                                         Text(
                                                           "${widget.data.name}",
                                                           style: GoogleFonts
                                                               .roboto(
-                                                            fontSize: 13,
+                                                            fontSize: SizeHelper.of(context).help(
+                                                              mobileSmall: 6,
+                                                              mobileNormal: 8,
+                                                              mobileLarge: 10,
+                                                              tabletNormal: 12,
+                                                              tabletExtraLarge: 14,
+                                                              desktopLarge: 16,
+                                                            ),
                                                             fontStyle: FontStyle
                                                                 .normal,
                                                             fontWeight:
@@ -219,7 +322,14 @@ class _ProductItemState extends State<ProductItem> {
                                                                 " ${widget.data.price}",
                                                             style: GoogleFonts
                                                                 .roboto(
-                                                              fontSize: 18,
+                                                              fontSize: SizeHelper.of(context).help(
+                                                                mobileSmall: 10,
+                                                                mobileNormal: 12,
+                                                                mobileLarge: 14,
+                                                                tabletNormal: 16,
+                                                                tabletExtraLarge: 18,
+                                                                desktopLarge: 20,
+                                                              ),
                                                               fontStyle:
                                                                   FontStyle
                                                                       .normal,
@@ -234,12 +344,20 @@ class _ProductItemState extends State<ProductItem> {
 
                                                 // SizedBox(height:10),
                                                 Expanded(
-                                                  flex: 2,
+                                                  flex: 1,
                                                   child: Column(
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          Text(Utils.labels!.quantity),
+                                                          Text(Utils.labels!
+                                                              .quantity,style: TextStyle(fontSize: SizeHelper.of(context).help(
+                                                            mobileSmall: 6,
+                                                            mobileNormal: 8,
+                                                            mobileLarge: 10,
+                                                            tabletNormal: 12,
+                                                            tabletExtraLarge: 14,
+                                                            desktopLarge: 16,
+                                                          ),color: Colors.grey),),
                                                           SizedBox(width: 10),
                                                           Expanded(
                                                             child: Container(
@@ -266,7 +384,14 @@ class _ProductItemState extends State<ProductItem> {
                                                                               Icon(
                                                                                 Icons.remove,
                                                                                 color: snapshot.data! > 1 ? Color(0xffFF4550) : Colors.grey,
-                                                                                size: 15,
+                                                                                size: SizeHelper.of(context).help(
+                                                                                  mobileSmall: 8,
+                                                                                  mobileNormal: 10,
+                                                                                  mobileLarge: 11,
+                                                                                  tabletNormal: 14,
+                                                                                  tabletExtraLarge: 16,
+                                                                                  desktopLarge: 18,
+                                                                                ),
                                                                               ),
                                                                               () {
                                                                             if (snapshot.data! >
@@ -279,7 +404,14 @@ class _ProductItemState extends State<ProductItem> {
                                                                           ),
                                                                           Text(
                                                                               snapshot.data!.toString(),
-                                                                              style: TextStyle(fontSize: 14, color: Colors.black87)),
+                                                                              style: TextStyle(fontSize: SizeHelper.of(context).help(
+                                                                                mobileSmall: 6,
+                                                                                mobileNormal: 8,
+                                                                                mobileLarge: 10,
+                                                                                tabletNormal: 12,
+                                                                                tabletExtraLarge: 14,
+                                                                                desktopLarge: 16,
+                                                                              ), color: Colors.black87)),
                                                                           SizedBox(
                                                                             width:
                                                                                 10,
@@ -288,7 +420,14 @@ class _ProductItemState extends State<ProductItem> {
                                                                               Icon(
                                                                                 Icons.add,
                                                                                 color: snapshot.data! < stockQuantity ? Color(0xffFF4550) : Colors.grey,
-                                                                                size: 15,
+                                                                                size: SizeHelper.of(context).help(
+                                                                                  mobileSmall: 8,
+                                                                                  mobileNormal: 10,
+                                                                                  mobileLarge: 11,
+                                                                                  tabletNormal: 14,
+                                                                                  tabletExtraLarge: 16,
+                                                                                  desktopLarge: 18,
+                                                                                ),
                                                                               ),
                                                                               () {
                                                                             if (snapshot.data! <
@@ -307,7 +446,15 @@ class _ProductItemState extends State<ProductItem> {
                                                       SizedBox(height: 15),
                                                       Row(
                                                         children: [
-                                                          Text(Utils.labels!.variation),
+                                                          Text(Utils.labels!
+                                                              .variation,style: TextStyle(fontSize: SizeHelper.of(context).help(
+                                                            mobileSmall: 6,
+                                                            mobileNormal: 8,
+                                                            mobileLarge: 10,
+                                                            tabletNormal: 12,
+                                                            tabletExtraLarge: 14,
+                                                            desktopLarge: 16,
+                                                          ),color: Colors.grey),),
                                                           SizedBox(width: 10),
                                                           Expanded(
                                                             child: Container(
@@ -343,32 +490,36 @@ class _ProductItemState extends State<ProductItem> {
                                                   ),
                                                 ),
                                               ]),
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Colors.blue),
-                                            onPressed: () async {
-                                              print(widget.data.id);
-                                              String res = await Utils.bLoC
-                                                  .addCartItems(
-                                                      widget.data.id.toString(),
-                                                      int.parse(rxItemsCount
-                                                          .value
-                                                          .toString()),
-                                                      rxSelectedAgeSubject
-                                                          .value);
-                                              Navigator.pop(context);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    res,
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 20),
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  primary: Colors.blue),
+                                              onPressed: () async {
+                                                print(widget.data.id);
+                                                String res = await Utils.bLoC
+                                                    .addCartItems(
+                                                        widget.data.id.toString(),
+                                                        int.parse(rxItemsCount
+                                                            .value
+                                                            .toString()),
+                                                        rxSelectedAgeSubject
+                                                            .value);
+                                                Navigator.pop(context);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      res,
+                                                    ),
+                                                    duration: const Duration(
+                                                        seconds: 3),
                                                   ),
-                                                  duration: const Duration(
-                                                      seconds: 3),
-                                                ),
-                                              );
-                                            },
-                                            child: Text(Utils.labels!.add_to_cart),
+                                                );
+                                              },
+                                              child:
+                                                  Text(Utils.labels!.add_to_cart),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -387,8 +538,22 @@ class _ProductItemState extends State<ProductItem> {
                         // Get.toNamed(Routes.CART);
                       },
                       child: Container(
-                        width: 40,
-                        height: 40,
+                        width: SizeHelper.of(context).help(
+                          mobileSmall: 35,
+                          mobileNormal: 37,
+                          mobileLarge: 39,
+                          tabletNormal: 41,
+                          tabletExtraLarge: 43,
+                          desktopLarge: 45,
+                        ),
+                        height: SizeHelper.of(context).help(
+                          mobileSmall: 35,
+                          mobileNormal: 37,
+                          mobileLarge: 39,
+                          tabletNormal: 41,
+                          tabletExtraLarge: 43,
+                          desktopLarge: 45,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
                           gradient: LinearGradient(
@@ -408,6 +573,13 @@ class _ProductItemState extends State<ProductItem> {
                         ),
                         child: Icon(
                           Icons.add_shopping_cart,
+                          size: SizeHelper.of(context).help(
+                            mobileNormal: 22,
+                            mobileLarge: 24,
+                            tabletNormal: 26,
+                            tabletExtraLarge: 28,
+                            desktopLarge: 30,
+                          ),
                           color: Colors.white,
                         ),
                       ),
@@ -419,12 +591,33 @@ class _ProductItemState extends State<ProductItem> {
           ),
         ),
         PositionedDirectional(
-          top: 15,
-          start: 15,
+          top: SizeHelper.of(context).help(
+            mobileSmall: 11,
+            mobileNormal: 12,
+            mobileLarge: 13,
+            tabletNormal: 15,
+            tabletExtraLarge: 18,
+            desktopLarge: 20,
+          ),
+          start: SizeHelper.of(context).help(
+            mobileSmall: 11,
+            mobileNormal: 12,
+            mobileLarge: 13,
+            tabletNormal: 15,
+            tabletExtraLarge: 18,
+            desktopLarge: 20,
+          ),
           child: GestureDetector(
             child: Icon(
               Icons.favorite_border,
-              size: 28,
+              size: SizeHelper.of(context).help(
+                mobileSmall: 20,
+                mobileNormal: 24,
+                mobileLarge: 26,
+                tabletNormal: 28,
+                tabletExtraLarge: 30,
+                desktopLarge: 33,
+              ),
             ),
             onTap: () {
             if(Utils.id == ""){
@@ -439,7 +632,14 @@ class _ProductItemState extends State<ProductItem> {
                     // dropdownValue = snapshot.data[0].title!;
                     return AlertDialog(
                       title: Container(
-                        height: 50,
+                        height: SizeHelper.of(context).help(
+                          mobileSmall: 50,
+                          mobileNormal: 55,
+                          mobileLarge: 60,
+                          tabletNormal: 65,
+                          tabletExtraLarge: 70,
+                          desktopLarge: 80,
+                        ),
                         child: Image.asset(
                           'assets/images/addLike.png',
                           scale: 3,
@@ -472,7 +672,14 @@ class _ProductItemState extends State<ProductItem> {
                                         //snapshot.hasData ?
                                         Container(
                                           alignment: Alignment.center,
-                                          width: Utils.deviceWidth / 3,
+                                          width: SizeHelper.of(context).help(
+                                            mobileSmall: 100,
+                                            mobileNormal: 110,
+                                            mobileLarge: 120,
+                                            tabletNormal: 125,
+                                            tabletExtraLarge: 130,
+                                            desktopLarge: 135,
+                                          ),
                                           height: Utils.deviceHeight / 20,
                                           decoration: BoxDecoration(
                                             borderRadius:
@@ -481,8 +688,16 @@ class _ProductItemState extends State<ProductItem> {
                                                 color: Colors.grey, width: .7),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  SizeHelper.of(context).help(
+                                                mobileSmall: 5,
+                                                mobileNormal: 6,
+                                                mobileLarge: 7,
+                                                tabletNormal: 8,
+                                                tabletExtraLarge: 10,
+                                                desktopLarge: 12,
+                                              ),
                                             ),
                                             child: Row(
                                               children: [
@@ -582,19 +797,16 @@ class _ProductItemState extends State<ProductItem> {
                                                                       'shared');
                                                           items.add(wm);
                                                           dropdownValue = wm;
-
-                                                          update(() {
-                                                            controller.text =
-                                                                '';
-                                                          });
+                                                          controller.text = '';
+                                                          update(() {});
                                                           Navigator.of(context)
                                                               .pop(
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
                                                               SnackBar(
-                                                                content:Text(
-                                                                    '${Utils.labels!.wish_List} ${Utils.labels!.added}' ),
+                                                                content: Text(
+                                                                    '${Utils.labels!.wish_List} ${Utils.labels!.added}'),
                                                                 duration:
                                                                     const Duration(
                                                                         seconds:

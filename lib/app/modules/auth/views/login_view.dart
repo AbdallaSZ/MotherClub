@@ -52,10 +52,6 @@ class LoginView extends GetView<AuthController> {
     return Scaffold(
       // backgroundColor: Background_Color,
      body: SafeArea(
-         child: Container(
-          color:   white_color,
-         height: deviceHeight,
-         width: deviceWidth,
          child: SingleChildScrollView(
            child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,7 +230,7 @@ class LoginView extends GetView<AuthController> {
 
              ],
            ),
-         ))
+         )
 
      ),
     );

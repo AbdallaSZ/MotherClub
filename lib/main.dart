@@ -22,7 +22,7 @@ void main() async {
   Utils.userPreferences.initialize();
   
   await Firebase.initializeApp();
-  bool releaseMode = true;
+  bool releaseMode = false;
   runApp(
        DevicePreview(enabled: !releaseMode,
          builder: (context) => MyApp(),)

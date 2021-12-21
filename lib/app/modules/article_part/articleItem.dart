@@ -3,6 +3,7 @@ import 'package:motherclub/app/Models/choose_for_you_model.dart';
 import 'package:motherclub/app/modules/article_part/article_content.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:size_helper/size_helper.dart';
 
 class ArticleItem extends StatelessWidget {
   const ArticleItem({Key? key, required this.data}) : super(key: key);
@@ -31,14 +32,33 @@ class ArticleItem extends StatelessWidget {
         ),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        width: Utils.deviceWidth / 2.2,
-        height: Utils.deviceHeight / 3.2,
+        height: SizeHelper.of(context).help(
+          mobileSmall: 180,
+          mobileLarge: 200.0,
+          tabletNormal: 240.0,
+          tabletExtraLarge: 325.0,
+          desktopLarge: 380.0,
+        ),
+        width: SizeHelper.of(context).help(
+          mobileSmall: 140,
+          mobileLarge: 160,
+          tabletNormal: 200,
+          tabletExtraLarge: 280,
+          desktopLarge: 340,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.network(data.image!),
-            Text('${data.title!.rendered!}',textAlign: TextAlign.center,),
+            Text('${data.title!.rendered!}',textAlign: TextAlign.center,style: TextStyle(fontSize: SizeHelper.of(context).help(
+              mobileSmall: 8,
+              mobileNormal: 10,
+              mobileLarge: 11,
+              tabletNormal: 14,
+              tabletExtraLarge: 16,
+              desktopLarge: 18,
+            ),),),
           ],
         ),
       ),

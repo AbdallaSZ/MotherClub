@@ -13,6 +13,7 @@ import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
+import 'package:size_helper/size_helper.dart';
 
 import '../../ProductDetailsModule/ProductDetailsScreen.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -60,73 +61,109 @@ class _StoreViewScreenState extends State<StoreView> {
       child: Scaffold(
         body: Stack(children: [
           SingleChildScrollView(
-            child: Column(children: [
-              // AppBarWidget("Store", deviceHeight / 9.4, deviceWidth, context),
+            child: Column(
 
-              Card(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: deviceHeight / 17,
-                      width: deviceWidth / 1.09,
-                      // alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        border: Border.all(color: white_color, width: 0.5),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          print("tapped");
-                          DataSearch myDataSearch = DataSearch(data);
-                          var result = showSearch(
-                              context: context, delegate: myDataSearch);
-                          result.then((value) {
-                            if (value != null) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (c) => BlocProvider(
-                                          create: (c) => ProductDetailsBloc(),
-                                          child: ProductDetailsScreen(
-                                              value.productId!))));
-                            }
-                          });
-                        },
-                        child: TextFormField(
-                          controller: _searchview,
-                          enabled: false,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Black_textColor,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: SizeHelper.of(context).help(
+                    mobileSmall: 4,
+                    mobileNormal: 5,
+                    mobileLarge: 10,
+                    tabletNormal: 20,
+                    tabletExtraLarge: 25,
+                    desktopLarge: 30,
+                  ),
+                  ),
+                  child: Row(
+
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+
+                        height: SizeHelper.of(context).help(
+                          mobileSmall: 35,
+                          mobileNormal: 35,
+                          mobileLarge: 40,
+                          mobileExtraLarge: 45,
+                          tabletNormal: 45,
+                          tabletLarge: 45,
+                          tabletExtraLarge: 50,
+                          desktopLarge: 70,
+                        ),
+                        width:   SizeHelper.of(context).help(
+                          mobileSmall: 150,
+                          mobileNormal: 230,
+                          mobileLarge: 240,
+                          mobileExtraLarge: 250,
+                          tabletNormal: 250,
+                          tabletLarge: 300,
+                          tabletExtraLarge: 500,
+                          desktopLarge: 600,
+                        ),
+                        // alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xffe0e0e0),
+                              spreadRadius: 1,
+                              blurRadius: 5,
+                              offset: Offset(0, 0), // changes position of shadow
                             ),
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          border: Border.all(color: white_color, width: 0.5),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            print("tapped");
+                            DataSearch myDataSearch = DataSearch(data);
+                            var result = showSearch(
+                                context: context, delegate: myDataSearch);
+                            result.then((value) {
+                              if (value != null) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (c) => BlocProvider(
+                                            create: (c) => ProductDetailsBloc(),
+                                            child: ProductDetailsScreen(
+                                                value.productId!))));
+                              }
+                            });
+                          },
+                          child: TextFormField(
+                            controller: _searchview,
+                            enabled: false,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Black_textColor,
+                              ),
 
-                            labelText: Utils.labels!.search_product,
-                            labelStyle: Theme.of(context).textTheme.bodyText2,
-                            //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
-                            contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                              labelText: Utils.labels!.search_product,
+                              labelStyle: Theme.of(context).textTheme.bodyText2,
+                              //  suffixIcon:  Icon(IconButton,color: Black_textColor,),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    // SizedBox(width: 10,),
-                    // Icon(Icons.sort,color: Colors.black,size: 25,),
-                    /*Icon(Icons.arrow_back,color: Colors.black,),
+                      // SizedBox(width: 10,),
+                      // Icon(Icons.sort,color: Colors.black,size: 25,),
+                      /*Icon(Icons.arrow_back,color: Colors.black,),
                             SizedBox(width: 20,),
                             Text('Category List',style: Theme.of(context).textTheme.headline1,),
 */
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
               Container(
                 padding: EdgeInsets.all(10),

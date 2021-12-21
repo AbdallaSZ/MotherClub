@@ -9,6 +9,10 @@ class FeedBack extends StatefulWidget {
   State<FeedBack> createState() => _FeedBackState();
 }
 
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _messageController = TextEditingController();
+
 final _formKey = GlobalKey<FormState>();
 
 class _FeedBackState extends State<FeedBack> {
@@ -38,70 +42,106 @@ class _FeedBackState extends State<FeedBack> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text('Mother’s Club',style: TextStyle(color: Colors.pinkAccent,fontSize: 24),),
+                        Text(
+                          'Mother’s Club',
+                          style:
+                              TextStyle(color: Colors.pinkAccent, fontSize: 24),
+                        ),
                         TextFormField(
+                          controller: _nameController,
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.person_outline,color: Colors.pinkAccent,),
+                            icon: const Icon(
+                              Icons.person_outline,
+                              color: Colors.pinkAccent,
+                            ),
                             hintText: 'Enter your full name',
                             labelText: 'Name',
                           ),
                           validator: (value) {
-                            if (value!.isEmpty && value.length<3) {
+                            if (value!.isEmpty && value.length < 3) {
                               return 'Please enter valid name';
                             }
                             return null;
                           },
                         ),
                         TextFormField(
+                          controller: _emailController,
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.email_outlined,color: Colors.pinkAccent,),
+                            icon: const Icon(
+                              Icons.email_outlined,
+                              color: Colors.pinkAccent,
+                            ),
                             hintText: 'Enter an Email',
                             labelText: 'Email',
                           ),
                           validator: (value) {
-                            if (value!.contains('@')&& value.contains('com')) {
-                              return 'Please enter valid phone number';
+                            if (!value!.contains('@') &&
+                                !value.contains('com')) {
+                              return 'Please enter valid Email';
                             }
                             return null;
                           },
                         ),
                         TextFormField(
+                          controller: _messageController,
                           keyboardType: TextInputType.multiline,
                           maxLines: null,
                           minLines: 5,
                           decoration: const InputDecoration(
-                            icon: const Icon(Icons.message_outlined,color: Colors.pinkAccent,),
+                            icon: const Icon(
+                              Icons.message_outlined,
+                              color: Colors.pinkAccent,
+                            ),
                             hintText: 'Enter your message',
                             labelText: 'Message',
                           ),
                           validator: (value) {
-                            if (value!.length < 40) {
+                            if (value!.length < 20) {
                               return 'Please enter valid Message';
                             }
                             return null;
                           },
                         ),
                         Container(
-
                             margin: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                               color: Colors.pinkAccent,
                             ),
                             child: ElevatedButton(
-
-                              style:  ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20,),primary: Colors.pinkAccent),
-
+                              style: ElevatedButton.styleFrom(
+                                  textStyle: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                  primary: Colors.pinkAccent),
                               child: const Text('Submit'),
-                              onPressed: () {
-                                // It returns true if the form is valid, otherwise returns false
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  // If the form is valid, display a Snackbar.
-
+                                  await Utils.bLoC
+                                      .sendFeedB(
+                                        _nameController.text,
+                                        _emailController.text,
+                                        _messageController.text,
+                                      )
+                                      .then(
+                                        (value) => ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content:
+                                                Text(Utils.labels!.feedback_sent),
+                                            duration:
+                                                const Duration(seconds: 3),
+                                          ),
+                                        ),
+                                      );
                                 }
+                                _nameController.text='';
+                                _emailController.text='';
+                                _messageController.text='';
+                                Navigator.pop(context);
                               },
                             )),
-
                       ],
                     ),
                   ),
@@ -109,7 +149,7 @@ class _FeedBackState extends State<FeedBack> {
               ),
               Container(
                 width: Utils.deviceWidth,
-                height: Utils.deviceHeight/3.7,
+                height: Utils.deviceHeight / 3.7,
                 color: Colors.pinkAccent,
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -117,34 +157,52 @@ class _FeedBackState extends State<FeedBack> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-                      Text(Utils.labels!.we_are_opened_to_suggestion,style: TextStyle(color: Colors.white,fontSize: 18),),
+                      Text(
+                        Utils.labels!.we_are_opened_to_suggestion,
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
                       Row(
                         children: [
-                          Icon(Icons.not_listed_location_sharp,color: Colors.white,),
-                          Text(Utils.labels!.feedback_location,style: TextStyle(color: Colors.white)),
+                          Icon(
+                            Icons.not_listed_location_sharp,
+                            color: Colors.white,
+                          ),
+                          Text(Utils.labels!.feedback_location,
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.phone,color: Colors.white,),
-                          Text(' +971-45533869',style: TextStyle(color: Colors.white)),
+                          Icon(
+                            Icons.phone,
+                            color: Colors.white,
+                          ),
+                          Text(' +971-45533869',
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.mail,color: Colors.white,),
-                          Text('info@mothersclub.me',style: TextStyle(color: Colors.white)),
+                          Icon(
+                            Icons.mail,
+                            color: Colors.white,
+                          ),
+                          Text('info@mothersclub.me',
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.reduce_capacity,color: Colors.white,),
-                          Text(Utils.labels!.follow_us,style: TextStyle(color: Colors.white)),
+                          Icon(
+                            Icons.reduce_capacity,
+                            color: Colors.white,
+                          ),
+                          Text(Utils.labels!.follow_us,
+                              style: TextStyle(color: Colors.white)),
                         ],
                       ),
-
-                    ],),
+                    ],
+                  ),
                 ),
               ),
             ],
