@@ -7,7 +7,7 @@ import 'package:motherclub/app/Models/MonthsModel.dart';
 import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart' as pm;
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
-import 'package:motherclub/app/Models/WeeksDetail.dart';
+import 'package:motherclub/app/Models/pregnancy_data_model.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
 import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/app/Models/baby_model.dart';
@@ -76,23 +76,15 @@ class BLoC {
     return weeksLst;
   }
 
-  Future<WeeksDetail> weekDetails(String slug) async {
+  Future<PregnancyDataModel> weekDetails(String slug) async {
     var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(slug);
-    WeeksDetail weeksDetailModel = new WeeksDetail(
-      name: weekDetailResponse[0]['name'].toString(),
-      description: weekDetailResponse[0]['description'].toString(),
-      videoLink: weekDetailResponse[0]['video_link'].toString(),
-      slug: weekDetailResponse[0]['slug'].toString(),
-    );
+    PregnancyDataModel weeksDetailModel = PregnancyDataModel.fromMap(weekDetailResponse[0]);
     return weeksDetailModel;
   }
-
   Future<List<FormsModel>> forumsList() async {
     List<FormsModel> formsLst = <FormsModel>[];
-
     var fromResponse = await Utils.networkcall.getForumAPICall();
     // var test = _networkService.convertToJson(fromResponse);
-
     fromResponse.forEach((newFrom) {
       FormsModel forumModel = FormsModel.fromJson(newFrom);
       formsLst.add(forumModel);

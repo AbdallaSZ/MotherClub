@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/Models/WeeksDetail.dart';
+import 'package:motherclub/app/Models/pregnancy_data_model.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/modules/YourPregnancy/Views/pregnancy_article_item.dart';
 import 'package:motherclub/app/modules/article_part/article_content.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -245,7 +246,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
               stream: _rxSlug.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData)
-                  return FutureBuilder<WeeksDetail>(
+                  return FutureBuilder<PregnancyDataModel>(
                       future: Utils.bLoC.weekDetails(snapshot.data!),
                       builder: (context, snapshot2) {
                         return snapshot2.connectionState ==
@@ -254,244 +255,242 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                 padding: EdgeInsets.symmetric(vertical: 50),
                                 child:
                                     Center(child: CircularProgressIndicator()))
-                            : Column(
-                                children: [
-                                  // (weekSlug == "0")
-                                  //     ? Container(
-                                  //         child: FlickVideoPlayer(
-                                  //             flickManager: FlickManager(
-                                  //           videoPlayerController:  playVid('https://mothersclub.me/wp-content/uploads/2021/01/الاسبوع-الثالث-.mp4'),
-                                  //         )),
-                                  //       )
-                                  //     :
-                                  Container(
-                                    child: FlickVideoPlayer(
-                                        flickManager: FlickManager(
-                                      videoPlayerController: playVid(
-                                        snapshot2.data!.videoLink,
+                            : snapshot2.hasData
+                                ? Column(
+                                    children: [
+                                      Container(
+                                        child: FlickVideoPlayer(
+                                            flickManager: FlickManager(
+                                          videoPlayerController: playVid(
+                                            snapshot2.data!.videoLink!,
+                                          ),
+                                        )),
                                       ),
-                                    )),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.all(
-                                        SizeHelper.of(context).help(
-                                          mobileSmall: 10,
-                                          mobileNormal: 12,
-                                          mobileLarge: 14,
-                                          tabletNormal: 16,
-                                          tabletExtraLarge: 18,
-                                          desktopLarge: 20,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        '${Utils.labels!.pregnancy_tools_resources}',
-                                        style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: SizeHelper.of(context).help(
-                                            mobileSmall: 10,
-                                            mobileNormal: 12,
-                                            mobileLarge: 14,
-                                            tabletNormal: 16,
-                                            tabletExtraLarge: 18,
-                                            desktopLarge: 20,
+                                      Padding(
+                                          padding: EdgeInsets.all(
+                                            SizeHelper.of(context).help(
+                                              mobileSmall: 10,
+                                              mobileNormal: 12,
+                                              mobileLarge: 14,
+                                              tabletNormal: 16,
+                                              tabletExtraLarge: 18,
+                                              desktopLarge: 20,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '${Utils.labels!.pregnancy_tools_resources}',
+                                            style: TextStyle(
+                                              color: Colors.black45,
+                                              fontSize:
+                                                  SizeHelper.of(context).help(
+                                                mobileSmall: 10,
+                                                mobileNormal: 12,
+                                                mobileLarge: 14,
+                                                tabletNormal: 16,
+                                                tabletExtraLarge: 18,
+                                                desktopLarge: 20,
+                                              ),
+                                            ),
+                                          )),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 10,
+                                            left: 10,
+                                            right: 10,
+                                            bottom: 50),
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 10),
+                                          padding: EdgeInsets.only(right: 10),
+                                          width: Utils.width,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              color: Colors
+                                                  .white /*RandomColorModel().getColor().withOpacity(0.5)*/),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Get.toNamed(Routes.BLOG);
+                                            },
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              // mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                (weekSlug == "0")
+                                                    ? Text(
+                                                        Utils.labels!.week +
+                                                            "2",
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              SizeHelper.of(
+                                                                      context)
+                                                                  .help(
+                                                            mobileSmall: 15,
+                                                            mobileNormal: 17,
+                                                            mobileLarge: 19,
+                                                            tabletNormal: 21,
+                                                            tabletExtraLarge:
+                                                                23,
+                                                            desktopLarge: 25,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Text(
+                                                        snapshot2.data!.name!,
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              SizeHelper.of(
+                                                                      context)
+                                                                  .help(
+                                                            mobileSmall: 15,
+                                                            mobileNormal: 17,
+                                                            mobileLarge: 19,
+                                                            tabletNormal: 21,
+                                                            tabletExtraLarge:
+                                                                23,
+                                                            desktopLarge: 25,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                Divider(
+                                                  height: 5,
+                                                  color: Colors.red,
+                                                ),
+                                                (weekSlug == "0")
+                                                    ? Text(
+                                                        "يتمكن 400 حيوان منوي فقط من إتمام الرحلة الشاقة والتي تستمر عشر ساعات للوصول إلى البويضة، بينما حيوان منوي واحد فقط الذي يتمكن من اختراق الغشاء الخارجي للبويضة. يكون طفلك في هذا الوقت عبارة عن كرة صغيرة من الخلايا والتي اتفق العلماء على تسميتها بالكيس الأريميّ",
+                                                        style: TextStyle(
+                                                          fontSize:
+                                                              SizeHelper.of(
+                                                                      context)
+                                                                  .help(
+                                                            mobileSmall: 10,
+                                                            mobileNormal: 12,
+                                                            mobileLarge: 14,
+                                                            tabletNormal: 16,
+                                                            tabletExtraLarge:
+                                                                18,
+                                                            desktopLarge: 20,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Text(
+                                                        snapshot2
+                                                            .data!.description!,
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                          fontSize:
+                                                              SizeHelper.of(
+                                                                      context)
+                                                                  .help(
+                                                            mobileSmall: 10,
+                                                            mobileNormal: 12,
+                                                            mobileLarge: 14,
+                                                            tabletNormal: 16,
+                                                            tabletExtraLarge:
+                                                                18,
+                                                            desktopLarge: 20,
+                                                          ),
+                                                          color:
+                                                              Black_textColor,
+                                                        ),
+                                                      ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      )),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 10,
-                                        left: 10,
-                                        right: 10,
-                                        bottom: 50),
-                                    child: Container(
-                                      margin: EdgeInsets.only(top: 10),
-                                      padding: EdgeInsets.only(right: 10),
-                                      height: SizeHelper.of(context).help(
-                                        mobileSmall: 50,
-                                        mobileNormal: 60,
-                                        mobileLarge: 70,
-                                        mobileExtraLarge: 100,
-                                        tabletNormal: 130,
-                                        tabletLarge: 160,
-                                        tabletExtraLarge: 200,
-                                        desktopLarge: 250,
                                       ),
-                                      width: SizeHelper.of(context).help(
-                                        mobileSmall: 150,
-                                        mobileNormal: 220,
-                                        mobileLarge: 240,
-                                        mobileExtraLarge: 300,
-                                        tabletNormal: 450,
-                                        tabletLarge: 500,
-                                        tabletExtraLarge: 600,
-                                        desktopLarge: 700,
+                                      SizedBox(
+                                        height: SizeHelper.of(context).help(
+                                          mobileSmall: 15,
+                                          mobileNormal: 17,
+                                          mobileLarge: 19,
+                                          tabletNormal: 21,
+                                          tabletExtraLarge: 23,
+                                          desktopLarge: 25,
+                                        ),
                                       ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          color: Colors
-                                              .white /*RandomColorModel().getColor().withOpacity(0.5)*/),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed(Routes.BLOG);
-                                        },
-                                        child: Row(
-                                          //crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: SizeHelper.of(context).help(
+                                            mobileSmall: 6,
+                                            mobileNormal: 8,
+                                            mobileLarge: 10,
+                                            tabletNormal: 12,
+                                            tabletExtraLarge: 14,
+                                            desktopLarge: 16,
+                                          ),
+                                          horizontal:
+                                              SizeHelper.of(context).help(
+                                            mobileSmall: 6,
+                                            mobileNormal: 8,
+                                            mobileLarge: 10,
+                                            tabletNormal: 12,
+                                            tabletExtraLarge: 14,
+                                            desktopLarge: 16,
+                                          ),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Flexible(
-                                                 flex: 2,
+                                            GestureDetector(
+                                              onTap: () {
 
-                                                child: Image.asset(
-                                                  'assets/images/RectangleDemo.png',
-                                                  fit: BoxFit.fitHeight,scale: SizeHelper.of(context).help(
-                                                  mobileSmall: .5,
-                                                  mobileNormal: .4,
-                                                  mobileLarge: .3,
-                                                  tabletNormal: .2,
-                                                  tabletExtraLarge: .1,
-                                                  desktopLarge: .09,
-                                                ),
-                                                )),
-                                            Flexible(
-                                              flex: 3,
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    (weekSlug == "0")
-                                                        ? Text(
-                                                            Utils.labels!.week +
-                                                                "2",
-                                                            style: TextStyle(
-                                                              fontSize:
-                                                                  SizeHelper.of(
-                                                                          context)
-                                                                      .help(
-                                                                mobileSmall: 15,
-                                                                mobileNormal:
-                                                                    17,
-                                                                mobileLarge: 19,
-                                                                tabletNormal:
-                                                                    21,
-                                                                tabletExtraLarge:
-                                                                    23,
-                                                                desktopLarge:
-                                                                    25,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Text(
-                                                            snapshot2
-                                                                .data!.name,
-                                                            style: TextStyle(
-                                                              fontSize:
-                                                                  SizeHelper.of(
-                                                                          context)
-                                                                      .help(
-                                                                mobileSmall: 15,
-                                                                mobileNormal:
-                                                                    17,
-                                                                mobileLarge: 19,
-                                                                tabletNormal:
-                                                                    21,
-                                                                tabletExtraLarge:
-                                                                    23,
-                                                                desktopLarge:
-                                                                    25,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                    Divider(
-                                                      height: 5,
-                                                      color: Colors.red,
-                                                    ),
-                                                    (weekSlug == "0")
-                                                        ? Text(
-                                                            "يتمكن 400 حيوان منوي فقط من إتمام الرحلة الشاقة والتي تستمر عشر ساعات للوصول إلى البويضة، بينما حيوان منوي واحد فقط الذي يتمكن من اختراق الغشاء الخارجي للبويضة. يكون طفلك في هذا الوقت عبارة عن كرة صغيرة من الخلايا والتي اتفق العلماء على تسميتها بالكيس الأريميّ",
-                                                            style: TextStyle(
-                                                              fontSize:
-                                                                  SizeHelper.of(
-                                                                          context)
-                                                                      .help(
-                                                                mobileSmall: 10,
-                                                                mobileNormal:
-                                                                    12,
-                                                                mobileLarge: 14,
-                                                                tabletNormal:
-                                                                    16,
-                                                                tabletExtraLarge:
-                                                                    18,
-                                                                desktopLarge:
-                                                                    20,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : Text(
-                                                            snapshot2.data!
-                                                                .description,
-                                                            style: GoogleFonts
-                                                                .roboto(
-                                                                    fontSize:
-                                                                        SizeHelper.of(context)
-                                                                            .help(
-                                                                      mobileSmall:
-                                                                          10,
-                                                                      mobileNormal:
-                                                                          12,
-                                                                      mobileLarge:
-                                                                          14,
-                                                                      tabletNormal:
-                                                                          16,
-                                                                      tabletExtraLarge:
-                                                                          18,
-                                                                      desktopLarge:
-                                                                          20,
-                                                                    ),
-                                                                    color:
-                                                                        Black_textColor),
-                                                          ),
-                                                  ],
+                                              },
+                                              child: Text(
+                                                Utils.labels!.see_all,
+                                                style: GoogleFonts.roboto(
+                                                  fontSize:
+                                                      SizeHelper.of(context)
+                                                          .help(
+                                                    mobileSmall: 10,
+                                                    mobileNormal: 12,
+                                                    mobileLarge: 14,
+                                                    tabletNormal: 16,
+                                                    tabletExtraLarge: 18,
+                                                    desktopLarge: 20,
+                                                  ),
+                                                  fontStyle: FontStyle.normal,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: primary_text_color,
                                                 ),
                                               ),
                                             ),
-                                            //           Flexible(
-                                            //             flex: 1,
-                                            //             child: Container(
-                                            //               // padding: EdgeInsets.only(right: 10),
-                                            //               width: 30,
-                                            //               height: 30,
-                                            //
-                                            //               decoration: BoxDecoration(
-                                            //                 borderRadius:
-                                            //                     BorderRadius.circular(
-                                            //                         25.0),
-                                            //                 gradient: LinearGradient(
-                                            //                     /* begin: FractionalOffset.topCenter,
-                                            // end: FractionalOffset.bottomCenter,*/
-                                            //                     colors: [
-                                            //                       CustomButton_Color,
-                                            //                       CustomButton_Second_Color
-                                            //                     ]),
-                                            //
-                                            //                 // gradient: colorsConstants.gradient1
-                                            //               ),
-                                            //               child: Icon(
-                                            //                 Icons.arrow_forward_outlined,
-                                            //                 color: Colors.white,
-                                            //               ),
-                                            //             ),
-                                            //           )
+                                            Container(
+                                              height:
+                                                  SizeHelper.of(context).help(
+                                                mobileSmall: 100,
+                                                mobileNormal: 120,
+                                                mobileLarge: 140,
+                                                mobileExtraLarge: 180,
+                                                tabletNormal: 240,
+                                                tabletLarge: 300,
+                                                tabletExtraLarge: 400,
+                                                desktopLarge: 500,
+                                              ),
+                                              child: ListView.builder(
+                                                itemCount: snapshot2
+                                                    .data!.articles!.length,
+                                                itemBuilder: (
+                                                  context,
+                                                  index,
+                                                ) {
+                                                  return PregnancyArticleItem(
+                                                    data: snapshot2
+                                                        .data!.articles![index],
+                                                  );
+                                                },
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              );
+                                    ],
+                                  )
+                                : Container();
                       });
                 else
                   return Container();

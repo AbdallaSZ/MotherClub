@@ -162,12 +162,21 @@ class Networkcall {
   //todo API Call For weeksdetails
 
   Future<dynamic> getWeeksDetailAPICall(String slug) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var weekSlug = preferences.getString('slug').toString();
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // var weekSlug = preferences.getString('slug').toString();
     var response = await http
         .get(
 
-      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=$slug'),
+      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=2-week&page=1'),
+      headers: {
+        // 'Content-Type': 'application/json',
+        // 'Host': '<calculated when request is sent>',
+        //  'User-Agent': 'PostmanRuntime/7.28.4',
+        //  'Accept': '*/*',
+        // 'Accept-Encoding': 'gzip, deflate, br',
+        //  'Connection': 'keep-alive',
+
+      }
     )
         .catchError(
       (error) {
