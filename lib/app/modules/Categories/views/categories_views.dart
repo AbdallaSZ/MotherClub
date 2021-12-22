@@ -31,29 +31,32 @@ class CategoriesView extends GetView<CategoriesController> {
               if (snapshot.hasData) {
                 List<CategoriesModel>? data = snapshot.data;
                 return Center(
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height: SizeHelper.of(context).help(
-                            mobileSmall: 0,
-                            mobileNormal: 0,
-                            mobileLarge: 0,
-                            mobileExtraLarge: 0,
-                            tabletSmall: 0,
-                            tabletNormal: 14,
-                            tabletLarge: 22,
-                            tabletExtraLarge: 24,
-                            desktopLarge: 25,
-                          ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: SizeHelper.of(context).help(
+                              mobileSmall: 0,
+                              mobileNormal: 0,
+                              mobileLarge: 0,
+                              mobileExtraLarge: 0,
+                              tabletSmall: 0,
+                              tabletNormal: 14,
+                              tabletLarge: 22,
+                              tabletExtraLarge: 24,
+                              desktopLarge: 25,
+                            ),
 
-                        );
-                      },
-                    shrinkWrap: true,
-                      itemCount: data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CategoriresCard(deviceHeight, deviceWidth,
-                            context, data[index], routes[index]);
-                      }),
+                          );
+                        },
+                      shrinkWrap: true,
+                        itemCount: data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CategoriresCard(deviceHeight, deviceWidth,
+                              context, data[index], routes[index]);
+                        }),
+                  ),
                 );
               } else {
                 return ListView.builder(
