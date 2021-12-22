@@ -390,97 +390,97 @@ class ForumView extends GetView<ForumController> {
                   }),
             ),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Container(
-                height: SizeHelper.of(context).help(
-                  mobileSmall: 20,
-                  mobileNormal: 25,
-                  mobileLarge: 30,
-                  tabletNormal: 40,
-                  tabletExtraLarge: 45,
-                  desktopLarge: 50,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.chat,
-                      color: Black_textColor,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0xffe0e0e0),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 0), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: TextFormField(
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(15),
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              hintText: Utils.labels!.write_your_experience,
-                              hintStyle: GoogleFonts.roboto(
-                                  fontSize: SizeHelper.of(context).help(
-                                    mobileSmall: 10,
-                                    mobileNormal: 12,
-                                    mobileLarge: 13,
-                                    tabletNormal: 15,
-                                    tabletExtraLarge: 16,
-                                    desktopLarge: 17,
-                                  ),
-                                  letterSpacing: 0.25,
-                                  fontWeight: FontWeight.w400,
-                                  color: Black_textColor),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ShaderMask(
-                              blendMode: BlendMode.srcIn,
-                              shaderCallback: (Rect bounds) {
-                                return ui.Gradient.linear(
-                                  Offset(14.0, 24.0),
-                                  Offset(24.0, 0.0),
-                                  [
-                                    CustomButton_Color,
-                                    CustomButton_Second_Color
-                                  ],
-                                );
-                              },
-                              child: Icon(
-                                Icons.send,
-                                color: Black_textColor,
-                              )),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            //   child: Container(
+            //     height: SizeHelper.of(context).help(
+            //       mobileSmall: 20,
+            //       mobileNormal: 25,
+            //       mobileLarge: 30,
+            //       tabletNormal: 40,
+            //       tabletExtraLarge: 45,
+            //       desktopLarge: 50,
+            //     ),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Icon(
+            //           Icons.chat,
+            //           color: Black_textColor,
+            //         ),
+            //         Expanded(
+            //           child: Padding(
+            //             padding: const EdgeInsets.symmetric(horizontal: 10),
+            //             child: Container(
+            //               padding: EdgeInsets.symmetric(horizontal: 20),
+            //               decoration: BoxDecoration(
+            //                 color: Colors.white,
+            //                 borderRadius: BorderRadius.all(Radius.circular(5)),
+            //                 boxShadow: [
+            //                   BoxShadow(
+            //                     color: Color(0xffe0e0e0),
+            //                     spreadRadius: 1,
+            //                     blurRadius: 5,
+            //                     offset:
+            //                         Offset(0, 0), // changes position of shadow
+            //                   ),
+            //                 ],
+            //               ),
+            //               child: TextFormField(
+            //                 textAlign: TextAlign.center,
+            //                 decoration: InputDecoration(
+            //                   contentPadding: EdgeInsets.all(15),
+            //                   border: InputBorder.none,
+            //                   focusedBorder: InputBorder.none,
+            //                   enabledBorder: InputBorder.none,
+            //                   errorBorder: InputBorder.none,
+            //                   disabledBorder: InputBorder.none,
+            //                   hintText: Utils.labels!.write_your_experience,
+            //                   hintStyle: GoogleFonts.roboto(
+            //                       fontSize: SizeHelper.of(context).help(
+            //                         mobileSmall: 10,
+            //                         mobileNormal: 12,
+            //                         mobileLarge: 13,
+            //                         tabletNormal: 15,
+            //                         tabletExtraLarge: 16,
+            //                         desktopLarge: 17,
+            //                       ),
+            //                       letterSpacing: 0.25,
+            //                       fontWeight: FontWeight.w400,
+            //                       color: Black_textColor),
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.only(right: 10.0),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               ShaderMask(
+            //                   blendMode: BlendMode.srcIn,
+            //                   shaderCallback: (Rect bounds) {
+            //                     return ui.Gradient.linear(
+            //                       Offset(14.0, 24.0),
+            //                       Offset(24.0, 0.0),
+            //                       [
+            //                         CustomButton_Color,
+            //                         CustomButton_Second_Color
+            //                       ],
+            //                     );
+            //                   },
+            //                   child: Icon(
+            //                     Icons.send,
+            //                     color: Black_textColor,
+            //                   )),
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

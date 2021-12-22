@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/pregnancy_data_model.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
+import 'package:motherclub/app/modules/YourPregnancy/Views/all_pregnancy_articles.dart';
 import 'package:motherclub/app/modules/YourPregnancy/Views/pregnancy_article_item.dart';
 import 'package:motherclub/app/modules/article_part/article_content.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
@@ -23,7 +24,7 @@ class YourPregnancyView extends StatefulWidget {
 
 class _YourPregnancyViewState extends State<YourPregnancyView> {
   int tappedIndex = 0;
-  late String weekSlug = "2-week";
+
   BehaviorSubject<String> _rxSlug = BehaviorSubject();
   BehaviorSubject<int> _rxIndex = BehaviorSubject();
   VideoPlayerController controller = VideoPlayerController.network(
@@ -58,11 +59,11 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-
-    Future<void> getWeekSlug() async {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('slug', weekSlug);
-    }
+    //
+    // Future<void> getWeekSlug() nc {
+    //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   prefs.setString('slug', weekSlug);
+    // }
 
     return Scaffold(
       body: CustomScrollView(slivers: <Widget>[
@@ -247,7 +248,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
               builder: (context, snapshot) {
                 if (snapshot.hasData)
                   return FutureBuilder<PregnancyDataModel>(
-                      future: Utils.bLoC.weekDetails(snapshot.data!),
+                      future: Utils.bLoC.weekDetails(snapshot.data!,1),
                       builder: (context, snapshot2) {
                         return snapshot2.connectionState ==
                                 ConnectionState.waiting
@@ -316,26 +317,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                                   CrossAxisAlignment.start,
                                               // mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                (weekSlug == "0")
-                                                    ? Text(
-                                                        Utils.labels!.week +
-                                                            "2",
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              SizeHelper.of(
-                                                                      context)
-                                                                  .help(
-                                                            mobileSmall: 15,
-                                                            mobileNormal: 17,
-                                                            mobileLarge: 19,
-                                                            tabletNormal: 21,
-                                                            tabletExtraLarge:
-                                                                23,
-                                                            desktopLarge: 25,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text(
+                                               Text(
                                                         snapshot2.data!.name!,
                                                         style: TextStyle(
                                                           fontSize:
@@ -356,25 +338,7 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                                   height: 5,
                                                   color: Colors.red,
                                                 ),
-                                                (weekSlug == "0")
-                                                    ? Text(
-                                                        "يتمكن 400 حيوان منوي فقط من إتمام الرحلة الشاقة والتي تستمر عشر ساعات للوصول إلى البويضة، بينما حيوان منوي واحد فقط الذي يتمكن من اختراق الغشاء الخارجي للبويضة. يكون طفلك في هذا الوقت عبارة عن كرة صغيرة من الخلايا والتي اتفق العلماء على تسميتها بالكيس الأريميّ",
-                                                        style: TextStyle(
-                                                          fontSize:
-                                                              SizeHelper.of(
-                                                                      context)
-                                                                  .help(
-                                                            mobileSmall: 10,
-                                                            mobileNormal: 12,
-                                                            mobileLarge: 14,
-                                                            tabletNormal: 16,
-                                                            tabletExtraLarge:
-                                                                18,
-                                                            desktopLarge: 20,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text(
+                                             Text(
                                                         snapshot2
                                                             .data!.description!,
                                                         style:
@@ -436,7 +400,10 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                           children: [
                                             GestureDetector(
                                               onTap: () {
-
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(builder: (c) {
+                                                      return AllPregnancyArticles(slug: snapshot.data!);
+                                                    }));
                                               },
                                               child: Text(
                                                 Utils.labels!.see_all,

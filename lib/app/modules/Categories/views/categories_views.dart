@@ -25,48 +25,45 @@ class CategoriesView extends GetView<CategoriesController> {
     ];
     return Scaffold(
         backgroundColor: Background_Color,
-        body: Container(
-          padding: EdgeInsets.symmetric(
-              vertical: deviceHeight / 75, horizontal: deviceWidth / 40),
-          height: deviceHeight,
-          width: deviceWidth,
-          child: FutureBuilder<List<CategoriesModel>>(
-              future: Utils.bLoC.categoresList(context),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<CategoriesModel>? data = snapshot.data;
-                  return Center(
-                    child: ListView.separated(
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: SizeHelper.of(context).help(
-                              mobileSmall: 0,
-                              mobileNormal: 0,
-                              mobileLarge: 0,
-                              tabletNormal: 35,
-                              tabletExtraLarge: 40,
-                              desktopLarge: 50,
-                            ),
+        body: FutureBuilder<List<CategoriesModel>>(
+            future: Utils.bLoC.categoresList(context),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<CategoriesModel>? data = snapshot.data;
+                return Center(
+                  child: ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: SizeHelper.of(context).help(
+                            mobileSmall: 0,
+                            mobileNormal: 0,
+                            mobileLarge: 0,
+                            mobileExtraLarge: 0,
+                            tabletSmall: 0,
+                            tabletNormal: 14,
+                            tabletLarge: 22,
+                            tabletExtraLarge: 24,
+                            desktopLarge: 25,
+                          ),
 
-                          );
-                        },
-                      shrinkWrap: true,
-                        itemCount: data!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CategoriresCard(deviceHeight, deviceWidth,
-                              context, data[index], routes[index]);
-                        }),
-                  );
-                } else {
-                  return ListView.builder(
-                      itemCount: 10,
+                        );
+                      },
+                    shrinkWrap: true,
+                      itemCount: data!.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                            child: FurmShimmer(
-                                deviceHeight, deviceWidth, context));
-                      });
-                }
-              }),
-        ));
+                        return CategoriresCard(deviceHeight, deviceWidth,
+                            context, data[index], routes[index]);
+                      }),
+                );
+              } else {
+                return ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                          child: FurmShimmer(
+                              deviceHeight, deviceWidth, context));
+                    });
+              }
+            }));
   }
 }

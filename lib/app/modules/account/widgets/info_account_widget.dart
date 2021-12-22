@@ -82,7 +82,7 @@ Widget InfoAccountWidget() {
                               ),
                               SizedBox(height: 3),
                               Text(
-                                'Age : ${snapshot.data!.babyAge}',
+                                '${Utils.labels!.age} : ${snapshot.data!.babyAge}',
                                 style: GoogleFonts.roboto(
                                     fontSize: SizeHelper.of(context).help(
                                       mobileSmall: 6,
@@ -104,8 +104,28 @@ Widget InfoAccountWidget() {
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      height: 59,
-                      width: 48,
+                      height: SizeHelper.of(context).help(
+                        mobileSmall: 30,
+                        mobileNormal:40,
+                        mobileLarge: 40,
+                        mobileExtraLarge: 45,
+                        tabletSmall: 50,
+                        tabletNormal: 50,
+                        tabletLarge: 60,
+                        tabletExtraLarge: 70,
+                        desktopLarge: 70,
+                      ),
+                      width:SizeHelper.of(context).help(
+                        mobileSmall: 30,
+                        mobileNormal:40,
+                        mobileLarge: 40,
+                        mobileExtraLarge: 45,
+                        tabletSmall: 50,
+                        tabletNormal: 50,
+                        tabletLarge: 60,
+                        tabletExtraLarge: 70,
+                        desktopLarge: 70,
+                      ),
                       decoration: BoxDecoration(
                           border: Border.all(color: white_color, width: 1),
                           borderRadius: BorderRadius.circular(10)),
@@ -129,7 +149,7 @@ Widget InfoAccountWidget() {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "Week",
+                            Utils.labels!.week,
                             style: GoogleFonts.roboto(
                                 fontSize: SizeHelper.of(context).help(
                                   mobileSmall: 6,
@@ -221,7 +241,7 @@ Widget InfoAccountWidget() {
                               ),
                               SizedBox(height: 3),
                               Text(
-                                'Age : ...',
+                                '${Utils.labels!.age} : ...',
                                 style: GoogleFonts.roboto(
                                     fontSize: SizeHelper.of(context).help(
                                       mobileSmall: 6,
@@ -243,8 +263,28 @@ Widget InfoAccountWidget() {
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                      height: 59,
-                      width: 48,
+                      height: SizeHelper.of(context).help(
+                        mobileSmall: 30,
+                        mobileNormal:40,
+                        mobileLarge: 40,
+                        mobileExtraLarge: 45,
+                        tabletSmall: 50,
+                        tabletNormal: 50,
+                        tabletLarge: 60,
+                        tabletExtraLarge: 70,
+                        desktopLarge: 70,
+                      ),
+                      width:SizeHelper.of(context).help(
+                        mobileSmall: 30,
+                        mobileNormal:40,
+                        mobileLarge: 40,
+                        mobileExtraLarge: 45,
+                        tabletSmall: 50,
+                        tabletNormal: 50,
+                        tabletLarge: 60,
+                        tabletExtraLarge: 70,
+                        desktopLarge: 70,
+                      ),
                       decoration: BoxDecoration(
                           border: Border.all(color: white_color, width: 1),
                           borderRadius: BorderRadius.circular(10)),

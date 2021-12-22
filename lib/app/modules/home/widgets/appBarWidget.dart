@@ -23,8 +23,6 @@ Widget homeAppBar(
   double width,
   BuildContext context,
 ) {
-  double deviceHeight = MediaQuery.of(context).size.height;
-  double deviceWidth = MediaQuery.of(context).size.width;
   List<String> routes = [
     Routes.YOURPREGNANCY,
     Routes.YOURBABY,
@@ -84,57 +82,64 @@ Widget homeAppBar(
                             Get.toNamed(routes[index]);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(8),
-                            child: Container(
-                                child: Column(children: [
-                              Container(
-                                height: SizeHelper.of(context).help(
-                                  mobileSmall: 60,
-                                  mobileNormal: 65,
-                                  mobileLarge: 70,
-                                  tabletNormal: 75,
-                                  tabletExtraLarge: 80,
-                                  desktopLarge: 85,
-                                ),
-                                width: SizeHelper.of(context).help(
-                                  mobileSmall: 60,
-                                  mobileNormal: 65,
-                                  mobileLarge: 70,
-                                  tabletNormal: 75,
-                                  tabletExtraLarge: 80,
-                                  desktopLarge: 85,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: RandomColorModel()
-                                      .getColor()
-                                      .withOpacity(0.3),
-                                ),
-                                child: Image.network(data[index].image),
+                              child: Column(children: [
+                            Container(
+                              height: SizeHelper.of(context).help(
+                                mobileSmall: 60,
+                                mobileNormal: 65,
+                                mobileLarge: 70,
+                                tabletNormal: 75,
+                                tabletExtraLarge: 80,
+                                desktopLarge: 85,
                               ),
-                              SizedBox(height: 3),
-                              Text(
-                                '${data[index].title}',
-                                style: GoogleFonts.roboto(
-                                  fontSize: 13,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w500,
-                                  color: Black_textColor,
-                                ),
-                                textAlign: TextAlign.center,
+                              width: SizeHelper.of(context).help(
+                                mobileSmall: 60,
+                                mobileNormal: 65,
+                                mobileLarge: 70,
+                                tabletNormal: 75,
+                                tabletExtraLarge: 80,
+                                desktopLarge: 85,
                               ),
-                            ])),
-                          ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: RandomColorModel()
+                                    .getColor()
+                                    .withOpacity(0.3),
+                              ),
+                              child: Image.network(data[index].image),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              '${data[index].title}',
+                              style: GoogleFonts.roboto(
+                                fontSize: SizeHelper.of(context).help(
+                                  mobileSmall: 7,
+                                  mobileNormal: 9,
+                                  mobileLarge: 10,
+                                  tabletNormal: 12,
+                                  tabletExtraLarge: 14,
+                                  desktopLarge: 16,
+                                ),
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w500,
+                                color: Black_textColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ])),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           width: SizeHelper.of(context).help(
-                            mobileSmall: 0,
-                            mobileNormal: 0,
-                            mobileLarge: 0,
-                            tabletNormal: 40,
-                            tabletExtraLarge: 60,
+                            mobileSmall: 2,
+                            mobileNormal: 2,
+                            mobileLarge: 2,
+                            mobileExtraLarge: 5,
+                            tabletSmall: 5,
+                            tabletNormal: 10,
+                            tabletLarge: 30,
+                            tabletExtraLarge: 70,
                             desktopLarge: 80,
                           ),
                         );
@@ -197,7 +202,7 @@ Widget homeAppBar(
           desktopLarge: 50,
         ),
       ),
-      sliver : SliverToBoxAdapter(
+      sliver: SliverToBoxAdapter(
         child: SizedBox(
           height: SizeHelper.of(context).help(
             mobileSmall: 180,

@@ -29,7 +29,9 @@ class BLoC {
       productsList.add(prodModel);
     });
     return productsList;
-  }  Future<List<ProductDetailsModel>> search( String keyword) async {
+  }
+
+  Future<List<ProductDetailsModel>> search( String keyword) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
 
     var dataFromResponse = await Utils.networkcall.searchProducts(keyword);
@@ -85,8 +87,8 @@ class BLoC {
     return weeksLst;
   }
 
-  Future<PregnancyDataModel> weekDetails(String slug) async {
-    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(slug);
+  Future<PregnancyDataModel> weekDetails(String slug,int page) async {
+    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(slug,page);
     PregnancyDataModel weeksDetailModel = PregnancyDataModel.fromMap(weekDetailResponse[0]);
     return weeksDetailModel;
   }
@@ -145,11 +147,7 @@ class BLoC {
 
     var weekResponse = await Utils.networkcall.getMonthAPICall();
     weekResponse.forEach((month) {
-      MonthsModel monthsModel = new MonthsModel(
-          Id: month['id'].toString(),
-          name: month['name'],
-          slug: month['slug'],
-          count: month['count'].toString());
+      MonthsModel monthsModel = MonthsModel.fromMap(month);
       monthsLst.add(monthsModel);
     });
 

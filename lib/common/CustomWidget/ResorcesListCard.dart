@@ -36,7 +36,7 @@ Widget ResorcesListCard(Post post, context) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-              flex: 3,
+              flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Image.network(

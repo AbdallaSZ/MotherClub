@@ -9,9 +9,6 @@ class Networkcall {
         .get(
           Uri.parse(
               'https://mothersclub.me/wp-json/wc/v3/products?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e&page=$page&per_page=$perPage'),
-          /*headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }*/
         )
         .catchError(
           (error) {},
@@ -77,12 +74,12 @@ class Networkcall {
   }
 
   Future<dynamic> getBabyAPICall(String slug) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var monthSlug = preferences.getString('monthSlug') == null
-        ? '2-month'
-        : preferences.getString('monthSlug');
+    // SharedPreferences preferences = await SharedPreferences.getInstance();
+    // var monthSlug = preferences.getString('monthSlug') == null
+    //     ? '2-month'
+    //     : preferences.getString('monthSlug');
     var response = await http
-        .get(Uri.parse('https://mothersclub.me/months/details?slug=$monthSlug'))
+        .get(Uri.parse('https://mothersclub.me/months/details?slug=$slug'))
         .catchError(
       (error) {
         return error;
@@ -174,13 +171,13 @@ class Networkcall {
 
   //todo API Call For weeksdetails
 
-  Future<dynamic> getWeeksDetailAPICall(String slug) async {
+  Future<dynamic> getWeeksDetailAPICall(String slug ,int page) async {
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // var weekSlug = preferences.getString('slug').toString();
     var response = await http
         .get(
 
-      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=2-week&page=1'),
+      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=2-week&page=$page'),
       headers: {
         // 'Content-Type': 'application/json',
         // 'Host': '<calculated when request is sent>',

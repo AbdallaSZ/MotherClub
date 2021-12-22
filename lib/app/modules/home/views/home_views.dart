@@ -12,7 +12,6 @@ class HomeView extends GetResponsiveView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print('hhhi${Utils.cookie}');
     double deviceHeight = MediaQuery
         .of(context)
         .size
