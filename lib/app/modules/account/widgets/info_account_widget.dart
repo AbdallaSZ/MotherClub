@@ -82,7 +82,7 @@ Widget InfoAccountWidget() {
                               ),
                               SizedBox(height: 3),
                               Text(
-                                '${Utils.labels!.age} : ${snapshot.data!.babyAge}',
+                                '${Utils.labels!.age} : ${snapshot.data!.babyAge ?? ""}',
                                 style: GoogleFonts.roboto(
                                     fontSize: SizeHelper.of(context).help(
                                       mobileSmall: 6,
@@ -133,7 +133,7 @@ Widget InfoAccountWidget() {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "${snapshot.data!.weeksUser}",
+                            "${snapshot.data!.weeksUser ?? ""}",
                             style: GoogleFonts.roboto(
                                 fontSize: SizeHelper.of(context).help(
                                   mobileSmall: 6,

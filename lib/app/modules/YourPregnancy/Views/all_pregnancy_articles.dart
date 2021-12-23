@@ -18,7 +18,7 @@ class AllPregnancyArticles extends StatefulWidget {
 }
 
 class _AllPregnancyArticlesScreenState extends State<AllPregnancyArticles> {
-  static int _pageSize = 20;
+  static int _pageSize = 10;
   final PagingController<int, Article> _pagingController =
       PagingController(firstPageKey: 1);
 

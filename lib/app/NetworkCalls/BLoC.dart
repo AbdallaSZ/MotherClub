@@ -92,6 +92,7 @@ class BLoC {
     PregnancyDataModel weeksDetailModel = PregnancyDataModel.fromMap(weekDetailResponse[0]);
     return weeksDetailModel;
   }
+
   Future<List<FormsModel>> forumsList() async {
     List<FormsModel> formsLst = <FormsModel>[];
     var fromResponse = await Utils.networkcall.getForumAPICall();

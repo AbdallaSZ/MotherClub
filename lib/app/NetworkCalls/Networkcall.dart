@@ -177,7 +177,7 @@ class Networkcall {
     var response = await http
         .get(
 
-      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=2-week&page=$page'),
+      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=$slug&page=$page'),
       headers: {
         // 'Content-Type': 'application/json',
         // 'Host': '<calculated when request is sent>',

@@ -63,7 +63,7 @@ Widget InfoWidget() {
                         ),
                         SizedBox(height: 2),
                         Text(
-                          '${Utils.labels!.you_are_pregnant_for} ${snapshot.data!.babyAge}',
+                          '${Utils.labels!.you_are_pregnant_for} ${snapshot.data!.babyAge ?? ""}',
                           style: GoogleFonts.roboto(
                               fontSize: SizeHelper.of(context).help(
                                 mobileSmall: 6,
@@ -121,7 +121,7 @@ Widget InfoWidget() {
                             child: Column(
                               children: [
                                 Text(
-                                  "${snapshot.data!.weeksUser}",
+                                  "${snapshot.data!.weeksUser ?? ""}",
                                   style: GoogleFonts.roboto(
                                       fontSize: SizeHelper.of(context).help(
                                         mobileSmall: 6,
