@@ -20,10 +20,10 @@ import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductDetailsModel>> productList(BuildContext context, {int page = 1 , int perPage= 10}) async {
+  Future<List<ProductDetailsModel>> productList( {int page = 1 , int perPage= 10 , bool onSale = false , String min = '0' , String max = '10000000'}) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
 
-    var dataFromResponse = await Utils.networkcall.getProductsAPICall(context,page,perPage);
+    var dataFromResponse = await Utils.networkcall.getProductsAPICall(page,perPage,onSale,min,max);
     await dataFromResponse.forEach((newProduct) {
       ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
       productsList.add(prodModel);

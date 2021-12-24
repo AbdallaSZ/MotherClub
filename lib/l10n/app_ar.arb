@@ -154,5 +154,9 @@
   "item_added_to_the_cart_again": "تم اضافة عنصر الى السلة مرة اخرى",
   "you_have_to_agree_the_terms": "لقد وافقت على الاتفاقية",
   "feedback_sent": "تم إرسال الملاحظات بنجاح!",
-  "pregnancy_tools_resources": "أدوات وموارد الحمل"
+  "pregnancy_tools_resources": "أدوات وموارد الحمل",
+  "search": "بحث",
+  "price": "سعر",
+  "filters": "تصنيف",
+  "on_sale": "في التخفيضات"
 }
