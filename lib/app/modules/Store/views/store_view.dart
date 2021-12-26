@@ -201,6 +201,7 @@ class _StoreViewScreenState extends State<StoreView> {
                   ),
                   GestureDetector(
                     onTap: () {
+
                       Color getColor(Set<MaterialState> states) {
                         const Set<MaterialState> interactiveStates =
                             <MaterialState>{
@@ -217,8 +218,6 @@ class _StoreViewScreenState extends State<StoreView> {
                       showDialog(
                           context: context,
                           builder: (context) {
-
-
                             return AlertDialog(
                               title: Text(
                                 Utils.labels!.filters,
@@ -346,6 +345,7 @@ class _StoreViewScreenState extends State<StoreView> {
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
+                                    page = 1;
                                     isFiltering = true;
                                     Navigator.pop(context);
                                     _fetchPage(
@@ -473,13 +473,13 @@ class _StoreViewScreenState extends State<StoreView> {
       else {
         if (pageKey == 1) _pagingController.itemList = [];
         newItems = await Utils.bLoC.productList(
-            page: page,
-            perPage: _pageSize,
-            onSale: onSale!,
-            max: maxPrice!,
-            min: minPrice!);
+          page: page,
+          perPage: _pageSize,
+          onSale: onSale!,
+          max: maxPrice!,
+          min: minPrice!,
+        );
       }
-
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems);

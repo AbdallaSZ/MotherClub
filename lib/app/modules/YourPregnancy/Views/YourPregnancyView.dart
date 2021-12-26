@@ -89,20 +89,33 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    Utils.labels!.your_Pregnancy,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: SizeHelper.of(context).help(
-                        mobileSmall: 10,
-                        mobileNormal: 12,
-                        mobileLarge: 14,
-                        tabletNormal: 16,
-                        tabletExtraLarge: 18,
-                        desktopLarge: 20,
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: (){Navigator.pop(context);},
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
+                      Expanded(
+                        child: Text(
+                          Utils.labels!.your_Pregnancy,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 10,
+                              mobileNormal: 12,
+                              mobileLarge: 14,
+                              tabletNormal: 16,
+                              tabletExtraLarge: 18,
+                              desktopLarge: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Divider(
                     height: 13,

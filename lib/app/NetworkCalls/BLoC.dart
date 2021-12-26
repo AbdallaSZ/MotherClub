@@ -33,7 +33,6 @@ class BLoC {
 
   Future<List<ProductDetailsModel>> search( String keyword) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
-
     var dataFromResponse = await Utils.networkcall.searchProducts(keyword);
     await dataFromResponse.forEach((newProduct) {
       ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
