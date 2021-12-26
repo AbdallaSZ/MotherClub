@@ -29,16 +29,27 @@ class _StoreViewScreenState extends State<StoreView> {
   var _searchview = new TextEditingController();
   SearchBloc? searchBloc;
   static int _pageSize = 10;
-
-   PagingController<int, ProductDetailsModel> _pagingController =
+  bool isFiltering = false;
+  PagingController<int, ProductDetailsModel> _pagingController =
       PagingController(firstPageKey: 1);
+  BehaviorSubject<RangeValues>? _rxRangeValues = BehaviorSubject(sync: true);
+  BehaviorSubject<bool>? rxIsChecked = BehaviorSubject(sync: true);
 
   @override
   void initState() {
+    _rxRangeValues!.sink.add(RangeValues(10.0, 80.0));
+    rxIsChecked!.sink.add(false);
     searchBloc = SearchBloc();
     super.initState();
     _pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
+      isFiltering
+          ? _fetchPage(
+              pageKey,
+              onSale: rxIsChecked!.value,
+              minPrice: _rxRangeValues!.value.start.toString(),
+              maxPrice: _rxRangeValues!.value.end.toString(),
+            )
+          : _fetchPage(pageKey);
     });
   }
 
@@ -190,11 +201,6 @@ class _StoreViewScreenState extends State<StoreView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      BehaviorSubject<RangeValues>? _rxRangeValues =
-                          BehaviorSubject(sync: true);
-                      BehaviorSubject<bool>? rxIsChecked =
-                          BehaviorSubject(sync: true);
-                      ;
                       Color getColor(Set<MaterialState> states) {
                         const Set<MaterialState> interactiveStates =
                             <MaterialState>{
@@ -211,8 +217,8 @@ class _StoreViewScreenState extends State<StoreView> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            _rxRangeValues.sink.add(RangeValues(10.0, 80.0));
-                            rxIsChecked.sink.add(false);
+
+
                             return AlertDialog(
                               title: Text(
                                 Utils.labels!.filters,
@@ -231,7 +237,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   StreamBuilder<RangeValues>(
-                                      stream: _rxRangeValues.stream,
+                                      stream: _rxRangeValues!.stream,
                                       builder: (context, sSnapshot) {
                                         if (sSnapshot.hasData)
                                           return Column(
@@ -242,7 +248,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                                 values: sSnapshot.data!,
                                                 onChanged: (values) {
                                                   // setState(() {
-                                                  _rxRangeValues.sink.add(
+                                                  _rxRangeValues!.sink.add(
                                                       RangeValues(values.start,
                                                           values.end));
                                                   //   });
@@ -318,7 +324,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                       StreamBuilder<bool>(
-                                          stream: rxIsChecked.stream,
+                                          stream: rxIsChecked!.stream,
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData)
                                               return Checkbox(
@@ -327,8 +333,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                                     .resolveWith(getColor),
                                                 value: snapshot.data!,
                                                 onChanged: (bool? value) {
-                                                  rxIsChecked.sink.add(value!);
-
+                                                  rxIsChecked!.sink.add(value!);
                                                 },
                                               );
                                             else
@@ -341,8 +346,16 @@ class _StoreViewScreenState extends State<StoreView> {
                               actions: <Widget>[
                                 TextButton(
                                   onPressed: () {
+                                    isFiltering = true;
                                     Navigator.pop(context);
-                                    _fetchPage(1,onSale: rxIsChecked.value,minPrice:_rxRangeValues.value.start.toString(), maxPrice: _rxRangeValues.value.end.toString(),);
+                                    _fetchPage(
+                                      1,
+                                      onSale: rxIsChecked!.value,
+                                      minPrice: _rxRangeValues!.value.start
+                                          .toString(),
+                                      maxPrice:
+                                          _rxRangeValues!.value.end.toString(),
+                                    );
                                   },
                                   child: Text(Utils.labels!.search),
                                 )
@@ -458,8 +471,7 @@ class _StoreViewScreenState extends State<StoreView> {
       if (onSale == null && minPrice == null && maxPrice == null)
         newItems = await Utils.bLoC.productList(page: page, perPage: _pageSize);
       else {
-        page = 1;
-        _pagingController.itemList = [];
+        if (pageKey == 1) _pagingController.itemList = [];
         newItems = await Utils.bLoC.productList(
             page: page,
             perPage: _pageSize,
