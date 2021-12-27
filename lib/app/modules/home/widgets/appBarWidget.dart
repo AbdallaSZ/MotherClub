@@ -380,9 +380,7 @@ Widget homeAppBar(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return snapshot.hasData
-                          ? ProductShimer(height, width, context)
-                          : Card(
+                      return Card(
                               // padding: EdgeInsets.all(2),
                               // color: Colors.yellow,
                               child: ProductShimer(height, width, context),

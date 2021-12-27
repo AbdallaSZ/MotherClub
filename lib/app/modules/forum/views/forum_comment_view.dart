@@ -26,7 +26,7 @@ class ForumCommentView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            HeaderWidget(context, ' '),
+            headerWidget(context, ' '),
             Column(
 
               children: [
