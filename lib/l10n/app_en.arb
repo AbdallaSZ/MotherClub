@@ -598,5 +598,21 @@
   "pregnancy_tools_resources": "Pregnancy Tools & Resources",
   "@pregnancy_tools_resources": {
     "description": "The conventional newborn programmer greeting"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "filters": "Filters",
+  "@filters": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "on_sale": "On Sale",
+  "@on_sale": {
+    "description": "The conventional newborn programmer greeting"
   }
 }

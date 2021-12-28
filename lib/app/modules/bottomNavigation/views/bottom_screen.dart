@@ -106,7 +106,7 @@ class _BottomScreenState extends State<BottomScreen> {
           return StreamBuilder<int>(
               stream: rxPages.stream,
               builder: (context, mySnapshot) {
-                return Scaffold(
+                return mySnapshot.hasData ? Scaffold(
                   appBar: CustomAppBar(
                     titleSize: SizeHelper.of(context).help(
                       mobileSmall: 14,
@@ -392,7 +392,7 @@ class _BottomScreenState extends State<BottomScreen> {
                           )),
                     ],
                   ),
-                );
+                ):Scaffold();
               });
         });
   }

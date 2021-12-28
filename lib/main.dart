@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
                   ? state.locale!.languageCode
                   : "ar");
              // print("current language is => "+state.locale!.languageCode);
+       //      print("current language is => "+state.locale!.languageCode);
 
             }
             return GetMaterialApp(
