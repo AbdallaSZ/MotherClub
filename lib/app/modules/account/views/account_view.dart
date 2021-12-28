@@ -505,7 +505,10 @@ class _AccountViewState extends State<AccountView> {
     ));
   }
 
-  void logout() {
+  void logout() async{
+    if(Utils.method == SignInMethod.google)
+    await Utils.googleSignIn.signOut();
+
     NetworkService.logout("wp-json/cocart/v2/logout");
   }
 }

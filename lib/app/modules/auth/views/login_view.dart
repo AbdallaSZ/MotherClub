@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
+import 'package:motherclub/app/modules/account/SignInModel.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
 import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
@@ -15,6 +18,7 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/CustomLogoWidget.dart';
 import 'package:motherclub/common/CustomWidget/EditTextField.dart';
+import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
 
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
@@ -194,11 +198,11 @@ class LoginView extends GetView<AuthController> {
                              color: Text_color),
                        ),
                      ),*/
-                  /* Divider(
+                   Divider(
                        color: Colors.transparent,
                        height: deviceHeight/27,
-                     ),*/
-                  /*  Row(
+                     ),
+                    Row(
                          children: <Widget>[
                            Expanded(
                                child: Divider(color:Black_textColor ,)
@@ -215,23 +219,23 @@ class LoginView extends GetView<AuthController> {
                                child: Divider(color:Black_textColor ,)
                            ),
                          ]
-                     ),*/
-                  /*Divider(
+                     ),
+                  Divider(
                        color: Colors.transparent,
                        height: deviceHeight/26,
-                     ),*/
-                  /*  Row(
+                     ),
+                    Row(
                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                        children: [
                          InkWell(
                            onTap: (){
-                              signup(context);
+                              signIn(context);
                                     }
                            ,
                              child: SocialButtonWidget('assets/images/Google.png',context,deviceHeight/17,deviceWidth/2.37)),
                          SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37)
                        ],
-                     ),*/
+                     ),
                   Divider(
                     color: Colors.transparent,
                     height: deviceHeight / 30,
@@ -297,24 +301,34 @@ class LoginView extends GetView<AuthController> {
     );
   }
 
-  Future<void> signup(BuildContext context) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+  Future<void> signIn(BuildContext context) async {
+
+
     final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+        await Utils.googleSignIn.signIn();
     if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
+     var response = await Utils.networkcall.googleLogin(Utils.googleSignIn.currentUser!.email);
+      Utils.method= SignInMethod.google;
+      Utils.getImage(int.parse(response["data"]["ID"]));
+     var userData = response['data'];
+     UserModel authUser = UserModel.fromJson(userData);
+     Utils.userPreferences.saveUser(authUser);
+     AuthModel _authData = await Utils.bLoC.authData(Utils.googleSignIn.currentUser!.email, response["data"]["user_pass"]);
+     Utils.userPreferences.saveAuth(_authData);
+      Get.toNamed(Routes.BOTTOM);
+      /*
       final AuthCredential authCredential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken);
+          accessToken: googleSignInAuthentication.accessToken);*/
 
+/*
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
-      print(user!.displayName);
-      if (result != null) {
+      print(user!.displayName);*/
+      /*if (result != null) {
         Get.toNamed(Routes.BOTTOM);
-      } // if result not null we simply call the MaterialpageRoute,
+      } */// if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
   }

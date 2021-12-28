@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/app/NetworkCalls/BLoC.dart';
 import 'package:motherclub/app/NetworkCalls/Networkcall.dart';
@@ -13,7 +14,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum Locality {
   arabic , english ,spanish ,urdu
 }
-
+enum SignInMethod {
+google , facebook , regular
+}
 class Utils
 {
 
@@ -25,6 +28,13 @@ class Utils
   static String name ='';
   static String pass ='';
   static String cookie ='';
+  static SignInMethod method = SignInMethod.regular;
+  static final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   static String userName ='';
   static String payTabsServerKey ='SDJNZDNMBJ-J2MW66NTLR-KBZWWBWBLM';
