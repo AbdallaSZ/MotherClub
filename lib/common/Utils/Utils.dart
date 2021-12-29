@@ -28,11 +28,11 @@ class Utils
   static String name ='';
   static String pass ='';
   static String cookie ='';
+  static var fb ;
   static SignInMethod method = SignInMethod.regular;
   static final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
       'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
 

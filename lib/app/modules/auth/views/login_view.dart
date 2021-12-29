@@ -2,6 +2,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -233,7 +234,11 @@ class LoginView extends GetView<AuthController> {
                                     }
                            ,
                              child: SocialButtonWidget('assets/images/Google.png',context,deviceHeight/17,deviceWidth/2.37)),
-                         SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37)
+                         GestureDetector(
+                             onTap: (){
+                               loginFacebookLogin(context);
+                             },
+                             child: SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37))
                        ],
                      ),
                   Divider(
@@ -331,6 +336,59 @@ class LoginView extends GetView<AuthController> {
       } */// if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
+  }
+  Future<void> loginFacebookLogin(BuildContext context) async {
+  Utils.method = SignInMethod.facebook;
+  Utils.fb = FacebookLogin();
+
+
+// Log in
+    final res = await Utils.fb.logIn(
+        permissions: [
+          FacebookPermission.email,
+    ]);
+
+// Check result status
+    switch (res.status) {
+      case FacebookLoginStatus.success:
+      // Logged in
+
+      // Send access token to server for validation and auth
+        final FacebookAccessToken accessToken = res.accessToken!;
+        print('Access token: ${accessToken.token}');
+
+        // Get profile data
+        final profile = await Utils.fb.getUserProfile();
+        print('Hello, ${profile!.name}! You ID: ${profile.userId}');
+
+        // Get user profile image url
+        final imageUrl = await Utils.fb.getProfileImageUrl(width: 100);
+        print('Your profile image: $imageUrl');
+
+        // Get email (since we request email permission)
+        var email = await Utils.fb.getUserEmail();
+        // But user can decline permission
+        if (email == null)
+         email = profile!.name.toString().trim()+"@gmail.com";
+        var response = await Utils.networkcall.googleLogin(email);
+        Utils.getImage(int.parse(response["data"]["ID"]));
+        var userData = response['data'];
+        UserModel authUser = UserModel.fromJson(userData);
+        Utils.userPreferences.saveUser(authUser);
+        AuthModel _authData = await Utils.bLoC.authData(email, response["data"]["user_pass"]);
+        Utils.userPreferences.saveAuth(_authData);
+        Get.toNamed(Routes.BOTTOM);
+
+        break;
+      case FacebookLoginStatus.cancel:
+      // User cancel log in
+        break;
+      case FacebookLoginStatus.error:
+      // Log in failed
+        print('Error while log in: ${res.error}');
+        break;
+    }
+
   }
 
   String _radioValue = Utils.locality == Locality.english
