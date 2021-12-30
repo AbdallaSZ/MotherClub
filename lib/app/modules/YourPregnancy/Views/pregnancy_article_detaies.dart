@@ -12,28 +12,11 @@ class PregnancyArticleDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      //
-      // CustomAppBar(
-      //   centerTitle: true,
-      //   titleSize: SizeHelper.of(context).help(
-      //     mobileSmall: 10,
-      //     mobileNormal: 12,
-      //     mobileLarge: 14,
-      //     tabletNormal: 16,
-      //     tabletExtraLarge: 18,
-      //     desktopLarge: 20,
-      //   ),
-      //   title: data.title!.rendered,
-      //   withBackButton: true,
-      //   onBackButtonPressed: () {
-      //     Navigator.pop(context);
-      //   },
-      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              headerWidget(context,data.title!.rendered!,),
+              headerWidget(context,'${data.title!.rendered!}',),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 20),

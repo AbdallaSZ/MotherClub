@@ -28,15 +28,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   LanguageBloc? _bloc;
   TextEditingController passwordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
-  GlobalKey<FormState>formKey = GlobalKey();
-  GlobalKey<ScaffoldState>scaffoldKey = GlobalKey();
+  GlobalKey<FormState> formKey = GlobalKey();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   String _radioValue = Utils.locality == Locality.english
       ? "en"
       : Utils.locality == Locality.arabic
-      ? "ar"
-      : Utils.locality == Locality.spanish
-      ? "es"
-      : "ur"; //Initial definition of radio button value
+          ? "ar"
+          : Utils.locality == Locality.spanish
+              ? "es"
+              : "ur"; //Initial definition of radio button value
   String? choice;
 
   void radioButtonChanges(String? value) {
@@ -66,9 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
     Future.delayed(Duration(milliseconds: 500)).then((value) {
       Utils.languageSubject.sink.add(true);
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -83,11 +81,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: CustomAppBar(title: Utils.labels!.settings,
+      appBar: CustomAppBar(
+        title: Utils.labels!.settings,
         withBackButton: true,
         onBackButtonPressed: () {
           Navigator.pop(context);
-        },),
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
         child: Column(
@@ -98,42 +98,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 30,bottom: 30),
+                  padding: const EdgeInsets.only(left: 20, top: 30, bottom: 30),
                   child: GestureDetector(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Stack(
                       children: [
                         StreamBuilder<File>(
-                          stream: imageSubject.stream,
-                          builder: (context, snapshot) {
-                            return Container(
-                              height:150 ,
-                              width:150 ,
-                                child: CircleAvatar(
-                                  foregroundImage:  getImage(snapshot)
-                                  ,
-                              )
-                            );
-                          }
-                        ),
+                            stream: imageSubject.stream,
+                            builder: (context, snapshot) {
+                              return Container(
+                                  height: 150,
+                                  width: 150,
+                                  child: CircleAvatar(
+                                    foregroundImage: getImage(snapshot),
+                                  ));
+                            }),
                         Positioned(
                           bottom: 0,
-                            left:55,
-                            child: GestureDetector(
-                              onTap: (){
-                                openImagePicker();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.black12
+                          left: 55,
+                          child: GestureDetector(
+                            onTap: () {
+                              openImagePicker();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.black12),
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.camera_alt_outlined,
+                                color: Colors.redAccent,
+                              ),
+                            ),
                           ),
-                          alignment: Alignment.center,
-                          child: Icon(Icons.camera_alt_outlined, color: Colors.redAccent,),
                         ),
-                            ))
                       ],
                     ),
                   ),
@@ -164,8 +163,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-
-
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -192,7 +189,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       },
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Expanded(
                                             flex: 6,
@@ -217,7 +214,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       },
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
                                           Expanded(
                                             flex: 6,
@@ -311,62 +308,80 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
+
   String imageText = "";
-  String imageName = "Upload Profile Image" ;
-  File? imageFile ;
+  String imageName = "Upload Profile Image";
+
+  File? imageFile;
+
   BehaviorSubject<File> imageSubject = BehaviorSubject();
-  void openImagePicker() async{
+
+  void openImagePicker() async {
     final ImagePicker _picker = ImagePicker();
     // Pick an image
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     final path = image!.path;
     imageName = image.name;
-    imageFile  = File(path);
+    imageFile = File(path);
     final bytes = await imageFile!.readAsBytes();
     var result = base64Encode(bytes);
     imageText = result;
-    showDialog(context: context, builder: (c){
-      return AlertDialog(
-        title: Text(Utils.labels!.warning),
-        content: Text(Utils.labels!.are_you_sure_to_select_this_image ),
-        actions: [
-          FlatButton(onPressed: (){
-            Navigator.pop(context);
-          }, child: Text(Utils.labels!.no)),
-          FlatButton(onPressed: (){
-            Navigator.pop(context);
-            imageSubject.sink.add(imageFile!);
-            uploadImage();
-          }, child: Text(Utils.labels!.yes, style: TextStyle(color: Colors.greenAccent),)),
-
-        ],
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (c) {
+          return AlertDialog(
+            title: Text(Utils.labels!.warning),
+            content: Text(Utils.labels!.are_you_sure_to_select_this_image),
+            actions: [
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(Utils.labels!.no)),
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    imageSubject.sink.add(imageFile!);
+                    uploadImage();
+                  },
+                  child: Text(
+                    Utils.labels!.yes,
+                    style: TextStyle(color: Colors.greenAccent),
+                  )),
+            ],
+          );
+        });
   }
+
   String base64Encode(List<int> bytes) => base64.encode(bytes);
 
   submit() {
-    if(formKey.currentState!.validate()){
-    Navigator.pop(context);
-    Utils.progressBar.showLoadingIndicator(Utils.labels!.change_password,context);
+    if (formKey.currentState!.validate()) {
+      Navigator.pop(context);
+      Utils.progressBar
+          .showLoadingIndicator(Utils.labels!.change_password, context);
 
-    UserRepo.changePassword(passwordController.text, newPasswordController.text).then((value)
-    {
-      Utils.progressBar.hideOpenDialog(context);
-      if(value["status"]){
-        scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(Utils.labels!.change_password),));
-        passwordController.text= "";
-        newPasswordController.text= "";
-      }else
-        scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(value["msg"]),));
-
-    });
-  }
+      UserRepo.changePassword(
+              passwordController.text, newPasswordController.text)
+          .then((value) {
+        Utils.progressBar.hideOpenDialog(context);
+        if (value["status"]) {
+          scaffoldKey.currentState!.showSnackBar(SnackBar(
+            content: Text(Utils.labels!.change_password),
+          ));
+          passwordController.text = "";
+          newPasswordController.text = "";
+        } else
+          scaffoldKey.currentState!.showSnackBar(SnackBar(
+            content: Text(value["msg"]),
+          ));
+      });
+    }
   }
 
   void showPasswordDialog() {
-    showDialog(context: context,
-
+    showDialog(
+        context: context,
         builder: (e) {
           return Container(
             height: 210,
@@ -378,14 +393,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   key: formKey,
                   child: Column(
                     children: [
-                      myTextFormField(
-                          Utils.labels!.current_password, passwordController, context, validate: passwordValidate),
-                      SizedBox(height: 20,),
-                      myTextFormField(
-                          Utils.labels!.new_password, newPasswordController, context,
-                           validate: passwordValidate),
-                      SizedBox(height: 20,),
-
+                      myTextFormField(Utils.labels!.current_password,
+                          passwordController, context,
+                          validate: passwordValidate),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      myTextFormField(Utils.labels!.new_password,
+                          newPasswordController, context,
+                          validate: passwordValidate),
+                      SizedBox(
+                        height: 20,
+                      ),
                       InkWell(
                           onTap: () {
                             submit();
@@ -396,16 +415,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
-
             ),
           );
-        }
-    );
+        });
   }
 
-  Widget myTextFormField(String Lable,
-      TextEditingController textEditingController, BuildContext context,
-       {String? Function(String? s)? validate,}) {
+  Widget myTextFormField(
+    String Lable,
+    TextEditingController textEditingController,
+    BuildContext context, {
+    String? Function(String? s)? validate,
+  }) {
     return Container(
       height: 60,
       alignment: Alignment.center,
@@ -419,7 +439,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: TextFormField(
         controller: textEditingController,
         keyboardType: TextInputType.text,
-        onFieldSubmitted: (s){
+        onFieldSubmitted: (s) {
           FocusScope.of(context).unfocus();
         },
         decoration: InputDecoration(
@@ -429,14 +449,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
           labelText: Lable,
-          labelStyle: Theme
-              .of(context)
-              .textTheme
-              .bodyText2,
+          labelStyle: Theme.of(context).textTheme.bodyText2,
           // suffixIcon:  Icon(IconButton,color: Black_textColor,),
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         ),
-
         validator: validate,
       ),
     );
@@ -448,29 +464,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   ImageProvider getImage(AsyncSnapshot<File> snapshot) {
-    if(!snapshot.hasData) {
-     return NetworkImage(Utils.prefs!
-          .getString("imageUrl") ??
+    if (!snapshot.hasData) {
+      return NetworkImage(Utils.prefs!.getString("imageUrl") ??
           "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
-    }
-    else return FileImage(snapshot.data!);
+    } else
+      return FileImage(snapshot.data!);
   }
 
   void uploadImage() {
-    Utils.progressBar.showLoadingIndicator(Utils.labels!.change_password,context);
+    Utils.progressBar
+        .showLoadingIndicator(Utils.labels!.change_password, context);
 
     UserRepo.uploadImage(imageText).then((value) {
       Utils.progressBar.hideOpenDialog(context);
-      if(value['data']['success']){
-        scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(Utils.labels!.image_uploaded_successfully),));
+      if (value['data']['success']) {
+        scaffoldKey.currentState!.showSnackBar(SnackBar(
+          content: Text(Utils.labels!.image_uploaded_successfully),
+        ));
         Utils.prefs!.setString("imageUrl", value["data"]["avatar_url_thumb"]);
         print(Utils.prefs!.getString("imageUrl"));
-
-      }
-      else   scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(Utils.labels!.error),));
-
+      } else
+        scaffoldKey.currentState!.showSnackBar(SnackBar(
+          content: Text(Utils.labels!.error),
+        ));
     });
   }
-
-
 }

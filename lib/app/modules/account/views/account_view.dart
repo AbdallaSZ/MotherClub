@@ -277,42 +277,42 @@ class _AccountViewState extends State<AccountView> {
                 );
               },
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.touch_app,
-                      size: SizeHelper.of(context).help(
-                        mobileSmall: 15,
-                        mobileNormal: 17,
-                        mobileLarge: 19,
-                        tabletNormal: 21,
-                        tabletExtraLarge: 23,
-                        desktopLarge: 25,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      Utils.labels!.buy_again,
-                      style: GoogleFonts.roboto(
-                          fontSize: SizeHelper.of(context).help(
-                            mobileSmall: 10,
-                            mobileNormal: 12,
-                            mobileLarge: 14,
-                            tabletNormal: 16,
-                            tabletExtraLarge: 18,
-                            desktopLarge: 20,
-                          ),
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          color: Black_textColor),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, top: 20),
+            //   child: Container(
+            //     child: Row(
+            //       children: [
+            //         Icon(
+            //           Icons.touch_app,
+            //           size: SizeHelper.of(context).help(
+            //             mobileSmall: 15,
+            //             mobileNormal: 17,
+            //             mobileLarge: 19,
+            //             tabletNormal: 21,
+            //             tabletExtraLarge: 23,
+            //             desktopLarge: 25,
+            //           ),
+            //         ),
+            //         // SizedBox(width: 15),
+            //         // Text(
+            //         //   Utils.labels!.buy_again,
+            //         //   style: GoogleFonts.roboto(
+            //         //       fontSize: SizeHelper.of(context).help(
+            //         //         mobileSmall: 10,
+            //         //         mobileNormal: 12,
+            //         //         mobileLarge: 14,
+            //         //         tabletNormal: 16,
+            //         //         tabletExtraLarge: 18,
+            //         //         desktopLarge: 20,
+            //         //       ),
+            //         //       fontWeight: FontWeight.w500,
+            //         //       fontStyle: FontStyle.normal,
+            //         //       color: Black_textColor),
+            //         // ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 30),
               child: GestureDetector(

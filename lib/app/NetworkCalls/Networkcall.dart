@@ -407,7 +407,7 @@ class Networkcall {
   Future<dynamic> getArticles() async {
     final response = await http.get(
       Uri.parse(
-        'https://mothersclub.me/pregnancy-we-choose-you',
+        'https://mothersclub.me/wp-json/custom-plugin/pregnancy-we-choose-you',
       ),
     );
     return jsonDecode(response.body);
