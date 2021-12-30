@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
               Utils.userPreferences.setLanguage(state.locale != null
                   ? state.locale!.languageCode
                   : "ar");
+             // print("current language is => "+state.locale!.languageCode);
        //      print("current language is => "+state.locale!.languageCode);
 
             }

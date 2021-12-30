@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:motherclub/app/NetworkCalls/Api.dart';
+import 'package:motherclub/app/modules/account/SignInModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -167,6 +169,27 @@ class Networkcall {
       },
     );
     return json.decode(response.body);
+  }
+   googleLogin(String email) async {
+    var response = await NetworkService.dio
+        .post(
+
+          'https://mothersclub.me/wp-json/jwt-auth/v1/token', data: {
+            "username" : email,
+            "social_login" : true,
+    }
+      /*
+       headers: {
+         "Authorization": RemoteConfig.config["AuthorizationToken"],
+       }
+       */
+    )
+        .catchError(
+      (error) {
+        return false;
+      },
+    );
+    return response.data;
   }
 
   //todo API Call For weeksdetails

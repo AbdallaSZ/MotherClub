@@ -2,12 +2,16 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:motherclub/app/Models/UserModel.dart';
+import 'package:motherclub/app/Models/auth_model.dart';
 import 'package:motherclub/app/language/LangaugeBloc.dart';
 import 'package:motherclub/app/language/LanguageEvent.dart';
+import 'package:motherclub/app/modules/account/SignInModel.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
 import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
@@ -15,6 +19,7 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/CustomWidget/CustomLogoWidget.dart';
 import 'package:motherclub/common/CustomWidget/EditTextField.dart';
+import 'package:motherclub/common/CustomWidget/SocialButtonWidget.dart';
 
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:provider/provider.dart';
@@ -194,11 +199,11 @@ class LoginView extends GetView<AuthController> {
                              color: Text_color),
                        ),
                      ),*/
-                  /* Divider(
+                   Divider(
                        color: Colors.transparent,
                        height: deviceHeight/27,
-                     ),*/
-                  /*  Row(
+                     ),
+                    Row(
                          children: <Widget>[
                            Expanded(
                                child: Divider(color:Black_textColor ,)
@@ -215,23 +220,27 @@ class LoginView extends GetView<AuthController> {
                                child: Divider(color:Black_textColor ,)
                            ),
                          ]
-                     ),*/
-                  /*Divider(
+                     ),
+                  Divider(
                        color: Colors.transparent,
                        height: deviceHeight/26,
-                     ),*/
-                  /*  Row(
+                     ),
+                    Row(
                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                        children: [
                          InkWell(
                            onTap: (){
-                              signup(context);
+                              signIn(context);
                                     }
                            ,
                              child: SocialButtonWidget('assets/images/Google.png',context,deviceHeight/17,deviceWidth/2.37)),
-                         SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37)
+                         GestureDetector(
+                             onTap: (){
+                               loginFacebookLogin(context);
+                             },
+                             child: SocialButtonWidget('assets/images/facebook.png',context,deviceHeight/17,deviceWidth/2.37))
                        ],
-                     ),*/
+                     ),
                   Divider(
                     color: Colors.transparent,
                     height: deviceHeight / 30,
@@ -297,26 +306,89 @@ class LoginView extends GetView<AuthController> {
     );
   }
 
-  Future<void> signup(BuildContext context) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+  Future<void> signIn(BuildContext context) async {
+
+
     final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+        await Utils.googleSignIn.signIn();
     if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
+     var response = await Utils.networkcall.googleLogin(Utils.googleSignIn.currentUser!.email);
+      Utils.method= SignInMethod.google;
+      Utils.getImage(int.parse(response["data"]["ID"]));
+     var userData = response['data'];
+     UserModel authUser = UserModel.fromJson(userData);
+     Utils.userPreferences.saveUser(authUser);
+     AuthModel _authData = await Utils.bLoC.authData(Utils.googleSignIn.currentUser!.email, response["data"]["user_pass"]);
+     Utils.userPreferences.saveAuth(_authData);
+      Get.toNamed(Routes.BOTTOM);
+      /*
       final AuthCredential authCredential = GoogleAuthProvider.credential(
           idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken);
+          accessToken: googleSignInAuthentication.accessToken);*/
 
+/*
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
-      print(user!.displayName);
-      if (result != null) {
+      print(user!.displayName);*/
+      /*if (result != null) {
         Get.toNamed(Routes.BOTTOM);
-      } // if result not null we simply call the MaterialpageRoute,
+      } */// if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
+  }
+  Future<void> loginFacebookLogin(BuildContext context) async {
+  Utils.method = SignInMethod.facebook;
+  Utils.fb = FacebookLogin();
+
+
+// Log in
+    final res = await Utils.fb.logIn(
+        permissions: [
+          FacebookPermission.email,
+    ]);
+
+// Check result status
+    switch (res.status) {
+      case FacebookLoginStatus.success:
+      // Logged in
+
+      // Send access token to server for validation and auth
+        final FacebookAccessToken accessToken = res.accessToken!;
+        print('Access token: ${accessToken.token}');
+
+        // Get profile data
+        final profile = await Utils.fb.getUserProfile();
+        print('Hello, ${profile!.name}! You ID: ${profile.userId}');
+
+        // Get user profile image url
+        final imageUrl = await Utils.fb.getProfileImageUrl(width: 100);
+        print('Your profile image: $imageUrl');
+
+        // Get email (since we request email permission)
+        var email = await Utils.fb.getUserEmail();
+        // But user can decline permission
+        if (email == null)
+         email = profile!.name.toString().trim()+"@gmail.com";
+        var response = await Utils.networkcall.googleLogin(email);
+        Utils.getImage(int.parse(response["data"]["ID"]));
+        var userData = response['data'];
+        UserModel authUser = UserModel.fromJson(userData);
+        Utils.userPreferences.saveUser(authUser);
+        AuthModel _authData = await Utils.bLoC.authData(email, response["data"]["user_pass"]);
+        Utils.userPreferences.saveAuth(_authData);
+        Get.toNamed(Routes.BOTTOM);
+
+        break;
+      case FacebookLoginStatus.cancel:
+      // User cancel log in
+        break;
+      case FacebookLoginStatus.error:
+      // Log in failed
+        print('Error while log in: ${res.error}');
+        break;
+    }
+
   }
 
   String _radioValue = Utils.locality == Locality.english
