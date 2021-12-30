@@ -273,12 +273,12 @@ class _YourPregnancyViewState extends State<YourPregnancyView> {
                                 ? Column(
                                     children: [
                                       Container(
-                                        child: FlickVideoPlayer(
+                                        child:snapshot2.data!.videoLink != null ?  FlickVideoPlayer(
                                             flickManager: FlickManager(
                                           videoPlayerController: playVid(
                                             snapshot2.data!.videoLink!,
                                           ),
-                                        )),
+                                        )) : Container(),
                                       ),
                                       Padding(
                                           padding: EdgeInsets.all(
