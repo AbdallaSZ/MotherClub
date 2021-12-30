@@ -11,23 +11,31 @@ import 'package:motherclub/common/CustomWidget/statless/custom_appbar.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:html/parser.dart';
+import 'package:size_helper/size_helper.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   ProductDetailsScreen(this.id, {Key? key}) : super(key: key);
   String id;
-
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> with TickerProviderStateMixin   {
+class _ProductDetailsScreenState extends State<ProductDetailsScreen>
+    with TickerProviderStateMixin {
+  String _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString = parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
+  }
   ProductDetailsBloc? productDetailsBloc;
 
   ProductDetailsModel? model;
   bool isFavorite = false;
   BehaviorSubject<String> rxSelectedAgeSubject = BehaviorSubject();
   TextEditingController itemNumberController = TextEditingController();
-   TabController? tabController;
+  TabController? tabController;
 
   @override
   void dispose() {
@@ -53,43 +61,44 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(withBackButton: true, onBackButtonPressed: (){
-        Navigator.pop(context);
-      },),
       body: SafeArea(
         bottom: true,
         left: true,
         right: true,
-        child: Container(
-          width: Utils.width,
-          color: Colors.white,
-          height: Utils.height,
-          child: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
-              bloc: productDetailsBloc,
-              builder: (context, state) {
-                if (state.status == ResultState.Success) {
-                  ProductDetailsState myState = state;
-                  model = myState.model;
-                  rxSelectedAgeSubject.sink
-                      .add(model!.attributes![0].options![0]);
-                  return Stack(
-                    children: [
-                      SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Column(children: [
-                            _buildSliverHead(state.model!),
-                            _buildSliverList(state.model!)
-                          ])),
-                    ],
-                  );
-                } else if (state.status == ResultState.Loading)
-                  return Center(child: CircularProgressIndicator());
-                else if (state.status == ResultState.Error) {
-                  return Center(child: Text(state.errorMessage!));
-                } else {
-                  return Center();
-                }
-              }),
+        child: Column(
+          children: [
+            Container(
+              width: Utils.width,
+              color: Colors.white,
+              height: Utils.height,
+              child: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
+                  bloc: productDetailsBloc,
+                  builder: (context, state) {
+                    if (state.status == ResultState.Success) {
+                      ProductDetailsState myState = state;
+                      model = myState.model;
+                      rxSelectedAgeSubject.sink
+                          .add(model!.attributes![0].options![0]);
+                      return Stack(
+                        children: [
+                          SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Column(children: [
+                                _buildSliverHead(state.model!),
+                                _buildSliverList(state.model!)
+                              ],),),
+                        ],
+                      );
+                    } else if (state.status == ResultState.Loading)
+                      return Center(child: CircularProgressIndicator());
+                    else if (state.status == ResultState.Error) {
+                      return Center(child: Text(state.errorMessage!));
+                    } else {
+                      return Center();
+                    }
+                  }),
+            ),
+          ],
         ),
       ),
     );
@@ -97,12 +106,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
 
   _buildSliverHead(ProductDetailsModel model) {
     return DetailsSliver(
-        expandedHeight: 270,
-        model: model,
-        roundedContainerHeight: 20,
-        urls: model.images!,
-        price: double.parse(model.price!),
-        currency: Utils.labels!.amd);
+      expandedHeight: 270,
+      model: model,
+      roundedContainerHeight: 20,
+      urls: model.images!,
+      price: double.parse(model.price!),
+      currency: Utils.labels!.amd,
+    );
   }
 
   _buildSliverList(ProductDetailsModel model) {
@@ -136,11 +146,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
               height: 16,
             ),
             Text(
-              model.description!,
+              _parseHtmlString(model.description!),
               maxLines: 10,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  fontSize: 14,
+                  fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 10,
+                    mobileNormal: 12,
+                    mobileLarge: 14,
+                    tabletNormal: 16,
+                    tabletExtraLarge: 18,
+                    desktopLarge: 20,
+                  ),
                   fontWeight: FontWeight.normal,
                   letterSpacing: 2,
                   color: Colors.grey.shade700),
@@ -149,25 +166,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
               alignment: Alignment.topCenter,
               height: Utils.height! * .5,
               width: Utils.width!,
-              child:Column(
-                mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTabView(),
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Container(
-                    height: Utils.height! * .4,
-                    child: TabBarView(
-                        children: [
-                          _buildAdditionalInfoSection(model),
-                          _buildReviewSection(),
-
-                        ],
-                        controller:tabController
+                    child: Expanded(
+                      child: TabBarView(children: [
+                        _buildAdditionalInfoSection(model),
+                        _buildReviewSection(),
+                      ], controller: tabController),
                     ),
                   ),
                 ],
-              ) ,
-
+              ),
             )
           ],
         ));
@@ -190,7 +206,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: SizeHelper.of(context).help(
+                            mobileSmall: 10,
+                            mobileNormal: 12,
+                            mobileLarge: 14,
+                            tabletNormal: 16,
+                            tabletExtraLarge: 18,
+                            desktopLarge: 20,
+                          ),
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2,
                           color: Colors.black),
@@ -202,7 +225,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 18,
+                          fontSize: SizeHelper.of(context).help(
+                            mobileSmall: 10,
+                            mobileNormal: 12,
+                            mobileLarge: 14,
+                            tabletNormal: 16,
+                            tabletExtraLarge: 18,
+                            desktopLarge: 20,
+                          ),
                           fontWeight: FontWeight.bold,
                           color: Colors.green),
                     )),
@@ -214,7 +244,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
             Flexible(
                 flex: 3,
                 child: Text(
-                  model.shortDescription!,
+                  _parseHtmlString(model.shortDescription!) ,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -250,7 +280,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
         Text(
           Utils.labels!.age + " : ",
           style: TextStyle(
-              fontSize: 16,
+          fontSize: SizeHelper.of(context).help(
+            mobileSmall: 10,
+            mobileNormal: 12,
+            mobileLarge: 14,
+            tabletNormal: 16,
+            tabletExtraLarge: 18,
+            desktopLarge: 20,
+          ),
               fontWeight: FontWeight.normal,
               letterSpacing: 2,
               color: Colors.black),
@@ -277,7 +314,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> with Ticker
       ],
     );
   }
-BehaviorSubject<int> rxItemsCount = BehaviorSubject();
+
+  BehaviorSubject<int> rxItemsCount = BehaviorSubject();
 
   buildCountItem(Icon icon, Function onPress) {
     return Container(
@@ -291,9 +329,11 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
           },
           child: icon),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade400), shape: BoxShape.rectangle),
+          border: Border.all(color: Colors.grey.shade400),
+          shape: BoxShape.rectangle),
     );
   }
+
   _buildAddToCartSection(ProductDetailsModel model) {
     int stockQuantity = model.stockQuantity ?? 3;
     return Row(
@@ -302,76 +342,79 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
         Expanded(
           flex: 2,
           child: StreamBuilder<int>(
-            stream: rxItemsCount.stream,
-            builder: (context, snapshot) {
-              if(snapshot.hasData)
-              return Row(children: [
-                buildCountItem(
-                    Icon(
-                      Icons.remove,
-                      color:
-                      snapshot.data! > 1 ? Color(0xffFF4550) : Colors.grey,
-                      size: 15,
-                    ), () {
-                  if(snapshot.data! > 1)
-                    rxItemsCount.sink.add((snapshot.data!) - 1);
-                }),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(snapshot.data!.toString(),
-                    style: TextStyle(fontSize: 14 , color: Colors.black87)),
-                SizedBox(
-                  width: 10,
-                ),
-                buildCountItem(
-                    Icon(
-                      Icons.add,
-                      color: snapshot.data! < stockQuantity
-                          ? Color(0xffFF4550)
-                          : Colors.grey,
-                      size: 15,
-                    ), () {
-                  if(snapshot.data! < stockQuantity)
-                    rxItemsCount.sink.add((snapshot.data!) + 1);
-                })
-
-              ],);
-            else
-              return Container();
-            }
-          ),
+              stream: rxItemsCount.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData)
+                  return Row(
+                    children: [
+                      buildCountItem(
+                          Icon(
+                            Icons.remove,
+                            color: snapshot.data! > 1
+                                ? Color(0xffFF4550)
+                                : Colors.grey,
+                            size: 15,
+                          ), () {
+                        if (snapshot.data! > 1)
+                          rxItemsCount.sink.add((snapshot.data!) - 1);
+                      }),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(snapshot.data!.toString(),
+                          style:
+                              TextStyle(        fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 10,
+                                mobileNormal: 12,
+                                mobileLarge: 14,
+                                tabletNormal: 16,
+                                tabletExtraLarge: 18,
+                                desktopLarge: 20,
+                              ), color: Colors.black87)),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      buildCountItem(
+                          Icon(
+                            Icons.add,
+                            color: snapshot.data! < stockQuantity
+                                ? Color(0xffFF4550)
+                                : Colors.grey,
+                            size: 15,
+                          ), () {
+                        if (snapshot.data! < stockQuantity)
+                          rxItemsCount.sink.add((snapshot.data!) + 1);
+                      })
+                    ],
+                  );
+                else
+                  return Container();
+              }),
         ),
         SizedBox(
           width: 8,
         ),
         GestureDetector(
-          onTap: ()async {
-          if(Utils.id == ""){
-            showDialog(
-                context: context,
-                builder: (c) {
-                  return loginDialog;
-                });
-          }
-           else {
-            String res = await Utils.bLoC
-                .addCartItems(widget.id,
-                rxItemsCount.value, rxSelectedAgeSubject.value);
-            Navigator.pop(context);
-            ScaffoldMessenger.of(
-                context)
-                .showSnackBar(
-              SnackBar(
-                content: Text(
-                  res,
+          onTap: () async {
+            if (Utils.id == "") {
+              showDialog(
+                  context: context,
+                  builder: (c) {
+                    return loginDialog;
+                  });
+            } else {
+              String res = await Utils.bLoC.addCartItems(
+                  widget.id, rxItemsCount.value, rxSelectedAgeSubject.value);
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    res,
+                  ),
+                  duration: const Duration(seconds: 3),
                 ),
-                duration:
-                const Duration(
-                    seconds: 3),
-              ),
-            );
-          }
+              );
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(8),
@@ -387,7 +430,14 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
                 ),
                 Text(
                   Utils.labels!.add_to_cart,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white,         fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 10,
+                    mobileNormal: 12,
+                    mobileLarge: 14,
+                    tabletNormal: 16,
+                    tabletExtraLarge: 18,
+                    desktopLarge: 20,
+                  ),),
                 )
               ],
             ),
@@ -411,7 +461,14 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
             Utils.labels!.additional_information,
             style: TextStyle(
                 color: Colors.black87,
-                fontSize: 18,
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 15,
+                  mobileNormal: 17,
+                  mobileLarge: 19,
+                  tabletNormal: 21,
+                  tabletExtraLarge: 23,
+                  desktopLarge: 25,
+                ),
                 fontWeight: FontWeight.bold),
           ),
         ),
@@ -420,13 +477,19 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
             Utils.labels!.review,
             style: TextStyle(
                 color: Colors.black87,
-                fontSize: 18,
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 15,
+                  mobileNormal: 17,
+                  mobileLarge: 19,
+                  tabletNormal: 21,
+                  tabletExtraLarge: 23,
+                  desktopLarge: 25,
+                ),
                 fontWeight: FontWeight.bold),
           ),
         ),
       ],
     );
-
   }
 
   getOptionsStringsConcatenated(List<String> list) {
@@ -437,9 +500,25 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(Utils.labels!.additional_information, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18 , color: Colors.black87)),
-        Divider(height: 1,color: Colors.black87,),
-        SizedBox(height: 8,),
+        Text(Utils.labels!.additional_information,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 15,
+                  mobileNormal: 17,
+                  mobileLarge: 19,
+                  tabletNormal: 21,
+                  tabletExtraLarge: 23,
+                  desktopLarge: 25,
+                ),
+                color: Colors.black87)),
+        Divider(
+          height: 1,
+          color: Colors.black87,
+        ),
+        SizedBox(
+          height: 8,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -447,16 +526,34 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
             Text(
               Utils.labels!.age + " : ",
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 10,
+                    mobileNormal: 12,
+                    mobileLarge: 14,
+                    tabletNormal: 16,
+                    tabletExtraLarge: 18,
+                    desktopLarge: 20,
+                  ),
                   fontWeight: FontWeight.normal,
                   letterSpacing: 2,
                   color: Colors.black),
             ),
-            Flexible(child: Text(getOptionsStringsConcatenated(model.attributes![0].options!),style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                letterSpacing: 2,
-                color: Colors.black)))
+            Flexible(
+                child: Text(
+                    getOptionsStringsConcatenated(
+                        model.attributes![0].options!),
+                    style: TextStyle(
+                        fontSize: SizeHelper.of(context).help(
+                          mobileSmall: 8,
+                          mobileNormal: 10,
+                          mobileLarge: 12,
+                          tabletNormal: 14,
+                          tabletExtraLarge: 16,
+                          desktopLarge: 18,
+                        ),
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 2,
+                        color: Colors.black)))
           ],
         )
       ],
@@ -465,63 +562,49 @@ BehaviorSubject<int> rxItemsCount = BehaviorSubject();
 
   _buildReviewSection() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextFormField(
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-
-            ),
-            hintText: Utils.labels!.write_review
-          ),
+              border: OutlineInputBorder(),
+              hintText: Utils.labels!.write_review),
         ),
-        SizedBox(height: 16,),
+
         Row(
           children: [
-            Expanded(
-                flex: 1,
-                child: Text(Utils.labels!.email )),
+            Expanded(flex: 1, child: Text(Utils.labels!.email)),
             Expanded(
               flex: 4,
               child: TextFormField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-
-                    ),
-
+                  border: OutlineInputBorder(),
                 ),
               ),
             ),
-
           ],
         ),
-        SizedBox(height: 16,),
+
         Row(
           children: [
-            Expanded(                flex: 1,
-                child: Text(Utils.labels!.name )),
+            Expanded(flex: 1, child: Text(Utils.labels!.name)),
             Expanded(
               flex: 4,
               child: TextFormField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(
-
-                    ),
-
+                  border: OutlineInputBorder(),
                 ),
               ),
             ),
-
           ],
         ),
-        SizedBox(height: 16,),
-        RaisedButton(onPressed: (){},
-        child: Text(Utils.labels!.submit),
+
+        RaisedButton(
+          onPressed: () {},
+          child: Text(Utils.labels!.submit),
         )
       ],
     );
   }
-
-
 }
 
 class DetailsSliver extends StatefulWidget {

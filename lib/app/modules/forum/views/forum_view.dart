@@ -6,14 +6,20 @@ import 'package:motherclub/app/Shimmers/FurmShimmer.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/modules/forum/controller/forumController.dart';
 import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';
-import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
-import 'dart:ui' as ui;
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
+import 'package:html/parser.dart';
 
 class ForumView extends GetView<ForumController> {
+
+  String _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString = parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -157,7 +163,7 @@ class ForumView extends GetView<ForumController> {
                                         Container(
                                           // padding:EdgeInsets.fromLTRB(15,17,10,0),
                                           child: Text(
-                                              "${data[index].title!.rendered}",
+                                              _parseHtmlString("${data[index].title!.rendered}"),
                                               style: GoogleFonts.roboto(
                                                 fontSize:
                                                     SizeHelper.of(context).help(
@@ -233,7 +239,7 @@ class ForumView extends GetView<ForumController> {
                                         SizedBox(height: 15),
                                         Flexible(
                                           child: Text(
-                                            "${data[index].content!.rendered}",
+                                            _parseHtmlString("${data[index].content!.rendered}"),
                                             style: GoogleFonts.roboto(
                                                 fontSize:
                                                     SizeHelper.of(context).help(

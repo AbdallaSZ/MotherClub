@@ -24,7 +24,7 @@ void main() async {
   await Firebase.initializeApp();
   bool releaseMode = true;
   runApp(
-       DevicePreview(enabled: !releaseMode,
+       DevicePreview(enabled: releaseMode,
          builder: (context) => MyApp(),)
   );
 }

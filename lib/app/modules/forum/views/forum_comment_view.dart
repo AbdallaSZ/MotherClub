@@ -11,7 +11,7 @@ import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
 import 'all_comments_screen.dart';
-
+import 'package:html/parser.dart';
 class ForumCommentView extends StatelessWidget {
   ForumCommentView({required this.formsModel});
 
@@ -19,6 +19,12 @@ class ForumCommentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String _parseHtmlString(String htmlString) {
+      final document = parse(htmlString);
+      final String parsedString = parse(document.body!.text).documentElement!.text;
+
+      return parsedString;
+    }
     double deviceWidth = MediaQuery.of(context).size.width;
     return SafeArea(
         child: Scaffold(
@@ -54,7 +60,7 @@ class ForumCommentView extends StatelessWidget {
                         children: [
                           Container(
                             // padding:EdgeInsets.fromLTRB(15,17,10,0),
-                            child: Text("${this.formsModel.title!.rendered}",
+                            child: Text(  _parseHtmlString("${formsModel.title!.rendered}"),
                                 style: GoogleFonts.roboto(
                                   fontSize: SizeHelper.of(context).help(
                                     mobileSmall: 10,
@@ -80,7 +86,7 @@ class ForumCommentView extends StatelessWidget {
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  "${this.formsModel.date}",
+                                  _parseHtmlString("${this.formsModel.date}"),
                                   style: GoogleFonts.roboto(
                                       fontSize: SizeHelper.of(context).help(
                                         mobileSmall: 6,
@@ -102,7 +108,7 @@ class ForumCommentView extends StatelessWidget {
                           Expanded(
                             child: Center(
                               child: Text(
-                                "${this.formsModel.content!.rendered}",
+                                _parseHtmlString("${this.formsModel.content!.rendered}"),
                                 style: GoogleFonts.roboto(
                                     fontSize: SizeHelper.of(context).help(
                                       mobileSmall: 6,
