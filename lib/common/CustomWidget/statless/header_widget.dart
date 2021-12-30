@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:size_helper/size_helper.dart';
 
@@ -21,44 +22,68 @@ Widget headerWidget(BuildContext context, String title) {
         ],
       ),
     ),
-    child: Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: ListTile(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-          ),
+    child: ListTile(
+      leading: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.white,
         ),
-        title: Text(
-          title,
-          style: GoogleFonts.roboto(
-            fontSize: SizeHelper.of(context).help(
-              mobileSmall: 8,
-              mobileNormal: 10,
-              mobileLarge: 12,
-              tabletNormal: 14,
-              tabletExtraLarge: 16,
-              desktopLarge: 18,
-            ),
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal,
-            letterSpacing: 0.25,
-          ),
-        ),
-        trailing: Image.asset(
-
-          'assets/images/logo_en.jpg',
-
-          fit: BoxFit.fill,
-          scale: 4,
-        ),
-        // isThreeLine: true,
       ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: SizeHelper.of(context).help(
+              mobileSmall: 200,
+              mobileNormal:  220,
+              mobileLarge: 230,
+              tabletNormal: 240,
+              tabletExtraLarge: 250,
+              desktopLarge: 300,
+            ),
+            child: Text(
+              title,
+                textAlign: TextAlign.center,
+              style: GoogleFonts.roboto(
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 8,
+                  mobileNormal: 12,
+                  mobileLarge: 14,
+                  tabletNormal: 16,
+                  tabletExtraLarge: 18,
+                  desktopLarge: 20,
+                ),
+
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.normal,
+                // letterSpacing: 0.25,
+              ),
+
+            ),
+          ),
+        ],
+      ),
+
+      trailing: Container(
+
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/logo_en.jpg',
+            ),
+            fit: BoxFit.fitWidth,
+          )
+
+        ),
+      ), // isThreeLine: true,
     ),
   );
 }

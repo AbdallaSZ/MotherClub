@@ -111,21 +111,21 @@ class LoginView extends GetView<AuthController> {
                       context: context,
                       IconButton: Icons.lock_open,
                       textEditingController: _passwordController),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: _checkbox,
-                          onChanged: (value) {},
-                        ),
-                        Text(
-                          Utils.labels!.remember_me,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment.topLeft,
+                  //   child: Row(
+                  //     children: [
+                  //       Checkbox(
+                  //         value: _checkbox,
+                  //         onChanged: (value) {},
+                  //       ),
+                  //       Text(
+                  //         Utils.labels!.remember_me,
+                  //         style: Theme.of(context).textTheme.bodyText2,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Divider(
                     color: Colors.transparent,
                     height: deviceHeight / 22,

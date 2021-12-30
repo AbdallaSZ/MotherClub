@@ -138,6 +138,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                           Utils.labels!.change_language,
                                         ),
                                         content: Container(
+                                          height: 120,
                                           alignment: Alignment.centerRight,
                                           child: Column(
                                               crossAxisAlignment:
