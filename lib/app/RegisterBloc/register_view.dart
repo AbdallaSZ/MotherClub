@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:motherclub/app/Models/RegisterRequestModel.dart';
+import 'package:motherclub/app/NetworkCalls/Api.dart';
 import 'package:motherclub/app/RegisterBloc/RegisterBloc.dart';
 import 'package:motherclub/app/RegisterBloc/RegisterState.dart';
 import 'package:motherclub/app/StateEnum.dart';
@@ -389,12 +390,14 @@ class _RegisterViewState extends State<RegisterView> {
                             Utils.progressBar.showLoadingIndicator(
                                 Utils.labels!.register, context);
                           } else if (state.resultState == ResultState.Success) {
+
                             auth
                                 .login(_usernameController.text,
                                     _passwordController.text)
                                 .then((value) {
                               print('loginAuth ${value['status']}');
                               if (value['status'] == true) {
+                                getImage(int.parse(Utils.id));
                                 Utils.progressBar.hideOpenDialog(context);
                                 Get.offAllNamed(Routes.BOTTOM);
                               }
@@ -480,9 +483,22 @@ class _RegisterViewState extends State<RegisterView> {
     final bytes = await File(path).readAsBytes();
     var result = base64Encode(bytes);
     imageText = result;
+
     imageSubject.sink.add(imageName);
   }
+  static getImage(int id)async {
+    var myData = await NetworkService.getMyData("api/user/get_avatar/?user_id=$id&type=full");
 
+    try{
+      String url = myData["avatar"];
+      if(url.contains("empty"))
+        Utils.prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+      else
+        Utils.prefs!.setString("imageUrl", myData['avatar']);
+    }catch (e){
+      Utils.  prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+    }
+  }
   String base64Encode(List<int> bytes) => base64.encode(bytes);
 
   void showSnackBar(String text) {
