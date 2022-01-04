@@ -63,7 +63,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
-    Utils.initializeLocality(context,myWidth: deviceWidth , myHeight: deviceHeight);
+    Utils.initializeLocality(context);
     Utils.initializePref();
     Utils.deviceHeight = MediaQuery.of(context).size.height;
     Utils.deviceWidth = MediaQuery.of(context).size.width;

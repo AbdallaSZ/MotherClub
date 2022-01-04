@@ -46,12 +46,8 @@ class Utils
   static  double? width , height ;
   static AppLocalizations? labels;
 
-  static initializeLocality (context,{myWidth , myHeight}){
+  static initializeLocality (context){
     Utils.labels = AppLocalizations.of(context);
-    if(myWidth !=null){
-      width = myWidth;
-      height = myHeight;
-    }
     setLocality();
   }
   static BehaviorSubject<bool> languageSubject  = BehaviorSubject();

@@ -39,7 +39,8 @@ initialize()async{
   getNonce(){
     var nonce = prefs.getString("Nonce");
     return nonce;
-  } setLanguage(String lang)async{
+  }
+  setLanguage(String lang)async{
     prefs.setString("Lang", lang);
     print("Nonce Saved");
   }
