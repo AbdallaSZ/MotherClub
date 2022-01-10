@@ -42,14 +42,10 @@ class MyApp extends StatelessWidget {
         create: (BuildContext context) => LanguageBloc(),
         child: flutter_bloc.BlocBuilder<LanguageBloc ,LanguageState >(
           builder: (con , state ){
-
             if (Utils.userPreferences.getLanguage()==null || state.locale!=null) {
               Utils.userPreferences.setLanguage(state.locale != null
                   ? state.locale!.languageCode
                   : "ar");
-             // print("current language is => "+state.locale!.languageCode);
-       //      print("current language is => "+state.locale!.languageCode);
-
             }
             return GetMaterialApp(
               builder: DevicePreview.appBuilder,
@@ -59,7 +55,6 @@ class MyApp extends StatelessWidget {
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
               localizationsDelegates: [
-                // ... app-specific localization delegate[s] here
                 // TODO: uncomment the line below after codegen
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,

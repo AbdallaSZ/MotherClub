@@ -37,12 +37,12 @@ Widget headerWidget(BuildContext context, String title) {
         children: [
           Container(
             width: SizeHelper.of(context).help(
-              mobileSmall: 200,
-              mobileNormal:  220,
-              mobileLarge: 230,
-              tabletNormal: 240,
-              tabletExtraLarge: 250,
-              desktopLarge: 300,
+              mobileSmall: 140,
+              mobileNormal:  150,
+              mobileLarge: 170,
+              tabletNormal: 200,
+              tabletExtraLarge: 230,
+              desktopLarge: 260,
             ),
             child: Text(
               title,
