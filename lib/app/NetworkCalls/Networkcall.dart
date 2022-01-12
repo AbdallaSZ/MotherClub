@@ -174,7 +174,7 @@ class Networkcall {
     var response = await NetworkService.dio
         .post(
 
-          'https://mothersclub.me/wp-json/jwt-auth/v1/token', data: {
+          'https://mothersclub.me/wp-json/custom-plugin/social_login', data: {
             "username" : email,
             "social_login" : true,
     }
