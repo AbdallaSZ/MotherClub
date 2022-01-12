@@ -341,7 +341,6 @@ class _ProductItemState extends State<ProductItem> {
                                                             )),
                                                       ],
                                                     )),
-
                                                 // SizedBox(height:10),
                                                 Expanded(
                                                   flex: 2,
