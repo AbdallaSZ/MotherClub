@@ -369,7 +369,7 @@ class LoginView extends GetView<AuthController> {
         var email = await Utils.fb.getUserEmail();
         // But user can decline permission
         if (email == null)
-         email = profile!.name.toString().trim();
+         email = profile!.name.toString().trim()+"@yahoo.com";
         var response = await Utils.networkcall.googleLogin(email);
         Utils.getImage(int.parse(response["data"]["ID"]));
         var userData = response['data'];
