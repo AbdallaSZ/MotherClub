@@ -24,7 +24,10 @@ void main() async {
   await Firebase.initializeApp();
   bool releaseMode = true;
   runApp(
-      MyApp(),
+   DevicePreview(
+     builder: (context) =>
+          MyApp(),
+   ),
   );
 }
 

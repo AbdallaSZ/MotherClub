@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/CategoriesModel.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
-import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/RandomColorModel.dart';
 import 'package:size_helper/size_helper.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
-
+import 'package:html/parser.dart';
 // Widget CategoriresCard(double height, double width, BuildContext context,
 //     CategoriesModel categoriesModel, String route) {
 //   return GestureDetector(
@@ -39,6 +36,7 @@ import 'package:motherclub/common/Utils/Utils.dart';
 //                   child: Image.network(categoriesModel.image))),
 Widget CategoriresCard(double height, double width, BuildContext context,
     CategoriesModel categoriesModel, String route) {
+
   return GestureDetector(
     onTap: () {
       if (Utils.id == "" && route == Routes.FORUM) {
@@ -55,11 +53,11 @@ Widget CategoriresCard(double height, double width, BuildContext context,
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(10),
             height: SizeHelper.of(context).help(
-        mobileSmall: 90,
-        mobileLarge: 110,
-        tabletNormal: 130,
-        tabletExtraLarge: 150,
-        desktopLarge: 170,
+        mobileSmall: 95,
+        mobileLarge: 115,
+        tabletNormal: 135,
+        tabletExtraLarge: 155,
+        desktopLarge: 175,
       ),
       width: width,
       decoration: BoxDecoration(
@@ -76,7 +74,7 @@ Widget CategoriresCard(double height, double width, BuildContext context,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${categoriesModel.title}',
+                Text(  (categoriesModel.title == 'Your Pregnancy')? Utils.labels!.your_Pregnancy: (categoriesModel.title == 'Your Baby') ?Utils.labels!.your_baby: (categoriesModel.title == 'Forum') ?Utils.labels!.your_forum:(categoriesModel.title == 'Store') ?Utils.labels!.your_store:'',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: SizeHelper.of(context).help(
@@ -92,8 +90,7 @@ Widget CategoriresCard(double height, double width, BuildContext context,
                   height: 5,
                   color: Colors.transparent,
                 ),
-                Text('${categoriesModel.description}',
-                    style: TextStyle(
+                Text(  (categoriesModel.title == 'Your Pregnancy')? Utils.labels!.your_pregnancy_desc: (categoriesModel.title == 'Your Baby') ?Utils.labels!.your_baby_desc: (categoriesModel.title == 'Forum') ?Utils.labels!.your_forum_desc:(categoriesModel.title == 'Store') ?Utils.labels!.your_store_desc:'',                    style: TextStyle(
                         fontSize: SizeHelper.of(context).help(
                           mobileSmall: 6,
                           mobileNormal: 8,

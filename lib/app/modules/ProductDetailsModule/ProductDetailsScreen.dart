@@ -65,40 +65,49 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
         bottom: true,
         left: true,
         right: true,
-        child: Column(
-          children: [
-            Container(
-              width: Utils.width,
-              color: Colors.white,
-              height: Utils.height,
-              child: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
-                  bloc: productDetailsBloc,
-                  builder: (context, state) {
-                    if (state.status == ResultState.Success) {
-                      ProductDetailsState myState = state;
-                      model = myState.model;
-                      rxSelectedAgeSubject.sink
-                          .add(model!.attributes![0].options![0]);
-                      return Stack(
+        child: Container(
+          width: Utils.deviceWidth,
+          color: Colors.white,
+          // height: Utils.deviceHeight-SizeHelper.of(context).help(
+          //   mobileSmall: 170,
+          //   mobileNormal: 160,
+          //   mobileLarge: 130,
+          //   mobileExtraLarge: 140,
+          //   tabletSmall: 90,
+          //   tabletNormal: 85,
+          //   tabletLarge: 180,
+          //   tabletExtraLarge: 190,
+          //   desktopSmall: 200,
+          //   desktopNormal: 210,
+          //   desktopLarge: 230,
+          //   desktopExtraLarge: 260,
+          // ),
+          child: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
+              bloc: productDetailsBloc,
+              builder: (context, state) {
+                if (state.status == ResultState.Success) {
+                  ProductDetailsState myState = state;
+                  model = myState.model;
+                  rxSelectedAgeSubject.sink
+                      .add(model!.attributes![0].options![0]);
+                  return Stack(
+                    children: [
+                      ListView(
                         children: [
-                          SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(children: [
-                                _buildSliverHead(state.model!),
-                                _buildSliverList(state.model!)
-                              ],),),
+                          _buildSliverHead(state.model!),
+                          _buildSliverList(state.model!),
                         ],
-                      );
-                    } else if (state.status == ResultState.Loading)
-                      return Center(child: CircularProgressIndicator());
-                    else if (state.status == ResultState.Error) {
-                      return Center(child: Text(state.errorMessage!));
-                    } else {
-                      return Center();
-                    }
-                  }),
-            ),
-          ],
+                      ),
+                    ],
+                  );
+                } else if (state.status == ResultState.Loading)
+                  return Center(child: CircularProgressIndicator());
+                else if (state.status == ResultState.Error) {
+                  return Center(child: Text(state.errorMessage!));
+                } else {
+                  return Center();
+                }
+              }),
         ),
       ),
     );
@@ -116,8 +125,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
   }
 
   _buildSliverList(ProductDetailsModel model) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           child: _buildHeaderSection(model),
@@ -132,7 +143,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
 
   _buildHeaderSection(ProductDetailsModel model) {
     return Container(
-        width: Utils.width,
+        width: Utils.deviceWidth,
         decoration: BoxDecoration(
           color: Colors.white,
         ),
@@ -164,8 +175,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             ),
             Container(
               alignment: Alignment.topCenter,
-              height: Utils.height! * .5,
-              width: Utils.width!,
+              height: Utils.deviceHeight * .5,
+              width: Utils.deviceWidth,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +202,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
 
   _buildHeaderProduct(ProductDetailsModel model) {
     return Container(
-        height: Utils.height! * .15,
+        height: Utils.deviceHeight * .15,
         child: Column(
           children: [
             Row(
@@ -451,6 +462,76 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
   }
 
   _buildTabView() {
+    double h3 = SizeHelper.of(context).help(
+      mobileSmall: 15,
+      mobileNormal: 16,
+      mobileLarge: 17,
+      mobileExtraLarge: 20,
+      tabletSmall: 22,
+      tabletNormal: 25,
+      tabletLarge: 29,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 45,
+      desktopExtraLarge: 45,
+    );
+    double h4 = SizeHelper.of(context).help(
+      mobileSmall: 12,
+      mobileNormal: 13,
+      mobileLarge: 15,
+      mobileExtraLarge: 17,
+      tabletSmall: 20,
+      tabletNormal: 25,
+      tabletLarge: 30,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 40,
+      desktopExtraLarge: 45,
+    );
+    double h5 = SizeHelper.of(context).help(
+      mobileSmall: 10,
+      mobileNormal: 11,
+      mobileLarge: 11,
+      mobileExtraLarge: 13,
+      tabletSmall: 15,
+      tabletNormal: 18,
+      tabletLarge: 21,
+      tabletExtraLarge: 24,
+      desktopSmall: 28,
+      desktopNormal: 32,
+      desktopLarge: 36,
+      desktopExtraLarge: 38,
+    );
+    double h6 = SizeHelper.of(context).help(
+      mobileSmall: 8,
+      mobileNormal: 9,
+      mobileLarge: 9,
+      mobileExtraLarge: 10,
+      tabletSmall: 12,
+      tabletNormal: 14,
+      tabletLarge: 15,
+      tabletExtraLarge: 17,
+      desktopSmall: 19,
+      desktopNormal: 22,
+      desktopLarge: 24,
+      desktopExtraLarge: 25,
+    );
+    double h7 = SizeHelper.of(context).help(
+      mobileSmall: 7,
+      mobileNormal: 7,
+      mobileLarge: 8,
+      mobileExtraLarge: 8,
+      tabletSmall: 10,
+      tabletNormal: 12,
+      tabletLarge: 13,
+      tabletExtraLarge: 14,
+      desktopSmall: 15,
+      desktopNormal: 17,
+      desktopLarge: 18,
+      desktopExtraLarge: 20,
+    );
     return TabBar(
       indicator: BoxDecoration(color: Colors.grey.shade300),
       labelColor: Colors.grey,
@@ -461,14 +542,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             Utils.labels!.additional_information,
             style: TextStyle(
                 color: Colors.black87,
-                fontSize: SizeHelper.of(context).help(
-                  mobileSmall: 15,
-                  mobileNormal: 17,
-                  mobileLarge: 19,
-                  tabletNormal: 21,
-                  tabletExtraLarge: 23,
-                  desktopLarge: 25,
-                ),
+                fontSize: h5,
                 fontWeight: FontWeight.bold),
           ),
         ),
@@ -477,14 +551,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             Utils.labels!.review,
             style: TextStyle(
                 color: Colors.black87,
-                fontSize: SizeHelper.of(context).help(
-                  mobileSmall: 15,
-                  mobileNormal: 17,
-                  mobileLarge: 19,
-                  tabletNormal: 21,
-                  tabletExtraLarge: 23,
-                  desktopLarge: 25,
-                ),
+                fontSize: h5,
                 fontWeight: FontWeight.bold),
           ),
         ),
@@ -675,7 +742,7 @@ class DetailsSliverDelegate extends State<DetailsSliver> {
     return Container(
       width: Utils.width,
       //color: Colors.red,
-      height: Utils.height! * .3,
+      height: Utils.deviceHeight * .3,
       child: PageView.builder(
           itemCount: items.length,
           controller: _pageController,
@@ -703,7 +770,7 @@ class DetailsSliverDelegate extends State<DetailsSliver> {
         _numPages > 1
             ? Positioned(
                 bottom: 40,
-                left: Utils.width! / 2 - 50,
+                left: Utils.deviceWidth/ 2 - 50,
                 child: _buildPageIndicator(),
               )
             : Container(),

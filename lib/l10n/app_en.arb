@@ -1,618 +1,828 @@
 {
   "home" : "Home",
   "@home": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "my_account":"My Account",
   "@profile": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
    "store":"Store",
   "@store": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "error":"Some Error Happened",
   "@error": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "logout":"Log out",
   "@logout": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "change_language":"Change Language",
   "@change_language": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "forum":"Forum",
   "@forum": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "change_password":"Change Password",
   "@change_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "password_changed_successfully": "Password has been changed",
   "@password_changed_successfully": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "please_check_username_password": " Please check your username or password ",
   "@please_check_username_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"login": "login",
   "@login": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "forget_password": "Forget Password ? ",
   "@forget_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "dont_have_an_account": "Don’t have an account?",
   "@dont_have_an_account": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "username": "Username",
   "@username": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "remember_me": "Remember Me?",
   "@remember_me": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "upload_profile_image": "Upload Profile Image ",
   "@upload_profile_image": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },  "something_went_wrong": "Something went wrong",
   "@something_went_wrong": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "new_password": "New Password",
   "@new_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "are_you_sure_to_select_this_image": "Are you sure you want to change the image ? ",
   "@are_you_sure_to_select_this_image": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
    "image_uploaded_successfully": "The image has been changed successfully ",
   "@image_uploaded_successfully": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "current_password": "Current Password",
   "@current_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "category":"Category",
   "@category": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "splash_phrase":"Your Arabic Guide for pregnancy and parenthood",
   "@splash_phrase": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "items":"Items",
   "@items": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
-  "amd":"AMD",
+  "amd":"AED",
   "@amd": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"discount":"Discount",
   "@discount": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "create_New_Account":"Create a New Account",
   "@create_New_Account": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 
 
   "create_new_account_to_see":"Create an account to see all your information and allows you will be able to share your experience with others and learn other mothers experiment’s.",
   "@create_new_account_to_see": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "agree_for_news":"Agree for Newsletter?",
   "@agree_for_news": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "proceed_as_guest": "Proceed as a guest",
   "@proceed_as_guest": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "total":"Total",
   "@total": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"guest":"Guest",
   "@guest": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"you_have_to_login_first":"You have to login first ",
   "@you_have_to_login_first": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "sizes":"Sizes:",
   "@sizes": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"not_now":"Not now",
   "@not_now": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"done":"Done",
   "@done": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"we_are_pleased":"We are pleased to join your journey and provide you with free knowledge and medical tips week by week as your pea-pod develops into a full-grown sweet baby.",
   "@we_are_pleased": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "your_Pregnancy":"Your Pregnancy",
   "@your_Pregnancy": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "physical":"Physical",
   "@physical": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "loading":"Loading...",
   "@loading": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "wish_List":"Wish List",
   "@wish_List": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"weeks_Pregnancy_Helps":"Weeks Pregnancy Helps",
   "@weeks_Pregnancy_Helps": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"expert_Blogs":"Expert Blogs",
   "@expert_Blogs": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"ok_Go_Back":"Ok Go Back ",
   "@ok_Go_Back": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "code_entered_is":"Code entered is ",
   "@code_entered_is": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "item_Details":"Item Details ",
   "@item_Details": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "description":"Description",
   "@description": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"review":"Review",
   "@review": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "magnetic_Energy":"Magnetic Energy Anion Sanitary Napkins are designed for your wellness during your periods. Magnetic Strip provides 3 natural energies (magnetism, anion and far infrared) that",
   "@magnetic_Energy": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"add_to_cart":"Add to Cart",
   "@add_to_cart": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"maternity_Bladder":"Maternity Bladder Control ads'",
   "@maternity_Bladder": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"no_Products_Found":"No Products Found",
   "@no_Products_Found": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"thaiamine":"Thiamine (Vitamin B1) in\\n your diet \\nduring pregnancy",
   "@thaiamine": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"agree_to":"I agree to the ",
   "@agree_to": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"terms_conditions":"Terms and conditions",
   "@terms_conditions": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"and":"and",
   "@and": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"privacy_policy":"Privacy Policy",
   "@privacy_policy": {
-    "description": "The conventional newborn programmer greeting"
-  },"to_mother_club":" to\\nMotherClub",
+    "description": ""
+  },"to_mother_club":" to MotherClub",
   "@to_mother_club": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "register":"Register",
   "@register": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "name_must_be_more_than":"Name Must be more than 3 characters",
   "@name_must_be_more_than": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "username_must_be_more_than":"User name Must be more than 3 characters",
   "@username_must_be_more_than": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "password_must_be_more_than":"Password Must be more than 7 characters",
   "@password_must_be_more_than": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "email_must_be_more_than":"Email is not valid ",
   "@email_must_be_more_than": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "your_orders":"Your Orders",
   "@your_orders": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "see_all":"See All",
   "@see_all": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"week":"Week",
   "@week": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"comments":"Comments",
   "@comments": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "reply":"Reply",
   "@reply": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "buy_again":"Buy Again",
   "@buy_again": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "your_wish_list":"Your Wish List",
   "@your_wish_list": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "add_wishlist_name":"Add Wish List",
   "@add_wishlist_name": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "add":"Add",
   "@add": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "contact_us":"contact us",
   "@contact_us": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "choose_age":"Choose baby age",
   "@choose_age": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },  "additional_information":"additional_information",
   "@additional_information": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "write_review":"Write your review",
   "@write_review": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   }, "submit":"Submit",
   "@submit": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"item_added":"'Item added to the cart'",
   "@item_added": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "select_language":"Select Language",
   "@select_language": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "settings":"Settings",
   "@settings": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"contact_details":"Contact Details",
   "@contact_details": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"address":"Address",
   "@address": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"address_validation":"Enter A valid Address",
   "@address_validation": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"save_address_as":"SAVE ADDRESS AS",
   "@save_address_as": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"work":"Work",
   "@work": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"payment_option":"PAYMENT OPTION",
   "@payment_option": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"have_a_promo":"Have a promo code",
   "@have_a_promo": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"apply":"Apply",
   "@apply": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"verify_your_email":"Verify Your Email",
   "@verify_your_email": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"please_enter_4_digit":"Please enter the 4 digite code sent to Amara123@gmail.com",
   "@please_enter_4_digit": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"verification_code":"Verification Code",
   "@verification_code": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"login_to_account":"Login your Account",
   "@login_to_account": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"your_password":"Your new password must be different from priviously  used Password",
   "@your_password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"we_pleased":"We are pleased to accompany you on your journey and provide you with free information",
   "@we_pleased": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"or_login_with":"Or login with",
   "@or_login_with": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"following":"Following",
   "@following": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },  "we_choose_for_you": "We Choose for you",
   "@we_choose_for_you": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "search_product": "Search Products",
   "@search_product": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "your_baby": "Your baby",
   "@your_baby": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "baby_month": "Baby Month",
   "@baby_month": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "checkout": "CHECKOUT",
   "@checkout": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "continue_": "Continue",
   "@continue_": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "mother_club": "Mother Club",
   "@mother_club": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "email": "Email",
   "@email": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "edit_wishlist_Name": "Edit Wish List Name",
   "@edit_wishlist_Name": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "edit": "Edit",
   "@edit": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "phone": "phone",
   "@phone": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "phone_validation": "Enter a valid phone",
   "@phone_validation": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "warning": "Warning",
   "@warning": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "ok": "OK",
   "@ok": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "confirmed": "Confirmed",
   "@confirmed": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "there_is_no_product": "There is no product for ",
   "@there_is_no_product": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "password": "Password",
   "@password": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 "city": "City",
   "@city": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "city_validation": "must be a valid city",
   "@city_validation": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "name": "Name",
   "@name": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "shipping_details": "Shopping Details",
   "@shipping_details": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 "zipCode": "Zip Code",
   "@zipCode": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 "zipCode_validation": "Enter a valid Zip Code",
   "@zipCode_validation": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 "age": "Age",
   "@age": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 "first": "First",
   "@first": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 "last": "Last",
   "@last": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "week_pregnancy": "Pregnancy Week",
   "@week_pregnancy": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
 
   "write_your_experience": "Write your experience",
   "@write_your_experience": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "congrats": "'Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.'",
   "@congrats": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "followers":"Followers",
   "@followers": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "you_are_pregnant_for":"You are pregnant for",
   "@you_are_pregnant_for": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
    "hi":"Hi",
   "@hi": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "likes":"Likes",
   "@likes": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "yes":"Yes",
   "@yes": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "no":"No",
   "@no": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "cancel":"Cancel",
   "@cancel": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "we_are_opened_to_suggestion": "we are open for any suggestion or just to have a chat",
   "@we_are_opened_to_suggestion": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "feedback_location": "Sharjah Research Technology and\n Innovation park Sharjah-UAE",
   "@feedback_location": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "follow_us": "FOLLOW US",
   "@follow_us": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "feedback":"Feedback",
   "@feedback": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "total_post":"Total Post",
   "@total_post": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },"shopping_products":"Shopping products",
   "@shopping_products": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "remove_order" : "Deleting orders",
   "@remove_order": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "no_wish_list_yet": "No Wish list",
   "@no_wish_list_yet": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "variation": "Variation",
   "@variation": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "quantity": "Quantity",
   "@quantity": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "you_have": "You have",
   "@you_have": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "items_in_your_cart": "items in your cart",
   "@items_in_your_cart": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "your_cart": "Your Cart",
   "@your_cart": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
 
   "has_deleted": "has deleted",
   "@has_deleted": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "added": "added",
   "@added": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "edited": "edited",
   "@edited": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "order": "order",
   "@order": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "some_fields_are_invalid": "some fields are invalid",
   "@some_fields_are_invalid": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "item_removed_from_this_wishlist": "Item removed from this wishlist !",
   "@item_removed_from_this_wishlist": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "item_added_to_the_cart_again": "item added to the cart again",
   "@item_added_to_the_cart_again": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "you_have_to_agree_the_terms": "You have to agree the terms",
   "@you_have_to_agree_the_terms": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "feedback_sent": "Feedback successfully sent!",
   "@feedback_sent": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "pregnancy_tools_resources": "Pregnancy Tools & Resources",
   "@pregnancy_tools_resources": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "search": "Search",
   "@search": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "price": "Price",
   "@price": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "filters": "Filters",
   "@filters": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
   },
   "on_sale": "On Sale",
   "@on_sale": {
-    "description": "The conventional newborn programmer greeting"
+    "description": ""
+  },
+  "open_forum": "Open Forum",
+  "@open_forum": {
+    "description": ""
+  },
+  "add_new_topic": "Add New Topic",
+  "@add_new_topic": {
+    "description": ""
+  },
+  "title": "title : ",
+  "@title": {
+    "description": ""
+  },
+  "content": "content : ",
+  "@content": {
+    "description": ""
+  },
+  "your_store": "Your Store",
+  "@your_store": {
+    "description": ""
+  },
+  "your_forum": "Your Forum",
+  "@your_forum": {
+    "description": ""
+  },
+  "your_pregnancy_desc": "We are pleased to join your journey and provide you with free knowledge and medical tips week by week as your pea-pod develops into a full-grown sweet baby.",
+  "@your_pregnancy_desc": {
+    "description": ""
+  },
+  "your_baby_desc": "Congratulations on your new bundle of joy! Now that your baby arrived, you can find here everything you have to look forward to, from milestones to baby’s growth, plus tips to make life easier.",
+  "@your_baby_desc": {
+    "description": ""
+  },
+  "your_forum_desc": "By joining our community forum, you will be able to share your experience with others and learn other mothers experiment’s from all over the world.",
+  "@your_forum_desc": {
+    "description": ""
+  },
+  "your_store_desc": "Our store has a carefully selected items to provide you with a safe and easy mother-baby solutions. We have worked hard to bring you the best possible offers, shipping to you wherever you are.",
+  "@your_store_desc": {
+    "description": ""
+  },
+  
+  
+  
+  "terms_and_conditions1": "Welcome to the Mothers Club website, which is an online information and communication service provided by the Mothers Club FZLLC, Sharjah – United Arab Emirates. This policy aims to cover the uses of the entire site, although additional terms, restrictions and privacy policies may apply.",
+  "@terms_and_conditions1": {
+    "description": ""
+  },
+  "terms_and_conditions_title1": "Healthcare Disclaimer",
+  "@terms_and_conditions_title1": {
+    "description": ""
+  },
+
+  "terms_and_conditions2": "The goal of making content, products, consulting services, and any communication available here is to educate consumers about healthcare and medical problems that may affect their daily lives. Nothing in the Content or in the Products or Services is intended to be a substitute for medical advice, diagnosis, or treatment.\n\nThis website and its services do not constitute medical, nursing or other professional healthcare advice, diagnosis or treatment. You should always speak with your health care provider first for diagnosis and treatment, including your specific medical needs. All products or services offered on this Website do not represent or warrant the safety, suitability, or effectiveness of the particular service or product. Users are advised to always seek to direct any questions regarding personal health or health conditions to a physician or other qualified healthcare provider. If you have or suspect you have a health problem or condition, please contact a qualified healthcare professional immediately.",
+  "@terms_and_conditions2": {
+    "description": ""
+  },
+  "terms_and_conditions_title2": "Terms of Use",
+  "@terms_and_conditions_title2": {
+    "description": ""
+  },
+  "terms_and_conditions3": "Your access to or use of the Service constitutes acceptance of the Agreement as it appears at the time of entry or use. You may offer website visitors from time to time opportunities to subscribe to additional features or services through the Website and you may be obligated to enter into additional agreements or authorizations before you can use such features or services.",
+  "@terms_and_conditions3": {
+    "description": ""
+  },
+  "terms_and_conditions_title3": "Intended for Users 18 Years of Age and Older",
+  "@terms_and_conditions_title3": {
+    "description": ""
+  },
+  "terms_and_conditions4": "This website is intended for use by persons 18 years of age or older and children and persons under 18 years of age are not recommended to use this site. A parent or guardian is supposed to assist site users under 18 years of age.",
+  "@terms_and_conditions4": {
+    "description": ""
+  },
+  "terms_and_conditions_title4": "You Will Agree Not to:",
+  "@terms_and_conditions_title4": {
+    "description": ""
+  },
+  "terms_and_conditions5": "Uploading or transmitting any communications or content of any kind that may infringe or infringe the rights of any party\n\nUse this website for any purpose that infringes your local, state, international or national rights\n\nUse this website as a means to distribute advertisements or other unsolicited material to any third party\n\nUse this Website to post or transmit material that is unlawful, obscene, defamatory, threatening, harassing, abusive, slanderous, hateful, or embarrassing to any other person or entity\n\nAttempting to disable a “breach” or affect the proper functioning of this website\n\nIf you use any part of the Site and it requires secure access, you are responsible for maintaining the privacy of your account and password and for restricting access to your computer, and you agree to accept responsibility for all activities that occur under your account or password.",
+  "@terms_and_conditions5": {
+    "description": ""
+  },
+  "terms_and_conditions_title5": "Cancel Use",
+  "@terms_and_conditions_title5": {
+    "description": ""
+  },
+  "terms_and_conditions6": "The Mothers Club may terminate your account or your use of the Website in its sole discretion at any time. You are legally responsible for any orders placed or financial charges incurred prior to cancellation.",
+  "@terms_and_conditions6": {
+    "description": ""
+  },
+  "terms_and_conditions_title6": "Blogs and Interactive Media",
+  "@terms_and_conditions_title6": {
+    "description": ""
+  },
+  "terms_and_conditions7": "If you write articles or publish information on a website, this gives The Mothers Club an irrevocable right to reproduce, distribute, publish, display, draft, modify and create secondary works from them, use what you submit for any purpose in any form and publish it on any media.\n\n\nIf you use blog articles or post information on the website, you agree not to:\n\n\nPost material that infringes the rights of any third party, including intellectual property rights, personal rights or rights of publicity.\n\nPost material that is unlawful, obscene, defamatory, threatening, harassing, abusive, defamatory, hateful or embarrassing to any other person or entity.\n\nPosting ads to seduce businesses.\n\nPublishing chain letters or hierarchical systems.\nImpersonating another person, including a spouse, child, or sibling.\n\nAllow someone to use personal documents to post or view comments.\n\nThe Mothers Club reserves the right (but is not obligated to) to delete messages that do not respect the Terms of Use, and/or to deny access to the entire Site or to certain features such as the Blog.",
+  "@terms_and_conditions7": {
+    "description": ""
+  },
+  "terms_and_conditions_title7": "Evacuation Responsibility:",
+  "@terms_and_conditions_title7": {
+    "description": ""
+  },
+  "terms_and_conditions8": "You understand and agree that The Mothers Club and any other services, content or information made available or provided on the Site make no express or implied warranties, representations or representations whatsoever (including but not limited to warranties of bond, non-infringement or implied warranties relating to trade or fitness for a particular purpose) in connection with the Service or any goods, information or services you make available through the Service. In addition, Mothers Club does not guarantee that the use of the site will be unaccompanied by technical difficulties, for example, but not limited to the lack of information, interruption or failure of the service, viruses or Internet worms, and you understand the responsibility to implement adequate procedures and control points to meet your special requirements in terms of the accuracy of the data entered. and outgoing.",
+  "@terms_and_conditions8": {
+    "description": ""
+  },
+  "terms_and_conditions_title8": "Limitation of Liability",
+  "@terms_and_conditions_title8": {
+    "description": ""
+  },
+
+  "terms_and_conditions9": "Use of this website is entirely at your own risk, and in no event shall The Mothers Club be liable for any direct, indirect, incidental, consequential, special, representative or punitive damages, or any other financial damages, losses, fees, fines or penalties. other, or legal liabilities arising from or in any way connected with this Service, websites browsed through this Service and/or the content or information contained herein. Your sole and exclusive remedy for dissatisfaction with this Service is to discontinue its use. By applying this paragraph, the User agrees to all content, goods and services available through the Website.",
+  "@terms_and_conditions9": {
+    "description": ""
+  },
+  "terms_and_conditions_title9": "Links to third-party websites",
+  "@terms_and_conditions_title9": {
+    "description": ""
+  },
+  "terms_and_conditions10": "The Site contains links to other websites operated by third parties. These links are provided for your convenience and are intended to enable access to third party websites only, and not for any other purpose.\n\nThe Mothers Club does not warrant or claim to represent any material, quality, functionality, accuracy or suitability for any particular purpose or to promote or otherwise represent any third-party site, content or service. A link to a third-party site on the Mothers Club does not constitute sponsorship, endorsement, approval or responsibility for the third-party site whatsoever. The Mothers Club makes no representation or warranty for any of the products or services offered on any third party website.",
+  "@terms_and_conditions10": {
+    "description": ""
+  },
+  "terms_and_conditions_title10": "Contact Information",
+  "@terms_and_conditions_title10": {
+    "description": ""
+  },
+  "terms_and_conditions11": "If you have any questions about the service, please contact us at:",
+  "@terms_and_conditions11": {
+    "description": ""
+  },
+
+  "privacy_policy_title1": "Information We Collect",
+  "@privacy_policy_title1": {
+    "description": ""
+  },
+  "privacy_policy1": "We respect the privacy right of all visitors to the Mothers Club website and we receive and keep the information you enter on our websites or otherwise make available to us, such as your name, e-mail and phone number, including the information you provide when filling out profile information. When you interact with our websites, certain information about your use of the websites is automatically collected. This information includes computer and network information such as your pageview statistics, level of activity on and off our Sites, referring URL, advertising data, IP address and device identifiers. This information may also include the history of purchases, if any, you have made, your web access information, the way you search for our sites, the websites or postal addresses on our sites that you click, and if and when you read the emails we send, and your browsing activities Via other websites. Most of this information is collected by cookies, web beacons, and other tracking technologies as well as by your web browser or device (such as your IP address, proxy access control, browser version, etc.).",
+  "@privacy_policy1": {
+    "description": ""
+  },
+  "privacy_policy_title2": "Electronic Communications, Newsletter and Related Services",
+  "@privacy_policy_title2": {
+    "description": ""
+  },
+  "privacy_policy2": "The Mothers Club allows you to receive communications from us or third parties. You can subscribe to our e-mail newsletter. You can also unsubscribe from the newsletter service at any time. We may share e-mail messages that we receive from you via e-mail links on our website with customer service representatives, employees, medical experts or agents, who are able to respond to your inquiries. We do everything we can to respond in a timely manner as soon as messages are received. Once your query is answered, it will be disposed of or archived depending on the nature of the query. You may decide at some point that you no longer wish to receive communications from our Website. To stop receiving correspondence, please send an email to info@mothersclub.me",
+  "@privacy_policy2": {
+    "description": ""
+  },
+  "privacy_policy_title3": "Polls",
+  "@privacy_policy_title3": {
+    "description": ""
+  },
+  "privacy_policy3": "\nWe survey visitors to our website from time to time. The information obtained from these surveys is used in an indefinite aggregate form to help us understand the needs of our visitors so that we can improve our site. Information may be shared with third parties with whom we have a business relationship. In surveys, we do not usually ask for personally identifiable information, but if we ask for contact information for the purpose of follow-up, you can refuse to provide it. In the event that survey participants choose to give out personal information (such as e-mail), it will be exchanged with the people who must see it to answer the question or request, or with third parties that provide our site with data management services, those third parties have given their consent to keep the survey data confidential.",
+  "@privacy_policy3": {
+    "description": ""
+  },
+  "privacy_policy_title4": "How We use the Information We Collect",
+  "@privacy_policy_title4": {
+    "description": ""
+  },
+  "privacy_policy4": "We use the information we collect to do, such as to:\n\nImprove performance and user experience on our websites.\nOperating, evaluating and improving our business.\nFulfilling orders and requests for products, services, or information.\nRevenue processing and exchange business.\nOnline order tracking and confirmation.\nConnect or install products.\nMarketing and advertising products and services, including getting to know you on our websites and tailoring ads and offers for you (both on our websites and other websites) based on your interaction with us in our stores and online.\nConducting research and analysis.\nCommunicate with the user about the account, special events and surveys.\nCreate and manage your accounts with us.",
+  "@privacy_policy4": {
+    "description": ""
+  },
+  "privacy_policy_title5": "Data Retention",
+  "@privacy_policy_title5": {
+    "description": ""
+  },
+  "privacy_policy5": "\nWe will retain your information for as long as your account is active or as needed to provide services to you, comply with our legal obligations, resolve disputes, and enforce our agreements.",
+  "@privacy_policy5": {
+    "description": ""
+  },
+  "privacy_policy_title6": "We may share information with third parties",
+  "@privacy_policy_title6": {
+    "description": ""
+  },
+  "privacy_policy6": "We may share your personal information with third parties we partner with to help us provide the Services. In each case, we will ensure that these third parties agree to protect your data. We may make available to third parties aggregate statistics about our visitors, traffic patterns and related site information. This data reflects site usage patterns collected each month during visits to our site, but does not contain information that personally identifies you unless you give us permission to share that information. We may use or disclose your personal information when required to do so by law, or where we believe in good faith that such action is necessary (a) to comply with applicable law or to comply with legal process presented on our sites, or (b) to protect and maintain our rights, property, or our Sites or our users, or (c) to protect our personal safety, the safety of people using our Sites, or the safety of the general public.",
+  "@privacy_policy6": {
+    "description": ""
+  },
+  "privacy_policy_title7": "Online Advertising and Your Choices",
+  "@privacy_policy_title7": {
+    "description": ""
+  },
+  "privacy_policy7": "Use of cookies: Our sponsors, advertisers and ad servers may use cookies when viewing pages on our site. They use these cookies to collect information as a means of measuring the effectiveness of their advertisements, to serve advertisements about goods and services that may be of interest to you or to avoid showing you the same advertisements over time. This information may include your browser type, operating system, web pages visited, time of visits, content viewed, advertisements shown, and other click-through data. We do not control the use of cookies by third parties or how they manage the information they collect through them. However, our sponsors and advertisers have agreed that they will not collect any personal information from visitors to our site. If you click on an advertisement on our site and visit a site operated by one of our sponsors or advertisers, please note that we are not responsible for the privacy practices of that site. You should read the privacy policies of each website you visit to determine what information that website may collect about you.",
+  "@privacy_policy7": {
+    "description": ""
+  },
+  "privacy_policy_title8": "The Wish",
+  "@privacy_policy_title8": {
+    "description": ""
+  },
+  "privacy_policy8": "We use reasonable security measures to protect the confidentiality of personal information under our control and appropriately restrict access to it. We use a variety of information security measures to protect your online transactions with us.",
+  "@privacy_policy8": {
+    "description": ""
+  },
+  "privacy_policy_title9": "Links to Other Websites",
+  "@privacy_policy_title9": {
+    "description": ""
+  },
+  "privacy_policy9": "Our websites are provided with links to other websites, and many of these websites have their own privacy policies, so be sure to check the privacy policy posted on the website you are browsing.",
+  "@privacy_policy9": {
+    "description": ""
+  },
+  "privacy_policy_title10": "Contact Information",
+  "@privacy_policy_title10": {
+    "description": ""
+  },
+  "privacy_policy10": "If you have a question, or concern about your privacy, please contact our Privacy Officer via :",
+  "@privacy_policy10": {
+    "description": ""
   }
 }

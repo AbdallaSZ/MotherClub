@@ -8,8 +8,14 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
-
+import 'package:html/parser.dart';
 Widget ResorcesListCard(Post post, context) {
+  String _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString = parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
+  }
   return Container(
     margin: EdgeInsets.only(top: 10),
     padding: EdgeInsets.only(right: 10),
@@ -60,7 +66,7 @@ Widget ResorcesListCard(Post post, context) {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  post.title!.rendered!,
+                  _parseHtmlString(post.title!.rendered!),
                   style: TextStyle(
                       fontSize: SizeHelper.of(context).help(
                         mobileSmall: 10,

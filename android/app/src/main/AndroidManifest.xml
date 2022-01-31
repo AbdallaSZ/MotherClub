@@ -2,7 +2,7 @@
     package="com.example.motherclub">
    <application
        android:largeHeap="true"
-        android:label="motherclub"
+        android:label="Mother's Club"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

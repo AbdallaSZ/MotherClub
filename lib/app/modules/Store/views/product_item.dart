@@ -1,11 +1,6 @@
-import 'dart:collection';
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductDetailsModel.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
@@ -99,6 +94,90 @@ class _ProductItemState extends State<ProductItem> {
 
   @override
   Widget build(BuildContext context) {
+    double h2 = SizeHelper.of(context).help(
+      mobileSmall: 19,
+      mobileNormal: 21,
+      mobileLarge: 24,
+      mobileExtraLarge: 26,
+      tabletSmall: 29,
+      tabletNormal: 31,
+      tabletLarge: 33,
+      tabletExtraLarge: 38,
+      desktopSmall: 44,
+      desktopNormal: 49,
+      desktopLarge: 55,
+      desktopExtraLarge: 60,
+    );
+    double h3 = SizeHelper.of(context).help(
+      mobileSmall: 15,
+      mobileNormal: 16,
+      mobileLarge: 17,
+      mobileExtraLarge: 20,
+      tabletSmall: 22,
+      tabletNormal: 25,
+      tabletLarge: 29,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 45,
+      desktopExtraLarge: 45,
+    );
+    double h4 = SizeHelper.of(context).help(
+      mobileSmall: 12,
+      mobileNormal: 13,
+      mobileLarge: 15,
+      mobileExtraLarge: 17,
+      tabletSmall: 20,
+      tabletNormal: 25,
+      tabletLarge: 30,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 40,
+      desktopExtraLarge: 45,
+    );
+    double h5 = SizeHelper.of(context).help(
+      mobileSmall: 10,
+      mobileNormal: 11,
+      mobileLarge: 11,
+      mobileExtraLarge: 13,
+      tabletSmall: 15,
+      tabletNormal: 18,
+      tabletLarge: 21,
+      tabletExtraLarge: 24,
+      desktopSmall: 28,
+      desktopNormal: 32,
+      desktopLarge: 36,
+      desktopExtraLarge: 38,
+    );
+    double h6 = SizeHelper.of(context).help(
+      mobileSmall: 8,
+      mobileNormal: 9,
+      mobileLarge: 9,
+      mobileExtraLarge: 10,
+      tabletSmall: 12,
+      tabletNormal: 14,
+      tabletLarge: 15,
+      tabletExtraLarge: 17,
+      desktopSmall: 19,
+      desktopNormal: 22,
+      desktopLarge: 24,
+      desktopExtraLarge: 25,
+    );
+    double h7 = SizeHelper.of(context).help(
+      mobileSmall: 7,
+      mobileNormal: 7,
+      mobileLarge: 8,
+      mobileExtraLarge: 8,
+      tabletSmall: 10,
+      tabletNormal: 12,
+      tabletLarge: 13,
+      tabletExtraLarge: 14,
+      desktopSmall: 15,
+      desktopNormal: 17,
+      desktopLarge: 18,
+      desktopExtraLarge: 20,
+    );
     return Stack(
       children: [
         Container(
@@ -537,22 +616,8 @@ class _ProductItemState extends State<ProductItem> {
                         // Get.toNamed(Routes.CART);
                       },
                       child: Container(
-                        width: SizeHelper.of(context).help(
-                          mobileSmall: 35,
-                          mobileNormal: 37,
-                          mobileLarge: 39,
-                          tabletNormal: 41,
-                          tabletExtraLarge: 43,
-                          desktopLarge: 45,
-                        ),
-                        height: SizeHelper.of(context).help(
-                          mobileSmall: 35,
-                          mobileNormal: 37,
-                          mobileLarge: 39,
-                          tabletNormal: 41,
-                          tabletExtraLarge: 43,
-                          desktopLarge: 45,
-                        ),
+                        width: h2,
+                        height: h2,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
                           gradient: LinearGradient(
@@ -572,13 +637,7 @@ class _ProductItemState extends State<ProductItem> {
                         ),
                         child: Icon(
                           Icons.add_shopping_cart,
-                          size: SizeHelper.of(context).help(
-                            mobileNormal: 22,
-                            mobileLarge: 24,
-                            tabletNormal: 26,
-                            tabletExtraLarge: 28,
-                            desktopLarge: 30,
-                          ),
+                          size: h3,
                           color: Colors.white,
                         ),
                       ),

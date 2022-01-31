@@ -13,6 +13,8 @@ import 'package:motherclub/app/RegisterBloc/RegisterBloc.dart';
 import 'package:motherclub/app/RegisterBloc/RegisterState.dart';
 import 'package:motherclub/app/StateEnum.dart';
 import 'package:motherclub/app/modules/auth/controllers/auth_controller.dart';
+import 'package:motherclub/app/modules/privacy_policy/terms_and_conditions.dart';
+import 'package:motherclub/app/modules/terms_and_conditions/terms_and_conditions.dart';
 import 'package:motherclub/app/provider/AuthProvider.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -78,6 +80,76 @@ class _RegisterViewState extends State<RegisterView> {
     double deviceWidth = MediaQuery.of(context).size.width;
 
     AuthProvider auth = Provider.of<AuthProvider>(context);
+    double h3 = SizeHelper.of(context).help(
+      mobileSmall: 15,
+      mobileNormal: 16,
+      mobileLarge: 17,
+      mobileExtraLarge: 20,
+      tabletSmall: 22,
+      tabletNormal: 25,
+      tabletLarge: 29,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 45,
+      desktopExtraLarge: 45,
+    );
+    double h4 = SizeHelper.of(context).help(
+      mobileSmall: 12,
+      mobileNormal: 13,
+      mobileLarge: 15,
+      mobileExtraLarge: 17,
+      tabletSmall: 20,
+      tabletNormal: 25,
+      tabletLarge: 30,
+      tabletExtraLarge: 35,
+      desktopSmall: 40,
+      desktopNormal: 40,
+      desktopLarge: 40,
+      desktopExtraLarge: 45,
+    );
+    double h5 = SizeHelper.of(context).help(
+      mobileSmall: 10,
+      mobileNormal: 11,
+      mobileLarge: 11,
+      mobileExtraLarge: 13,
+      tabletSmall: 15,
+      tabletNormal: 18,
+      tabletLarge: 21,
+      tabletExtraLarge: 24,
+      desktopSmall: 28,
+      desktopNormal: 32,
+      desktopLarge: 36,
+      desktopExtraLarge: 38,
+    );
+    double h6 = SizeHelper.of(context).help(
+      mobileSmall: 8,
+      mobileNormal: 9,
+      mobileLarge: 9,
+      mobileExtraLarge: 10,
+      tabletSmall: 12,
+      tabletNormal: 14,
+      tabletLarge: 15,
+      tabletExtraLarge: 17,
+      desktopSmall: 19,
+      desktopNormal: 22,
+      desktopLarge: 24,
+      desktopExtraLarge: 25,
+    );
+    double h7 = SizeHelper.of(context).help(
+      mobileSmall: 7,
+      mobileNormal: 7,
+      mobileLarge: 8,
+      mobileExtraLarge: 8,
+      tabletSmall: 10,
+      tabletNormal: 12,
+      tabletLarge: 13,
+      tabletExtraLarge: 14,
+      desktopSmall: 15,
+      desktopNormal: 17,
+      desktopLarge: 18,
+      desktopExtraLarge: 20,
+    );
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
@@ -199,170 +271,137 @@ class _RegisterViewState extends State<RegisterView> {
                                 color: Colors.transparent,
                                 height: deviceHeight / 25,
                               ),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      Utils.labels!.agree_for_news,
-                                      style: GoogleFonts.roboto(
-                                          fontSize: SizeHelper.of(context).help(
-                                            mobileSmall: 10,
-                                            mobileNormal: 10,
-                                            mobileLarge: 12,
-                                            mobileExtraLarge: 13,
-                                            tabletSmall: 16,
-                                            tabletNormal: 20,
-                                            tabletLarge: 25,
-                                            tabletExtraLarge: 25,
-                                            desktopLarge: 26,
-                                          ),
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle: FontStyle.normal,
-                                          color: Black_textColor),
-                                    ),
-                                    // CustomToggleWidget(deviceHeight/23,deviceWidth/4,context),
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                color: Colors.transparent,
-                                height: deviceHeight / 23,
-                              ),
+                              // Container(
+                              //   alignment: Alignment.center,
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     children: [
+                              //       Text(
+                              //         Utils.labels!.agree_for_news,
+                              //         style: GoogleFonts.roboto(
+                              //             fontSize: SizeHelper.of(context).help(
+                              //               mobileSmall: 10,
+                              //               mobileNormal: 10,
+                              //               mobileLarge: 12,
+                              //               mobileExtraLarge: 13,
+                              //               tabletSmall: 16,
+                              //               tabletNormal: 20,
+                              //               tabletLarge: 25,
+                              //               tabletExtraLarge: 25,
+                              //               desktopLarge: 26,
+                              //             ),
+                              //             fontWeight: FontWeight.w500,
+                              //             fontStyle: FontStyle.normal,
+                              //             color: Black_textColor),
+                              //       ),
+                              //       // CustomToggleWidget(deviceHeight/23,deviceWidth/4,context),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Divider(
+                              //   color: Colors.transparent,
+                              //   height: deviceHeight / 23,
+                              // ),
                               Row(
                                 children: [
                                   StreamBuilder<bool>(
-                                      stream: checkBoxSubject.stream,
-                                      builder: (context, snapshot) {
-                                        if (snapshot.hasData)
-                                          return Checkbox(
-                                            value: snapshot.data,
-                                            activeColor: pinkfavorite_Color,
-                                            onChanged: (value) {
-                                              checkBoxSubject.sink.add(value!);
-                                              _checkbox = value;
+                                    stream: checkBoxSubject.stream,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData)
+                                        return Checkbox(
+                                          value: snapshot.data,
+                                          activeColor: pinkfavorite_Color,
+                                          onChanged: (value) {
+                                            checkBoxSubject.sink.add(value!);
+                                            _checkbox = value;
+                                          },
+                                        );
+                                      else
+                                        return Container();
+                                    },
+                                  ),
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            Utils.labels!.agree_to,
+                                            style: GoogleFonts.roboto(
+                                                fontSize: h7,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: Black_textColor),
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => const TermsAndConditions()),
+                                              );
                                             },
-                                          );
-                                        else
-                                          return Container();
-                                      }),
-                                  Container(
-                                    width: Utils.deviceWidth - 130,
-                                    child: RichText(
-
-                                      overflow: TextOverflow.clip,
-                                      maxLines: 1,
-                                      softWrap: false,
-                                      text: TextSpan(
-                                        text: Utils.labels!.agree_to,
-                                        style: GoogleFonts.roboto(
-                                            fontSize: SizeHelper.of(context).help(
-                                              mobileSmall: 6,
-                                              mobileNormal: 7,
-                                              mobileLarge: 8,
-                                              mobileExtraLarge: 10,
-                                              tabletSmall: 12,
-                                              tabletNormal: 14,
-                                              tabletLarge: 16,
-                                              tabletExtraLarge: 18,
-                                              desktopLarge: 22,
+                                            child: Text(
+                                              Utils.labels!.terms_conditions,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: h6,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Text_color),
                                             ),
-                                            fontWeight: FontWeight.w400,
-                                            fontStyle: FontStyle.normal,
-                                            color: Black_textColor),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: Utils.labels!.terms_conditions,
-                                            style: GoogleFonts.roboto(
-                                                fontSize:
-                                                    SizeHelper.of(context).help(
-                                                  mobileSmall: 6,
-                                                  mobileNormal: 7,
-                                                  mobileLarge: 8,
-                                                  mobileExtraLarge: 10,
-                                                  tabletSmall: 12,
-                                                  tabletNormal: 14,
-                                                  tabletLarge: 16,
-                                                  tabletExtraLarge: 18,
-                                                  desktopLarge: 22,
-                                                ),
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                color: Text_color),
                                           ),
-                                          TextSpan(
-                                            text: ' ${Utils.labels!.and} ',
-                                            style: GoogleFonts.roboto(
-                                                fontSize:
-                                                    SizeHelper.of(context).help(
-                                                  mobileSmall: 6,
-                                                  mobileNormal: 7,
-                                                  mobileLarge: 8,
-                                                  mobileExtraLarge: 10,
-                                                  tabletSmall: 12,
-                                                  tabletNormal: 14,
-                                                  tabletLarge: 16,
-                                                  tabletExtraLarge: 18,
-                                                  desktopLarge: 22,
-                                                ),
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                color: Black_textColor),
-                                          ),
-                                          TextSpan(
-                                            text: Utils.labels!.privacy_policy,
-                                            style: GoogleFonts.roboto(
-                                                fontSize:
-                                                    SizeHelper.of(context).help(
-                                                  mobileSmall: 6,
-                                                  mobileNormal: 7,
-                                                  mobileLarge: 8,
-                                                  mobileExtraLarge: 10,
-                                                  tabletSmall: 12,
-                                                  tabletNormal: 14,
-                                                  tabletLarge: 16,
-                                                  tabletExtraLarge: 18,
-                                                  desktopLarge: 22,
-                                                ),
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                color: Text_color),
-                                          ),
-                                          TextSpan(
-                                            text: Utils.labels!.to_mother_club,
-                                            style: GoogleFonts.roboto(
-                                                fontSize:
-                                                    SizeHelper.of(context).help(
-                                                  mobileSmall: 6,
-                                                  mobileNormal: 7,
-                                                  mobileLarge: 8,
-                                                  mobileExtraLarge: 10,
-                                                  tabletSmall: 12,
-                                                  tabletNormal: 14,
-                                                  tabletLarge: 16,
-                                                  tabletExtraLarge: 18,
-                                                  desktopLarge: 22,
-                                                ),
-                                                fontWeight: FontWeight.w400,
-                                                fontStyle: FontStyle.normal,
-                                                color: Black_textColor),
-                                          )
                                         ],
                                       ),
-                                    ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            ' ${Utils.labels!.and} ',
+                                            style: GoogleFonts.roboto(
+                                                fontSize: h7,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: Black_textColor),
+                                          ),
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => const PrivacyPolicy()),
+                                              );
+                                            },
+                                            child: Text(
+                                              Utils.labels!.privacy_policy,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize:
+                                                      SizeHelper.of(context).help(
+                                                    mobileSmall: 6,
+                                                    mobileNormal: 7,
+                                                    mobileLarge: 8,
+                                                    mobileExtraLarge: 10,
+                                                    tabletSmall: 12,
+                                                    tabletNormal: 14,
+                                                    tabletLarge: 16,
+                                                    tabletExtraLarge: 18,
+                                                    desktopLarge: 22,
+                                                  ),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Text_color),
+                                            ),
+                                          ),
+                                          Text(
+                                            Utils.labels!.to_mother_club,
+                                            style: GoogleFonts.roboto(
+                                                fontSize: h7,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                                color: Black_textColor),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                  //     Text(
-                                  //       'to\n MotherClub',
-                                  //       style:  GoogleFonts.roboto(
-                                  //         fontSize: 13,
-                                  //         fontWeight: FontWeight.w500,
-                                  //         fontStyle: FontStyle.normal,
-                                  //         color: Black_textColor),
-                                  //
-                                  // ),
                                 ],
                               ),
+
                               Divider(
                                 color: Colors.transparent,
                                 height: deviceHeight / 21,
@@ -390,7 +429,6 @@ class _RegisterViewState extends State<RegisterView> {
                             Utils.progressBar.showLoadingIndicator(
                                 Utils.labels!.register, context);
                           } else if (state.resultState == ResultState.Success) {
-
                             auth
                                 .login(_usernameController.text,
                                     _passwordController.text)
@@ -486,19 +524,24 @@ class _RegisterViewState extends State<RegisterView> {
 
     imageSubject.sink.add(imageName);
   }
-  static getImage(int id)async {
-    var myData = await NetworkService.getMyData("api/user/get_avatar/?user_id=$id&type=full");
 
-    try{
+  static getImage(int id) async {
+    var myData = await NetworkService.getMyData(
+        "api/user/get_avatar/?user_id=$id&type=full");
+
+    try {
       String url = myData["avatar"];
-      if(url.contains("empty"))
-        Utils.prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+      if (url.contains("empty"))
+        Utils.prefs!.setString("imageUrl",
+            "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
       else
         Utils.prefs!.setString("imageUrl", myData['avatar']);
-    }catch (e){
-      Utils.  prefs!.setString("imageUrl", "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
+    } catch (e) {
+      Utils.prefs!.setString("imageUrl",
+          "https://c0.klipartz.com/pngpicture/434/847/gratis-png-usuario-de-iconos-de-computadora-empresario-ejecutivo-de-negocios-s.png");
     }
   }
+
   String base64Encode(List<int> bytes) => base64.encode(bytes);
 
   void showSnackBar(String text) {

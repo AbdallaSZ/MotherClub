@@ -22,7 +22,7 @@ class ProgressBar{
               content: Container(
                 height: 50,
                 alignment: Alignment.center,
-                  child: JumpingText(Utils.labels!.loading,style: TextStyle(color: Colors.pink),)),
+                  child:Text(Utils.labels!.loading,style: TextStyle(color: Colors.pink),)),
             )
         );
       },

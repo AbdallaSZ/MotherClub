@@ -5,7 +5,7 @@ import 'package:motherclub/app/Models/FormsModel.dart';
 import 'package:motherclub/app/Shimmers/FurmShimmer.dart';
 import 'package:motherclub/app/modules/account/widgets/info_account_widget.dart';
 import 'package:motherclub/app/modules/forum/controller/forumController.dart';
-import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';
+import 'package:motherclub/app/modules/forum/views/forum_topic_view.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
@@ -132,12 +132,11 @@ class ForumView extends GetView<ForumController> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  // await Utils.bLoC.UsersDetails();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => ForumCommentView(
-                                            formsModel: snapshot.data![index])),
+                                        builder: (context) => ForumDetails(
+                                            formsId: snapshot.data![index].id!)),
                                   );
                                 },
                                 child: Card(
@@ -163,7 +162,7 @@ class ForumView extends GetView<ForumController> {
                                         Container(
                                           // padding:EdgeInsets.fromLTRB(15,17,10,0),
                                           child: Text(
-                                              _parseHtmlString("${data[index].title!.rendered}"),
+                                              _parseHtmlString("${data[index].title!}"),
                                               style: GoogleFonts.roboto(
                                                 fontSize:
                                                     SizeHelper.of(context).help(
@@ -199,36 +198,36 @@ class ForumView extends GetView<ForumController> {
                                                             .start,
                                                     children: [
                                                       //Text("Aditya Diab",style: Theme.of(context).textTheme.headline1,),
-                                                      Text(
-                                                        "${data[index].date}",
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontSize: SizeHelper.of(
-                                                                        context)
-                                                                    .help(
-                                                                  mobileSmall:
-                                                                      6,
-                                                                  mobileNormal:
-                                                                      8,
-                                                                  mobileLarge:
-                                                                      10,
-                                                                  tabletNormal:
-                                                                      12,
-                                                                  tabletExtraLarge:
-                                                                      14,
-                                                                  desktopLarge:
-                                                                      16,
-                                                                ),
-                                                                letterSpacing:
-                                                                    0.35,
-                                                                height: 1.5,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color:
-                                                                    Black_textColor),
-                                                        maxLines: 2,
-                                                      )
+                                                      // Text(
+                                                      //   "${data[index].date}",
+                                                      //   style:
+                                                      //       GoogleFonts.roboto(
+                                                      //           fontSize: SizeHelper.of(
+                                                      //                   context)
+                                                      //               .help(
+                                                      //             mobileSmall:
+                                                      //                 6,
+                                                      //             mobileNormal:
+                                                      //                 8,
+                                                      //             mobileLarge:
+                                                      //                 10,
+                                                      //             tabletNormal:
+                                                      //                 12,
+                                                      //             tabletExtraLarge:
+                                                      //                 14,
+                                                      //             desktopLarge:
+                                                      //                 16,
+                                                      //           ),
+                                                      //           letterSpacing:
+                                                      //               0.35,
+                                                      //           height: 1.5,
+                                                      //           fontWeight:
+                                                      //               FontWeight
+                                                      //                   .w400,
+                                                      //           color:
+                                                      //               Black_textColor),
+                                                      //   maxLines: 2,
+                                                      // )
                                                     ],
                                                   ),
                                                 ],
@@ -239,7 +238,7 @@ class ForumView extends GetView<ForumController> {
                                         SizedBox(height: 15),
                                         Flexible(
                                           child: Text(
-                                            _parseHtmlString("${data[index].content!.rendered}"),
+                                            _parseHtmlString("${data[index].content!}"),
                                             style: GoogleFonts.roboto(
                                                 fontSize:
                                                     SizeHelper.of(context).help(
@@ -354,7 +353,7 @@ class ForumView extends GetView<ForumController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Open Post",
+                                              Utils.labels!.open_forum,
                                               style: GoogleFonts.roboto(
                                                   fontSize:
                                                       SizeHelper.of(context)

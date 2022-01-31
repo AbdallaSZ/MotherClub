@@ -11,6 +11,7 @@ class BabyDataList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(monthSlug);
     return FutureBuilder<List<BabyModel>>(
         future: Utils.bLoC.babyList(monthSlug),
         builder: (context, snapshot) {
@@ -31,6 +32,7 @@ class BabyDataList extends StatelessWidget {
                       ),
                       child: ListView.builder(
                         itemBuilder: (BuildContext _, int index) {
+                          print(snapshot.data![index].name!);
                           return Padding(
                               padding: EdgeInsets.all(10),
                               child: Container(
@@ -39,7 +41,6 @@ class BabyDataList extends StatelessWidget {
                                     Radius.circular(10),
                                   ),
                                   color: yourbabyCard,
-
                                 ),
                                 child: Column(
                                   children: [

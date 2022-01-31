@@ -32,10 +32,6 @@ class _AllPregnancyArticlesScreenState extends State<AllPregnancyArticles> {
 
   List<Article>? data;
 
-  _StoreViewScreenState() {
-    //Register a closure to be called when the object changes.
-  }
-
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;

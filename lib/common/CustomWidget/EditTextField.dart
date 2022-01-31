@@ -47,10 +47,7 @@ Widget EditTextWidget(
         disabledBorder: InputBorder.none,
         labelText: Lable,
         labelStyle: Theme.of(context).textTheme.bodyText2,
-        suffixIcon: Icon(
-          IconButton,
-          color: Black_textColor,
-        ),
+
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
       ),
     ),

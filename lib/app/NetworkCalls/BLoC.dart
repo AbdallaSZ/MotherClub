@@ -7,6 +7,7 @@ import 'package:motherclub/app/Models/MonthsModel.dart';
 import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/Models/ProductModel.dart' as pm;
 import 'package:motherclub/app/Models/UserDetailsModel.dart';
+import 'package:motherclub/app/Models/forum_detailes_model.dart';
 import 'package:motherclub/app/Models/pregnancy_data_model.dart';
 import 'package:motherclub/app/Models/WeeksModel.dart';
 import 'package:motherclub/app/Models/auth_model.dart';
@@ -15,6 +16,8 @@ import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/choose_for_you_model.dart';
 import 'package:motherclub/app/Models/order_model.dart';
 import 'package:motherclub/app/Models/replies_model.dart';
+import 'package:motherclub/app/Models/reply_model.dart';
+import 'package:motherclub/app/Models/topic_model.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
@@ -95,26 +98,53 @@ class BLoC {
   Future<List<FormsModel>> forumsList() async {
     List<FormsModel> formsLst = <FormsModel>[];
     var fromResponse = await Utils.networkcall.getForumAPICall();
-    // var test = _networkService.convertToJson(fromResponse);
     fromResponse.forEach((newFrom) {
-      FormsModel forumModel = FormsModel.fromJson(newFrom);
+      FormsModel forumModel = FormsModel.fromMap(newFrom);
       formsLst.add(forumModel);
     });
 
     return formsLst;
   }
 
+  Future<ForumDetailsModel> forumsDetails(int forumId) async {
+    var fromResponse = await Utils.networkcall.getForumDetailsAPI(forumId);
+    ForumDetailsModel forumModel = ForumDetailsModel.fromMap(fromResponse);
+    return forumModel;
+  }
+  Future<TopicModel> topicDetails(int topicId) async {
+    var topicResponse = await Utils.networkcall.getTopicDetails(topicId);
+    TopicModel topicModel = TopicModel.fromMap(topicResponse);
+    return topicModel;
+  }
+  Future<ReplyModel> repDetails(int repId) async {
+    var repResponse = await Utils.networkcall.getReplyDetails(repId);
+    ReplyModel repModel = ReplyModel.fromMap(repResponse);
+    return repModel;
+  }
+
+  Future<void> createForum(String title, String id, String content) async {
+    try {
+      await Utils.networkcall.createForumTopic(title, id, content);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> createForumRep( String id, String content) async {
+    try {
+      await Utils.networkcall.createForumTopicRep( id, content);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
   Future<List<RepliesModel>> commentsList(String postId) async {
     List<RepliesModel> commentsLst = <RepliesModel>[];
-
     var fromResponse = await Utils.networkcall.getCommentsAPICall(postId);
-    // var test = _networkService.convertToJson(fromResponse);
-
     fromResponse.forEach((newFrom) {
       RepliesModel forumModel = RepliesModel.fromMap(newFrom);
       commentsLst.add(forumModel);
     });
-
     return commentsLst;
   }
 
@@ -122,7 +152,6 @@ class BLoC {
     List<BabyModel> babyList = <BabyModel>[];
     var response = await Utils.networkcall.getBabyAPICall(slug);
     var test = response['data'];
-
     test.forEach((newFrom) {
       BabyModel babyModel = BabyModel.fromMap(newFrom);
       babyList.add(babyModel);
@@ -144,13 +173,11 @@ class BLoC {
 
   Future<List<MonthsModel>> monthsList(BuildContext context) async {
     List<MonthsModel> monthsLst = <MonthsModel>[];
-
     var weekResponse = await Utils.networkcall.getMonthAPICall();
     weekResponse.forEach((month) {
       MonthsModel monthsModel = MonthsModel.fromMap(month);
       monthsLst.add(monthsModel);
     });
-
     return monthsLst;
   }
 

@@ -5,8 +5,9 @@ import 'package:motherclub/app/modules/account/SignInModel.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Networkcall {
-  Future<dynamic> getProductsAPICall(int page , int perPage , bool onSale , String min , String max) async {
+class NetworkCall {
+  Future<dynamic> getProductsAPICall(
+      int page, int perPage, bool onSale, String min, String max) async {
     var response = await http
         .get(
           Uri.parse(
@@ -16,7 +17,9 @@ class Networkcall {
           (error) {},
         );
     return json.decode(response.body);
-  }  Future<dynamic> searchProducts(String keyword) async {
+  }
+
+  Future<dynamic> searchProducts(String keyword) async {
     var response = await http
         .get(
           Uri.parse(
@@ -47,7 +50,7 @@ class Networkcall {
     var response = await http
         .get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/wp/v2/forum',
+        'https://mothersclub.me/wp-json/bbp-api/v1/forums/',
       ),
     )
         .catchError(
@@ -57,6 +60,90 @@ class Networkcall {
     );
 
     return json.decode(response.body);
+  }
+
+  Future<dynamic> getForumDetailsAPI(int forumId) async {
+    var response = await http
+        .get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/bbp-api/v1/forums/$forumId?page=1',
+      ),
+    )
+        .catchError(
+      (error) {
+        return false;
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getReplyDetails(int repId) async {
+    var response = await http
+        .get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/bbp-api/v1/replies/$repId',
+      ),
+    )
+        .catchError(
+      (error) {
+        return false;
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> getTopicDetails(int topicId) async {
+    var response = await http
+        .get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/bbp-api/v1/topics/$topicId?page=1',
+      ),
+    )
+        .catchError(
+      (error) {
+        return false;
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
+  Future<dynamic> createForumTopic(
+      String title, String id, String content) async {
+    final response = await http.post(
+      Uri.parse('https://mothersclub.me/wp-json/bbp-api/v1/forums/$id'),
+      body: {
+        'id': '$id',
+        'title': '$title',
+        'content': '$content',
+        'email': '${Utils.email}',
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to Wishlist. ${response.body}');
+    } else {
+      print('done');
+      return jsonDecode(response.body);
+    }
+  }
+
+  Future<dynamic> createForumTopicRep(String id, String content) async {
+    final response = await http.post(
+      Uri.parse('https://mothersclub.me/wp-json/bbp-api/v1/topics/$id'),
+      body: {
+        'id': '$id',
+        'content': '$content',
+        'email': '${Utils.email}',
+      },
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to create rep.');
+    } else {
+      print('done');
+      return jsonDecode(response.body);
+    }
   }
 
   Future<dynamic> getCommentsAPICall(String postId) async {
@@ -156,12 +243,8 @@ class Networkcall {
     var response = await http
         .get(
       Uri.parse(
-          'https://mothersclub.me/wp-json/wp/v2/weeks?orderby=id&per_page=50'),
-      /*
-       headers: {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }
-       */
+        'https://mothersclub.me/wp-json/wp/v2/weeks?orderby=id&per_page=50',
+      ),
     )
         .catchError(
       (error) {
@@ -170,21 +253,20 @@ class Networkcall {
     );
     return json.decode(response.body);
   }
-   googleLogin(String email) async {
-    var response = await NetworkService.dio
-        .post(
 
-          'https://mothersclub.me/wp-json/custom-plugin/social_login', data: {
-            "username" : email,
-            "social_login" : true,
-    }
-      /*
+  googleLogin(String email) async {
+    var response = await NetworkService.dio.post(
+        'https://mothersclub.me/wp-json/custom-plugin/social_login',
+        data: {
+          "username": email,
+          "social_login": true,
+        }
+        /*
        headers: {
          "Authorization": RemoteConfig.config["AuthorizationToken"],
        }
        */
-    )
-        .catchError(
+        ).catchError(
       (error) {
         return false;
       },
@@ -194,24 +276,18 @@ class Networkcall {
 
   //todo API Call For weeksdetails
 
-  Future<dynamic> getWeeksDetailAPICall(String slug ,int page) async {
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
-    // var weekSlug = preferences.getString('slug').toString();
-    var response = await http
-        .get(
-
-      Uri.parse('https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=$slug&page=$page'),
-      headers: {
-        // 'Content-Type': 'application/json',
-        // 'Host': '<calculated when request is sent>',
-        //  'User-Agent': 'PostmanRuntime/7.28.4',
-        //  'Accept': '*/*',
-        // 'Accept-Encoding': 'gzip, deflate, br',
-        //  'Connection': 'keep-alive',
-
-      }
-    )
-        .catchError(
+  Future<dynamic> getWeeksDetailAPICall(String slug, int page) async {
+    var response = await http.get(
+        Uri.parse(
+            'https://mothersclub.me/wp-json/custom-plugin/pregnancy_week_details?slug=$slug&page=$page&per_page=15'),
+        headers: {
+          // 'Content-Type': 'application/json',
+          // 'Host': '<calculated when request is sent>',
+          //  'User-Agent': 'PostmanRuntime/7.28.4',
+          //  'Accept': '*/*',
+          // 'Accept-Encoding': 'gzip, deflate, br',
+          //  'Connection': 'keep-alive',
+        }).catchError(
       (error) {
         print('error');
       },

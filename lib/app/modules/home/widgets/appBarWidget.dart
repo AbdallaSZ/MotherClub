@@ -23,6 +23,7 @@ Widget homeAppBar(
   double width,
   BuildContext context,
 ) {
+  List<String> categoriesName = [Utils.labels!.your_store,Utils.labels!.your_forum,Utils.labels!.your_baby,Utils.labels!.your_Pregnancy,];
   List<String> routes = [
     Routes.YOURPREGNANCY,
     Routes.YOURBABY,
@@ -110,7 +111,8 @@ Widget homeAppBar(
                             ),
                             SizedBox(height: 3),
                             Text(
-                              '${data[index].title}',
+
+                              (data[index].title == 'Store') ? Utils.labels!.your_store: (data[index].title == 'Forum') ?Utils.labels!.your_forum: (data[index].title == 'Your Baby') ?Utils.labels!.your_baby:(data[index].title == 'Your Pregnancy') ?Utils.labels!.your_Pregnancy:'',
                               style: GoogleFonts.roboto(
                                 fontSize: SizeHelper.of(context).help(
                                   mobileSmall: 7,

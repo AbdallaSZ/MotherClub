@@ -28,7 +28,7 @@ import 'package:motherclub/app/modules/auth/bindings/auth_biinding.dart';
 import 'package:motherclub/app/modules/auth/views/login_view.dart';
 import 'package:motherclub/app/modules/bottomNavigation/binding/bottombinding.dart';
 import 'package:motherclub/app/modules/bottomNavigation/views/bottom_screen.dart';
-import 'package:motherclub/app/modules/forum/views/forum_comment_view.dart';
+import 'package:motherclub/app/modules/forum/views/forum_topic_view.dart';
 import 'package:motherclub/app/modules/forum/views/forum_view.dart';
 import 'package:motherclub/app/modules/home/views/home_views.dart';
 import 'package:motherclub/app/modules/splash/bindings/splash_binding.dart';

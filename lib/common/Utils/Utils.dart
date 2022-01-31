@@ -82,7 +82,7 @@ class Utils
         break;
     }
   }
-  static Networkcall networkcall =Networkcall();
+  static NetworkCall networkcall =NetworkCall();
   static UserPreferences userPreferences=UserPreferences();
   static ProgressBar progressBar=ProgressBar();
   static BLoC bLoC=BLoC();

@@ -7,8 +7,6 @@ import 'package:motherclub/app/modules/Categories/controllers/CalegoriesControll
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CategoriesCard.dart';
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
