@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:motherclub/app/Models/ProductDetailsModel.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/Models/product_category_model.dart';
 import 'package:motherclub/app/SearchModule/DataSearch.dart';
 import 'package:motherclub/app/SearchModule/SearchBloc.dart';
-import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
 import 'package:motherclub/app/modules/Store/views/product_item.dart';
-import 'package:motherclub/app/modules/Store/widgets/_performSearch.dart';
 import 'package:motherclub/app/routes/app_pages.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Dialogs.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:size_helper/size_helper.dart';
-
-import '../../ProductDetailsModule/ProductDetailsScreen.dart';
 import '../../ProductDetailsModule/ProductDetailsScreen.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -34,11 +30,16 @@ class _StoreViewScreenState extends State<StoreView> {
       PagingController(firstPageKey: 1);
   BehaviorSubject<RangeValues>? _rxRangeValues = BehaviorSubject(sync: true);
   BehaviorSubject<bool>? rxIsChecked = BehaviorSubject(sync: true);
+  BehaviorSubject<bool>? rxWithCategoryIsChecked = BehaviorSubject(sync: true);
+  BehaviorSubject<ProductCategoryModel>? rxCategory =
+      BehaviorSubject(sync: true);
 
   @override
   void initState() {
     _rxRangeValues!.sink.add(RangeValues(10.0, 80.0));
     rxIsChecked!.sink.add(false);
+    rxWithCategoryIsChecked!.sink.add(false);
+
     searchBloc = SearchBloc();
     super.initState();
     _pagingController.addPageRequestListener((pageKey) {
@@ -48,6 +49,9 @@ class _StoreViewScreenState extends State<StoreView> {
               onSale: rxIsChecked!.value,
               minPrice: _rxRangeValues!.value.start.toString(),
               maxPrice: _rxRangeValues!.value.end.toString(),
+              categoryId: rxWithCategoryIsChecked!.value
+                  ? rxCategory!.value.id.toString()
+                  : '',
             )
           : _fetchPage(pageKey);
     });
@@ -56,6 +60,10 @@ class _StoreViewScreenState extends State<StoreView> {
   @override
   void dispose() {
     _pagingController.dispose();
+    rxIsChecked?.close();
+    rxWithCategoryIsChecked?.close();
+    _rxRangeValues?.close();
+    rxCategory?.close();
     super.dispose();
   }
 
@@ -201,7 +209,6 @@ class _StoreViewScreenState extends State<StoreView> {
                   ),
                   GestureDetector(
                     onTap: () {
-
                       Color getColor(Set<MaterialState> states) {
                         const Set<MaterialState> interactiveStates =
                             <MaterialState>{
@@ -340,6 +347,131 @@ class _StoreViewScreenState extends State<StoreView> {
                                           }),
                                     ],
                                   ),
+                                  Row(
+                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        '${Utils.labels!.category} : ',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize:
+                                                SizeHelper.of(context).help(
+                                              mobileSmall: 7,
+                                              mobileNormal: 7,
+                                              mobileLarge: 8,
+                                              mobileExtraLarge: 8,
+                                              tabletSmall: 10,
+                                              tabletNormal: 12,
+                                              tabletLarge: 13,
+                                              tabletExtraLarge: 14,
+                                              desktopSmall: 15,
+                                              desktopNormal: 17,
+                                              desktopLarge: 18,
+                                              desktopExtraLarge: 20,
+                                            ),
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      StreamBuilder<bool>(
+                                          stream:
+                                              rxWithCategoryIsChecked!.stream,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData)
+                                              return Checkbox(
+                                                checkColor: Colors.white,
+                                                fillColor: MaterialStateProperty
+                                                    .resolveWith(getColor),
+                                                value: snapshot.data!,
+                                                onChanged: (bool? value) {
+                                                  rxWithCategoryIsChecked!.sink
+                                                      .add(value!);
+                                                },
+                                              );
+                                            else
+                                              return Container();
+                                          }),
+                                      FutureBuilder<List<ProductCategoryModel>>(
+                                          future: Utils.bLoC
+                                              .productCategoriesList(),
+                                          builder:
+                                              (context, categoriesSnapshot) {
+                                            if (!categoriesSnapshot.hasData ||
+                                                categoriesSnapshot
+                                                        .connectionState ==
+                                                    ConnectionState.waiting) {
+                                              return Container();
+                                            } else {
+                                              rxCategory!.sink.add(
+                                                  categoriesSnapshot
+                                                      .data!.first);
+                                              return StreamBuilder<
+                                                      ProductCategoryModel>(
+                                                  stream: rxCategory!.stream,
+                                                  builder: (context,
+                                                      rxCategorySnapshot) {
+                                                    return !rxCategorySnapshot
+                                                            .hasData
+                                                        ? Container()
+                                                        : StreamBuilder<bool>(
+                                                            stream:
+                                                                rxWithCategoryIsChecked!
+                                                                    .stream,
+                                                            builder: (context,
+                                                                rxWithCategoryIsCheckedSnapshot) {
+                                                              return !rxWithCategoryIsCheckedSnapshot
+                                                                      .hasData
+                                                                  ? Container()
+                                                                  : DropdownButton<
+                                                                      ProductCategoryModel>(
+                                                                      hint: Text(
+                                                                          'select category type'),
+                                                                      value: rxCategorySnapshot
+                                                                          .data,
+                                                                      icon: Icon(
+                                                                          Icons
+                                                                              .arrow_drop_down_circle_sharp,
+                                                                          color: rxWithCategoryIsCheckedSnapshot.data!
+                                                                              ? Colors.red
+                                                                              : Colors.grey),
+                                                                      elevation:
+                                                                          16,
+                                                                      style: TextStyle(
+                                                                          color: rxWithCategoryIsCheckedSnapshot.data!
+                                                                              ? Colors.black87
+                                                                              : Colors.grey),
+                                                                      underline:
+                                                                          Container(
+                                                                        height:
+                                                                            2,
+                                                                        color: rxWithCategoryIsCheckedSnapshot.data!
+                                                                            ? Colors.red
+                                                                            : Colors.grey,
+                                                                      ),
+                                                                      onChanged: rxWithCategoryIsCheckedSnapshot
+                                                                              .data!
+                                                                          ? (ProductCategoryModel?
+                                                                              newValue) {
+                                                                              rxCategory!.sink.add(newValue!);
+                                                                            }
+                                                                          : null,
+                                                                      items: categoriesSnapshot
+                                                                          .data!
+                                                                          .map<DropdownMenuItem<ProductCategoryModel>>((ProductCategoryModel
+                                                                              value) {
+                                                                        return DropdownMenuItem<
+                                                                            ProductCategoryModel>(
+                                                                          value:
+                                                                              value,
+                                                                          child:
+                                                                              Text(value.name!),
+                                                                        );
+                                                                      }).toList(),
+                                                                    );
+                                                            });
+                                                  });
+                                            }
+                                          }),
+                                    ],
+                                  ),
                                 ],
                               ),
                               actions: <Widget>[
@@ -355,6 +487,9 @@ class _StoreViewScreenState extends State<StoreView> {
                                           .toString(),
                                       maxPrice:
                                           _rxRangeValues!.value.end.toString(),
+                                      categoryId: rxWithCategoryIsChecked!.value
+                                          ? rxCategory!.value.id.toString()
+                                          : '',
                                     );
                                   },
                                   child: Text(Utils.labels!.search),
@@ -376,8 +511,10 @@ class _StoreViewScreenState extends State<StoreView> {
                       pagingController: _pagingController,
                       builderDelegate:
                           PagedChildBuilderDelegate<ProductDetailsModel>(
+
                         itemBuilder: (context, item, index) => buildProductItem(
-                          item,
+                          item
+                          // (item.attributes!.firstWhere((element) => element.name == 'Age').options!.contains('0-3 Months')) ? item : P ,
                         ),
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -465,10 +602,16 @@ class _StoreViewScreenState extends State<StoreView> {
   int page = 1;
 
   Future<void> _fetchPage(int pageKey,
-      {bool? onSale, String? minPrice, String? maxPrice}) async {
+      {bool? onSale,
+      String? minPrice,
+      String? maxPrice,
+      String? categoryId}) async {
     try {
       List<ProductDetailsModel> newItems = [];
-      if (onSale == null && minPrice == null && maxPrice == null)
+      if (onSale == null &&
+          minPrice == null &&
+          maxPrice == null &&
+          categoryId == null)
         newItems = await Utils.bLoC.productList(page: page, perPage: _pageSize);
       else {
         if (pageKey == 1) _pagingController.itemList = [];
@@ -478,10 +621,12 @@ class _StoreViewScreenState extends State<StoreView> {
           onSale: onSale!,
           max: maxPrice!,
           min: minPrice!,
+          category: categoryId.toString(),
         );
       }
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
+        ;
         _pagingController.appendLastPage(newItems);
       } else {
         final nextPageKey = pageKey + newItems.length;

@@ -15,6 +15,7 @@ import 'package:motherclub/app/Models/baby_model.dart';
 import 'package:motherclub/app/Models/cart_item_model.dart';
 import 'package:motherclub/app/Models/choose_for_you_model.dart';
 import 'package:motherclub/app/Models/order_model.dart';
+import 'package:motherclub/app/Models/product_category_model.dart';
 import 'package:motherclub/app/Models/replies_model.dart';
 import 'package:motherclub/app/Models/reply_model.dart';
 import 'package:motherclub/app/Models/topic_model.dart';
@@ -23,15 +24,24 @@ import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductDetailsModel>> productList( {int page = 1 , int perPage= 10 , bool onSale = false , String min = '0' , String max = '10000000'}) async {
+  Future<List<ProductDetailsModel>> productList( {int page = 1 , int perPage= 10 , bool onSale = false , String min = '0' , String max = '10000000' , String category = '' }) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
 
-    var dataFromResponse = await Utils.networkcall.getProductsAPICall(page,perPage,onSale,min,max);
+    var dataFromResponse = await Utils.networkcall.getProductsAPICall(page,perPage,onSale,min,max,category);
     await dataFromResponse.forEach((newProduct) {
       ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
       productsList.add(prodModel);
     });
     return productsList;
+  }
+  Future<List<ProductCategoryModel>> productCategoriesList() async {
+    List<ProductCategoryModel> productCategoryList = <ProductCategoryModel>[];
+    var productCategoryResponse = await Utils.networkcall.getProductCategories();
+    productCategoryResponse.forEach((newModel) {
+      ProductCategoryModel productCategoryModel = ProductCategoryModel.fromMap(newModel);
+      productCategoryList.add(productCategoryModel);
+    });
+    return productCategoryList;
   }
 
   Future<List<ProductDetailsModel>> search( String keyword) async {

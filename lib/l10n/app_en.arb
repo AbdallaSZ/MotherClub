@@ -824,5 +824,9 @@
   "privacy_policy10": "If you have a question, or concern about your privacy, please contact our Privacy Officer via :",
   "@privacy_policy10": {
     "description": ""
+  },
+  "search_with_category": "Search with category",
+  "@with_category": {
+    "description": ""
   }
 }

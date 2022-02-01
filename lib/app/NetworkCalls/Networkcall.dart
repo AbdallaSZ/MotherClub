@@ -7,17 +7,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkCall {
   Future<dynamic> getProductsAPICall(
-      int page, int perPage, bool onSale, String min, String max) async {
+      int page, int perPage, bool onSale, String min, String max,String category) async {
     var response = await http
         .get(
           Uri.parse(
-              'https://mothersclub.me/wp-json/wc/v3/products?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e&page=$page&per_page=$perPage&on_sale=$onSale&min_price=$min&max_price=$max'),
+              'https://mothersclub.me/wp-json/wc/v3/products?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e&page=$page&per_page=$perPage&on_sale=$onSale&min_price=$min&max_price=$max&category=$category'),
         )
         .catchError(
           (error) {},
         );
     return json.decode(response.body);
   }
+
+  Future<dynamic> getProductCategories() async {
+    var response = await http
+        .get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wc/v3/products/categories?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e',
+      ),
+    )
+        .catchError(
+          (error) {
+        return false;
+      },
+    );
+
+    return json.decode(response.body);
+  }
+
 
   Future<dynamic> searchProducts(String keyword) async {
     var response = await http
@@ -98,7 +115,7 @@ class NetworkCall {
     var response = await http
         .get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/bbp-api/v1/topics/$topicId?page=1',
+        'https://mothersclub.me/wp-json/bbp-api/v1/topics/$topicId?page=10',
       ),
     )
         .catchError(
