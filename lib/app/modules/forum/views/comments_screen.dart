@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:motherclub/app/Models/reply_model.dart' as rep;
 import 'package:motherclub/app/Models/topic_model.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -21,6 +22,8 @@ class CommentsScreen extends StatefulWidget {
 
 class _CommentsScreenState extends State<CommentsScreen> {
   TextEditingController _repController = TextEditingController();
+  final PagingController<int, Reply> _pagingController =
+  PagingController(firstPageKey: 1);
   String _parseHtmlString(String htmlString) {
     final document = parse(htmlString);
     final String parsedString =
@@ -29,6 +32,39 @@ class _CommentsScreenState extends State<CommentsScreen> {
     return parsedString;
   }
 
+@override
+  void initState() {
+    // TODO: implement initState
+
+  _pagingController.addPageRequestListener((pageKey) {
+    Future.delayed(Duration(seconds: 2),
+            (){
+          _fetchPage(widget.topicId! ,pageKey,);
+        }
+    );
+  });
+
+  super.initState();
+  }
+  static const _pageSize = 5;
+
+  int pageNumber = 1 ;
+  Future<void> _fetchPage(int formsId,int pageKey) async {
+    try {
+      final result = await Utils.bLoC.topicDetails(formsId, pageNumber , _pageSize);
+      List<Reply> newItems = result.replies ?? [];
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        pageNumber++;
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -135,10 +171,11 @@ class _CommentsScreenState extends State<CommentsScreen> {
           ),
         ),
         body: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
             headerWidget(context, ' '),
             FutureBuilder<TopicModel>(
-                future: Utils.bLoC.topicDetails(widget.topicId!),
+                future: Utils.bLoC.topicDetails(widget.topicId!,1,200),
                 builder: (context, snapshot) {
                   return snapshot.connectionState == ConnectionState.waiting
                       ? !snapshot.hasData
@@ -150,7 +187,6 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                 SizedBox(
                                   height: 50,
                                 ),
-                                CircularProgressIndicator(),
                               ],
                             ))
                       : (!snapshot.hasData)
@@ -275,159 +311,160 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                             ),
                                           ),
                                         )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          itemCount:
-                                              snapshot.data!.replies!.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return FutureBuilder<
-                                                    rep.ReplyModel>(
-                                                future: Utils.bLoC.repDetails(
-                                                    snapshot.data!
-                                                        .replies![index].id!),
-                                                builder: (context,
-                                                    repDetailsSnapshot) {
-                                                  return !repDetailsSnapshot
-                                                          .hasData
-                                                      ? Container()
-                                                      : Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border: Border.all(
-                                                                  width: 1,
-                                                                  color: Colors
-                                                                      .grey),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          0.1),
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius: 1,
-                                                                  offset: Offset(
-                                                                      0,
-                                                                      3), // changes position of shadow
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10),
-                                                            // height: 110,
-                                                            child: Column(
-                                                              // crossAxisAlignment: CrossAxisAlignment.start,
-
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        CircleAvatar(
-                                                                          radius:
-                                                                              20,
-                                                                          backgroundColor:
-                                                                              Colors.blue,
-                                                                        ),
-                                                                        SizedBox(
-                                                                            width:
-                                                                                10),
-                                                                        Column(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              "${snapshot.data!.replies![index].authorName}",
-                                                                              style: GoogleFonts.roboto(fontSize: 16, letterSpacing: 1, fontWeight: FontWeight.w500, color: Black_textColor),
-                                                                            ),
-                                                                            Text(
-                                                                              "${snapshot.data!.replies![index].postDate}",
-                                                                              style: GoogleFonts.roboto(
-                                                                                fontSize: 10,
-                                                                                letterSpacing: 0.35,
-                                                                                height: 1.5,
-                                                                                fontWeight: FontWeight.w400,
-                                                                                color: Black_textColor,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        // Row(
-                                                                        //   mainAxisAlignment: MainA,
-                                                                        //   children: [
-
-                                                                        //   ],
-                                                                        // ),
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      "${repDetailsSnapshot.data!.title}",
-                                                                      style: GoogleFonts
-                                                                          .roboto(
-                                                                        fontSize:
-                                                                            8,
-                                                                        letterSpacing:
-                                                                            0.35,
-                                                                        height:
-                                                                            1.5,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        color: Colors
-                                                                            .blue,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Center(
-                                                                  child: Text(
-                                                                    _parseHtmlString(
-                                                                        "${repDetailsSnapshot.data!.content}"),
-                                                                    style: GoogleFonts
-                                                                        .roboto(
-                                                                      fontSize:
-                                                                          15,
-                                                                      letterSpacing:
-                                                                          0.35,
-                                                                      height:
-                                                                          1.5,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                });
-                                          }),
+                                      : Container(
+                                    height: MediaQuery.of(context).size.height * .6,
+                                    child: PagedListView<int, Reply>(
+                                      pagingController: _pagingController,
+                                      builderDelegate: PagedChildBuilderDelegate<Reply>(
+                                        itemBuilder: (context,Reply item, index) => buildFutureBuilder(item),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             );
                 }),
-            SizedBox(height: 50,)
+            SizedBox(height: 100,)
 
           ],
         ),
       ),
     );
+  }
+
+  FutureBuilder<rep.ReplyModel> buildFutureBuilder(Reply item) {
+    return FutureBuilder<rep.ReplyModel>(
+                                              future: Utils.bLoC.repDetails(
+                                                  item.id!),
+                                              builder: (context,
+                                                  repDetailsSnapshot) {
+                                                return !repDetailsSnapshot
+                                                        .hasData
+                                                    ? Container()
+                                                    : Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                width: 1,
+                                                                color: Colors
+                                                                    .grey),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                        0.1),
+                                                                spreadRadius:
+                                                                    1,
+                                                                blurRadius: 1,
+                                                                offset: Offset(
+                                                                    0,
+                                                                    3), // changes position of shadow
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10),
+                                                          // height: 110,
+                                                          child: Column(
+                                                            // crossAxisAlignment: CrossAxisAlignment.start,
+
+                                                            children: [
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      CircleAvatar(
+                                                                        radius:
+                                                                            20,
+                                                                        backgroundColor:
+                                                                            Colors.blue,
+                                                                      ),
+                                                                      SizedBox(
+                                                                          width:
+                                                                              10),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            "${item.authorName}",
+                                                                            style: GoogleFonts.roboto(fontSize: 16, letterSpacing: 1, fontWeight: FontWeight.w500, color: Black_textColor),
+                                                                          ),
+                                                                          Text(
+                                                                            "${item.postDate}",
+                                                                            style: GoogleFonts.roboto(
+                                                                              fontSize: 10,
+                                                                              letterSpacing: 0.35,
+                                                                              height: 1.5,
+                                                                              fontWeight: FontWeight.w400,
+                                                                              color: Black_textColor,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      // Row(
+                                                                      //   mainAxisAlignment: MainA,
+                                                                      //   children: [
+
+                                                                      //   ],
+                                                                      // ),
+                                                                    ],
+                                                                  ),
+                                                                  Text(
+                                                                    "${repDetailsSnapshot.data!.title}",
+                                                                    style: GoogleFonts
+                                                                        .roboto(
+                                                                      fontSize:
+                                                                          8,
+                                                                      letterSpacing:
+                                                                          0.35,
+                                                                      height:
+                                                                          1.5,
+                                                                      fontWeight:
+                                                                          FontWeight.w500,
+                                                                      color: Colors
+                                                                          .blue,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Center(
+                                                                child: Text(
+                                                                  _parseHtmlString(
+                                                                      "${repDetailsSnapshot.data!.content}"),
+                                                                  style: GoogleFonts
+                                                                      .roboto(
+                                                                    fontSize:
+                                                                        15,
+                                                                    letterSpacing:
+                                                                        0.35,
+                                                                    height:
+                                                                        1.5,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      );
+                                              });
   }
 }
