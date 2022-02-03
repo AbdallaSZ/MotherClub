@@ -626,7 +626,6 @@ class _StoreViewScreenState extends State<StoreView> {
       }
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
-        ;
         _pagingController.appendLastPage(newItems);
       } else {
         final nextPageKey = pageKey + newItems.length;

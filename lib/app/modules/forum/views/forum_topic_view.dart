@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:motherclub/app/Models/forum_detailes_model.dart';
 import 'package:motherclub/app/modules/forum/views/comments_screen.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -13,6 +14,7 @@ class ForumDetails extends StatefulWidget {
   ForumDetails({required this.formsId});
 
   final int formsId;
+  int page =1 ;
 
   @override
   State<ForumDetails> createState() => _ForumDetailsState();
@@ -21,7 +23,22 @@ class ForumDetails extends StatefulWidget {
 class _ForumDetailsState extends State<ForumDetails> {
   TextEditingController _contentController = TextEditingController();
   TextEditingController _titleController = TextEditingController();
+  static const _pageSize = 5;
 
+  final PagingController<int, Topic> _pagingController =
+  PagingController(firstPageKey: 1);
+  @override
+  void initState() {
+    // TODO: implement initState
+    _pagingController.addPageRequestListener((pageKey) {
+      Future.delayed(Duration(seconds: 2),
+          (){
+            _fetchPage(widget.formsId ,pageKey,);
+          }
+      );
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     String _parseHtmlString(String htmlString) {
@@ -151,10 +168,11 @@ class _ForumDetailsState extends State<ForumDetails> {
         icon: const Icon(Icons.add),
       ),
       body: FutureBuilder<ForumDetailsModel>(
-          future: Utils.bLoC.forumsDetails(widget.formsId),
+          future: Utils.bLoC.forumsDetails(widget.formsId,),
           builder: (context, snapshot) {
             return snapshot.hasData
                 ? ListView(
+              physics: BouncingScrollPhysics(),
                     children: [
                       headerWidget(context, ' '),
                       Container(
@@ -347,132 +365,16 @@ class _ForumDetailsState extends State<ForumDetails> {
                       // Container(height: 30,child: Text("81" + Utils.labels!.comments)),
                       snapshot.data!.topics == null
                           ? Container()
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data!.totalTopics,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1, color: Colors.grey),
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.1),
-                                          spreadRadius: 1,
-                                          blurRadius: 1,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    padding: EdgeInsets.all(10),
-                                    // height: 110,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 20,
-                                                  backgroundColor: Colors.blue,
-                                                ),
-                                                SizedBox(width: 10),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "${snapshot.data!.topics![index].authorName}",
-                                                      style: GoogleFonts.roboto(
-                                                          fontSize: 16,
-                                                          letterSpacing: 1,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color:
-                                                              Black_textColor),
-                                                    ),
-                                                    Text(
-                                                      "${snapshot.data!.topics![index].postDate}",
-                                                      style: GoogleFonts.roboto(
-                                                        fontSize: 10,
-                                                        letterSpacing: 0.35,
-                                                        height: 1.5,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Black_textColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 10),
-                                        Center(
-                                          child: SingleChildScrollView(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0),
-                                              child: Text(
-                                                "${snapshot.data!.topics![index].title}",
-                                                style: GoogleFonts.roboto(
-                                                  fontSize: 12,
-                                                  letterSpacing: 0.35,
-                                                  height: 1.5,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Black_textColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              snapshot.data!.topics![index]
-                                                  .replyCount
-                                                  .toString(),
-                                              style:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          CommentsScreen(
-                                                              snapshot
-                                                                  .data!
-                                                                  .topics![
-                                                                      index]
-                                                                  .id)),
-                                                );
-                                              },
-                                              child: Icon(
-                                                Icons.chat,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
+                          :  Container(
+                        height: MediaQuery.of(context).size.height * .7,
+                            child: PagedListView<int, Topic>(
+                        pagingController: _pagingController,
+                        builderDelegate: PagedChildBuilderDelegate<Topic>(
+                            itemBuilder: (context,Topic item, index) => buildItem(item,
+                            ),
+                        ),
+                      ),
+                          ),
                       SizedBox(height: 50),
                     ],
                   )
@@ -481,5 +383,140 @@ class _ForumDetailsState extends State<ForumDetails> {
                   );
           }),
     ));
+  }
+  buildItem(Topic item){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+              width: 1, color: Colors.grey),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(0,
+                  3), // changes position of shadow
+            ),
+          ],
+        ),
+        padding: EdgeInsets.all(10),
+        // height: 110,
+        child: Column(
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.blue,
+                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.authorName!,
+                          style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              letterSpacing: 1,
+                              fontWeight:
+                              FontWeight.w500,
+                              color:
+                              Black_textColor),
+                        ),
+                        Text(
+                          item.postDate!,
+                          style: GoogleFonts.roboto(
+                            fontSize: 10,
+                            letterSpacing: 0.35,
+                            height: 1.5,
+                            fontWeight:
+                            FontWeight.w400,
+                            color: Black_textColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 8.0),
+                  child: Text(
+                    item.title!,
+                    style: GoogleFonts.roboto(
+                      fontSize: 12,
+                      letterSpacing: 0.35,
+                      height: 1.5,
+                      fontWeight: FontWeight.w500,
+                      color: Black_textColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment.end,
+              children: [
+                Text(
+                  item
+                      .replyCount
+                      .toString(),
+                  style:
+                  TextStyle(color: Colors.grey),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              CommentsScreen(
+                                 item.id)),
+                    );
+                  },
+                  child: Icon(
+                    Icons.chat,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  int pageNumber = 1 ;
+  Future<void> _fetchPage(int formsId,int pageKey) async {
+    try {
+      final result = await Utils.bLoC.forumsDetails(formsId, pageNumber , _pageSize);
+      List<Topic> newItems = result.topics!;
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        pageNumber++;
+        final nextPageKey = pageKey + newItems.length;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
   }
 }

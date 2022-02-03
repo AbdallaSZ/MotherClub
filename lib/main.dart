@@ -25,6 +25,7 @@ void main() async {
   bool releaseMode = true;
   runApp(
    DevicePreview(
+      enabled: !releaseMode,
      builder: (context) =>
           MyApp(),
    ),

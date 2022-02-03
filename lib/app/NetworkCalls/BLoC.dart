@@ -116,8 +116,8 @@ class BLoC {
     return formsLst;
   }
 
-  Future<ForumDetailsModel> forumsDetails(int forumId) async {
-    var fromResponse = await Utils.networkcall.getForumDetailsAPI(forumId);
+  Future<ForumDetailsModel> forumsDetails(int forumId,[ int page =1, int perPage= 10]) async {
+    var fromResponse = await Utils.networkcall.getForumDetailsAPI(forumId,page,perPage);
     ForumDetailsModel forumModel = ForumDetailsModel.fromMap(fromResponse);
     return forumModel;
   }
