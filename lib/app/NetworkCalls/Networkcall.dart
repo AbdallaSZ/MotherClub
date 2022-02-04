@@ -91,7 +91,6 @@ class NetworkCall {
         return false;
       },
     );
-
     return json.decode(response.body);
   }
 
@@ -342,12 +341,6 @@ class NetworkCall {
       Uri.parse(
           'https://mothersclub.me/wp-json/wc/v3/products/2957?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e'),
 
-      /*
-       headers:
-       {
-         "Authorization": RemoteConfig.config["AuthorizationToken"],
-       }
-       */
     )
         .catchError(
       (error) {

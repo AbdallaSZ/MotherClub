@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/Models/ProductDetailsModel.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart' as PDM;
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
-Widget createFilteredListView(List<ProductDetailsModel> data) {
+Widget createFilteredListView(List<PDM.ProductDetailsModel> data) {
   return new Flexible(
     child: data.length==0? Container(
       alignment: Alignment.center,

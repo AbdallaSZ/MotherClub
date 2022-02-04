@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motherclub/app/Models/ProductDetailsModel.dart';
-import 'package:motherclub/app/Models/ProductModel.dart';
+import 'package:motherclub/app/Models/ProductDetailsModel.dart' as PDM;
 import 'package:motherclub/app/Shimmers/GridShimmer.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
-import 'package:motherclub/common/CustomWidget/appBarWidget.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 Widget storeAppBar(
@@ -69,11 +67,11 @@ Widget storeAppBar(
           padding: EdgeInsets.all(10),
           // color: Colors.red,
           height: deviceHeight,
-          child: FutureBuilder<List<ProductDetailsModel>>(
+          child: FutureBuilder<List<PDM.ProductDetailsModel>>(
             future: Utils.bLoC.productList(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<ProductDetailsModel>? data = snapshot.data;
+                List<PDM.ProductDetailsModel>? data = snapshot.data;
                 return GridView.builder(
                   itemCount: data!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

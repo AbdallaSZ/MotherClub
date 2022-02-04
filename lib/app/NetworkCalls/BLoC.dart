@@ -24,27 +24,43 @@ import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductDetailsModel>> productList( {int page = 1 , int perPage= 10 , bool onSale = false , String min = '0' , String max = '10000000' , String category = '' }) async {
+  Future<List<ProductDetailsModel>> productList(
+      {int page = 1,
+      int perPage = 10,
+      bool onSale = true,
+      String min = '0',
+      String max = '10000000',
+      String category = ''}) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
 
-    var dataFromResponse = await Utils.networkcall.getProductsAPICall(page,perPage,onSale,min,max,category);
+    var dataFromResponse = await Utils.networkcall
+        .getProductsAPICall(page, perPage, onSale, min, max, category);
     await dataFromResponse.forEach((newProduct) {
       ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
-      productsList.add(prodModel);
+      // if (Utils.locality!.index == 0) {
+      //   if (prodModel.language == 'Arabic')
+      //     productsList.add(prodModel);
+      // }else {
+      //   if (prodModel.language == 'English')
+          productsList.add(prodModel);
+     // }
     });
     return productsList;
   }
+
   Future<List<ProductCategoryModel>> productCategoriesList() async {
     List<ProductCategoryModel> productCategoryList = <ProductCategoryModel>[];
-    var productCategoryResponse = await Utils.networkcall.getProductCategories();
+    var productCategoryResponse =
+        await Utils.networkcall.getProductCategories();
     productCategoryResponse.forEach((newModel) {
-      ProductCategoryModel productCategoryModel = ProductCategoryModel.fromMap(newModel);
+      ProductCategoryModel productCategoryModel =
+          ProductCategoryModel.fromMap(newModel);
       productCategoryList.add(productCategoryModel);
     });
     return productCategoryList;
   }
 
-  Future<List<ProductDetailsModel>> search( String keyword) async {
+  Future<List<ProductDetailsModel>> search(String keyword) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
     var dataFromResponse = await Utils.networkcall.searchProducts(keyword);
     await dataFromResponse.forEach((newProduct) {
@@ -99,9 +115,11 @@ class BLoC {
     return weeksLst;
   }
 
-  Future<PregnancyDataModel> weekDetails(String slug,int page) async {
-    var weekDetailResponse = await Utils.networkcall.getWeeksDetailAPICall(slug,page);
-    PregnancyDataModel weeksDetailModel = PregnancyDataModel.fromMap(weekDetailResponse[0]);
+  Future<PregnancyDataModel> weekDetails(String slug, int page) async {
+    var weekDetailResponse =
+        await Utils.networkcall.getWeeksDetailAPICall(slug, page);
+    PregnancyDataModel weeksDetailModel =
+        PregnancyDataModel.fromMap(weekDetailResponse[0]);
     return weeksDetailModel;
   }
 
@@ -121,11 +139,13 @@ class BLoC {
     ForumDetailsModel forumModel = ForumDetailsModel.fromMap(fromResponse);
     return forumModel;
   }
+
   Future<TopicModel> topicDetails(int topicId) async {
     var topicResponse = await Utils.networkcall.getTopicDetails(topicId);
     TopicModel topicModel = TopicModel.fromMap(topicResponse);
     return topicModel;
   }
+
   Future<ReplyModel> repDetails(int repId) async {
     var repResponse = await Utils.networkcall.getReplyDetails(repId);
     ReplyModel repModel = ReplyModel.fromMap(repResponse);
@@ -140,9 +160,9 @@ class BLoC {
     }
   }
 
-  Future<void> createForumRep( String id, String content) async {
+  Future<void> createForumRep(String id, String content) async {
     try {
-      await Utils.networkcall.createForumTopicRep( id, content);
+      await Utils.networkcall.createForumTopicRep(id, content);
     } on Exception catch (e) {
       print(e);
     }
@@ -395,12 +415,13 @@ class BLoC {
     }
   }
 
-  Future<void> sendFeedB(String userName, String userEmail, String feedbackMessage) async {
+  Future<void> sendFeedB(
+      String userName, String userEmail, String feedbackMessage) async {
     try {
-      await Utils.networkcall.sendFeedback(userName, userEmail, feedbackMessage);
+      await Utils.networkcall
+          .sendFeedback(userName, userEmail, feedbackMessage);
     } on Exception catch (e) {
       print(e);
     }
   }
-
 }

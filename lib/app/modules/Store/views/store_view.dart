@@ -626,11 +626,19 @@ class _StoreViewScreenState extends State<StoreView> {
       }
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
-        ;
         _pagingController.appendLastPage(newItems);
       } else {
         final nextPageKey = pageKey + newItems.length;
-        _pagingController.appendPage(newItems, nextPageKey);
+        _pagingController.appendPage(newItems.where((element) {
+          if (Utils.locality!.index == 0) {
+            if (element.language == 'Arabic')
+              return true;
+          }else {
+            if (element.language == 'English')
+              return true;
+          }
+          return false;
+        } ).toList(), nextPageKey);
       }
       page += 1;
     } catch (error) {

@@ -96,7 +96,6 @@ class Choose_Payment_view extends GetView<AuthController> {
                                     future: Utils.bLoC.productList(),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
-                                        List<ProductDetailsModel>? data = snapshot.data;
                                         return ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           itemCount: 2,

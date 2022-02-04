@@ -47,17 +47,17 @@ dependencies:
   video_player: ^2.2.7
   flick_video_player: ^0.3.1
   flutter_paytabs_bridge:
-  flutter_launcher_icons:
+#  flutter_launcher_icons:
   size_helper: ^0.0.1+1
   url_launcher: ^6.0.18
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter_icons:
-    android: "ic_launcher"
-    ios: true
-    image_path: "assets/icon/icon.png"
+#
+#flutter_icons:
+#    android: true
+#    ios: true
+#    image_path: "assets/images/sort.png"
 
 flutter:
   uses-material-design: true

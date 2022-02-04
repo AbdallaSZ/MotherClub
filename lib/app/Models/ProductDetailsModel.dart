@@ -39,6 +39,7 @@ class ProductDetailsModel {
   bool? shippingRequired;
   bool? shippingTaxable;
   String? shippingClass;
+  String ?language;
   int? shippingClassId;
   bool? reviewsAllowed;
   String? averageRating;
@@ -75,7 +76,7 @@ class ProductDetailsModel {
         this.price,
         this.regularPrice,
         this.salePrice,
-    
+        this.language,
         this.onSale,
         this.purchasable,
         this.totalSales,
@@ -136,7 +137,7 @@ class ProductDetailsModel {
     price = json['price'];
     regularPrice = json['regular_price'];
     salePrice = json['sale_price'];
-   
+    language = json["language"];
     onSale = json['on_sale'];
     purchasable = json['purchasable'];
     totalSales = json['total_sales'];
@@ -233,6 +234,7 @@ class ProductDetailsModel {
     data['total_sales'] = this.totalSales;
     data['virtual'] = this.virtual;
     data['downloadable'] = this.downloadable;
+    data["language"] = this.language;
 
     data['download_limit'] = this.downloadLimit;
     data['download_expiry'] = this.downloadExpiry;

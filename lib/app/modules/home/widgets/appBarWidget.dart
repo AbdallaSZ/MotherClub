@@ -103,9 +103,7 @@ Widget homeAppBar(
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: RandomColorModel()
-                                    .getColor()
-                                    .withOpacity(0.3),
+                                color: Color(0xFFCDECE4),
                               ),
                               child: Image.network(data[index].image),
                             ),
