@@ -134,18 +134,16 @@ class BLoC {
     return formsLst;
   }
 
-  Future<ForumDetailsModel> forumsDetails(int forumId) async {
-    var fromResponse = await Utils.networkcall.getForumDetailsAPI(forumId);
+  Future<ForumDetailsModel> forumsDetails(int forumId,[ int page =1, int perPage= 10]) async {
+    var fromResponse = await Utils.networkcall.getForumDetailsAPI(forumId,page,perPage);
     ForumDetailsModel forumModel = ForumDetailsModel.fromMap(fromResponse);
     return forumModel;
   }
-
-  Future<TopicModel> topicDetails(int topicId) async {
-    var topicResponse = await Utils.networkcall.getTopicDetails(topicId);
+  Future<TopicModel> topicDetails(int topicId, [int page =1, int perPage=5]) async {
+    var topicResponse = await Utils.networkcall.getTopicDetails(topicId, page, perPage);
     TopicModel topicModel = TopicModel.fromMap(topicResponse);
     return topicModel;
   }
-
   Future<ReplyModel> repDetails(int repId) async {
     var repResponse = await Utils.networkcall.getReplyDetails(repId);
     ReplyModel repModel = ReplyModel.fromMap(repResponse);
@@ -424,4 +422,5 @@ class BLoC {
       print(e);
     }
   }
+
 }

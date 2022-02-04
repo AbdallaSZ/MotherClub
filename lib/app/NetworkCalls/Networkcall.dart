@@ -79,11 +79,11 @@ class NetworkCall {
     return json.decode(response.body);
   }
 
-  Future<dynamic> getForumDetailsAPI(int forumId) async {
+  Future<dynamic> getForumDetailsAPI(int forumId, int page , int perPage) async {
     var response = await http
         .get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/bbp-api/v1/forums/$forumId?page=1',
+        'https://mothersclub.me/wp-json/bbp-api/v1/forums/$forumId?page=$page&per_page=$perPage',
       ),
     )
         .catchError(
@@ -110,11 +110,11 @@ class NetworkCall {
     return json.decode(response.body);
   }
 
-  Future<dynamic> getTopicDetails(int topicId) async {
+  Future<dynamic> getTopicDetails(int topicId, int page , int perPage) async {
     var response = await http
         .get(
       Uri.parse(
-        'https://mothersclub.me/wp-json/bbp-api/v1/topics/$topicId?page=10',
+        'https://mothersclub.me/wp-json/bbp-api/v1/topics/$topicId?page=$page&per_page=$perPage',
       ),
     )
         .catchError(
