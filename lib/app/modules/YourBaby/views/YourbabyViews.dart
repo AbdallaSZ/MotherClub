@@ -263,7 +263,7 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                                               desktopLarge: 20,
                                             ),
                                             fontWeight: FontWeight.w400,
-                                            color: Colors.blueGrey),textAlign: TextAlign.end,),
+                                            color: Colors.blueGrey),textAlign: TextAlign.start,),
                                   ),
                                   BabyDataList(
                                     monthSlug: '${streamSnapshot.data!+1}-month',

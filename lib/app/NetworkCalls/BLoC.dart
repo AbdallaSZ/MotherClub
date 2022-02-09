@@ -37,13 +37,7 @@ class BLoC {
         .getProductsAPICall(page, perPage, onSale, min, max, category);
     await dataFromResponse.forEach((newProduct) {
       ProductDetailsModel prodModel = ProductDetailsModel.fromJson(newProduct);
-      // if (Utils.locality!.index == 0) {
-      //   if (prodModel.language == 'Arabic')
-      //     productsList.add(prodModel);
-      // }else {
-      //   if (prodModel.language == 'English')
           productsList.add(prodModel);
-     // }
     });
     return productsList;
   }

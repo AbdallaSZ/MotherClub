@@ -39,7 +39,7 @@ class ProductDetailsModel {
   bool? shippingRequired;
   bool? shippingTaxable;
   String? shippingClass;
-  String ?language;
+  String? language;
   int? shippingClassId;
   bool? reviewsAllowed;
   String? averageRating;
@@ -57,66 +57,66 @@ class ProductDetailsModel {
   List<MetaData>? metaData;
   String? stockStatus;
 
-  ProductDetailsModel(
-      this.id,
-        this.name,
-        this.slug,
-        this.permalink,
-        this.dateCreated,
-        this.dateCreatedGmt,
-        this.dateModified,
-        this.dateModifiedGmt,
-        this.type,
-        this.status,
-        this.featured,
-        this.catalogVisibility,
-        this.description,
-        this.shortDescription,
-        this.sku,
-        this.price,
-        this.regularPrice,
-        this.salePrice,
-        this.language,
-        this.onSale,
-        this.purchasable,
-        this.totalSales,
-        this.virtual,
-        this.downloadable,
 
-        this.downloadLimit,
-        this.downloadExpiry,
-        this.externalUrl,
-        this.buttonText,
-        this.taxStatus,
-        this.taxClass,
-        this.manageStock,
-        this.stockQuantity,
-        this.backorders,
-        this.backordersAllowed,
-        this.backordered,
-        this.soldIndividually,
-        this.weight,
-        this.dimensions,
-        this.shippingRequired,
-        this.shippingTaxable,
-        this.shippingClass,
-        this.shippingClassId,
-        this.reviewsAllowed,
-        this.averageRating,
-        this.ratingCount,
-        this.parentId,
-        this.purchaseNote,
-        this.categories,
-        this.images,
-        this.attributes,
-        this.defaultAttributes,
-        this.variations,
-        this.menuOrder,
-        this.priceHtml,
-        this.relatedIds,
-        this.metaData,
-        this.stockStatus,
-        );
+  ProductDetailsModel(
+    this.id,
+    this.name,
+    this.slug,
+    this.permalink,
+    this.dateCreated,
+    this.dateCreatedGmt,
+    this.dateModified,
+    this.dateModifiedGmt,
+    this.type,
+    this.status,
+    this.featured,
+    this.catalogVisibility,
+    this.description,
+    this.shortDescription,
+    this.sku,
+    this.price,
+    this.regularPrice,
+    this.salePrice,
+    this.language,
+    this.onSale,
+    this.purchasable,
+    this.totalSales,
+    this.virtual,
+    this.downloadable,
+    this.downloadLimit,
+    this.downloadExpiry,
+    this.externalUrl,
+    this.buttonText,
+    this.taxStatus,
+    this.taxClass,
+    this.manageStock,
+    this.stockQuantity,
+    this.backorders,
+    this.backordersAllowed,
+    this.backordered,
+    this.soldIndividually,
+    this.weight,
+    this.dimensions,
+    this.shippingRequired,
+    this.shippingTaxable,
+    this.shippingClass,
+    this.shippingClassId,
+    this.reviewsAllowed,
+    this.averageRating,
+    this.ratingCount,
+    this.parentId,
+    this.purchaseNote,
+    this.categories,
+    this.images,
+    this.attributes,
+    this.defaultAttributes,
+    this.variations,
+    this.menuOrder,
+    this.priceHtml,
+    this.relatedIds,
+    this.metaData,
+    this.stockStatus,
+  );
 
   ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -143,7 +143,7 @@ class ProductDetailsModel {
     totalSales = json['total_sales'];
     virtual = json['virtual'];
     downloadable = json['downloadable'];
-  
+
     downloadLimit = json['download_limit'];
     downloadExpiry = json['download_expiry'];
     externalUrl = json['external_url'];
@@ -193,7 +193,6 @@ class ProductDetailsModel {
         defaultAttributes!.add(new DefaultAttributes.fromJson(v));
       });
     }
-
 
     if (json['related_ids'] != null) {
       relatedIds = [];
@@ -258,7 +257,6 @@ class ProductDetailsModel {
     data['average_rating'] = this.averageRating;
     data['rating_count'] = this.ratingCount;
 
-
     data['parent_id'] = this.parentId;
     data['purchase_note'] = this.purchaseNote;
     if (this.categories != null) {
@@ -276,7 +274,6 @@ class ProductDetailsModel {
           this.defaultAttributes!.map((v) => v.toJson()).toList();
     }
     data['variations'] = this.variations;
-
     data['menu_order'] = this.menuOrder;
     data['price_html'] = this.priceHtml;
     data['related_ids'] = this.relatedIds;
@@ -345,13 +342,13 @@ class Images {
 
   Images(
       {this.id,
-        this.dateCreated,
-        this.dateCreatedGmt,
-        this.dateModified,
-        this.dateModifiedGmt,
-        this.src,
-        this.name,
-        this.alt});
+      this.dateCreated,
+      this.dateCreatedGmt,
+      this.dateModified,
+      this.dateModifiedGmt,
+      this.src,
+      this.name,
+      this.alt});
 
   Images.fromJson(Map<String?, dynamic> json) {
     id = json['id'];
@@ -385,14 +382,17 @@ class Attributes {
   bool? visible;
   bool? variation;
   List<String>? options;
+  List<String>? optionValue;
 
   Attributes(
       {this.id,
-        this.name,
-        this.position,
-        this.visible,
-        this.variation,
-        this.options});
+      this.name,
+      this.position,
+      this.visible,
+      this.variation,
+      this.options,
+      this.optionValue,
+      });
 
   Attributes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -406,6 +406,12 @@ class Attributes {
         options!.add(v);
       });
     }
+    if (json['option_value'] != null) {
+      optionValue = [];
+      json['option_value'].forEach((v) {
+        optionValue!.add(v);
+      });
+    }
   }
 
   Map<String?, dynamic> toJson() {
@@ -416,6 +422,7 @@ class Attributes {
     data['visible'] = this.visible;
     data['variation'] = this.variation;
     data['options'] = this.options;
+    data['option_value'] = this.optionValue;
     return data;
   }
 }
@@ -463,6 +470,3 @@ class MetaData {
     return data;
   }
 }
-
-
-

@@ -89,7 +89,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   ProductDetailsState myState = state;
                   model = myState.model;
                   rxSelectedAgeSubject.sink
-                      .add(model!.attributes![0].options![0]);
+                      .add(model!.attributes![0].optionValue![0]);
                   return Stack(
                     children: [
                       ListView(
@@ -307,18 +307,38 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           child: StreamBuilder<String>(
               stream: rxSelectedAgeSubject.stream,
               builder: (context, snapshot) {
-                return DropdownButton<String>(
-                  isExpanded: true,
-                  value: snapshot.data,
-                  items: model.attributes![0].options!.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (_) {
-                    rxSelectedAgeSubject.sink.add(_!);
-                  },
+                return DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: snapshot.data,
+                    items: model.attributes![0].optionValue!
+                        .toSet()
+                        .toList()
+                        .map((String value) {
+                      String v = model.attributes![0].options![model.attributes![0].optionValue!.indexOf(value)];
+                      return DropdownMenuItem<String>(
+                        value:value,
+                        child: Text(
+                          v,
+                          style: TextStyle(
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 6,
+                              mobileNormal: 8,
+                              mobileLarge: 10,
+                              tabletNormal: 12,
+                              tabletExtraLarge: 14,
+                              desktopLarge: 16,
+                            ),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+
+                      rxSelectedAgeSubject.sink.add(val!);
+                    },
+                  ),
                 );
               }),
         )
