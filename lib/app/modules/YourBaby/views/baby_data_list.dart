@@ -6,7 +6,7 @@ import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
 class BabyDataList extends StatelessWidget {
-  const BabyDataList({Key? key, this.monthSlug = '1-month'}) : super(key: key);
+  const BabyDataList({Key? key, this.monthSlug}) : super(key: key);
   final monthSlug;
 
   @override

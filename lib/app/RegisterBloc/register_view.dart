@@ -189,9 +189,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 height: deviceHeight / 25,
                               ),
                               EditTextwidget(
-                                  Utils.labels!.first +
-                                      " " +
-                                      Utils.labels!.name,
+                                  Utils.labels!.first ,
                                   _nameController,
                                   context,
                                   validate: firstNameValidate),
@@ -200,7 +198,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 height: 10,
                               ),
                               EditTextwidget(
-                                  Utils.labels!.last + " " + Utils.labels!.name,
+                                  Utils.labels!.last ,
                                   _lastnameController,
                                   context,
                                   validate: lastNameValidate),

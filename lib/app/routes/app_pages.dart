@@ -133,7 +133,7 @@ class AppPages{
     ),
     GetPage(
       name: _Paths.PRODUCTDETAILS,
-      page: () => product_details_views(),
+      page: () => ProductDetailsViews(),
       // binding: blog_binding(),
     ),
 

@@ -6,6 +6,7 @@ import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:motherclub/app/Dialogs/Dialogs.dart';
 import 'package:motherclub/app/modules/orders/OrderRequestModel.dart';
 import 'package:motherclub/app/modules/orders/orderRepo.dart';
@@ -69,7 +70,66 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                     color: Colors.transparent,
                     height: 10,
                   ),
-                  EditTextNumberWidget(Utils.labels!.phone, _phoneController,context,11,validate:phoneValidate),
+                  InternationalPhoneNumberInput(
+
+                    textFieldController: _phoneController,
+                    cursorColor: Colors.blue,
+                    textStyle: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.black),
+                    // selectorTextStyle: Theme.of(context).textTheme.bodyText1.copyWith(  fontWeight: FontWeight.w300,
+                    //   fontSize: SizeHelper.of(context).help(
+                    //     tabletLarge: 14,
+                    //     desktopLarge: 18,
+                    //   ),),
+                    inputDecoration: InputDecoration(
+                      fillColor:Edit_textColor,
+                      filled: true,
+                      contentPadding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+                      hintText: Utils.labels!.phone,
+                      // hintStyle: Theme.of(context).textTheme.headline1.copyWith(  fontWeight: FontWeight.w300,
+                      //   fontSize: SizeHelper.of(context).help(
+                      //     tabletLarge: 16,
+                      //     desktopLarge: 20,
+                      //   ),),
+
+                      counterText: '',
+                      border: InputBorder.none,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.all(const Radius.circular(10)),
+                      ),
+                    ),
+                    initialValue: PhoneNumber(isoCode: 'EG',),
+                    onInputChanged: (v){
+
+                    },
+
+                  ),
+                  // EditTextNumberWidget(Utils.labels!.phone, _phoneController,context,11,validate:phoneValidate),
                  Divider(
                     color: Colors.transparent,
                     height: 10,

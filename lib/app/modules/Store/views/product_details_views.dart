@@ -5,16 +5,16 @@ import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/CustomWidget/CustomButton.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
-class product_details_views extends StatefulWidget {
-  product_details_views() : super();
+class ProductDetailsViews extends StatefulWidget {
+  ProductDetailsViews() : super();
 
   final String title = "Carousel Demo";
 
   @override
-  product_details_viewsState createState() => product_details_viewsState();
+  ProductDetailsViewsState createState() => ProductDetailsViewsState();
 }
 
-class product_details_viewsState extends State<product_details_views> {
+class ProductDetailsViewsState extends State<ProductDetailsViews> {
   //
   late CarouselSlider carouselSlider;
   int _current = 0;

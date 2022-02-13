@@ -20,6 +20,7 @@ class YourBabyViews extends StatefulWidget {
 class _YourBabyViewsState extends State<YourBabyViews> {
   late String monthSlug = "1-month";
   BehaviorSubject<int> _rxIndex = BehaviorSubject();
+
   @override
   void initState() {
     _rxIndex.sink.add(0);
@@ -158,84 +159,113 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return StreamBuilder<int>(
-                                          stream: _rxIndex.stream,
-                                          builder: (context, streamSnapshot) {
-
-                                            return streamSnapshot.hasData? Container(
-                                              margin: EdgeInsets.symmetric(
-                                                horizontal:
-                                                    SizeHelper.of(context).help(
-                                                  mobileSmall: 3,
-                                                  mobileNormal: 5,
-                                                  mobileLarge: 8,
-                                                  tabletNormal: 10,
-                                                  tabletExtraLarge: 13,
-                                                  desktopLarge: 15,
-                                                ),
-                                              ),
-                                              // height: deviceHeight/,
-                                              width: SizeHelper.of(context).help(
-                                                mobileSmall: 30,
-                                                mobileNormal: 40,
-                                                mobileLarge: 50,
-                                                tabletNormal: 70,
-                                                tabletExtraLarge: 80,
-                                                desktopLarge: 100,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: streamSnapshot.data! == index
-                                                    ? blue_color
-                                                    : Colors.transparent,
-                                                border: Border.all(
-                                                  color: streamSnapshot.data! == index
-                                                      ? Colors.transparent
-                                                      : Colors.white24,
-                                                  width: 1,
-                                                ),
-                                                borderRadius: BorderRadius.circular(
-                                                  10.0,
-                                                ),
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () async {
-                                                  _rxIndex.sink.add(index);
-                                                  monthSlug = snapshot.data![index].slug!;
-                                                  getMonthSlug();
-                                                },
-                                                child: Container(
-                                                  height: 50,
-                                                  width: 50,
-                                                  // color: Colors.red,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    children: [
-                                                      Divider(
-                                                        height: 5,
-                                                        color: Colors.transparent,
-                                                      ),
-                                                      Text(
-                                                        snapshot.data![index].name!,
-                                                        textAlign: TextAlign.center,
-                                                        style: GoogleFonts.roboto(
-                                                          fontSize:
-                                                              deviceHeight / 58,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          color: white_color,
+                                            stream: _rxIndex.stream,
+                                            builder: (context, streamSnapshot) {
+                                              return streamSnapshot.hasData
+                                                  ? Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                        horizontal:
+                                                            SizeHelper.of(
+                                                                    context)
+                                                                .help(
+                                                          mobileSmall: 3,
+                                                          mobileNormal: 5,
+                                                          mobileLarge: 8,
+                                                          tabletNormal: 10,
+                                                          tabletExtraLarge: 13,
+                                                          desktopLarge: 15,
                                                         ),
                                                       ),
-                                                      //Divider(height: 5,color: Colors.transparent,),
-                                                      // Text('3',style: Theme.of(context).textTheme.bodyText1,),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ):Container();
-                                          }
-                                        );
+                                                      // height: deviceHeight/,
+                                                      width:
+                                                          SizeHelper.of(context)
+                                                              .help(
+                                                        mobileSmall: 30,
+                                                        mobileNormal: 40,
+                                                        mobileLarge: 50,
+                                                        tabletNormal: 70,
+                                                        tabletExtraLarge: 80,
+                                                        desktopLarge: 100,
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                        color: streamSnapshot
+                                                                    .data! ==
+                                                                index
+                                                            ? blue_color
+                                                            : Colors
+                                                                .transparent,
+                                                        border: Border.all(
+                                                          color: streamSnapshot
+                                                                      .data! ==
+                                                                  index
+                                                              ? Colors
+                                                                  .transparent
+                                                              : Colors.white24,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          10.0,
+                                                        ),
+                                                      ),
+                                                      child: GestureDetector(
+                                                        onTap: () async {
+                                                          _rxIndex.sink
+                                                              .add(index);
+                                                          monthSlug = snapshot
+                                                              .data![index]
+                                                              .slug!;
+                                                          getMonthSlug();
+                                                        },
+                                                        child: Container(
+                                                          height: 50,
+                                                          width: 50,
+                                                          // color: Colors.red,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Divider(
+                                                                height: 5,
+                                                                color: Colors
+                                                                    .transparent,
+                                                              ),
+                                                              Text(
+                                                                snapshot
+                                                                    .data![
+                                                                        index]
+                                                                    .name!,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .roboto(
+                                                                  fontSize:
+                                                                      deviceHeight /
+                                                                          58,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  color:
+                                                                      white_color,
+                                                                ),
+                                                              ),
+                                                              //Divider(height: 5,color: Colors.transparent,),
+                                                              // Text('3',style: Theme.of(context).textTheme.bodyText1,),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : Container();
+                                            });
                                       }),
                                 ),
                               ],
@@ -245,33 +275,37 @@ class _YourBabyViewsState extends State<YourBabyViews> {
                         StreamBuilder<int>(
                             stream: _rxIndex.stream,
                             builder: (context, streamSnapshot) {
-                              return streamSnapshot.hasData? Column(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                        snapshot.data![streamSnapshot.data!]
-                                            .description!,
-                                        style: GoogleFonts.roboto(
-
-                                            fontSize: SizeHelper.of(context).help(
-                                              mobileSmall: 10,
-                                              mobileNormal: 12,
-                                              mobileLarge: 14,
-                                              tabletNormal: 16,
-                                              tabletExtraLarge: 18,
-                                              desktopLarge: 20,
-                                            ),
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.blueGrey),textAlign: TextAlign.start,),
-                                  ),
-                                  BabyDataList(
-                                    monthSlug: '${streamSnapshot.data!+1}-month',
-                                  ),
-                                ],
-                              ) : Container();
+                              return streamSnapshot.hasData
+                                  ? Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Text(
+                                            snapshot.data![streamSnapshot.data!]
+                                                .description!,
+                                            style: GoogleFonts.roboto(
+                                                fontSize:
+                                                    SizeHelper.of(context).help(
+                                                  mobileSmall: 10,
+                                                  mobileNormal: 12,
+                                                  mobileLarge: 14,
+                                                  tabletNormal: 16,
+                                                  tabletExtraLarge: 18,
+                                                  desktopLarge: 20,
+                                                ),
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.blueGrey),
+                                            textAlign: Utils.locality!.index == 0 ?  TextAlign.start :  TextAlign.end ,
+                                          ),
+                                        ),
+                                        BabyDataList(
+                                          monthSlug: snapshot
+                                              .data![streamSnapshot.data!].slug,
+                                        ),
+                                      ],
+                                    )
+                                  : Container();
                             }),
-
                       ]);
                     } else {
                       return Container();

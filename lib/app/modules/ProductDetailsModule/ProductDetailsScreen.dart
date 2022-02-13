@@ -17,6 +17,7 @@ import 'package:size_helper/size_helper.dart';
 class ProductDetailsScreen extends StatefulWidget {
   ProductDetailsScreen(this.id, {Key? key}) : super(key: key);
   String id;
+
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
 }
@@ -25,10 +26,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     with TickerProviderStateMixin {
   String _parseHtmlString(String htmlString) {
     final document = parse(htmlString);
-    final String parsedString = parse(document.body!.text).documentElement!.text;
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
 
     return parsedString;
   }
+
   ProductDetailsBloc? productDetailsBloc;
 
   ProductDetailsModel? model;
@@ -68,20 +71,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
         child: Container(
           width: Utils.deviceWidth,
           color: Colors.white,
-          // height: Utils.deviceHeight-SizeHelper.of(context).help(
-          //   mobileSmall: 170,
-          //   mobileNormal: 160,
-          //   mobileLarge: 130,
-          //   mobileExtraLarge: 140,
-          //   tabletSmall: 90,
-          //   tabletNormal: 85,
-          //   tabletLarge: 180,
-          //   tabletExtraLarge: 190,
-          //   desktopSmall: 200,
-          //   desktopNormal: 210,
-          //   desktopLarge: 230,
-          //   desktopExtraLarge: 260,
-          // ),
           child: BlocBuilder<ProductDetailsBloc, ProductDetailsState>(
               bloc: productDetailsBloc,
               builder: (context, state) {
@@ -255,7 +244,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             Flexible(
                 flex: 3,
                 child: Text(
-                  _parseHtmlString(model.shortDescription!) ,
+                  _parseHtmlString(model.shortDescription!),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -291,14 +280,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
         Text(
           Utils.labels!.age + " : ",
           style: TextStyle(
-          fontSize: SizeHelper.of(context).help(
-            mobileSmall: 10,
-            mobileNormal: 12,
-            mobileLarge: 14,
-            tabletNormal: 16,
-            tabletExtraLarge: 18,
-            desktopLarge: 20,
-          ),
+              fontSize: SizeHelper.of(context).help(
+                mobileSmall: 10,
+                mobileNormal: 12,
+                mobileLarge: 14,
+                tabletNormal: 16,
+                tabletExtraLarge: 18,
+                desktopLarge: 20,
+              ),
               fontWeight: FontWeight.normal,
               letterSpacing: 2,
               color: Colors.black),
@@ -309,33 +298,41 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               builder: (context, snapshot) {
                 return DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
+                    alignment: Alignment.center,
                     isExpanded: true,
                     value: snapshot.data,
                     items: model.attributes![0].optionValue!
                         .toSet()
                         .toList()
                         .map((String value) {
-                      String v = model.attributes![0].options![model.attributes![0].optionValue!.indexOf(value)];
+                      String v = model.attributes![0].options![
+                          model.attributes![0].optionValue!.indexOf(value)];
                       return DropdownMenuItem<String>(
-                        value:value,
+                        alignment: Alignment.center,
+                        value: value,
                         child: Text(
                           v,
                           style: TextStyle(
-                            fontSize: SizeHelper.of(context).help(
-                              mobileSmall: 6,
-                              mobileNormal: 8,
-                              mobileLarge: 10,
-                              tabletNormal: 12,
-                              tabletExtraLarge: 14,
-                              desktopLarge: 16,
-                            ),
-                          ),
+                              fontSize: SizeHelper.of(context).help(
+                                mobileSmall: 10,
+                                mobileNormal: 11,
+                                mobileLarge: 11,
+                                mobileExtraLarge: 13,
+                                tabletSmall: 15,
+                                tabletNormal: 18,
+                                tabletLarge: 21,
+                                tabletExtraLarge: 24,
+                                desktopSmall: 28,
+                                desktopNormal: 32,
+                                desktopLarge: 36,
+                                desktopExtraLarge: 38,
+                              ),
+                              letterSpacing: 2),
                           textAlign: TextAlign.center,
                         ),
                       );
                     }).toList(),
                     onChanged: (val) {
-
                       rxSelectedAgeSubject.sink.add(val!);
                     },
                   ),
@@ -393,15 +390,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                         width: 10,
                       ),
                       Text(snapshot.data!.toString(),
-                          style:
-                              TextStyle(        fontSize: SizeHelper.of(context).help(
+                          style: TextStyle(
+                              fontSize: SizeHelper.of(context).help(
                                 mobileSmall: 10,
                                 mobileNormal: 12,
                                 mobileLarge: 14,
                                 tabletNormal: 16,
                                 tabletExtraLarge: 18,
                                 desktopLarge: 20,
-                              ), color: Colors.black87)),
+                              ),
+                              color: Colors.black87)),
                       SizedBox(
                         width: 10,
                       ),
@@ -461,14 +459,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                 ),
                 Text(
                   Utils.labels!.add_to_cart,
-                  style: TextStyle(color: Colors.white,         fontSize: SizeHelper.of(context).help(
-                    mobileSmall: 10,
-                    mobileNormal: 12,
-                    mobileLarge: 14,
-                    tabletNormal: 16,
-                    tabletExtraLarge: 18,
-                    desktopLarge: 20,
-                  ),),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: SizeHelper.of(context).help(
+                      mobileSmall: 10,
+                      mobileNormal: 12,
+                      mobileLarge: 14,
+                      tabletNormal: 16,
+                      tabletExtraLarge: 18,
+                      desktopLarge: 20,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -580,10 +581,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
   }
 
   getOptionsStringsConcatenated(List<String> list) {
-    return list.map((e) => e).toList().toString();
+    return list.map((e) => e).toList().toString().replaceAll('[','').replaceAll(']', '');
   }
 
-  _buildAdditionalInfoSection(model) {
+  _buildAdditionalInfoSection(ProductDetailsModel model) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -606,6 +607,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
         SizedBox(
           height: 8,
         ),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -626,23 +628,67 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   color: Colors.black),
             ),
             Flexible(
-                child: Text(
-                    getOptionsStringsConcatenated(
-                        model.attributes![0].options!),
-                    style: TextStyle(
-                        fontSize: SizeHelper.of(context).help(
-                          mobileSmall: 8,
-                          mobileNormal: 10,
-                          mobileLarge: 12,
-                          tabletNormal: 14,
-                          tabletExtraLarge: 16,
-                          desktopLarge: 18,
-                        ),
-                        fontWeight: FontWeight.normal,
-                        letterSpacing: 2,
-                        color: Colors.black)))
+              child: Text(
+                getOptionsStringsConcatenated(model.attributes!.firstWhere((element) => element.name == 'Age').options as List<String>),
+                style: TextStyle(
+                    fontSize: SizeHelper.of(context).help(
+                      mobileSmall: 8,
+                      mobileNormal: 10,
+                      mobileLarge: 12,
+                      tabletNormal: 14,
+                      tabletExtraLarge: 16,
+                      desktopLarge: 18,
+                    ),
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 2,
+                    color: Colors.black),
+              ),
+            ),
+
           ],
-        )
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              Utils.labels!.gender + " : ",
+              style: TextStyle(
+                  fontSize: SizeHelper.of(context).help(
+                    mobileSmall: 10,
+                    mobileNormal: 12,
+                    mobileLarge: 14,
+                    tabletNormal: 16,
+                    tabletExtraLarge: 18,
+                    desktopLarge: 20,
+                  ),
+                  fontWeight: FontWeight.normal,
+                  letterSpacing: 2,
+                  color: Colors.black),
+            ),
+            Flexible(
+              child: Text(
+                getOptionsStringsConcatenated(model.attributes!.firstWhere((element) => element.name == 'Gender').options as List<String>),
+                style: TextStyle(
+                    fontSize: SizeHelper.of(context).help(
+                      mobileSmall: 8,
+                      mobileNormal: 10,
+                      mobileLarge: 12,
+                      tabletNormal: 14,
+                      tabletExtraLarge: 16,
+                      desktopLarge: 18,
+                    ),
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 2,
+                    color: Colors.black),
+              ),
+            ),
+
+          ],
+        ),
       ],
     );
   }
@@ -656,7 +702,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
               border: OutlineInputBorder(),
               hintText: Utils.labels!.write_review),
         ),
-
         Row(
           children: [
             Expanded(flex: 1, child: Text(Utils.labels!.email)),
@@ -670,7 +715,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             ),
           ],
         ),
-
         Row(
           children: [
             Expanded(flex: 1, child: Text(Utils.labels!.name)),
@@ -684,7 +728,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             ),
           ],
         ),
-
         RaisedButton(
           onPressed: () {},
           child: Text(Utils.labels!.submit),
@@ -759,15 +802,23 @@ class DetailsSliverDelegate extends State<DetailsSliver> {
 
   _buildPageView(List<Images> items) {
     _numPages = items.length;
-    return Container(
-      width: Utils.width,
-      //color: Colors.red,
-      height: Utils.deviceHeight * .3,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      // width: Utils.width,
+      // //color: Colors.red,
+      // height: Utils.deviceHeight * .3,
       child: PageView.builder(
+          reverse: true,
+          pageSnapping: true,
+          padEnds: true,
+          allowImplicitScrolling: true,
           itemCount: items.length,
           controller: _pageController,
           itemBuilder: (BuildContext context, int index) {
-            return Image.network(items[index].src!, fit: BoxFit.fill);
+            return Image.network(
+              items[index].src!,
+              fit: BoxFit.cover,
+            );
           },
           onPageChanged: (int index) {
             _currentPageNotifier.value = index;
@@ -783,14 +834,32 @@ class DetailsSliverDelegate extends State<DetailsSliver> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: widget.expandedHeight,
-          child: _buildPageView(widget.urls!),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            height: widget.expandedHeight,
+            width: SizeHelper.of(context).help(
+              mobileSmall: 200,
+              mobileNormal: 230,
+              mobileLarge: 250,
+              mobileExtraLarge: 270,
+              tabletSmall: 270,
+              tabletNormal: 280,
+              tabletLarge: 280,
+              tabletExtraLarge: 290,
+              desktopSmall: 300,
+              desktopNormal: 300,
+              desktopLarge: 350,
+              desktopExtraLarge: 370,
+            ),
+            child: _buildPageView(widget.urls!),
+          ),
         ),
         _numPages > 1
             ? Positioned(
                 bottom: 40,
-                left: Utils.deviceWidth/ 2 - 50,
+                left: Utils.deviceWidth / 2 - 50,
                 child: _buildPageIndicator(),
               )
             : Container(),

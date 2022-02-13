@@ -444,12 +444,12 @@
     "description": ""
   },
 
-"first": "First",
+"first": "First Name",
   "@first": {
     "description": ""
   },
 
-"last": "Last",
+"last": "Last Name",
   "@last": {
     "description": ""
   },
@@ -827,6 +827,10 @@
   },
   "search_with_category": "Search with category",
   "@with_category": {
+    "description": ""
+  },
+  "gender": "Gender",
+  "@gender": {
     "description": ""
   }
 }

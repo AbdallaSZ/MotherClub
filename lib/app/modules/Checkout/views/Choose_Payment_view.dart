@@ -152,7 +152,6 @@ class Choose_Payment_view extends GetView<AuthController> {
                                                         fontStyle: FontStyle.normal,
                                                         fontWeight: FontWeight.normal,
                                                         color: Colors.grey,
-
                                                       )
                                                       ),
                                                       SizedBox(height:3),

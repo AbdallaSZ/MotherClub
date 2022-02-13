@@ -103,7 +103,8 @@ Widget homeAppBar(
                               ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color(0xFFCDECE4),
+
+                                // color: Color(0xFFCDECE4),
                               ),
                               child: Image.network(data[index].image),
                             ),
