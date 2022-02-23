@@ -30,7 +30,7 @@ class _StoreViewScreenState extends State<StoreView> {
       PagingController(firstPageKey: 1);
   BehaviorSubject<RangeValues>? _rxRangeValues = BehaviorSubject(sync: true);
   BehaviorSubject<bool>? rxIsChecked = BehaviorSubject(sync: true);
-  BehaviorSubject<bool>? rxWithCategoryIsChecked = BehaviorSubject(sync: true);
+
   BehaviorSubject<ProductCategoryModel>? rxCategory =
       BehaviorSubject(sync: true);
 
@@ -38,7 +38,6 @@ class _StoreViewScreenState extends State<StoreView> {
   void initState() {
     _rxRangeValues!.sink.add(RangeValues(10.0, 80.0));
     rxIsChecked!.sink.add(false);
-    rxWithCategoryIsChecked!.sink.add(false);
 
     searchBloc = SearchBloc();
     super.initState();
@@ -49,9 +48,9 @@ class _StoreViewScreenState extends State<StoreView> {
               onSale: rxIsChecked!.value,
               minPrice: _rxRangeValues!.value.start.toString(),
               maxPrice: _rxRangeValues!.value.end.toString(),
-              categoryId: rxWithCategoryIsChecked!.value
+              categoryId: rxCategory!.value.id != -12
                   ? rxCategory!.value.id.toString()
-                  : '',
+                  : null,
             )
           : _fetchPage(pageKey);
     });
@@ -61,7 +60,7 @@ class _StoreViewScreenState extends State<StoreView> {
   void dispose() {
     _pagingController.dispose();
     rxIsChecked?.close();
-    rxWithCategoryIsChecked?.close();
+
     _rxRangeValues?.close();
     rxCategory?.close();
     super.dispose();
@@ -356,39 +355,32 @@ class _StoreViewScreenState extends State<StoreView> {
                                             color: Colors.black,
                                             fontSize:
                                                 SizeHelper.of(context).help(
-                                              mobileSmall: 7,
-                                              mobileNormal: 7,
-                                              mobileLarge: 8,
-                                              mobileExtraLarge: 8,
-                                              tabletSmall: 10,
-                                              tabletNormal: 12,
-                                              tabletLarge: 13,
-                                              tabletExtraLarge: 14,
-                                              desktopSmall: 15,
-                                              desktopNormal: 17,
-                                              desktopLarge: 18,
-                                              desktopExtraLarge: 20,
+                                              mobileSmall: 10,
+                                              mobileNormal: 12,
+                                              mobileLarge: 14,
+                                              tabletNormal: 16,
+                                              tabletExtraLarge: 18,
+                                              desktopLarge: 20,
                                             ),
                                             fontWeight: FontWeight.w700),
                                       ),
-                                      StreamBuilder<bool>(
-                                          stream:
-                                              rxWithCategoryIsChecked!.stream,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData)
-                                              return Checkbox(
-                                                checkColor: Colors.white,
-                                                fillColor: MaterialStateProperty
-                                                    .resolveWith(getColor),
-                                                value: snapshot.data!,
-                                                onChanged: (bool? value) {
-                                                  rxWithCategoryIsChecked!.sink
-                                                      .add(value!);
-                                                },
-                                              );
-                                            else
-                                              return Container();
-                                          }),
+                                      // StreamBuilder<bool>(
+                                      //     stream:
+                                      //         rxWithCategoryIsChecked!.stream,
+                                      //     builder: (context, snapshot) {
+                                      //       if (snapshot.hasData)
+                                      //         return Checkbox(
+                                      //           checkColor: Colors.white,
+                                      //           fillColor: MaterialStateProperty
+                                      //               .resolveWith(getColor),
+                                      //           value: snapshot.data!,
+                                      //           onChanged: (bool? value) {
+                                      //             rxWithCategoryIsChecked!.sink.add(value!);
+                                      //           },
+                                      //         );
+                                      //       else
+                                      //         return Container();
+                                      //     }),
                                       FutureBuilder<List<ProductCategoryModel>>(
                                           future: Utils.bLoC
                                               .productCategoriesList(),
@@ -411,62 +403,48 @@ class _StoreViewScreenState extends State<StoreView> {
                                                     return !rxCategorySnapshot
                                                             .hasData
                                                         ? Container()
-                                                        : StreamBuilder<bool>(
-                                                            stream:
-                                                                rxWithCategoryIsChecked!
-                                                                    .stream,
-                                                            builder: (context,
-                                                                rxWithCategoryIsCheckedSnapshot) {
-                                                              return !rxWithCategoryIsCheckedSnapshot
-                                                                      .hasData
-                                                                  ? Container()
-                                                                  : DropdownButton<
-                                                                      ProductCategoryModel>(
-                                                                      hint: Text(
-                                                                          'select category type'),
-                                                                      value: rxCategorySnapshot
-                                                                          .data,
-                                                                      icon: Icon(
-                                                                          Icons
-                                                                              .arrow_drop_down_circle_sharp,
-                                                                          color: rxWithCategoryIsCheckedSnapshot.data!
-                                                                              ? Colors.red
-                                                                              : Colors.grey),
-                                                                      elevation:
-                                                                          16,
-                                                                      style: TextStyle(
-                                                                          color: rxWithCategoryIsCheckedSnapshot.data!
-                                                                              ? Colors.black87
-                                                                              : Colors.grey),
-                                                                      underline:
-                                                                          Container(
-                                                                        height:
-                                                                            2,
-                                                                        color: rxWithCategoryIsCheckedSnapshot.data!
-                                                                            ? Colors.red
-                                                                            : Colors.grey,
-                                                                      ),
-                                                                      onChanged: rxWithCategoryIsCheckedSnapshot
-                                                                              .data!
-                                                                          ? (ProductCategoryModel?
-                                                                              newValue) {
-                                                                              rxCategory!.sink.add(newValue!);
-                                                                            }
-                                                                          : null,
-                                                                      items: categoriesSnapshot
-                                                                          .data!
-                                                                          .map<DropdownMenuItem<ProductCategoryModel>>((ProductCategoryModel
-                                                                              value) {
-                                                                        return DropdownMenuItem<
-                                                                            ProductCategoryModel>(
-                                                                          value:
-                                                                              value,
-                                                                          child:
-                                                                              Text(value.name!),
-                                                                        );
-                                                                      }).toList(),
-                                                                    );
-                                                            });
+                                                        : DropdownButton<
+                                                            ProductCategoryModel>(
+                                                            value:
+                                                                rxCategorySnapshot
+                                                                    .data,
+                                                            alignment: Alignment
+                                                                .center,
+                                                            icon: Icon(
+                                                                Icons
+                                                                    .arrow_drop_down_circle_sharp,
+                                                                color:
+                                                                    Colors.red),
+                                                            elevation: 16,
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                            underline:
+                                                                Container(
+                                                              height: 2,
+                                                              color: Colors.red,
+                                                            ),
+                                                            onChanged:
+                                                                (ProductCategoryModel?
+                                                                    newValue) {
+                                                              rxCategory!.sink
+                                                                  .add(
+                                                                      newValue!);
+                                                            },
+                                                            items: categoriesSnapshot.data!.map<
+                                                                    DropdownMenuItem<
+                                                                        ProductCategoryModel>>(
+                                                                (ProductCategoryModel
+                                                                    value) {
+                                                              return DropdownMenuItem<
+                                                                  ProductCategoryModel>(
+                                                                value: value,
+                                                                child: Text(
+                                                                    value
+                                                                        .name!),
+                                                              );
+                                                            }).toList(),
+                                                          );
                                                   });
                                             }
                                           }),
@@ -487,9 +465,9 @@ class _StoreViewScreenState extends State<StoreView> {
                                           .toString(),
                                       maxPrice:
                                           _rxRangeValues!.value.end.toString(),
-                                      categoryId: rxWithCategoryIsChecked!.value
+                                      categoryId: rxCategory!.value.id != -12
                                           ? rxCategory!.value.id.toString()
-                                          : '',
+                                          : null,
                                     );
                                   },
                                   child: Text(Utils.labels!.search),
@@ -511,11 +489,10 @@ class _StoreViewScreenState extends State<StoreView> {
                       pagingController: _pagingController,
                       builderDelegate:
                           PagedChildBuilderDelegate<ProductDetailsModel>(
-
                         itemBuilder: (context, item, index) => buildProductItem(
-                          item
-                          // (item.attributes!.firstWhere((element) => element.name == 'Age').options!.contains('0-3 Months')) ? item : P ,
-                        ),
+                            item
+                            // (item.attributes!.firstWhere((element) => element.name == 'Age').options!.contains('0-3 Months')) ? item : P ,
+                            ),
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: SizeHelper.of(context).help(
@@ -587,11 +564,16 @@ class _StoreViewScreenState extends State<StoreView> {
     return GestureDetector(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (c) => BlocProvider(
-                      create: (c) => ProductDetailsBloc(),
-                      child: ProductDetailsScreen(model.id.toString()))));
+            context,
+            MaterialPageRoute(
+              builder: (c) => BlocProvider(
+                create: (c) => ProductDetailsBloc(),
+                child: ProductDetailsScreen(
+                  model.id.toString(),
+                ),
+              ),
+            ),
+          );
         },
         child: ProductItem(
           data: model,
@@ -629,16 +611,16 @@ class _StoreViewScreenState extends State<StoreView> {
         _pagingController.appendLastPage(newItems);
       } else {
         final nextPageKey = pageKey + newItems.length;
-        _pagingController.appendPage(newItems.where((element) {
-          if (Utils.locality!.index == 0) {
-            if (element.language == 'Arabic')
-              return true;
-          }else {
-            if (element.language == 'English')
-              return true;
-          }
-          return false;
-        } ).toList(), nextPageKey);
+        _pagingController.appendPage(
+            newItems.where((element) {
+              if (Utils.locality!.index == 0) {
+                if (element.language == 'Arabic') return true;
+              } else {
+                if (element.language == 'English') return true;
+              }
+              return false;
+            }).toList(),
+            nextPageKey);
       }
       page += 1;
     } catch (error) {

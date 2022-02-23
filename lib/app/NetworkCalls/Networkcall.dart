@@ -523,7 +523,7 @@ class NetworkCall {
   }
 
   Future<dynamic> getOrders() async {
-    ///to do .. add user id filtering &customer=${Utils.id} at the end of the link
+
     final response = await http.get(
       Uri.parse(
         'https://mothersclub.me/wp-json/wc/v3/orders?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e&customer=${Utils.id}',
@@ -562,5 +562,34 @@ class NetworkCall {
     } else {
       return jsonDecode(response.body);
     }
+  }
+
+  Future<dynamic> getShippingZone() async {
+
+    final response = await http.get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wc/v3/shipping/zones?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e',
+      ),
+    );
+    return jsonDecode(response.body);
+  }
+
+  Future<dynamic> getShippingCost(int methodNum) async {
+
+    final response = await http.get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wc/v3/shipping/zones/$methodNum/methods?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e',
+      ),
+    );
+    return jsonDecode(response.body);
+  }
+  Future<dynamic> getTaxCost(int methodNum) async {
+
+    final response = await http.get(
+      Uri.parse(
+        'https://mothersclub.me/wp-json/wc/v3/taxes/$methodNum?consumer_key=ck_80cfe861da67b50ce8080a4589b2660cf6a133db&consumer_secret=cs_d00ecca9defdd4d4cf94b89c865da22188ef783e',
+      ),
+    );
+    return jsonDecode(response.body);
   }
 }

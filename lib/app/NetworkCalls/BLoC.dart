@@ -18,21 +18,17 @@ import 'package:motherclub/app/Models/order_model.dart';
 import 'package:motherclub/app/Models/product_category_model.dart';
 import 'package:motherclub/app/Models/replies_model.dart';
 import 'package:motherclub/app/Models/reply_model.dart';
+import 'package:motherclub/app/Models/shipping_cost_model.dart';
+import 'package:motherclub/app/Models/shipping_zone_model.dart';
 import 'package:motherclub/app/Models/topic_model.dart';
 import 'package:motherclub/app/Models/wishlistModel.dart';
 import 'package:motherclub/app/Models/wishlist_item_model.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 
 class BLoC {
-  Future<List<ProductDetailsModel>> productList(
-      {int page = 1,
-      int perPage = 10,
-      bool onSale = true,
-      String min = '0',
-      String max = '10000000',
+  Future<List<ProductDetailsModel>> productList({int page = 1, int perPage = 10, bool onSale = true, String min = '0', String max = '10000000',
       String category = ''}) async {
     List<ProductDetailsModel> productsList = <ProductDetailsModel>[];
-
     var dataFromResponse = await Utils.networkcall
         .getProductsAPICall(page, perPage, onSale, min, max, category);
     await dataFromResponse.forEach((newProduct) {
@@ -46,11 +42,12 @@ class BLoC {
     List<ProductCategoryModel> productCategoryList = <ProductCategoryModel>[];
     var productCategoryResponse =
         await Utils.networkcall.getProductCategories();
-    productCategoryResponse.forEach((newModel) {
+    await productCategoryResponse.forEach((newModel) {
       ProductCategoryModel productCategoryModel =
           ProductCategoryModel.fromMap(newModel);
       productCategoryList.add(productCategoryModel);
     });
+    productCategoryList.insert(0, ProductCategoryModel(name: 'Select Category',id: -12) ,);
     return productCategoryList;
   }
 
@@ -415,6 +412,35 @@ class BLoC {
     } on Exception catch (e) {
       print(e);
     }
+  }
+
+  Future<List<ShippingZoneModel>> shippingZone() async {
+    List<ShippingZoneModel> shippingZoneList = <ShippingZoneModel>[];
+    var response = await Utils.networkcall.getShippingZone();
+
+    await response.forEach((newShippingZone) {
+      ShippingZoneModel shippingZone = ShippingZoneModel.fromMap(newShippingZone);
+      shippingZoneList.add(shippingZone);
+    });
+    return shippingZoneList;
+  }
+
+  Future<List<ShippingCostModel>> shippingCost(int methodNum) async {
+
+    var response = await Utils.networkcall.getShippingCost(methodNum);
+    List<ShippingCostModel> shippingCostList = <ShippingCostModel>[];
+    await response.forEach((newShippingCost) {
+      ShippingCostModel shippingZone = ShippingCostModel.fromMap(newShippingCost);
+      shippingCostList.add(shippingZone);
+    });
+    return shippingCostList;
+  }
+  Future<double> taxCost(int methodNum) async {
+
+    var response = await Utils.networkcall.getTaxCost(methodNum);
+    double shippingCost = double.parse(response['rate']);
+
+    return shippingCost;
   }
 
 }

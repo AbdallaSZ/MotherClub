@@ -259,20 +259,51 @@
   "@add_wishlist_name": {
     "description": ""
   },
+  "insert_all_data":"Insert all data",
+  "@insert_all_data": {
+    "description": ""
+  },
+  "cod":"Cash on delivery",
+  "@cod": {
+    "description": ""
+  },
+  "online_pay":"Online Pay",
+  "@online_pay": {
+    "description": ""
+  },
+  "pay_done":"Pay Done",
+  "@pay_done": {
+    "description": ""
+  },
 
   "add":"Add",
   "@add": {
     "description": ""
   },
-
+  "shipping_cost": "Shipping Cost",
+  "@shipping_cost": {
+    "description": ""
+  },
+   "tax": "Tax",
+    "@tax": {
+      "description": ""
+    },
   "contact_us":"contact us",
   "@contact_us": {
+    "description": ""
+  },
+  "select_zone": "Select Zone",
+  "@select_zone": {
+    "description": ""
+  },
+  "country":"Country",
+  "@country": {
     "description": ""
   },
   "choose_age":"Choose baby age",
   "@choose_age": {
     "description": ""
-  },  "additional_information":"additional_information",
+  },  "additional_information":"Additional Information",
   "@additional_information": {
     "description": ""
   }, "write_review":"Write your review",

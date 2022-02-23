@@ -27,8 +27,8 @@ Widget homeAppBar(
   List<String> routes = [
     Routes.YOURPREGNANCY,
     Routes.YOURBABY,
+    Routes.STORE,
     Routes.FORUM,
-    Routes.STORE
   ];
   return CustomScrollView(slivers: <Widget>[
     // SliverToBoxAdapter(

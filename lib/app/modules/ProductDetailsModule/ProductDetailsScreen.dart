@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:motherclub/app/Models/ProductDetailsModel.dart';
 import 'package:motherclub/app/StateEnum.dart';
 import 'package:motherclub/app/modules/ProductDetailsModule/ProductDetailsBloc/ProductDetailsBloc.dart';
@@ -148,19 +149,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             Text(
               _parseHtmlString(model.description!),
               maxLines: 10,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontSize: SizeHelper.of(context).help(
-                    mobileSmall: 10,
-                    mobileNormal: 12,
-                    mobileLarge: 14,
-                    tabletNormal: 16,
-                    tabletExtraLarge: 18,
-                    desktopLarge: 20,
-                  ),
-                  fontWeight: FontWeight.normal,
-                  letterSpacing: 2,
-                  color: Colors.grey.shade700),
+
+              style: GoogleFonts.lato().copyWith(
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 10,
+                  mobileNormal: 11,
+                  mobileLarge: 11,
+                  mobileExtraLarge: 13,
+                  tabletSmall: 15,
+                  tabletNormal: 18,
+                  tabletLarge: 21,
+                  tabletExtraLarge: 24,
+                  desktopSmall: 28,
+                  desktopNormal: 32,
+                  desktopLarge: 36,
+                  desktopExtraLarge: 38,
+                ),
+              ),
             ),
             Container(
               alignment: Alignment.topCenter,
@@ -247,11 +252,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   _parseHtmlString(model.shortDescription!),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      letterSpacing: 2,
-                      color: Colors.grey.shade700),
+                  style: GoogleFonts.lato().copyWith(
+                    fontSize: SizeHelper.of(context).help(
+                      mobileSmall: 10,
+                      mobileNormal: 11,
+                      mobileLarge: 11,
+                      mobileExtraLarge: 13,
+                      tabletSmall: 15,
+                      tabletNormal: 18,
+                      tabletLarge: 21,
+                      tabletExtraLarge: 24,
+                      desktopSmall: 28,
+                      desktopNormal: 32,
+                      desktopLarge: 36,
+                      desktopExtraLarge: 38,
+                    ),
+                  ),
                 )),
           ],
         ));
@@ -554,26 +570,56 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
       desktopExtraLarge: 20,
     );
     return TabBar(
-      indicator: BoxDecoration(color: Colors.grey.shade300),
-      labelColor: Colors.grey,
+      indicator: BoxDecoration(color: Color(0xFFF84F62),borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))),
+      labelColor: Colors.white,
       controller: tabController,
+       unselectedLabelColor: Colors.black,
+      labelStyle: TextStyle(color: Colors.black),
       tabs: [
         Tab(
+
           child: Text(
             Utils.labels!.additional_information,
-            style: TextStyle(
-                color: Colors.black87,
-                fontSize: h5,
-                fontWeight: FontWeight.bold),
+              style: GoogleFonts.lato().copyWith(
+
+                fontSize: SizeHelper.of(context).help(
+                  mobileSmall: 10,
+                  mobileNormal: 11,
+                  mobileLarge: 11,
+                  mobileExtraLarge: 13,
+                  tabletSmall: 15,
+                  tabletNormal: 18,
+                  tabletLarge: 21,
+                  tabletExtraLarge: 24,
+                  desktopSmall: 28,
+                  desktopNormal: 32,
+                  desktopLarge: 36,
+                  desktopExtraLarge: 38,
+                ),
+              ),
           ),
         ),
         Tab(
           child: Text(
             Utils.labels!.review,
-            style: TextStyle(
-                color: Colors.black87,
-                fontSize: h5,
-                fontWeight: FontWeight.bold),
+            style: GoogleFonts.lato().copyWith(
+
+              fontSize: SizeHelper.of(context).help(
+
+                mobileSmall: 10,
+                mobileNormal: 11,
+                mobileLarge: 11,
+                mobileExtraLarge: 13,
+                tabletSmall: 15,
+                tabletNormal: 18,
+                tabletLarge: 21,
+                tabletExtraLarge: 24,
+                desktopSmall: 28,
+                desktopNormal: 32,
+                desktopLarge: 36,
+                desktopExtraLarge: 38,
+              ),
+            ),
           ),
         ),
       ],
@@ -588,28 +634,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(Utils.labels!.additional_information,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: SizeHelper.of(context).help(
-                  mobileSmall: 15,
-                  mobileNormal: 17,
-                  mobileLarge: 19,
-                  tabletNormal: 21,
-                  tabletExtraLarge: 23,
-                  desktopLarge: 25,
-                ),
-                color: Colors.black87)),
-        Divider(
-          height: 1,
-          color: Colors.black87,
-        ),
+        // Text(Utils.labels!.additional_information,
+        //     style: TextStyle(
+        //         // fontWeight: FontWeight.bold,
+        //         fontSize: SizeHelper.of(context).help(
+        //           mobileSmall: 8,
+        //           mobileNormal: 9,
+        //           mobileLarge: 9,
+        //           mobileExtraLarge: 10,
+        //           tabletSmall: 12,
+        //           tabletNormal: 14,
+        //           tabletLarge: 15,
+        //           tabletExtraLarge: 17,
+        //           desktopSmall: 19,
+        //           desktopNormal: 22,
+        //           desktopLarge: 24,
+        //           desktopExtraLarge: 25,
+        //         ),
+        //         color: Colors.black87)),
+        // Divider(
+        //   height: 1,
+        //   color: Colors.black87,
+        // ),
         SizedBox(
           height: 8,
         ),
 
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -651,7 +703,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           height: 8,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(

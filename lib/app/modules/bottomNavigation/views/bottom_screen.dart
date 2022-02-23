@@ -106,100 +106,105 @@ class _BottomScreenState extends State<BottomScreen> {
           return StreamBuilder<int>(
               stream: rxPages.stream,
               builder: (context, mySnapshot) {
-                return mySnapshot.hasData ? Scaffold(
-                  appBar: CustomAppBar(
-                    titleSize: SizeHelper.of(context).help(
-                      mobileSmall: 14,
-                      mobileNormal: 16,
-                      mobileLarge: 18,
-                      tabletNormal: 20,
-                      tabletExtraLarge: 22,
-                      desktopLarge: 24,
-                    ),
-                    centerTitle: true,
-                    title: titles[currentIndex],
-                    actions: [
-                      if (titles[currentIndex] == Utils.labels!.store)
-                        SizedBox(
-                          width: 20,
-                        ),
-                      GestureDetector(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (c) {
-                                  return Directionality(
-                                    textDirection:
-                                        Utils.locality == Locality.english
-                                            ? TextDirection.ltr
-                                            : TextDirection.rtl,
-                                    child: AlertDialog(
-                                        title: Text(
-                                          Utils.labels!.change_language,
-                                        ),
-                                        content: Container(
-                                          height: 120,
-                                          alignment: Alignment.centerRight,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    radioButtonChanges("en");
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: <Widget>[
-                                                      Expanded(
-                                                        flex: 6,
-                                                        child: Text(
-                                                          "English",
+                return mySnapshot.hasData
+                    ? Scaffold(
+                        appBar: CustomAppBar(
+                          titleSize: SizeHelper.of(context).help(
+                            mobileSmall: 14,
+                            mobileNormal: 16,
+                            mobileLarge: 18,
+                            tabletNormal: 20,
+                            tabletExtraLarge: 22,
+                            desktopLarge: 24,
+                          ),
+                          centerTitle: true,
+                          title: titles[currentIndex],
+                          actions: [
+                            if (titles[currentIndex] == Utils.labels!.store)
+                              SizedBox(
+                                width: 20,
+                              ),
+                            GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (c) {
+                                        return Directionality(
+                                          textDirection:
+                                              Utils.locality == Locality.english
+                                                  ? TextDirection.ltr
+                                                  : TextDirection.rtl,
+                                          child: AlertDialog(
+                                              title: Text(
+                                                Utils.labels!.change_language,
+                                              ),
+                                              content: Container(
+                                                height: 120,
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          radioButtonChanges(
+                                                              "en");
+                                                        },
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: <Widget>[
+                                                            Expanded(
+                                                              flex: 6,
+                                                              child: Text(
+                                                                "English",
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Radio(
+                                                                value: 'en',
+                                                                groupValue:
+                                                                    _radioValue,
+                                                                onChanged:
+                                                                    radioButtonChanges,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Radio(
-                                                          value: 'en',
-                                                          groupValue:
-                                                              _radioValue,
-                                                          onChanged:
-                                                              radioButtonChanges,
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          radioButtonChanges(
+                                                              "ar");
+                                                        },
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: <Widget>[
+                                                            Expanded(
+                                                              flex: 6,
+                                                              child: Text(
+                                                                "اللغة العربية",
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Radio(
+                                                                value: 'ar',
+                                                                groupValue:
+                                                                    _radioValue,
+                                                                onChanged:
+                                                                    radioButtonChanges,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    radioButtonChanges("ar");
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: <Widget>[
-                                                      Expanded(
-                                                        flex: 6,
-                                                        child: Text(
-                                                          "اللغة العربية",
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Radio(
-                                                          value: 'ar',
-                                                          groupValue:
-                                                              _radioValue,
-                                                          onChanged:
-                                                              radioButtonChanges,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ), /*
+                                                      ), /*
                                    Row(
                                      mainAxisAlignment: MainAxisAlignment.spaceBetween ,
                                      children: <Widget>[
@@ -240,160 +245,127 @@ class _BottomScreenState extends State<BottomScreen> {
 
                                      ],
                                    ),*/
-                                              ]),
-                                        )),
-                                  );
-                                });
-                            if (choice == "en") {
-                              _bloc!.add(LanguageEvent(Locale("en", "")));
-                            } else if (choice == "ar") {
-                              _bloc!.add(LanguageEvent(Locale("ar", "")));
-                            }
-                          },
-                          child: Image.asset('assets/images/translate.png')),
-                    ],
-                  ),
-                  body: currentPage,
-                  bottomNavigationBar: BottomNavigationBar(
+                                                    ]),
+                                              )),
+                                        );
+                                      });
+                                  if (choice == "en") {
+                                    _bloc!.add(LanguageEvent(Locale("en", "")));
+                                  } else if (choice == "ar") {
+                                    _bloc!.add(LanguageEvent(Locale("ar", "")));
+                                  }
+                                },
+                                child:
+                                    Image.asset('assets/images/translate.png')),
+                          ],
+                        ),
+                        body: currentPage,
+                        bottomNavigationBar: BottomNavigationBar(
+                          selectedLabelStyle: TextStyle(
+                            fontSize: SizeHelper.of(context).help(
+                              mobileSmall: 6,
+                              mobileNormal: 8,
+                              mobileLarge: 10,
+                              tabletNormal: 12,
+                              tabletExtraLarge: 14,
+                              desktopLarge: 16,
+                            ),
+                          ),
+                          type: BottomNavigationBarType.fixed,
+                          // backgroundColor: Color(0xFF6200EE),
+                          // selectedItemColor: Colors.purple,
+                          unselectedItemColor: Colors.black.withOpacity(.60),
+                          selectedFontSize: 12,
+                          unselectedFontSize: 12,
+                          fixedColor: Color(0xffFF4550),
+                          currentIndex: mySnapshot.data!,
+                          onTap: changePage,
+                          items: [
+                            BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.home,
+                                size: SizeHelper.of(context).help(
+                                  mobileSmall: 15,
+                                  mobileNormal: 17,
+                                  mobileLarge: 19,
+                                  tabletNormal: 21,
+                                  tabletExtraLarge: 23,
+                                  desktopLarge: 25,
+                                ),
+                              ),
+                              label: Utils.labels!.home,
+                              //Text(
 
-                    type: BottomNavigationBarType.fixed,
-                    // backgroundColor: Color(0xFF6200EE),
-                    // selectedItemColor: Colors.purple,
-                    unselectedItemColor: Colors.black.withOpacity(.60),
-                    selectedFontSize: 12,
-                    unselectedFontSize: 12,
-                    fixedColor: Color(0xffFF4550),
-                    currentIndex: mySnapshot.data!,
-                    onTap: changePage,
-                    items: [
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.home,
-                            size: SizeHelper.of(context).help(
-                              mobileSmall: 15,
-                              mobileNormal: 17,
-                              mobileLarge: 19,
-                              tabletNormal: 21,
-                              tabletExtraLarge: 23,
-                              desktopLarge: 25,
+                              // style: TextStyle(
+                              //   fontSize: SizeHelper.of(context).help(
+                              //     mobileSmall: 6,
+                              //     mobileNormal: 8,
+                              //     mobileLarge: 10,
+                              //     tabletNormal: 12,
+                              //     tabletExtraLarge: 14,
+                              //     desktopLarge: 16,
+                              //   ),
+                              // ),
                             ),
-                          ),
-                          title: Text(
-                            Utils.labels!.home,
-                            style: TextStyle(
-                              fontSize: SizeHelper.of(context).help(
-                                mobileSmall: 6,
-                                mobileNormal: 8,
-                                mobileLarge: 10,
-                                tabletNormal: 12,
-                                tabletExtraLarge: 14,
-                                desktopLarge: 16,
+                            //),
+                            BottomNavigationBarItem(
+                              icon: Icon(
+                                Icons.grid_on_sharp,
+                                size: SizeHelper.of(context).help(
+                                  mobileSmall: 15,
+                                  mobileNormal: 17,
+                                  mobileLarge: 19,
+                                  tabletNormal: 21,
+                                  tabletExtraLarge: 23,
+                                  desktopLarge: 25,
+                                ),
                               ),
+                              label:Utils.labels!.category,
+
                             ),
-                          )),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.grid_on_sharp,
-                            size: SizeHelper.of(context).help(
-                              mobileSmall: 15,
-                              mobileNormal: 17,
-                              mobileLarge: 19,
-                              tabletNormal: 21,
-                              tabletExtraLarge: 23,
-                              desktopLarge: 25,
-                            ),
-                          ),
-                          title: Text(
-                            Utils.labels!.category,
-                            style: TextStyle(
-                              fontSize: SizeHelper.of(context).help(
-                                mobileSmall: 6,
-                                mobileNormal: 8,
-                                mobileLarge: 10,
-                                tabletNormal: 12,
-                                tabletExtraLarge: 14,
-                                desktopLarge: 16,
-                              ),
-                            ),
-                          )),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.forum,
-                            size: SizeHelper.of(context).help(
-                              mobileSmall: 15,
-                              mobileNormal: 17,
-                              mobileLarge: 19,
-                              tabletNormal: 21,
-                              tabletExtraLarge: 23,
-                              desktopLarge: 25,
-                            ),
-                          ),
-                          title: Text(
-                            Utils.labels!.forum,
-                            style: TextStyle(
-                              fontSize: SizeHelper.of(context).help(
-                                mobileSmall: 6,
-                                mobileNormal: 8,
-                                mobileLarge: 10,
-                                tabletNormal: 12,
-                                tabletExtraLarge: 14,
-                                desktopLarge: 16,
-                              ),
-                            ),
-                          )),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.shopping_basket,
-                            size: SizeHelper.of(context).help(
-                              mobileSmall: 15,
-                              mobileNormal: 17,
-                              mobileLarge: 19,
-                              tabletNormal: 21,
-                              tabletExtraLarge: 23,
-                              desktopLarge: 25,
-                            ),
-                          ),
-                          title: Text(
-                            Utils.labels!.store,
-                            style: TextStyle(
-                              fontSize: SizeHelper.of(context).help(
-                                mobileSmall: 6,
-                                mobileNormal: 8,
-                                mobileLarge: 10,
-                                tabletNormal: 12,
-                                tabletExtraLarge: 14,
-                                desktopLarge: 16,
-                              ),
-                            ),
-                          )),
-                      BottomNavigationBarItem(
-                          icon: Icon(
-                            Icons.account_circle,
-                            size: SizeHelper.of(context).help(
-                              mobileSmall: 15,
-                              mobileNormal: 17,
-                              mobileLarge: 19,
-                              tabletNormal: 21,
-                              tabletExtraLarge: 23,
-                              desktopLarge: 25,
-                            ),
-                          ),
-                          title: Text(
-                            Utils.labels!.my_account,
-                            style: TextStyle(
-                              fontSize: SizeHelper.of(context).help(
-                                mobileSmall: 6,
-                                mobileNormal: 8,
-                                mobileLarge: 10,
-                                tabletNormal: 12,
-                                tabletExtraLarge: 14,
-                                desktopLarge: 16,
-                              ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ):Scaffold();
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.forum,
+                                  size: SizeHelper.of(context).help(
+                                    mobileSmall: 15,
+                                    mobileNormal: 17,
+                                    mobileLarge: 19,
+                                    tabletNormal: 21,
+                                    tabletExtraLarge: 23,
+                                    desktopLarge: 25,
+                                  ),
+                                ),
+                              label:Utils.labels!.forum,),
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.shopping_basket,
+                                  size: SizeHelper.of(context).help(
+                                    mobileSmall: 15,
+                                    mobileNormal: 17,
+                                    mobileLarge: 19,
+                                    tabletNormal: 21,
+                                    tabletExtraLarge: 23,
+                                    desktopLarge: 25,
+                                  ),
+                                ),
+                              label:Utils.labels!.store,),
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.account_circle,
+                                  size: SizeHelper.of(context).help(
+                                    mobileSmall: 15,
+                                    mobileNormal: 17,
+                                    mobileLarge: 19,
+                                    tabletNormal: 21,
+                                    tabletExtraLarge: 23,
+                                    desktopLarge: 25,
+                                  ),
+                                ),
+                              label:Utils.labels!.my_account,),
+                          ],
+                        ),
+                      )
+                    : Scaffold();
               });
         });
   }

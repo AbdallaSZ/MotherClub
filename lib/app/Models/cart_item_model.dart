@@ -54,11 +54,11 @@ class CartItemModel {
     customer: json["customer"] == null ? null : Customer.fromMap(json["customer"]),
     items: json["items"] == null ? null : List<Item>.from(json["items"].map((x) => Item.fromMap(x))),
     itemCount: json["item_count"] == null ? null : json["item_count"],
-    itemsWeight: json["items_weight"] == null ? null : json["items_weight"],
+    // itemsWeight: json["items_weight"] == null ? null : json["items_weight"],
     coupons: json["coupons"] == null ? null : List<dynamic>.from(json["coupons"].map((x) => x)),
     needsPayment: json["needs_payment"] == null ? null : json["needs_payment"],
     needsShipping: json["needs_shipping"] == null ? null : json["needs_shipping"],
-    //shipping: json["shipping"] == null ? null : Shipping.fromMap(json["shipping"]),
+    shipping: json["shipping"] == null ? null : Shipping.fromMap(json["shipping"]),
     fees: json["fees"] == null ? null : List<dynamic>.from(json["fees"].map((x) => x)),
     taxes: json["taxes"] == null ? null : Taxes.fromMap(json["taxes"]),
     totals: json["totals"] == null ? null : CartItemModelTotals.fromMap(json["totals"]),
@@ -78,7 +78,7 @@ class CartItemModel {
     "coupons": coupons == null ? null : List<dynamic>.from(coupons!.map((x) => x)),
     "needs_payment": needsPayment == null ? null : needsPayment,
     "needs_shipping": needsShipping == null ? null : needsShipping,
-    //"shipping": shipping == null ? null : shipping!.toMap(),
+    "shipping": shipping == null ? null : shipping!.toMap(),
     "fees": fees == null ? null : List<dynamic>.from(fees!.map((x) => x)),
     "taxes": taxes == null ? null : taxes!.toMap(),
     "totals": totals == null ? null : totals!.toMap(),
@@ -305,10 +305,10 @@ class Item {
     taxData: json["tax_data"] == null ? null : ItemTaxData.fromMap(json["tax_data"]),
     totals: json["totals"] == null ? null : ItemTotals.fromMap(json["totals"]),
     slug: json["slug"] == null ? null : json["slug"],
-    meta: json["meta"] == null ? null : ItemMeta.fromMap(json["meta"]),
-    backorders: json["backorders"] == null ? null : json["backorders"],
-    cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
-    featuredImage: json["featured_image"] == null ? null : json["featured_image"],
+     meta: json["meta"] == null ? null : ItemMeta.fromMap(json["meta"]),
+     backorders: json["backorders"] == null ? null : json["backorders"],
+    //cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
+     featuredImage: json["featured_image"] == null ? null : json["featured_image"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -321,10 +321,10 @@ class Item {
     "tax_data": taxData == null ? null : taxData!.toMap(),
     "totals": totals == null ? null : totals!.toMap(),
     "slug": slug == null ? null : slug,
-    "meta": meta == null ? null : meta!.toMap(),
-    "backorders": backorders == null ? null : backorders,
-    "cart_item_data": cartItemData == null ? null : cartItemData!.toMap(),
-    "featured_image": featuredImage == null ? null : featuredImage,
+     "meta": meta == null ? null : meta!.toMap(),
+     "backorders": backorders == null ? null : backorders,
+   // "cart_item_data": cartItemData == null ? null : cartItemData!.toMap(),
+     "featured_image": featuredImage == null ? null : featuredImage,
   };
 }
 
@@ -658,7 +658,7 @@ class RemovedItem {
     slug: json["slug"] == null ? null : json["slug"],
     meta: json["meta"] == null ? null : RemovedItemMeta.fromMap(json["meta"]),
     backorders: json["backorders"] == null ? null : json["backorders"],
-    cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
+  //  cartItemData: json["cart_item_data"] == null ? null : CartItemData.fromMap(json["cart_item_data"]),
     featuredImage: json["featured_image"] == null ? null : json["featured_image"],
   );
 
