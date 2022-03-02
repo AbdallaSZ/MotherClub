@@ -127,6 +127,7 @@
   "payment": "دفع",
   "order_id": "رقم الاوردر",
   "order_done": "تم الطلب بنجاح",
+  "status": "الحالة",
   "thank_you": "شكرا لك",
   "work": "العمل",
   "payment_option": "اختيار السداد",

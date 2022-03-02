@@ -559,6 +559,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         _cityController.text,
         _zipCodeController.text
     );
+
     var shippingDetails = new ShippingDetails(
       _nameController.text,
       _emailController.text,
@@ -575,7 +576,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
-    var res =  await createOrder(
+     await createOrder(
             shippingDetails, billingDetails, "cod", "Cash on delivery")
 
         .then((v) {
@@ -586,7 +587,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         ),
       );
     });
-    return res;
+    return response;
   }
 
   Future payPressed() async {
@@ -655,6 +656,10 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                     Utils.labels!.ok,
                     backFunction);
               });
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SuccessfulOrder(response)),
+          );
         } else {
           await showDialog(
               context: context,
@@ -736,7 +741,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       }
       // Navigator.push(
       //   context,
-      //   MaterialPageRoute(builder: (context) => SuccessfulOrder(res)),
+      //   MaterialPageRoute(builder: (context) => SuccessfulOrder()),
       // );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -749,16 +754,15 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
   }
 
   Future<void> cODSubmit() async {
-    var res;
     if (validateForm() && rxZoneName!.value != 'not selected') {
       if (Platform.isIOS) {
-        res=  await cODApplePayPressed();
+         await cODApplePayPressed();
       } else {
-        res= await cODPayPressed();
+        await cODPayPressed();
       }
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SuccessfulOrder(res)),
+        MaterialPageRoute(builder: (context) => SuccessfulOrder(response)),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -776,7 +780,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     }
     return false;
   }
-
+  var response;
   Future createOrder(
       ShippingDetails shippingDetails,
       BillingDetails billingDetails,
@@ -788,7 +792,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         cardType, true, billingDetails, shippingDetails, productData, [
       ShippingLines(methodId: "asas", methodTitle: "", total: (cost).toString()),
     ]);
-    await OrderRepo.createRepo(orderRequestModel);
+    response = await OrderRepo.createRepo(orderRequestModel);
     return (widget.total + cost + taxVal).toString();
   }
 

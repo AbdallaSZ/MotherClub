@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:motherclub/app/modules/home/views/home_views.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
 class SuccessfulOrder extends StatefulWidget {
   const SuccessfulOrder(this.res, {Key? key}) : super(key: key);
-  final res;
 
+ final res;
   @override
   _SuccessfulOrderState createState() => _SuccessfulOrderState();
 }
@@ -122,7 +123,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                                     .copyWith(fontSize: h6),
                               ),
                               Text(
-                                "5263546",
+                                widget.res['id'].toString(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
@@ -137,14 +138,14 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  Utils.labels!.payment,
+                                  Utils.labels!.status,
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
                                       .copyWith(fontSize: h6),
                                 ),
                                 Text(
-                                  "XXXXX-XXX- 1235",
+                                  widget.res['status'],
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -165,7 +166,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                                       .copyWith(fontSize: h6),
                                 ),
                                 Text(
-                                  "AED 160",
+                                  "AED ${widget.res['shipping_total']}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -186,7 +187,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                                       .copyWith(fontSize: h6),
                                 ),
                                 Text(
-                                  "AED 200",
+                                  "AED ${widget.res['total']}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headline6!
@@ -199,17 +200,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                   ),
                 ),
               ),
-              Divider(
-                color: Colors.transparent,
-                height: h4,
-              ),
-              Text(
-                Utils.labels!.track_your_order,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      fontSize: h6,
-                      color: Theme.of(context).accentColor,
-                    ),
-              ),
+
               Divider(
                 color: Colors.transparent,
                 height: h4,
@@ -242,20 +233,26 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                     //   MaterialPageRoute(builder: (context) => Home()),
                     // );
                   },
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: CustomButton_Color),
-                    child: Center(
-                        child: Text(
-                      Utils.labels!.go_to_home,
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                            fontSize: h4,
-                            fontWeight: FontWeight.w400,
-                          ),
-                      textAlign: TextAlign.center,
-                    )),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: CustomButton_Color),
+                      child: Center(
+                          child: Text(
+                        Utils.labels!.go_to_home,
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                              fontSize: h4,
+                              fontWeight: FontWeight.w400,
+                            ),
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
                   ),
                 ),
               ),

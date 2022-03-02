@@ -426,6 +426,10 @@
   "@order_done": {
     "description": "The conventional newborn programmer greeting"
   },
+  "status": "Status",
+  "@status": {
+    "description": "The conventional newborn programmer greeting"
+  },
   "total_price": "Total Price",
   "@total_price": {
     "description": "The current Language"
@@ -450,7 +454,7 @@
   "@go_to_home": {
     "description": "The current Language"
   },
-  "we_have_received_payment": "We have received payment your items\\n are shipping soon",
+  "we_have_received_payment": "We have received payment your items\n are shipping soon",
   "@we_have_received_payment": {
     "description": "The current Language"
   },
