@@ -1,11 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
 import 'package:motherclub/common/Utils/Utils.dart';
 import 'package:size_helper/size_helper.dart';
 
 class SuccessfulOrder extends StatefulWidget {
-  const SuccessfulOrder({Key? key}) : super(key: key);
+  const SuccessfulOrder(this.res, {Key? key}) : super(key: key);
+  final res;
 
   @override
   _SuccessfulOrderState createState() => _SuccessfulOrderState();
@@ -93,7 +93,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                         ),
                         SizedBox(
                           child: Image.asset(
-                              'lib/res/assets/images/check_circle_outline.png'),
+                              'assets/images/check_circle_outline.png'),
                         ),
                         Text(
                           Utils.labels!.thank_you,
@@ -249,7 +249,7 @@ class _SuccessfulOrderState extends State<SuccessfulOrder> {
                         color: CustomButton_Color),
                     child: Center(
                         child: Text(
-                          Utils.labels!.go_to_home,
+                      Utils.labels!.go_to_home,
                       style: Theme.of(context).textTheme.headline6!.copyWith(
                             fontSize: h4,
                             fontWeight: FontWeight.w400,

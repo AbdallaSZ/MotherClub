@@ -8,11 +8,6 @@ class OrderRequestModel {
   ShippingDetails? shipping;
   List<LineItems>? lineItems;
   List<ShippingLines>? shippingLines;
-
-
-
-
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['payment_method'] = this.paymentMethod;

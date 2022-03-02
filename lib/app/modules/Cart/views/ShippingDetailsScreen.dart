@@ -548,7 +548,7 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         : Utils.labels!.email_must_be_more_than;
   }
 
-  Future<void> cODPayPressed() async {
+  Future cODPayPressed() async {
     var billingDetails = new BillingDetails(
         _nameController.text,
         _emailController.text,
@@ -575,10 +575,10 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
-    await createOrder(
+    var res =  await createOrder(
             shippingDetails, billingDetails, "cod", "Cash on delivery")
+
         .then((v) {
-      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(Utils.labels!.pay_done),
@@ -586,9 +586,10 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         ),
       );
     });
+    return res;
   }
 
-  Future<void> payPressed() async {
+  Future payPressed() async {
     var billingDetails = new BillingDetails(
       _nameController.text,
       _emailController.text,
@@ -684,11 +685,12 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
             });
       }
     });
+    return res;
   }
 
-  Future<void> cODApplePayPressed() async {}
+  Future cODApplePayPressed() async {}
 
-  Future<void> applePayPressed() async {
+  Future applePayPressed() async {
     var configuration = PaymentSdkConfigurationDetails(
         profileId: "*Your profile id*",
         serverKey: Utils.payTabsServerKey,
@@ -724,17 +726,18 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     Navigator.pop(context);
   }
 
-  void submit() {
+  Future<void> submit() async {
     if (validateForm() && rxZoneName!.value != 'not selected') {
       if (Platform.isIOS) {
-        applePayPressed();
+         applePayPressed();
       } else {
-        payPressed();
+         payPressed();
+
       }
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SuccessfulOrder()),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => SuccessfulOrder(res)),
+      // );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -745,13 +748,18 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     }
   }
 
-  void cODSubmit() {
+  Future<void> cODSubmit() async {
+    var res;
     if (validateForm() && rxZoneName!.value != 'not selected') {
       if (Platform.isIOS) {
-        cODApplePayPressed();
+        res=  await cODApplePayPressed();
       } else {
-        cODPayPressed();
+        res= await cODPayPressed();
       }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SuccessfulOrder(res)),
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -773,14 +781,15 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       ShippingDetails shippingDetails,
       BillingDetails billingDetails,
       String paymentMethod,
-      String cardType) async {
+      String cardType
+      ) async {
     var productData = getProductData();
     OrderRequestModel orderRequestModel = OrderRequestModel(paymentMethod,
         cardType, true, billingDetails, shippingDetails, productData, [
       ShippingLines(methodId: "asas", methodTitle: "", total: (cost).toString()),
     ]);
     await OrderRepo.createRepo(orderRequestModel);
-    // return (widget.total + cost + taxVal).toString();
+    return (widget.total + cost + taxVal).toString();
   }
 
   List<LineItems> getProductData() {
