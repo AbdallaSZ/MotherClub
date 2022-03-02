@@ -91,7 +91,7 @@ class _OrderItemState extends State<OrderItem> {
         child: Column(
           children: [
             Image.asset(
-              'assets/images/product_image.png',
+              'assets/images/order2.png',
               height: SizeHelper.of(context).help(
                 mobileSmall: 60,
                 mobileNormal: 60,

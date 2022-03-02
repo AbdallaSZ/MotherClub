@@ -49,7 +49,7 @@ class _StoreViewScreenState extends State<CartView> {
               return StreamBuilder<int>(
                   stream: rxItemsCount.stream,
                   builder: (context, snapshot2) {
-                    return Scaffold(
+                    return snapshot2.hasData?Scaffold(
                       appBar: CustomAppBar(
                         onBackButtonPressed: () {
                           Navigator.of(context).pop();
@@ -193,8 +193,7 @@ class _StoreViewScreenState extends State<CartView> {
                                     onDismissed: (d) async {
                                       // Remove the item from the data source.
                                       await Utils.bLoC
-                                          .delCartItems(
-                                              data![index].itemKey!)
+                                          .delCartItems(data![index].itemKey!)
                                           .then((value) => ScaffoldMessenger
                                                   .of(context)
                                               .showSnackBar(SnackBar(
@@ -378,7 +377,7 @@ class _StoreViewScreenState extends State<CartView> {
                           )
                         ]),
                       ),
-                    );
+                    ):Container();
                   });
             } else if (snapshot.hasError) {
               //throw Exception(snapshot.stackTrace);

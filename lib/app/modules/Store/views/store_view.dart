@@ -50,7 +50,7 @@ class _StoreViewScreenState extends State<StoreView> {
               maxPrice: _rxRangeValues!.value.end.toString(),
               categoryId: rxCategory!.value.id != -12
                   ? rxCategory!.value.id.toString()
-                  : null,
+                  : '',
             )
           : _fetchPage(pageKey);
     });
@@ -467,7 +467,7 @@ class _StoreViewScreenState extends State<StoreView> {
                                           _rxRangeValues!.value.end.toString(),
                                       categoryId: rxCategory!.value.id != -12
                                           ? rxCategory!.value.id.toString()
-                                          : null,
+                                          : '',
                                     );
                                   },
                                   child: Text(Utils.labels!.search),

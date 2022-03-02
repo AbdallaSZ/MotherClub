@@ -418,6 +418,46 @@
   "@phone": {
     "description": ""
   },
+  "track_your_order": "Track Your Order",
+  "@track_your_order": {
+    "description": "The current Language"
+  },
+  "order_done": "Order Successfully Done",
+  "@order_done": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "total_price": "Total Price",
+  "@total_price": {
+    "description": "The current Language"
+  },
+  "delivery_charge": "Delivery Charge",
+  "@delivery_charge": {
+    "description": "The current Language"
+  },
+  "payment": "Payment",
+  "@payment": {
+    "description": "The current Language"
+  },
+  "order_id": "Order ID",
+  "@order_id": {
+    "description": "The current Language"
+  },
+  "thank_you": "Thank You",
+  "@thank_you": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "go_to_home": "Go To Home",
+  "@go_to_home": {
+    "description": "The current Language"
+  },
+  "we_have_received_payment": "We have received payment your items\\n are shipping soon",
+  "@we_have_received_payment": {
+    "description": "The current Language"
+  },
+  "mobile_number": "Mobile Number",
+  "@mobile_number": {
+    "description": ""
+  },
 "phone_validation": "Enter a valid phone",
   "@phone_validation": {
     "description": ""

@@ -5,11 +5,11 @@ import 'package:flutter_paytabs_bridge/BaseBillingShippingInfo.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:motherclub/app/Dialogs/Dialogs.dart';
 import 'package:motherclub/app/Models/shipping_cost_model.dart';
 import 'package:motherclub/app/Models/shipping_zone_model.dart';
+import 'package:motherclub/app/modules/Checkout/views/successful_order_view.dart';
 import 'package:motherclub/app/modules/orders/OrderRequestModel.dart';
 import 'package:motherclub/app/modules/orders/orderRepo.dart';
 import 'package:motherclub/common/Constant/ColorConstants.dart';
@@ -161,7 +161,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                 //
                 //   onInputChanged: (v) {},
                 // ),
-                EditTextwidget(Utils.labels!.phone, _phoneController, context,
+                EditTextwidget(
+                    Utils.labels!.mobile_number, _phoneController, context,
                     validate: phoneValidate),
                 Divider(
                   color: Colors.transparent,
@@ -174,19 +175,15 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                   height: 10,
                 ),
 
-                // Divider(
-                //   color: Colors.transparent,
-                //   height: 10,
-                // ),
-                // EditTextwidget(
-                //     Utils.labels!.country, _addressController, context,
-                //     validate: addressValidate),
-                // Divider(
-                //   color: Colors.transparent,
-                //   height: 10,
-                // ),
                 EditTextwidget(Utils.labels!.city, _cityController, context,
                     validate: cityValidate),
+                Divider(
+                  color: Colors.transparent,
+                  height: 10,
+                ),
+                EditTextwidget(
+                    Utils.labels!.address, _addressController, context,
+                    validate: addressValidate),
                 Divider(
                   color: Colors.transparent,
                   height: 10,
@@ -196,7 +193,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                     builder: (context, snapshot) {
                       return !snapshot.hasData
                           ? Container()
-                          : (snapshot.data! == 'not selected' || snapshot.data! == 'UAE')
+                          : (snapshot.data! == 'not selected' ||
+                                  snapshot.data! == 'UAE')
                               ? Container()
                               : EditTextwidget(Utils.labels!.zipCode,
                                   _zipCodeController, context,
@@ -213,25 +211,17 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                   child: InkWell(
                       onTap: () {
                         showDialog(
-                          barrierDismissible: false,
+                            barrierDismissible: false,
                             context: context,
                             builder: (context) {
                               cost = 0;
                               tax = 0;
                               return AlertDialog(
-
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                       taxVal = tax;
-
-                                      _addressController.text = rxShippingZone!
-                                                  .value.name! ==
-                                              'Locations not covered by your other zones'
-                                          ? 'not selected'
-                                          : rxShippingZone!.value.name!;
-
                                       rxZoneName!.sink.add(rxShippingZone!
                                                   .value.name! ==
                                               'Locations not covered by your other zones'
@@ -267,7 +257,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                                           builder: (context, snapshot) {
                                             if (snapshot.hasData) {
                                               firstIndex = snapshot.data![0];
-                                              rxShippingZone!.sink.add(snapshot.data![0]);
+                                              rxShippingZone!.sink
+                                                  .add(snapshot.data![0]);
                                             }
                                             return ((snapshot.connectionState ==
                                                         ConnectionState
@@ -363,10 +354,12 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                                             return rxShippingZoneSnapshot
                                                     .hasData
                                                 ? rxShippingZoneSnapshot
-                                                .data!.id! == 0 ?Text(
-                                                '${Utils.labels!.tax}:0.0'):FutureBuilder<double>(
-                                                    future: Utils.bLoC.taxCost(
-                                                        rxShippingZoneSnapshot
+                                                            .data!.id! ==
+                                                        0
+                                                    ? Text(
+                                                        '${Utils.labels!.tax}:0.0')
+                                                    : FutureBuilder<double>(
+                                                        future: Utils.bLoC.taxCost(rxShippingZoneSnapshot
                                                                         .data!
                                                                         .name ==
                                                                     'Saudi Arabia' ||
@@ -376,71 +369,90 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
                                                                     'Kuwait'
                                                             ? 2
                                                             : 1),
-                                                    builder:
-                                                        (context, taxSnapshot) {
-                                                      if (taxSnapshot.hasData)
-                                                        rxShippingZoneSnapshot
-                                                                    .data!
-                                                                    .name ==
-                                                                'Locations not covered by your other zones'
-                                                            ? tax = 0
-                                                            : tax = taxSnapshot.data!*widget.total/100;
-                                                      return (taxSnapshot
+                                                        builder: (context,
+                                                            taxSnapshot) {
+                                                          if (taxSnapshot
                                                               .hasData)
-                                                          ? taxSnapshot
-                                                                      .connectionState ==
-                                                                  ConnectionState
-                                                                      .waiting
-                                                              ? Text(
-                                                                  '${Utils.labels!.tax} : 0.0')
+                                                            rxShippingZoneSnapshot
+                                                                        .data!
+                                                                        .name ==
+                                                                    'Locations not covered by your other zones'
+                                                                ? tax = 0
+                                                                : tax = taxSnapshot
+                                                                        .data! *
+                                                                    widget
+                                                                        .total /
+                                                                    100;
+                                                          return (taxSnapshot
+                                                                  .hasData)
+                                                              ? taxSnapshot
+                                                                          .connectionState ==
+                                                                      ConnectionState
+                                                                          .waiting
+                                                                  ? Text(
+                                                                      '${Utils.labels!.tax} : 0.0')
+                                                                  : Text(
+                                                                      '${Utils.labels!.tax} : $tax')
                                                               : Text(
-                                                                  '${Utils.labels!.tax} : $tax')
-                                                          : Text(
-                                                              '${Utils.labels!.tax} : 0.0');
-                                                    })
+                                                                  '${Utils.labels!.tax} : 0.0');
+                                                        })
                                                 : Text(
                                                     '${Utils.labels!.tax} : 0.0');
                                           }),
-
                                       StreamBuilder<ShippingZoneModel>(
                                           stream: rxShippingZone!.stream,
-                                          builder: (context, rxShippingZoneSnapshot) {
-                                            return rxShippingZoneSnapshot.hasData
+                                          builder: (context,
+                                              rxShippingZoneSnapshot) {
+                                            return rxShippingZoneSnapshot
+                                                    .hasData
                                                 ? rxShippingZoneSnapshot
-                                                .data!.id! == 0 ?Text(
-                                                '${Utils.labels!.shipping_cost}:0.0'):FutureBuilder<
-                                                        List<ShippingCostModel>>(
-                                                    future: Utils.bLoC
-                                                        .shippingCost(
-                                                            rxShippingZoneSnapshot
-                                                                .data!.id!),
-                                                    builder: (context,
-                                                        costSnapshot) {
-                                                      if (costSnapshot.hasData)
-                                                        cost = widget.total >= double.parse(costSnapshot.data![0].settings!.minAmount!.value!)? 0:
-                                                        double.parse(
-                                                            costSnapshot
-                                                                .data![1]
-                                                                .settings!
-                                                                .cost!
-                                                                .value!);
-                                                      return (costSnapshot
+                                                            .data!.id! ==
+                                                        0
+                                                    ? Text(
+                                                        '${Utils.labels!.shipping_cost}:0.0')
+                                                    : FutureBuilder<
+                                                            List<
+                                                                ShippingCostModel>>(
+                                                        future: Utils.bLoC
+                                                            .shippingCost(
+                                                                rxShippingZoneSnapshot
+                                                                    .data!.id!),
+                                                        builder: (context,
+                                                            costSnapshot) {
+                                                          if (costSnapshot
                                                               .hasData)
-                                                          ? costSnapshot
-                                                                      .connectionState ==
-                                                                  ConnectionState
-                                                                      .waiting
-                                                              ? Text(
-                                                                  '${Utils.labels!.shipping_cost} : 0.0')
+                                                            cost = widget
+                                                                        .total >=
+                                                                    double.parse(costSnapshot
+                                                                        .data![
+                                                                            0]
+                                                                        .settings!
+                                                                        .minAmount!
+                                                                        .value!)
+                                                                ? 0
+                                                                : double.parse(
+                                                                    costSnapshot
+                                                                        .data![
+                                                                            1]
+                                                                        .settings!
+                                                                        .cost!
+                                                                        .value!);
+                                                          return (costSnapshot
+                                                                  .hasData)
+                                                              ? costSnapshot
+                                                                          .connectionState ==
+                                                                      ConnectionState
+                                                                          .waiting
+                                                                  ? Text(
+                                                                      '${Utils.labels!.shipping_cost} : 0.0')
+                                                                  : Text(
+                                                                      '${Utils.labels!.shipping_cost} : $cost')
                                                               : Text(
-                                                                  '${Utils.labels!.shipping_cost} : $cost')
-                                                          : Text(
-                                                              '${Utils.labels!.shipping_cost} : 0.0');
-                                                    })
+                                                                  '${Utils.labels!.shipping_cost} : 0.0');
+                                                        })
                                                 : Text(
                                                     '${Utils.labels!.shipping_cost} : 0.0');
                                           }),
-
                                     ],
                                   ),
                                 ),
@@ -545,7 +557,8 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
         "ae",
         _cityController.text,
         _cityController.text,
-        _zipCodeController.text);
+        _zipCodeController.text
+    );
     var shippingDetails = new ShippingDetails(
       _nameController.text,
       _emailController.text,
@@ -562,17 +575,16 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
       // var theme = IOSThemeConfigurations();
       // configuration.iOSThemeConfigurations = theme;
     }
-    await createOrder(shippingDetails, billingDetails, "cod", "Cash on delivery").then((v){
+    await createOrder(
+            shippingDetails, billingDetails, "cod", "Cash on delivery")
+        .then((v) {
       Navigator.pop(context);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:  Text(Utils.labels!.pay_done),
-          duration: const Duration(
-              seconds: 3),
+          content: Text(Utils.labels!.pay_done),
+          duration: const Duration(seconds: 3),
         ),
       );
-
     });
   }
 
@@ -713,38 +725,38 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
   }
 
   void submit() {
-    if (validateForm()&&rxZoneName!.value != 'not selected') {
+    if (validateForm() && rxZoneName!.value != 'not selected') {
       if (Platform.isIOS) {
         applePayPressed();
       } else {
         payPressed();
       }
-    }else{
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SuccessfulOrder()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:  Text(Utils.labels!.insert_all_data),
-          duration: const Duration(
-              seconds: 3),
+          content: Text(Utils.labels!.insert_all_data),
+          duration: const Duration(seconds: 3),
         ),
       );
     }
   }
 
   void cODSubmit() {
-    if (validateForm()&&rxZoneName!.value != 'not selected') {
+    if (validateForm() && rxZoneName!.value != 'not selected') {
       if (Platform.isIOS) {
         cODApplePayPressed();
       } else {
         cODPayPressed();
       }
-    }else{
-      ScaffoldMessenger.of(context)
-          .showSnackBar(
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content:  Text(Utils.labels!.insert_all_data),
-          duration: const Duration(
-              seconds: 3),
+          content: Text(Utils.labels!.insert_all_data),
+          duration: const Duration(seconds: 3),
         ),
       );
     }
@@ -765,11 +777,10 @@ class _ShippingDetailsScreenState extends State<ShippingDetailsScreen> {
     var productData = getProductData();
     OrderRequestModel orderRequestModel = OrderRequestModel(paymentMethod,
         cardType, true, billingDetails, shippingDetails, productData, [
-      ShippingLines(
-          methodId: "asas", methodTitle: "", total: widget.total.toString()),
+      ShippingLines(methodId: "asas", methodTitle: "", total: (cost).toString()),
     ]);
     await OrderRepo.createRepo(orderRequestModel);
-    return (widget.total + cost + taxVal).toString();
+    // return (widget.total + cost + taxVal).toString();
   }
 
   List<LineItems> getProductData() {
